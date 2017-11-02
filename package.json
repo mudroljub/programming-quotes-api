@@ -1,0 +1,22 @@
+{
+  "name": "baza-filmova",
+  "version": "1.0.0",
+  "description": "Idemo lagano",
+  "main": "web.js",
+  "scripts": {
+    "start": "node web.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "heroku"
+  ],
+  "author": "Damjan Pavlica <mudroljub@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2"
+  },
+  "engines": {
+    "node": "6.9.3"
+  }
+}
