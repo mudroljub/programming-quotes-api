@@ -28,6 +28,7 @@ app.get('/filmovi/', (req, res) => {
 
 app.post('/dodaj/', (req, res) => {
   res.send(req.body)
+  // dodati u bazu
 })
 
 /* SERVER */
