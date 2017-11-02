@@ -2,9 +2,10 @@
   "name": "baza-filmova",
   "version": "1.0.0",
   "description": "Idemo lagano",
-  "main": "web.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node web.js",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -18,5 +19,8 @@
   },
   "engines": {
     "node": "6.9.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
   }
 }
