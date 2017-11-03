@@ -1,10 +1,10 @@
 const express = require('express')
 const mongodb = require('mongodb')
 const cors = require('cors')
-const bodyParser = require("body-parser")
+const bodyParser = require('body-parser')
 
-const port = process.env.PORT
 const mongoUri = 'mongodb://filmovi:filmovi@ds243285.mlab.com:43285/heroku_sljlvq37'
+const port = process.env.PORT
 const app = express()
 
 app.use(cors())
@@ -27,8 +27,18 @@ app.get('/filmovi/', (req, res) => {
 })
 
 app.post('/dodaj/', (req, res) => {
-  res.send(req.body)
-  // dodati u bazu
+  const {naziv, godina, slika} = req.body
+  if (!naziv || !godina || !slika) return res.send('Niste poslali sva polja.')
+  mongodb.MongoClient.connect(mongoUri, function(err, db) {
+    if(err) throw err
+    db.collection('filmovi').update(
+       {naziv},
+       {$set: {godina, slika}},
+       {upsert: true} // insert ako treba
+    )
+    db.close()
+    res.send('Hvala na azuriranju baze filmova.')
+  })
 })
 
 /* SERVER */
