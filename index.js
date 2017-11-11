@@ -1,19 +1,31 @@
 const express = require('express')
 const mongodb = require('mongodb')
+const http = require('http')
 const cors = require('cors')
 const bodyParser = require('body-parser')
+const WebSocket = require('ws')
 
 const mongoUri = 'mongodb://filmovi:filmovi@ds243285.mlab.com:43285/heroku_sljlvq37'
-const port = process.env.PORT
+const port = process.env.PORT || 5000
 const app = express()
+const server = http.createServer(app)
+const wss = new WebSocket.Server({ server })
+
+/* CONFIG */
 
 app.use(cors())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
+wss.broadcast = data => {
+  wss.clients.forEach(client => {
+    if (client.readyState === WebSocket.OPEN) client.send(data)
+  })
+}
+
 /* RUTE */
 
-app.get('/', (req, res) => res.send(`Baza filmova u izgradnji.`))
+app.get('/', (req, res) => res.send('Baza filmova u izgradnji.'))
 
 app.get('/filmovi/', (req, res) => {
   mongodb.MongoClient.connect(mongoUri, (err, db) => {
@@ -34,13 +46,14 @@ app.post('/dodaj/', (req, res) => {
     db.collection('filmovi').update(
        {naziv},
        {$set: {godina, slika}},
-       {upsert: true} // insert ako treba
+       {upsert: true}
     )
     db.close()
     res.send('Hvala na azuriranju baze filmova.')
+    wss.broadcast('Baze filmova je azurirana.')
   })
 })
 
 /* SERVER */
 
-app.listen(port, () => console.log(`Server sluzi na kapiji ${port}.`))
+server.listen(port, () => console.log('Server sluzi na kapiji', port))
