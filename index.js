@@ -38,6 +38,8 @@ app.get('/filmovi/', (req, res) => {
   })
 })
 
+// izbrisati 5a00567ab894ff3f427849a3
+
 app.post('/dodaj/', (req, res) => {
   const {naziv, godina, slika} = req.body
   if (!naziv || !godina || !slika) return res.send('Niste poslali sva polja.')
