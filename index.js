@@ -37,17 +37,10 @@ app.get('/filmovi/', (req, res) => {
   })
 })
 
-// 5a00567ab894ff3f427849a3
-app.get('/obrisi/:id', function(req, res) {
-    mongodb.MongoClient.connect(mongoUri, (err, db) => {
-      db.collection('filmovi').deleteOne({"_id": ObjectId(req.param('id'))})
-    })
-})
-
 app.post('/dodaj/', (req, res) => {
   const {naziv, godina, slika} = req.body
   if (!naziv || !godina || !slika) return res.send('Niste poslali sva polja.')
-  mongodb.MongoClient.connect(mongoUri, function(err, db) {
+  mongodb.MongoClient.connect(mongoUri, (err, db) => {
     if(err) throw err
     db.collection('filmovi').update(
        {naziv},
@@ -57,6 +50,13 @@ app.post('/dodaj/', (req, res) => {
     res.send('Hvala na azuriranju baze filmova.')
     wss.broadcast('Baze filmova je azurirana.')
   })
+})
+
+app.get('/obrisi/:id', (req, res) => {
+    mongodb.MongoClient.connect(mongoUri, (err, db) => {
+      db.collection('filmovi').deleteOne({"_id": ObjectId(req.param('id'))})
+      res.send(`Unos koji ima ID ${req.param('id')} je obrisan.`)
+    })
 })
 
 /* SERVER */
