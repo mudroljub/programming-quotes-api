@@ -37,13 +37,11 @@ app.get('/filmovi/', (req, res) => {
   })
 })
 
-app.get('/izbrisi/', (req, res) => {
-  res.send('Baza filmova u izgradnji.')
-  mongodb.MongoClient.connect(mongoUri, (err, db) => {
-    var id = zahtev.url.replace('/izbrisi/', '')
-    odgovor.end("Zdravo id " + id + "\n")
-    // db.collection('filmovi').deleteOne({"_id": ObjectId("5a00567ab894ff3f427849a3")})
-  })
+// 5a00567ab894ff3f427849a3
+app.get('/obrisi/:id', function(req, res) {
+    mongodb.MongoClient.connect(mongoUri, (err, db) => {
+      db.collection('filmovi').deleteOne({"_id": ObjectId(req.param('id'))})
+    })
 })
 
 app.post('/dodaj/', (req, res) => {
