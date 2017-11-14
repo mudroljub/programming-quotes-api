@@ -54,8 +54,8 @@ app.post('/dodaj/', (req, res) => {
 
 app.get('/obrisi/:id', (req, res) => {
     mongodb.MongoClient.connect(mongoUri, (err, db) => {
-      db.collection('filmovi').deleteOne({"_id": ObjectId(req.param('id'))})
-      res.send(`Unos koji ima ID ${req.param('id')} je obrisan.`)
+      db.collection('filmovi').deleteOne({ "_id": mongodb.ObjectID(req.params.id) })
+      res.send(`Unos sa ID ${req.params.id} je obrisan.`)
     })
 })
 
