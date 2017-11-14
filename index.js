@@ -34,11 +34,17 @@ app.get('/filmovi/', (req, res) => {
       .find()
       .sort({godina: 1}) // ili padajuce -1
       .toArray((err, podaci) => res.send(podaci))
-    db.close()
   })
 })
 
-// izbrisati 5a00567ab894ff3f427849a3
+app.get('/izbrisi/', (req, res) => {
+  res.send('Baza filmova u izgradnji.')
+  mongodb.MongoClient.connect(mongoUri, (err, db) => {
+    var id = zahtev.url.replace('/izbrisi/', '')
+    odgovor.end("Zdravo id " + id + "\n")
+    // db.collection('filmovi').deleteOne({"_id": ObjectId("5a00567ab894ff3f427849a3")})
+  })
+})
 
 app.post('/dodaj/', (req, res) => {
   const {naziv, godina, slika} = req.body
@@ -50,7 +56,6 @@ app.post('/dodaj/', (req, res) => {
        {$set: {godina, slika}},
        {upsert: true}
     )
-    db.close()
     res.send('Hvala na azuriranju baze filmova.')
     wss.broadcast('Baze filmova je azurirana.')
   })
