@@ -1,0 +1,56 @@
+{
+  "env": {
+      "browser": true,
+      "node": true,
+      "es6": true
+  },
+  "globals": {
+      "angular": false,
+      "THREE": false
+  },
+  "rules": {
+      "no-undef": "error",
+      "no-unused-vars": "error",
+      "no-redeclare": "error",
+      "no-use-before-define": "error",
+      "no-dupe-args": "error",
+      "no-dupe-keys": "error",
+      "no-unreachable": "error",
+      "block-scoped-var": "error",
+      "class-methods-use-this": "warn",
+      "no-param-reassign": "error",
+      "vars-on-top": "error",
+      "no-shadow-restricted-names": "error",
+      "indent": ["warn", 2],
+      "operator-assignment": ["error", "always"],
+      "space-before-blocks": "warn",
+      "space-before-function-paren": ["warn", "never"],
+      "space-in-parens": ["warn", "never"],
+      "arrow-spacing": "warn",
+      "constructor-super": "error",
+      "no-this-before-super": "error",
+      "no-useless-constructor": "error",
+      "no-class-assign": "error",
+      "no-const-assign": "error",
+      "no-dupe-class-members": "error",
+      "no-duplicate-imports": "error",
+      "no-var": "error",
+      "object-shorthand": "error",
+      "no-invalid-this": "error",
+      "no-unexpected-multiline": "error",
+      "semi": ["warn", "never"],
+      "quotes": ["warn", "single"],
+      "prefer-const": "warn",
+      "space-infix-ops": "warn",
+      "comma-spacing": ["warn", { "before": false, "after": true }],
+      "spaced-comment": ["warn", "always"],
+      "new-cap": "warn"
+  },
+  "parserOptions": {
+      "ecmaVersion": 8,
+      "sourceType": "module",
+      "ecmaFeatures": {
+          "impliedStrict": true
+      }
+  }
+}
