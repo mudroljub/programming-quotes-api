@@ -37,7 +37,7 @@ app.get('/citati/', citati)
 
 app.post('/dodaj-citat/', (req, res) => dodajCitat(req, res, wss))
 
-app.get('/obrisi-citat/:id', obrisiCitat)
+app.post('/obrisi-citat/', obrisiCitat)
 
 /* SERVER */
 
