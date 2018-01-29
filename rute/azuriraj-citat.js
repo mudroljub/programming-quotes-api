@@ -1,7 +1,7 @@
 const mongodb = require('mongodb')
 const mongoUri = process.env.MONGODB_URI
 
-const dodajCitat = (req, res) => {
+const azurirajCitat = (req, res) => {
   const {_id, sr, autor, izvor, en} = req.body
   const uslov = (en || sr) && autor
   if (!uslov) return res.send('Niste poslali obavezna polja.')
@@ -16,4 +16,4 @@ const dodajCitat = (req, res) => {
   })
 }
 
-module.exports = dodajCitat
+module.exports = azurirajCitat

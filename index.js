@@ -10,6 +10,7 @@ const obrisiFilm = require('./rute/obrisi-film')
 
 const citati = require('./rute/citati')
 const dodajCitat = require('./rute/dodaj-citat')
+const azurirajCitat = require('./rute/azuriraj-citat')
 const obrisiCitat = require('./rute/obrisi-citat')
 
 const port = process.env.PORT || 5000
@@ -27,17 +28,23 @@ app.use(bodyParser.json())
 
 app.get('/', (req, res) => res.send('Baza podataka u izgradnji.'))
 
+// filmovi
+
 app.get('/filmovi/', filmovi)
 
 app.post('/dodaj-film/', (req, res) => dodajFilm(req, res, wss))
 
 app.get('/obrisi-film/:id', obrisiFilm)
 
+// citati
+
 app.get('/citati/', citati)
 
 app.post('/dodaj-citat/', (req, res) => dodajCitat(req, res, wss))
 
-app.post('/obrisi-citat/', obrisiCitat)
+app.post('/azuriraj-citat/', azurirajCitat)
+
+app.delete('/obrisi-citat/', obrisiCitat)
 
 /* SERVER */
 
