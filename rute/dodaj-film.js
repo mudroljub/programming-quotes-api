@@ -5,6 +5,7 @@ const WebSocket = require('ws')
 const dodajFilm = (req, res, wss) => {
   const {naziv, godina, slika} = req.body
   if (!naziv || !godina || !slika) return res.send('Niste poslali sva polja.')
+
   mongodb.MongoClient.connect(mongoUri, (err, db) => {
     if(err) throw err
     db.collection('filmovi').update(
