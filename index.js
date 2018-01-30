@@ -12,6 +12,7 @@ const citati = require('./rute/citati')
 const dodajCitat = require('./rute/dodaj-citat')
 const azurirajCitat = require('./rute/azuriraj-citat')
 const obrisiCitat = require('./rute/obrisi-citat')
+const oceniCitat = require('./rute/oceni-citat')
 
 const port = process.env.PORT || 5000
 const app = express()
@@ -43,6 +44,8 @@ app.get('/citati/', citati)
 app.post('/dodaj-citat/', (req, res) => dodajCitat(req, res, wss))
 
 app.post('/azuriraj-citat/', azurirajCitat)
+
+app.post('/oceni-citat/', oceniCitat)
 
 app.delete('/obrisi-citat/', obrisiCitat)
 
