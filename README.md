@@ -1,8 +1,6 @@
 # Baza podataka
 
-Bekend API i baza podataka za otvorene projekte Škole koda. Rađena u Node.js i MongoDB.
-
-Aplikacija je otvorenog koda, ali da bi je razvijao, [kontaktiraj](https://skolakoda.org/kontakt) Školu koda da bi dobio pristupna ovlašćenja serveru i kredencijale za bazu.
+Bekend API i baza podataka za otvorene projekte Škole koda. Rađena u Node.js i MongoDB. Projekat je otvorenog koda, ali da bi razvijao, [kontaktiraj nas](https://skolakoda.org/kontakt) za pristupna ovlašćenja serveru i kredencijale baze.
 
 ## Pokretanje
 
