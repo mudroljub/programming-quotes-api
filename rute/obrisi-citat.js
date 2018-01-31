@@ -1,5 +1,5 @@
 const mongodb = require('mongodb')
-const mongoUri = process.env.MONGODB_URI
+const mongoUri = require('../config/constants.js').mongoUri
 const lozinka = process.env.LOZINKA
 
 const obrisiCitat = (req, res) => {

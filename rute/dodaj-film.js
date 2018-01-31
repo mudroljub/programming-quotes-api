@@ -1,5 +1,5 @@
 const mongodb = require('mongodb')
-const mongoUri = process.env.MONGODB_URI
+const mongoUri = require('../config/constants.js').mongoUri
 const WebSocket = require('ws')
 
 const dodajFilm = (req, res, wss) => {
@@ -9,9 +9,9 @@ const dodajFilm = (req, res, wss) => {
   mongodb.MongoClient.connect(mongoUri, (err, db) => {
     if(err) throw err
     db.collection('filmovi').update(
-       {naziv},
-       {$set: {godina, slika}},
-       {upsert: true}
+      {naziv},
+      {$set: {godina, slika}},
+      {upsert: true}
     )
     res.send('Hvala na azuriranju baze filmova.')
     wss.clients.forEach(client => {

@@ -1,10 +1,11 @@
 {
-  "name": "baza-filmova",
+  "name": "baza-podataka",
   "version": "1.0.0",
-  "description": "Idemo lagano",
+  "description": "Bekend API i baza podataka za otvorene projekte Škole koda.",
+  "repository": "https://github.com/skolakoda/baza-podataka",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon --exec \"heroku local\" --signal SIGTERM",
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,10 +19,13 @@
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "express": "^4.16.2",
-    "mongodb": "^2.2.33",
-    "ws": "^3.3.1"
+    "mongodb": "^2.2.34",
+    "ws": "^3.3.3"
   },
   "engines": {
     "node": "6.9.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.11"
   }
 }

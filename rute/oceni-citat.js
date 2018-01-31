@@ -1,5 +1,5 @@
 const mongodb = require('mongodb')
-const mongoUri = process.env.MONGODB_URI
+const mongoUri = require('../config/constants.js').mongoUri
 
 const oceniCitat = (req, res) => {
   const {_id, novaOcena} = req.body
@@ -12,8 +12,8 @@ const oceniCitat = (req, res) => {
   mongodb.MongoClient.connect(mongoUri, (err, db) => {
     if(err) throw err
     db.collection('citati').update(
-       {_id},
-       {$set: {ocena}}
+      {_id},
+      {$set: {ocena}}
     )
     res.send('Hvala na azuriranju baze citata.')
   })

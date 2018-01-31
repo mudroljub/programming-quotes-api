@@ -1,5 +1,5 @@
 const mongodb = require('mongodb')
-const mongoUri = process.env.MONGODB_URI
+const mongoUri = require('../config/constants.js').mongoUri
 
 const filmovi = (req, res) => {
   mongodb.MongoClient.connect(mongoUri, (err, db) => {

@@ -1,12 +1,12 @@
 const mongodb = require('mongodb')
-const mongoUri = process.env.MONGODB_URI
+const mongoUri = require('../config/constants.js').mongoUri
 const WebSocket = require('ws')
 
 const dodajCitat = (req, res, wss) => {
   const {sr, autor, izvor, en} = req.body
   const uslov = (en || sr) && autor
   if (!uslov) return res.send('Niste poslali obavezna polja.')
-  
+
   mongodb.MongoClient.connect(mongoUri, (err, db) => {
     if(err) throw err
     db.collection('citati').insert(
