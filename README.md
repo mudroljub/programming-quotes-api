@@ -6,9 +6,10 @@ Ako želiš da se uključiš u razvoj, [kontaktiraj nas](https://skolakoda.org/k
 
 ## Preduslovi
 
-Instaliraj Node.js i [Heroku](https://devcenter.heroku.com/articles/heroku-cli).
-
-Moraš biti dodat na Github i Heroku kao saradnik i podesiti varijable okruženja.
+- Instaliraj Node.js i [Heroku](https://devcenter.heroku.com/articles/heroku-cli).
+- Otvori naloge na Github i Heroku
+- Moraš biti dodat na Github i Heroku kao saradnik
+- Moraš podesiti [varijable okruženja](https://devcenter.heroku.com/articles/heroku-local#set-up-your-local-environment-variables) u `.env` fajl
 
 ## Pokretanje
 
