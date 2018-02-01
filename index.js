@@ -5,14 +5,14 @@ const bodyParser = require('body-parser')
 const WebSocket = require('ws')
 
 const filmovi = require('./rute/filmovi')
-const dodajFilm = require('./rute/dodaj-film')
-const obrisiFilm = require('./rute/obrisi-film')
+const dodajFilm = require('./rute/filmovi/dodaj')
+const obrisiFilm = require('./rute/filmovi/obrisi')
 
 const citati = require('./rute/citati')
-const dodajCitat = require('./rute/dodaj-citat')
-const azurirajCitat = require('./rute/azuriraj-citat')
-const obrisiCitat = require('./rute/obrisi-citat')
-const oceniCitat = require('./rute/oceni-citat')
+const dodajCitat = require('./rute/citati/dodaj')
+const azurirajCitat = require('./rute/citati/azuriraj')
+const obrisiCitat = require('./rute/citati/obrisi')
+const oceniCitat = require('./rute/citati/oceni')
 
 const port = process.env.PORT || 5000
 const app = express()

@@ -1,5 +1,5 @@
 const mongodb = require('mongodb')
-const mongoUri = require('../config/constants.js').mongoUri
+const mongoUri = require('../../config.js').mongoUri
 const WebSocket = require('ws')
 
 const dodajCitat = (req, res, wss) => {

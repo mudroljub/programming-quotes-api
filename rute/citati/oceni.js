@@ -1,6 +1,6 @@
 const mongodb = require('mongodb')
 const ObjectId = require('mongodb').ObjectId
-const mongoUri = require('../config/constants.js').mongoUri
+const mongoUri = require('../../config.js').mongoUri
 
 const oceniCitat = (req, res) => {
   const _id = req.body._id
