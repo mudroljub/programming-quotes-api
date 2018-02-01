@@ -9,24 +9,19 @@ const oceniCitat = (req, res) => {
 
   mongodb.MongoClient.connect(mongoUri, (err, db) => {
     if(err) throw err
-    db.collection('citati').update(
-      {_id},
-      {$set: {ocena: 4.5, glasalo: 2}}
-    )
-    res.send('Hvala na oceni.')
-
-    // db.collection('citati').findOne({_id: ObjectId(_id)}, (err, citat) => {
-    //   if (err) throw err
-    //   const {glasalo, ocena} = citat
-    //   const noviProsek = (glasalo * ocena + novaOcena) / (glasalo + 1)
-    //   db.collection('citati').update(
-    //     {_id},
-    //     {$set: {ocena: noviProsek, glasalo: glasalo + 1}}
-    //   )
-    //   res.send(''+noviProsek)
-    //   db.close()
-    // })
-
+    db.collection('citati').findOne({_id: new ObjectId(_id)}, (err, citat) => {
+      if (err) throw err
+      const {glasalo, ocena} = citat
+      res.send(`glasalo: ${glasalo}, ocena: ${ocena}, novaOcena: ${novaOcena}`)
+      const noviProsek = (glasalo * ocena + novaOcena) / (glasalo + 1)
+      // res.send(`glasalo: ${glasalo}, ocena: ${ocena}, novaOcena: ${novaOcena}`)
+      db.collection('citati').update(
+        {_id: new ObjectId(_id)},
+        {$set: {ocena: noviProsek, glasalo: glasalo + 1}}
+      )
+      // res.send('noviProsek: ' + noviProsek)
+      db.close()
+    })
   })
 }
 

@@ -1,5 +1,6 @@
 const mongodb = require('mongodb')
 const mongoUri = require('../config/constants.js').mongoUri
+const ObjectId = require('mongodb').ObjectId
 
 const azurirajCitat = (req, res) => {
   const {_id, sr, autor, izvor, en} = req.body
@@ -9,7 +10,7 @@ const azurirajCitat = (req, res) => {
   mongodb.MongoClient.connect(mongoUri, (err, db) => {
     if(err) throw err
     db.collection('citati').update(
-      {_id},
+      {_id: new ObjectId(_id)},
       {$set: {sr, autor, izvor, en}}
     )
     res.send('Hvala na azuriranju baze citata.')
