@@ -23,7 +23,7 @@ const oceniCitat = (req, res) => {
           }
         }
       )
-      res.send(`Novi prosek je: ${noviProsek.toFixed(1)}`)
+      res.send(noviProsek.toFixed(1))
       db.close()
     })
   })
