@@ -41,7 +41,7 @@ app.get('/obrisi-film/:id', obrisiFilm)
 
 app.get('/citati/', citati)
 
-app.post('/dodaj-citat/', (req, res) => dodajCitat(req, res, wss))
+app.post('/dodaj-citat/', dodajCitat)
 
 app.post('/azuriraj-citat/', azurirajCitat)
 

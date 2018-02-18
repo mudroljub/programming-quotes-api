@@ -1,6 +1,6 @@
 # Baza podataka
 
-**Bekend API i baza podataka za otvorene projekte Škole koda. Tehnologije: Node.js i MongoDB.** 
+**Bekend API i baza podataka za otvorene projekte Škole koda. Tehnologije: Node.js i MongoDB.**
 
 Ako želiš da se uključiš u razvoj, [kontaktiraj nas](https://skolakoda.org/kontakt) za pristupna ovlašćenja i kredencijale.
 
@@ -31,3 +31,9 @@ To protect your data, it is best practice to store your database credentials in 
 ```
 heroku config
 ```
+
+## Dokumentacija
+
+Ovaj bekend API pokriva nekoliko otvorenih projekata Škole koda, između ostalih bazu filmova i bazu citata. Organizovan je po rutama, a svaka ruta je što je više moguće nezavisna funkcija.
+
+Za sistem prevođenja poruka koje bekend šalje, videti klijent aplikaciju.

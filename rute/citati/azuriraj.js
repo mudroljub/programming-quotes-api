@@ -1,11 +1,13 @@
 const mongodb = require('mongodb')
 const mongoUri = require('../../config.js').mongoUri
 const ObjectId = require('mongodb').ObjectId
+const lozinka = process.env.LOZINKA
 
 const azurirajCitat = (req, res) => {
-  const {_id, sr, autor, izvor, en} = req.body
+  const {_id, sr, autor, izvor, en, password} = req.body
   const uslov = (en || sr) && autor
   if (!uslov) return res.send('Niste poslali obavezna polja.')
+  if (password !== lozinka) return res.send('Niste prijavljeni.')
 
   mongodb.MongoClient.connect(mongoUri, (err, db) => {
     if(err) throw err
