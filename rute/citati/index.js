@@ -6,7 +6,7 @@ const citati = (req, res) => {
     if (err) throw err
     db.collection('citati')
       .find()
-      .toArray((err, podaci) => res.send(podaci))
+      .toArray((err, podaci) => res.send(podaci.sort(() => .5 - Math.random())))
   })
 }
 
