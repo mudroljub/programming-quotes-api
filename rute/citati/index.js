@@ -1,13 +1,13 @@
-const mongodb = require('mongodb')
-const mongoUri = require('../../config.js').mongoUri
+const Quote = require('../../models/quotes')
 
 const citati = (req, res) => {
-  mongodb.MongoClient.connect(mongoUri, (err, db) => {
-    if (err) throw err
-    db.collection('citati')
-      .find()
-      .toArray((err, podaci) => res.send(podaci))
-  })
+    Quote.find()
+      .then(quotes => {
+        res.send(quotes)
+      })
+      .catch(e => {
+        res.send('doslo je do greske')
+      })
 }
 
 module.exports = citati
