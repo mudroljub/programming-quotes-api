@@ -18,8 +18,10 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
+    "dotenv": "^5.0.0",
     "express": "^4.16.2",
     "mongodb": "^2.2.34",
+    "mongoose": "^5.0.6",
     "ws": "^3.3.3"
   },
   "engines": {
