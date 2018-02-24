@@ -15,7 +15,7 @@ const azurirajCitat = (req, res) => {
       {_id: new ObjectId(_id)},
       {$set: {sr, autor, izvor, en}}
     )
-    res.send('Hvala na azuriranju baze citata.')
+    res.send('SUCCESS_SAVED')
   })
 }
 
