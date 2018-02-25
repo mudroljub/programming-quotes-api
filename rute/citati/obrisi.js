@@ -8,7 +8,7 @@ const obrisiCitat = (req, res) => {
 
   mongodb.MongoClient.connect(mongoUri, (err, db) => {
     db.collection('citati').deleteOne({'_id': new mongodb.ObjectId(_id)})
-    res.send(`Unos sa ID ${_id} je obrisan.`)
+    res.send('ok')
   })
 }
 
