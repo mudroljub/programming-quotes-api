@@ -10,6 +10,9 @@ const dodajCitat = (req, res) => {
       if(quote.length) {
         throw new Error()
       }
+      return 'something'
+    })
+    .then( s => {
       return Author.findOne({name: autor})
     })
     .then(author => {
