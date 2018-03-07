@@ -14,8 +14,6 @@ const mongoUri = require('./config').mongoUri
 mongoose.connect(mongoUri)
 mongoose.Promise = global.Promise
 
-const mongoUri = require('./config').mongoUri
-
 mongoose.connect(mongoUri)
 mongoose.Promise = global.Promise
 
@@ -23,7 +21,7 @@ const port = process.env.PORT || 3001
 const app = express()
 
 
-app.use(cors(corsOption))
+app.use(cors())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
@@ -33,4 +31,4 @@ app.use('/citati', citati)
 
 app.get('/', (req, res) => res.send('Baza podataka u izgradnji.'))
 
-server.listen(port, () => console.log('Server on port', port))
+app.listen(port, () => console.log('Server on port', port))

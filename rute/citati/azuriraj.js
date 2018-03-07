@@ -8,7 +8,6 @@ const azurirajCitat = (req, res) => {
   if (!uslov) return res.send('Niste poslali obavezna polja.')
   Quote.findById(id)
     .then(quote => {
-      console.log('trazi citat');
       if(!quote) {
         throw new Error()
       }
@@ -19,7 +18,6 @@ const azurirajCitat = (req, res) => {
       return Author.findOne({name: autor})
     })
     .then(author => {
-      console.log('trazi autora');
       if(!author) {
         let author = new Author({name: autor})
         return author.save()
@@ -28,7 +26,6 @@ const azurirajCitat = (req, res) => {
     })
     .then(author => {
       req.newQuote.author = author._id
-      console.log('sasa', req.newQuote)
       return req.newQuote.save()
     })
     .then(newQuote => {
