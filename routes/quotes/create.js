@@ -10,7 +10,7 @@ module.exports = (req, res) => {
 
   mongodb.MongoClient.connect(mongoUri, (err, db) => {
     if(err) throw err
-    db.collection('citati').insert(
+    db.collection('quotes').insert(
       {sr, autor, izvor, en, ocena: 0, glasalo: 0}
     )
     res.send('SUCCESS_SAVED')

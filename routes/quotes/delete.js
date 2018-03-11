@@ -7,7 +7,7 @@ module.exports = (req, res) => {
   if (password !== lozinka) return res.send('Niste prijavljeni.')
 
   mongodb.MongoClient.connect(mongoUri, (err, db) => {
-    db.collection('citati').deleteOne({'_id': new mongodb.ObjectId(_id)}, (err, obj) => {
+    db.collection('quotes').deleteOne({'_id': new mongodb.ObjectId(_id)}, (err, obj) => {
       if (err) throw err
       if (obj.deletedCount) res.send('QUOTE_DELETED')
     })

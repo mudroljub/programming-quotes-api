@@ -11,7 +11,7 @@ module.exports = (req, res) => {
 
   mongodb.MongoClient.connect(mongoUri, (err, db) => {
     if(err) throw err
-    db.collection('citati').update(
+    db.collection('quotes').update(
       {_id: new ObjectId(_id)},
       {$set: {sr, autor, izvor, en}}
     )
