@@ -4,26 +4,26 @@ const mongoUri = require('../../config.js').mongoUri
 
 module.exports = (req, res) => {
   const _id = req.body._id
-  const novaOcena = Number(req.body.novaOcena)
-  if (!_id || !novaOcena) return res.send('Niste poslali obavezna polja.')
+  const newRating = Number(req.body.newRating)
+  if (!_id || !newRating) return res.send('ARGUMENTS_ERROR')
 
   mongodb.MongoClient.connect(mongoUri, (err, db) => {
     if(err) throw err
 
-    db.collection('quotes').findOne({_id: new ObjectId(_id)}, (err, citat) => {
+    db.collection('quotes').findOne({_id: new ObjectId(_id)}, (err, quote) => {
       if (err) throw err
-      const {glasalo, ocena} = citat
-      const noviProsek = (glasalo * ocena + novaOcena) / (glasalo + 1)
+      const {numberOfVotes, rating} = quote
+      const newAverage = (numberOfVotes * rating + newRating) / (numberOfVotes + 1)
       db.collection('quotes').update(
         {_id: new ObjectId(_id)},
         {
           $set: {
-            ocena: noviProsek.toFixed(1),
-            glasalo: glasalo + 1
+            rating: newAverage.toFixed(1),
+            numberOfVotes: numberOfVotes + 1
           }
         }
       )
-      res.send(noviProsek.toFixed(1))
+      res.send(newAverage.toFixed(1))
       db.close()
     })
   })
