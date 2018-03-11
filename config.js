@@ -1,4 +1,6 @@
-const mongoUri = `mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@ds243285.mlab.com:43285/${process.env.DB_NAME}`
+const {DB_USER, DB_PASSWORD, DB_DOMAIN, DB_NAME} = process.env
+
+const mongoUri = `mongodb://${DB_USER}:${DB_PASSWORD}@${DB_DOMAIN}/${DB_NAME}`
 
 module.exports = {
   mongoUri
