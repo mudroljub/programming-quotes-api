@@ -1,9 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
-
-const quotesRouter = require('./routes/quotesRouter')
-const moviesRouter = require('./routes/moviesRouter')
+const router = require('./routes/router')
 
 const port = process.env.PORT || 5000
 const app = express()
@@ -17,8 +15,7 @@ app.use(bodyParser.json())
 /* ROUTES */
 
 app.get('/', (req, res) => res.send('Baza podataka u izgradnji.'))
-app.use('/', moviesRouter)
-app.use('/quotes', quotesRouter)
+app.use('/', router)
 
 /* SERVER */
 
