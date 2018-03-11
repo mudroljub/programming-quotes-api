@@ -1,14 +1,13 @@
 const mongodb = require('mongodb')
 const mongoUri = require('../../config.js').mongoUri
 
-const filmovi = (req, res) => {
+const readQuotes = (req, res) => {
   mongodb.MongoClient.connect(mongoUri, (err, db) => {
     if (err) throw err
-    db.collection('filmovi')
+    db.collection('citati')
       .find()
-      .sort({godina: 1}) // ili padajuce -1
-      .toArray((err, podaci) => res.send(podaci))
+      .toArray((err, podaci) => res.send(podaci.sort(() => .5 - Math.random())))
   })
 }
 
-module.exports = filmovi
+module.exports = readQuotes

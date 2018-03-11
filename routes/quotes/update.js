@@ -3,7 +3,7 @@ const mongoUri = require('../../config.js').mongoUri
 const ObjectId = require('mongodb').ObjectId
 const lozinka = process.env.LOZINKA
 
-const azurirajCitat = (req, res) => {
+module.exports = (req, res) => {
   const {_id, sr, autor, izvor, en, password} = req.body
   const uslov = (en || sr) && autor
   if (!uslov) return res.send('Niste poslali obavezna polja.')
@@ -18,5 +18,3 @@ const azurirajCitat = (req, res) => {
     res.send('SUCCESS_SAVED')
   })
 }
-
-module.exports = azurirajCitat

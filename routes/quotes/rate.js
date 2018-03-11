@@ -2,7 +2,7 @@ const mongodb = require('mongodb')
 const ObjectId = require('mongodb').ObjectId
 const mongoUri = require('../../config.js').mongoUri
 
-const oceniCitat = (req, res) => {
+module.exports = (req, res) => {
   const _id = req.body._id
   const novaOcena = Number(req.body.novaOcena)
   if (!_id || !novaOcena) return res.send('Niste poslali obavezna polja.')
@@ -18,7 +18,7 @@ const oceniCitat = (req, res) => {
         {_id: new ObjectId(_id)},
         {
           $set: {
-            ocena: noviProsek.toFixed(1), 
+            ocena: noviProsek.toFixed(1),
             glasalo: glasalo + 1
           }
         }
@@ -28,5 +28,3 @@ const oceniCitat = (req, res) => {
     })
   })
 }
-
-module.exports = oceniCitat

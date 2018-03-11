@@ -2,7 +2,7 @@ const mongodb = require('mongodb')
 const mongoUri = require('../../config.js').mongoUri
 const lozinka = process.env.LOZINKA
 
-const dodajCitat = (req, res) => {
+module.exports = (req, res) => {
   const {sr, autor, izvor, en, password} = req.body
   const uslov = (en || sr) && autor
   if (!uslov) return res.send('ARGUMENTS_ERROR')
@@ -16,5 +16,3 @@ const dodajCitat = (req, res) => {
     res.send('SUCCESS_SAVED')
   })
 }
-
-module.exports = dodajCitat
