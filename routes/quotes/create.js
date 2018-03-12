@@ -1,18 +1,18 @@
-const mongodb = require('mongodb')
-const mongoUri = require('../../config.js').mongoUri
+const Quote = require('../../models/Quote')
 const lozinka = process.env.LOZINKA
 
-module.exports = (req, res) => {
-  const {sr, author, source, en, password} = req.body
+module.exports =  (req, res) => {
+  const {en, sr, author, source, password} = req.body
   const condition = (en || sr) && author
   if (!condition) return res.send('ARGUMENTS_ERROR')
   if (password !== lozinka) return res.send('LOGIN_REQUIRED')
 
-  mongodb.MongoClient.connect(mongoUri, (err, db) => {
-    if(err) throw err
-    db.collection('quotes').insert(
-      {sr, author, source, en, rating: 0, numberOfVotes: 0}
-    )
+  Quote.find({$or: [{sr}, {en}]}, (err, results) => {
+    if (results.length) return res.send('ALREADY_EXISTS')
+  })
+
+  Quote.create({en, sr, author, source}, (err, quote) => {
+    if (err) return console.error(err)
     res.send('SUCCESS_SAVED')
   })
 }

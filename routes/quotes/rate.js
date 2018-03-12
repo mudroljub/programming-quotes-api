@@ -1,30 +1,21 @@
-const mongodb = require('mongodb')
-const ObjectId = require('mongodb').ObjectId
-const mongoUri = require('../../config.js').mongoUri
+const Quote = require('../../models/Quote')
 
 module.exports = (req, res) => {
   const _id = req.body._id
   const newRating = Number(req.body.newRating)
   if (!_id || !newRating) return res.send('ARGUMENTS_ERROR')
 
-  mongodb.MongoClient.connect(mongoUri, (err, db) => {
-    if(err) throw err
-
-    db.collection('quotes').findOne({_id: new ObjectId(_id)}, (err, quote) => {
-      if (err) throw err
-      const {numberOfVotes, rating} = quote
-      const newAverage = (numberOfVotes * rating + newRating) / (numberOfVotes + 1)
-      db.collection('quotes').update(
-        {_id: new ObjectId(_id)},
-        {
-          $set: {
-            rating: newAverage.toFixed(1),
-            numberOfVotes: numberOfVotes + 1
-          }
-        }
-      )
-      res.send(newAverage.toFixed(1))
-      db.close()
+  Quote.findById(_id, (err, quote) => {
+    if (err) return console.error(err)
+    const {numberOfVotes, rating} = quote
+    const newAverage = ((numberOfVotes * rating + newRating) / (numberOfVotes + 1)).toFixed(1)
+    quote.set({
+      rating: newAverage,
+      numberOfVotes: numberOfVotes + 1
+    })
+    quote.save(err => {
+      if (err) return console.error(err)
+      res.send(newAverage)
     })
   })
 }
