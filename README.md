@@ -4,13 +4,13 @@
 
 If you have any question regarding development, [contact us](https://skolakoda.org/kontakt).
 
-## Preduslovi
+## Prerequisites
 
 - Instaliraj Node.js i [Heroku](https://devcenter.heroku.com/articles/heroku-cli).
 - Otvori naloge na Github i Heroku
 - Moraš podesiti [varijable okruženja](https://devcenter.heroku.com/articles/heroku-local#set-up-your-local-environment-variables) u `.env` fajl
 
-## Pokretanje
+## Start
 
 ```
 npm i
