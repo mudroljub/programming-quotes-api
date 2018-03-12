@@ -4,7 +4,7 @@
 
 Programming Quotes client app is [here](https://github.com/skolakoda/programerski-citati).
 
-If you have any question regarding development, [contact us](https://skolakoda.org/kontakt).
+If you have any question, [contact us](https://skolakoda.org/kontakt).
 
 ## Prerequisites
 
