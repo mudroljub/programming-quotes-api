@@ -1,7 +1,7 @@
 const mongodb = require('mongodb')
 const mongoUri = require('../../config.js').mongoUri
 
-const filmovi = (req, res) => {
+module.exports = (req, res) => {
   mongodb.MongoClient.connect(mongoUri, (err, db) => {
     if (err) throw err
     db.collection('filmovi')
@@ -10,5 +10,3 @@ const filmovi = (req, res) => {
       .toArray((err, podaci) => res.send(podaci))
   })
 }
-
-module.exports = filmovi

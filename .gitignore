@@ -2,3 +2,7 @@
 npm-debug.log
 .DS_Store
 /*.env
+
+yarn-debug.log*
+yarn-error.log*
+package-lock.json

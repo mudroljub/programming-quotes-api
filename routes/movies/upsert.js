@@ -1,8 +1,9 @@
 const mongodb = require('mongodb')
 const mongoUri = require('../../config.js').mongoUri
-const WebSocket = require('ws')
+// const WebSocket = require('ws')
+// const wss = new WebSocket.Server({port: 8080})
 
-const dodajFilm = (req, res, wss) => {
+module.exports = (req, res) => {
   const {naziv, godina, slika, comments} = req.body
   if (!naziv || !godina || !slika) return res.send('Niste poslali sva polja.')
 
@@ -14,10 +15,8 @@ const dodajFilm = (req, res, wss) => {
       {upsert: true}
     )
     res.send('Hvala na azuriranju baze filmova.')
-    wss.clients.forEach(client => {
-      if (client.readyState === WebSocket.OPEN) client.send('Baze filmova je azurirana.')
-    })
+    // wss.clients.forEach(client => {
+    //   if (client.readyState === WebSocket.OPEN) client.send('Baze filmova je azurirana.')
+    // })
   })
 }
-
-module.exports = dodajFilm
