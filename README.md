@@ -1,6 +1,6 @@
 # Baza podataka
 
-**Bekend API i baza podataka za otvorene projekte Škole koda. Tehnologije: Node.js i MongoDB.**
+**Backend API and database for Skola koda's open projects. Technologies: Node.js and MongoDB.**
 
 Ako želiš da se uključiš u razvoj, [kontaktiraj nas](https://skolakoda.org/kontakt) za pristupna ovlašćenja i kredencijale.
 
