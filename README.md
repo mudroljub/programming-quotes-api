@@ -2,7 +2,7 @@
 
 **Backend API and database for our open projects. Technologies: Node.js and MongoDB.**
 
-Ako želiš da se uključiš u razvoj, [kontaktiraj nas](https://skolakoda.org/kontakt) za pristupna ovlašćenja i kredencijale.
+If you have any question regarding development, [contact us](https://skolakoda.org/kontakt).
 
 ## Preduslovi
 
