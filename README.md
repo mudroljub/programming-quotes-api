@@ -23,14 +23,6 @@ npm start
 git push heroku master
 ```
 
-## Kredencijali
-
-To protect your data, it is best practice to store your database credentials in environment variables. On a traditional host you can set environment vars in your `bashrc` file. On Heroku, you use config vars. To see config variable run:
-
-```
-heroku config
-```
-
 ## Dokumentacija
 
 Ovaj bekend API pokriva nekoliko otvorenih projekata Škole koda, između ostalih bazu filmova i bazu citata. Organizovan je po rutama, a svaka ruta je što je više moguće nezavisna funkcija.
