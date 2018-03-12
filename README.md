@@ -23,7 +23,7 @@ npm start
 git push heroku master
 ```
 
-## Dokumentacija
+## Docs
 
 Ovaj bekend API pokriva nekoliko otvorenih projekata Škole koda, između ostalih bazu filmova i bazu citata. Organizovan je po rutama, a svaka ruta je što je više moguće nezavisna funkcija.
 
