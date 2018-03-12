@@ -2,6 +2,8 @@
 
 **Backend API and database for our open projects. Technologies: Node.js and MongoDB.**
 
+Client app is [here](https://github.com/skolakoda/programerski-citati).
+
 If you have any question regarding development, [contact us](https://skolakoda.org/kontakt).
 
 ## Prerequisites
