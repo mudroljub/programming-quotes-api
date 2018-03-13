@@ -1,9 +1,10 @@
+require('dotenv').load()
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 
-const mongoUri = require('./config').mongoUri
+const mongoUri = require('./config/db').mongoUri
 const router = require('./routes/router')
 
 const port = process.env.PORT || 5000
@@ -20,9 +21,9 @@ mongoose.Promise = global.Promise
 
 /* ROUTES */
 
-app.get('/', (req, res) => res.send('Baza podataka u izgradnji.'))
+app.get('/', (req, res) => res.send('Backend API and database for open projects.'))
 app.use('/', router)
 
 /* SERVER */
 
-app.listen(port, () => console.log('Služitelj sluzi na kapiji', port))
+app.listen(port, () => console.log('Serving on', `http://localhost:${port}/`))

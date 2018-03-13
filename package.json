@@ -1,7 +1,7 @@
 {
   "name": "baza-podataka",
   "version": "1.0.0",
-  "description": "Bekend API i baza podataka za otvorene projekte Škole koda.",
+  "description": "Backend API and database for open projects.",
   "repository": "https://github.com/skolakoda/baza-podataka",
   "main": "index.js",
   "scripts": {
@@ -9,24 +9,24 @@
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "node",
-    "heroku"
-  ],
   "author": "Damjan Pavlica <mudroljub@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "express": "^4.16.2",
+    "jsonwebtoken": "^8.2.0",
     "mongodb": "^2.2.34",
     "mongoose": "^5.0.9",
+    "passport": "^0.4.0",
+    "passport-google-oauth20": "^1.0.0",
     "ws": "^3.3.3"
   },
   "engines": {
     "node": "6.9.3"
   },
   "devDependencies": {
+    "dotenv": "^5.0.1",
     "nodemon": "^1.14.11"
   }
 }

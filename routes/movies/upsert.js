@@ -1,5 +1,5 @@
 const mongodb = require('mongodb')
-const mongoUri = require('../../config.js').mongoUri
+const mongoUri = require('../../config/db').mongoUri
 // const WebSocket = require('ws')
 // const wss = new WebSocket.Server({port: 8080})
 
