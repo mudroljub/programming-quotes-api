@@ -5,7 +5,7 @@
   "repository": "https://github.com/skolakoda/baza-podataka",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec \"heroku local\" --signal SIGTERM",
+    "start": "NODE_ENV=development nodemon --exec \"heroku local\" --signal SIGTERM",
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -5,10 +5,13 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 
 const mongoUri = require('./config/db').mongoUri
+const {port, domain} = require('./config/host')
 const router = require('./routes/router')
-
-const port = process.env.PORT || 5000
 const app = express()
+
+const passport = require('./config/passport')
+app.use(passport.initialize())
+app.use(passport.session())
 
 /* CONFIG */
 
@@ -26,4 +29,4 @@ app.use('/', router)
 
 /* SERVER */
 
-app.listen(port, () => console.log('Serving on', `http://localhost:${port}/`))
+app.listen(port, () => console.log(`Serving on ${domain}`))
