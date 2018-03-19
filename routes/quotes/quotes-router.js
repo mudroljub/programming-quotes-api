@@ -8,9 +8,9 @@ router.post('/rate/', require('./rate'))
 router.use((req, res, next) => {
   const token = req.body.token || req.query.token || req.headers['x-access-token']
   if (!token) return res.status(403).send({success: false, message: 'No token.'})
-  jwt.verify(token, process.env.JWTSECRET, (err, user) => {
+  jwt.verify(token, process.env.JWTSECRET, (err, data) => {
     if (err) return res.json({success: false, message: 'Bad token.'})
-    if (!user.admin) return res.json({success: false, message: 'Not admin.'})
+    if (!data.user.admin) return res.json({success: false, message: 'Not admin.'})
     next()
   })
 })
