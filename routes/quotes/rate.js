@@ -1,5 +1,16 @@
 const Quote = require('../../models/Quote')
+const User = require('../../models/User')
 const jwt = require('jsonwebtoken')
+
+const saveVote = (token, quoteId) => {
+  jwt.verify(token, process.env.JWTSECRET, (err, data) => {
+    if (!data.user) return
+    User.findById(data.user._id, (err, user) => {
+      user.set({ voted: [...user.voted, quoteId] })
+      user.save()
+    })
+  })
+}
 
 module.exports = (req, res) => {
   const _id = req.body._id
@@ -18,11 +29,6 @@ module.exports = (req, res) => {
       if (err) return console.error(err)
       res.send(newAverage)
     })
-
-    const token = req.body.token || req.query.token || req.headers['x-access-token']
-    jwt.verify(token, process.env.JWTSECRET, (err, data) => {
-      // if (data.user.voted) data.user.voted.push(_id)
-      console.log(data.user.voted)
-    })
+    saveVote(req.body.token || req.query.token, _id)
   })
 }
