@@ -3,6 +3,6 @@ const Quote = require('../../models/Quote')
 module.exports = (req, res) => {
   Quote
     .find()
-    .then(quotes => res.send(quotes.sort(() => .5 - Math.random())))
+    .then(quotes => res.send(quotes))
     .catch(e => res.send('SERVER_ERROR'))
 }
