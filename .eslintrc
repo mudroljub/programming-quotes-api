@@ -43,8 +43,7 @@
       "prefer-const": "warn",
       "space-infix-ops": "warn",
       "comma-spacing": ["warn", { "before": false, "after": true }],
-      "spaced-comment": ["warn", "always"],
-      "new-cap": "warn"
+      "spaced-comment": ["warn", "always"]
   },
   "parserOptions": {
       "ecmaVersion": 8,
