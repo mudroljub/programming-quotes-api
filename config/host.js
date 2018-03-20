@@ -6,7 +6,7 @@ const domain = process.env.NODE_ENV === 'development'
 
 const clientDomain = process.env.NODE_ENV === 'development'
   ? 'http://localhost:3000'
-  : 'https://skolakoda.org/programerski-citati'
+  : 'https://skolakoda.org/programming-quotes'
 
 module.exports = {
   port,
