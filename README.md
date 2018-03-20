@@ -25,4 +25,4 @@ Deploy will be done automatically after merge into master branch.
 
 ## Docs
 
-For documentation, see our [wiki](/wiki).
+For documentation, see our [wiki](https://github.com/skolakoda/baza-podataka/wiki).
