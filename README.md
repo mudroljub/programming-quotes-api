@@ -8,9 +8,9 @@ If you have any question, [contact us](https://skolakoda.org/kontakt).
 
 ## Prerequisites
 
-- Instaliraj Node.js i [Heroku](https://devcenter.heroku.com/articles/heroku-cli).
-- Otvori naloge na Github i Heroku
-- Moraš podesiti [varijable okruženja](https://devcenter.heroku.com/articles/heroku-local#set-up-your-local-environment-variables) u `.env` fajl
+- Intall Node.js
+- Github account
+- Set [environment variables](https://github.com/skolakoda/baza-podataka/wiki/Environment-variables)
 
 ## Start
 
