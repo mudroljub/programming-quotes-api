@@ -21,12 +21,8 @@ npm start
 
 ## Deploy
 
-```
-git push heroku master
-```
+Deploy will be done automatically after merge into master branch. 
 
 ## Docs
 
-Ovaj bekend API pokriva nekoliko otvorenih projekata Škole koda, između ostalih bazu filmova i bazu citata. Organizovan je po rutama, a svaka ruta je što je više moguće nezavisna funkcija.
-
-Za sistem prevođenja poruka koje bekend šalje, videti klijent aplikaciju.
+For documentation, see our [wiki](/wiki).
