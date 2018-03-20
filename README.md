@@ -2,7 +2,7 @@
 
 **Backend API and database for our open projects. Technologies: Node.js and MongoDB.**
 
-See also [Programming Quotes client app](https://github.com/skolakoda/programerski-citati).
+Client for this project is [Programming Quotes React app](https://github.com/skolakoda/programerski-citati).
 
 If you have any question, [contact us](https://skolakoda.org/kontakt).
 
