@@ -1,5 +1,5 @@
 const mongodb = require('mongodb')
-const mongoUri = require('../../config.js').mongoUri
+const mongoUri = require('../../config/db').mongoUri
 
 module.exports = (req, res) => {
   mongodb.MongoClient.connect(mongoUri, (err, db) => {
