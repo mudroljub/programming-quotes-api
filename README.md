@@ -2,7 +2,7 @@
 
 **Backend API and database for our open projects. Technologies: Node.js and MongoDB.**
 
-For client app see: [Programming Quotes](https://github.com/skolakoda/programming-quotes).
+For client see: [Programming Quotes React app](https://github.com/skolakoda/programming-quotes).
 
 ## Prerequisites
 
