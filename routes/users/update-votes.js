@@ -9,6 +9,7 @@ module.exports = (req, res) => {
     User.findById(data.user._id, (err, user) => {
       user.set({ voted })
       user.save()
+      res.send('ok')
     })
   })
 }
