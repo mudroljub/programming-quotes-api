@@ -4,8 +4,6 @@
 
 For client app see: [Programming Quotes](https://github.com/skolakoda/programming-quotes).
 
-If you have any question, [contact us](https://skolakoda.org/kontakt).
-
 ## Prerequisites
 
 - Intall Node.js
