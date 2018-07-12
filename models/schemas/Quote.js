@@ -7,15 +7,11 @@ const Quote = {
   },
   en: {
     type: String,
-    sparse: true,
-    unique: true,
     trim: true
   },
   sr: {
     type: String,
     trim: true,
-    sparse: true,
-    unique: true,
   },
   source: {
     type: String,
