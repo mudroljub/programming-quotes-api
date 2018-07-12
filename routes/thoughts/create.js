@@ -1,15 +1,15 @@
-const ProgrammingQuote = require('../../models/ProgrammingQuote')
+const SacredThought = require('../../models/SacredThought')
 
-module.exports =  (req, res) => {
+module.exports = (req, res) => {
   const {en, sr, author, source} = req.body
   const condition = (en || sr) && author
   if (!condition) return res.send('ARGUMENTS_ERROR')
 
-  ProgrammingQuote.find({$or: [{sr}, {en}]}, (err, results) => {
+  SacredThought.find({$or: [{sr}, {en}]}, (err, results) => {
     if (results.length) return res.send('ALREADY_EXISTS')
   })
 
-  ProgrammingQuote.create({en, sr, author, source}, (err, quote) => {
+  SacredThought.create({en, sr, author, source}, (err, quote) => {
     if (err) return console.error(err)
     res.send('SUCCESS_SAVED')
   })

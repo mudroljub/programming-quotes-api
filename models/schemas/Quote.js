@@ -1,11 +1,9 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
-
-const quotesSchema = Schema({
+const Quote = {
   author: {
     type: String, // Schema.Types.ObjectId,
-    ref: 'Author',
-    required: true
+    // ref: 'Author',
+    required: true,
+    trim: true,
   },
   en: {
     type: String,
@@ -21,19 +19,19 @@ const quotesSchema = Schema({
   },
   source: {
     type: String,
-    trim: true
+    trim: true,
   },
   numberOfVotes: {
     type: Number,
     min: 0,
-    default: 0
+    default: 0,
   },
   rating: {
     type: Number,
     min: 0,
     max: 5,
-    default: 0
+    default: 0,
   }
-})
+}
 
-module.exports = mongoose.model('Quote', quotesSchema)
+module.exports = Quote

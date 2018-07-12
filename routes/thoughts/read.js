@@ -1,7 +1,7 @@
-const ProgrammingQuote = require('../../models/ProgrammingQuote')
+const SacredThought = require('../../models/SacredThought')
 
 module.exports = (req, res) => {
-  ProgrammingQuote
+  SacredThought
     .find()
     .then(quotes => res.send(quotes))
     .catch(e => res.send('SERVER_ERROR'))
