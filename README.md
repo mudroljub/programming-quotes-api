@@ -19,8 +19,30 @@ npm start
 
 ## Deploy
 
-Deploy will be done automatically after merge into master branch. 
+Deploy will be done automatically after merge into master branch.
 
-## Docs
+## API endpoints
+### Read
 
-For documentation, see our [wiki](https://github.com/skolakoda/baza-podataka/wiki).
+GET `https://baza-podataka.herokuapp.com/quotes/`
+
+### Create
+
+POST `https://baza-podataka.herokuapp.com/quotes/create/`
+- required: `token`, `author` and one language (`en` or `sr`)
+- optional: `source` and other language
+
+### Update
+
+POST `https://baza-podataka.herokuapp.com/quotes/update/`
+- required: `token`, `_id`,`author` and one language (`en` or `sr`)
+
+### Delete
+
+DELETE: `https://baza-podataka.herokuapp.com/quotes/delete/`
+- required: `token` and `_id`
+
+### Rate
+
+POST `https://baza-podataka.herokuapp.com/quotes/rate/`
+- required: `_id` and `newRating`
