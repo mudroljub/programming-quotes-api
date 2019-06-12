@@ -7,7 +7,6 @@ For client see: [Programming Quotes React app](https://github.com/skolakoda/prog
 ## Prerequisites
 
 - Intall Node.js
-- Github account
 - Set [environment variables](https://github.com/skolakoda/baza-podataka/wiki/Environment-variables)
 
 ## Start
