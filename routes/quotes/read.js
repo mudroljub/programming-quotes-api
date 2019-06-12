@@ -1,6 +1,5 @@
-const Quote = require('../../models/ProgrammingQuote')
-
 module.exports = (req, res) => {
+  const { Quote } = res.locals
   Quote
     .find()
     .then(quotes => res.send(quotes))

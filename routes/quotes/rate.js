@@ -1,4 +1,3 @@
-const Quote = require('../../models/ProgrammingQuote')
 const User = require('../../models/User')
 const jwt = require('jsonwebtoken')
 
@@ -13,6 +12,7 @@ const saveVote = (token, quoteId) => {
 }
 
 module.exports = (req, res) => {
+  const { Quote } = res.locals
   const _id = req.body._id
   const newRating = Number(req.body.newRating)
   if (!_id || !newRating) return res.send('ARGUMENTS_ERROR')

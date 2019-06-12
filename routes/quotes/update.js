@@ -1,7 +1,6 @@
-const Quote = require('../../models/ProgrammingQuote')
-
 module.exports = (req, res) => {
   const {_id, en, sr, author, source} = req.body
+  const { Quote } = res.locals
 
   Quote.findById(_id, (err, quote) => {
     if (err) return console.error(err)

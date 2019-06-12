@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {validateToken} = require('../../utils/helpers')
+const { validateToken } = require('../../utils/helpers')
 
 router.get('/', require('./read'))
 router.post('/rate/', require('./rate'))

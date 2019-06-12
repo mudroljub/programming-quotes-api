@@ -1,24 +1,8 @@
 # Baza podataka
 
-**Backend API and database for our open projects. Technologies: Node.js and MongoDB.**
+**Backend API for our open source projects. Technologies: Node.js and MongoDB.**
 
-For client see: [Programming Quotes React app](https://github.com/skolakoda/programming-quotes).
-
-## Prerequisites
-
-- Intall Node.js
-- Set [environment variables](https://github.com/skolakoda/baza-podataka/wiki/Environment-variables)
-
-## Start
-
-```
-npm i
-npm start
-```
-
-## Deploy
-
-Deploy will be done automatically after merge into master branch.
+Also, see client: [Programming Quotes React app](https://github.com/skolakoda/programming-quotes).
 
 ## API endpoints
 
@@ -44,3 +28,27 @@ POST `https://baza-podataka.herokuapp.com/quotes/rate/`
 
 DELETE: `https://baza-podataka.herokuapp.com/quotes/delete/`
 - required: `token` and `_id`
+
+
+## Development
+
+### Prerequisites
+
+- Intall Node.js
+- Set [environment variables](https://github.com/skolakoda/baza-podataka/wiki/Environment-variables)
+
+### Start
+
+```
+npm i
+npm start
+```
+
+### Deploy
+
+Deploy will be done automatically after merge into master branch.
+
+### TODO
+
+- add /random endpoint
+- add pagination
