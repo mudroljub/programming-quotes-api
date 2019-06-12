@@ -1,4 +1,4 @@
-const ProgrammingQuote = require('../../models/ProgrammingQuote')
+const Quote = require('../../models/ProgrammingQuote')
 const User = require('../../models/User')
 const jwt = require('jsonwebtoken')
 
@@ -17,7 +17,7 @@ module.exports = (req, res) => {
   const newRating = Number(req.body.newRating)
   if (!_id || !newRating) return res.send('ARGUMENTS_ERROR')
 
-  ProgrammingQuote.findById(_id, (err, quote) => {
+  Quote.findById(_id, (err, quote) => {
     if (err) return console.error(err)
     const {numberOfVotes, rating} = quote
     const newAverage = ((numberOfVotes * rating + newRating) / (numberOfVotes + 1)).toFixed(1)

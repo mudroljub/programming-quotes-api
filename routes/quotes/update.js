@@ -1,11 +1,9 @@
-const ProgrammingQuote = require('../../models/ProgrammingQuote')
+const Quote = require('../../models/ProgrammingQuote')
 
 module.exports = (req, res) => {
   const {_id, en, sr, author, source} = req.body
-  const condition = (en || sr) && author
-  if (!condition) return res.send({message: 'ARGUMENTS_ERROR'})
 
-  ProgrammingQuote.findById(_id, (err, quote) => {
+  Quote.findById(_id, (err, quote) => {
     if (err) return console.error(err)
     quote.set({ en, sr, author, source })
     quote.save(err => {

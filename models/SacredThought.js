@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const {model} = require('mongoose')
 const QuotesSchema = require('./schemas/Quote')
 
-module.exports = mongoose.model('SacredThought', QuotesSchema, 'sacredThoughts')
+module.exports = model('SacredThought', QuotesSchema, 'sacredThoughts')
