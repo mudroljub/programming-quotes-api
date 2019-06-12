@@ -8,7 +8,7 @@ Also, see client: [Programming Quotes React app](https://github.com/skolakoda/pr
 
 ### Create
 
-POST `https://baza-podataka.herokuapp.com/quotes/create/`
+POST `https://baza-podataka.herokuapp.com/quotes/`
 - required: `token`, `author` and one language (`en` or `sr`)
 - optional: `source` and other language
 
@@ -18,15 +18,12 @@ GET `https://baza-podataka.herokuapp.com/quotes/`
 
 ### Update
 
-POST `https://baza-podataka.herokuapp.com/quotes/update/`
+PUT `https://baza-podataka.herokuapp.com/quotes/`
 - required: `token`, `_id`,`author` and one language (`en` or `sr`)
-
-POST `https://baza-podataka.herokuapp.com/quotes/rate/`
-- required: `_id` and `newRating`
 
 ### Delete
 
-DELETE: `https://baza-podataka.herokuapp.com/quotes/delete/`
+DELETE: `https://baza-podataka.herokuapp.com/quotes/`
 - required: `token` and `_id`
 
 
@@ -52,3 +49,4 @@ Deploy will be done automatically after merge into master branch.
 
 - add /random endpoint
 - add pagination
+- add voting
