@@ -22,9 +22,6 @@ npm start
 Deploy will be done automatically after merge into master branch.
 
 ## API endpoints
-### Read
-
-GET `https://baza-podataka.herokuapp.com/quotes/`
 
 ### Create
 
@@ -32,17 +29,19 @@ POST `https://baza-podataka.herokuapp.com/quotes/create/`
 - required: `token`, `author` and one language (`en` or `sr`)
 - optional: `source` and other language
 
+### Read
+
+GET `https://baza-podataka.herokuapp.com/quotes/`
+
 ### Update
 
 POST `https://baza-podataka.herokuapp.com/quotes/update/`
 - required: `token`, `_id`,`author` and one language (`en` or `sr`)
 
+POST `https://baza-podataka.herokuapp.com/quotes/rate/`
+- required: `_id` and `newRating`
+
 ### Delete
 
 DELETE: `https://baza-podataka.herokuapp.com/quotes/delete/`
 - required: `token` and `_id`
-
-### Rate
-
-POST `https://baza-podataka.herokuapp.com/quotes/rate/`
-- required: `_id` and `newRating`
