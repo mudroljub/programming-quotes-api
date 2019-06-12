@@ -1,3 +1,5 @@
+const mongoose = require('mongoose')
+
 const Quote = {
   author: {
     type: String, // Schema.Types.ObjectId,
@@ -7,6 +9,7 @@ const Quote = {
   },
   en: {
     type: String,
+    required: true,
     trim: true
   },
   sr: {
@@ -30,4 +33,6 @@ const Quote = {
   }
 }
 
-module.exports = Quote
+const QuotesSchema = mongoose.Schema(Quote)
+
+module.exports = QuotesSchema

@@ -20,11 +20,11 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
 mongoose.connect(mongoUri, { useNewUrlParser: true })
-mongoose.set('useCreateIndex', true) 
+mongoose.set('useCreateIndex', true)
 
 /* ROUTES */
 
-app.get('/', (req, res) => res.send('Backend API and database for open projects.'))
+app.get('/', (req, res) => res.send('Quotes API for open source projects.'))
 app.use('/', router)
 
 /* SERVER */

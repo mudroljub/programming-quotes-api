@@ -1,7 +1,7 @@
 const router = require('express').Router()
 
-const quotesRouter = require('./quotes/quotes-router')
-const thoughtsRouter = require('./thoughts/thoughts-router')
+const quotesRouter = require('./quotes/')
+const thoughtsRouter = require('./thoughts/')
 const authRouter = require('./auth')
 
 router.use('/quotes', quotesRouter)
