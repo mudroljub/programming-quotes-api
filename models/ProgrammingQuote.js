@@ -1,4 +1,4 @@
 const {model} = require('mongoose')
-const QuotesSchema = require('./schemas/Quote')
+const QuotesSchema = require('./QuoteSchema')
 
 module.exports = model('ProgrammingQuote', QuotesSchema, 'programmingQuotes')
