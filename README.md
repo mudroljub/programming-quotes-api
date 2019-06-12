@@ -1,29 +1,31 @@
-# Baza podataka
+# Programming Quotes API
 
-**Backend API for our open source projects. Technologies: Node.js and MongoDB.**
+**Programming Quotes REST API for open source projects.**
 
-Also, see client: [Programming Quotes React app](https://github.com/skolakoda/programming-quotes).
+https://baza-podataka.herokuapp.com
+
+See client app: [Programming Quotes React app](https://github.com/skolakoda/programming-quotes).
 
 ## API endpoints
 
 ### Create
 
-POST `https://baza-podataka.herokuapp.com/quotes/`
+POST `/quotes`
 - required: `token`, `author` and one language (`en` or `sr`)
 - optional: `source` and other language
 
 ### Read
 
-GET `https://baza-podataka.herokuapp.com/quotes/`
+GET `/quotes`
 
 ### Update
 
-PUT `https://baza-podataka.herokuapp.com/quotes/`
+PUT `/quotes`
 - required: `token`, `_id`,`author` and one language (`en` or `sr`)
 
 ### Delete
 
-DELETE: `https://baza-podataka.herokuapp.com/quotes/`
+DELETE: `/quotes`
 - required: `token` and `_id`
 
 

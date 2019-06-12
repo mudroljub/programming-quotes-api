@@ -9,11 +9,12 @@ const Quote = {
   },
   en: {
     type: String,
-    required: true,
+    required() { return !this.sr },
     trim: true
   },
   sr: {
     type: String,
+    required() { return !this.en },
     trim: true,
   },
   source: {
