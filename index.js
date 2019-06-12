@@ -19,8 +19,8 @@ app.use(cors())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
-mongoose.connect(mongoUri)
-mongoose.Promise = global.Promise
+mongoose.connect(mongoUri, { useNewUrlParser: true })
+mongoose.set('useCreateIndex', true) 
 
 /* ROUTES */
 
