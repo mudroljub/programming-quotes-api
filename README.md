@@ -1,6 +1,6 @@
 # Programming Quotes API
 
-**Programming Quotes REST API for open source projects.**
+**Programming Quotes API for open source projects.**
 
 https://pqapi.herokuapp.com/
 
