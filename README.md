@@ -13,12 +13,28 @@ GET `/quotes`
 POST `/quotes`
 - required: `token`, `author` and one language (`en` or `sr`)
 - optional: `source` and other language
+- author name should be from Wikipedia
+- user must be logged in
 
 PUT `/quotes`
 - required: `token`, `_id`,`author` and one language (`en` or `sr`)
+- user must be admin
 
 DELETE: `/quotes`
 - required: `token` and `_id`
+- user must be admin
+
+### Quote model
+
+```json
+{
+  "_id": "5a6ce86e2af929789500e7e4",
+  "en": "Computer Science is no more about computers than astronomy is about telescopes.",
+  "sr": "Računarska nauka se tiče računara koliko i astronomija teleskopa.",
+  "author": "Edsger W. Dijkstra",
+  "source": null
+}
+```
 
 ### User authentication
 
