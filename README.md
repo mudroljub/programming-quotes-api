@@ -4,8 +4,6 @@
 
 https://pqapi.herokuapp.com/
 
-See client app: [Programming Quotes React app](https://github.com/skolakoda/programming-quotes).
-
 ## Documentation
 
 ### Quote model
