@@ -6,7 +6,21 @@ https://pqapi.herokuapp.com/
 
 See client app: [Programming Quotes React app](https://github.com/skolakoda/programming-quotes).
 
-## API endpoints
+## Documentation
+
+### Quote model
+
+```json
+{
+  "_id": "5a6ce86e2af929789500e7e4",
+  "en": "Computer Science is no more about computers than astronomy is about telescopes.",
+  "sr": "Računarska nauka se tiče računara koliko i astronomija teleskopa.",
+  "author": "Edsger W. Dijkstra",
+  "source": null
+}
+```
+
+### API endpoints
 
 GET `/quotes`
 
@@ -23,18 +37,6 @@ PUT `/quotes`
 DELETE: `/quotes`
 - required: `token` and `_id`
 - user must be admin
-
-### Quote model
-
-```json
-{
-  "_id": "5a6ce86e2af929789500e7e4",
-  "en": "Computer Science is no more about computers than astronomy is about telescopes.",
-  "sr": "Računarska nauka se tiče računara koliko i astronomija teleskopa.",
-  "author": "Edsger W. Dijkstra",
-  "source": null
-}
-```
 
 ### User authentication
 
