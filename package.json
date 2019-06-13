@@ -1,14 +1,13 @@
 {
-  "name": "baza-podataka",
-  "version": "1.0.0",
-  "description": "Backend API and database for open projects.",
-  "repository": "https://github.com/skolakoda/baza-podataka",
+  "name": "programming-quotes-api",
+  "version": "2.0.0",
+  "description": "Programming Quotes API for open source projects.",
+  "repository": "https://github.com/skolakoda/programming-quotes-api",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec \"heroku local\" --signal SIGTERM",
-    "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+    },
   "author": "Damjan Pavlica <mudroljub@gmail.com>",
   "license": "ISC",
   "dependencies": {
