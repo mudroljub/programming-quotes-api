@@ -14,10 +14,10 @@ See client app: [Programming Quotes React app](https://github.com/skolakoda/prog
 
 **Read**: GET `/quotes`
 
-### Update: PUT `/quotes`
+**Update**: PUT `/quotes`
 - required: `token`, `_id`,`author` and one language (`en` or `sr`)
 
-### Delete: DELETE: `/quotes`
+**Delete**: DELETE: `/quotes`
 - required: `token` and `_id`
 
 ## Development
