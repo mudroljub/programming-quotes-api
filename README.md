@@ -8,16 +8,16 @@ See client app: [Programming Quotes React app](https://github.com/skolakoda/prog
 
 ## API endpoints
 
-**Create**: POST `/quotes`
+GET `/quotes`
+
+POST `/quotes`
 - required: `token`, `author` and one language (`en` or `sr`)
 - optional: `source` and other language
 
-**Read**: GET `/quotes`
-
-**Update**: PUT `/quotes`
+PUT `/quotes`
 - required: `token`, `_id`,`author` and one language (`en` or `sr`)
 
-**Delete**: DELETE: `/quotes`
+DELETE: `/quotes`
 - required: `token` and `_id`
 
 ## Development
