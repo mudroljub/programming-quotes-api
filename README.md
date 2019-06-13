@@ -22,8 +22,11 @@ DELETE: `/quotes`
 
 ### User authentication
 
-GET `/auth/google` takes user to the Gmail, and after successful login,
-redirects to GET `/auth/google/${token}`, where client app should handle token
+GET `/auth/google`
+takes user to the Gmail login, and after success, redirects to
+
+GET `/auth/google/${token}`
+where client app should handle token
 
 ## Development
 
