@@ -6,11 +6,17 @@ const validateToken = (req, res, next) => {
 
   jwt.verify(token, process.env.JWTSECRET, (err, data) => {
     if (err) return res.json({success: false, message: 'Bad token.'})
-    if (!data.user.admin) return res.json({success: false, message: 'Not admin.'})
+    res.locals.user = data.user
     next()
   })
 }
 
+const validateAdmin = (req, res, next) => {
+  if (!res.locals.user.admin) return res.json({success: false, message: 'Not admin.'})
+  next()
+}
+
 module.exports = {
-  validateToken
+  validateToken,
+  validateAdmin
 }
