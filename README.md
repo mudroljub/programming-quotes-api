@@ -20,6 +20,11 @@ PUT `/quotes`
 DELETE: `/quotes`
 - required: `token` and `_id`
 
+### User authentication
+
+GET `/auth/google` takes user to the Gmail, and after successful login,
+redirects to GET `/auth/google/${token}`, where client app should handle token
+
 ## Development
 
 ### Prerequisites
