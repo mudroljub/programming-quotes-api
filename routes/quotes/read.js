@@ -1,8 +1,7 @@
-const ProgrammingQuote = require('../../models/ProgrammingQuote')
-
 module.exports = (req, res) => {
-  ProgrammingQuote
+  const { Quote } = res.locals
+  Quote
     .find()
     .then(quotes => res.send(quotes))
-    .catch(e => res.send('SERVER_ERROR'))
+    .catch(e => res.send('SERVER_ERROR', e.message))
 }

@@ -1,13 +1,19 @@
 const router = require('express').Router()
-
-const quotesRouter = require('./quotes/quotes-router')
-const thoughtsRouter = require('./thoughts/thoughts-router')
-const moviesRouter = require('./movies/movies-router')
+const { model } = require('mongoose')
+const QuotesSchema = require('../models/QuoteSchema')
+const quotesRouter = require('./quotes/')
 const authRouter = require('./auth')
 
-router.use('/', moviesRouter)
-router.use('/quotes', quotesRouter)
-router.use('/thoughts', thoughtsRouter)
+router.use('/quotes/', (req, res, next) => {
+  res.locals.Quote = model('Quote', QuotesSchema, 'programmingQuotes')
+  next()
+}, quotesRouter)
+
+router.use('/svetemisli/', (req, res, next) => {
+  res.locals.Quote = model('Quote', QuotesSchema, 'svetemisli')
+  next()
+}, quotesRouter)
+
 router.use('/auth', authRouter)
 
 module.exports = router

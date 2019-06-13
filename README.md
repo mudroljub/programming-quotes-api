@@ -1,26 +1,45 @@
-# Baza podataka
+# Programming Quotes API
 
-**Backend API and database for our open projects. Technologies: Node.js and MongoDB.**
+**Programming Quotes REST API for open source projects.**
 
-For client see: [Programming Quotes React app](https://github.com/skolakoda/programming-quotes).
+https://baza-podataka.herokuapp.com
 
-## Prerequisites
+See client app: [Programming Quotes React app](https://github.com/skolakoda/programming-quotes).
+
+## API endpoints
+
+GET `/quotes`
+
+POST `/quotes`
+- required: `token`, `author` and one language (`en` or `sr`)
+- optional: `source` and other language
+
+PUT `/quotes`
+- required: `token`, `_id`,`author` and one language (`en` or `sr`)
+
+DELETE: `/quotes`
+- required: `token` and `_id`
+
+## Development
+
+### Prerequisites
 
 - Intall Node.js
-- Github account
 - Set [environment variables](https://github.com/skolakoda/baza-podataka/wiki/Environment-variables)
 
-## Start
+### Start
 
 ```
 npm i
 npm start
 ```
 
-## Deploy
+### Deploy
 
-Deploy will be done automatically after merge into master branch. 
+Deploy will be done automatically after merge into master branch.
 
-## Docs
+### TODO
 
-For documentation, see our [wiki](https://github.com/skolakoda/baza-podataka/wiki).
+- add /random endpoint
+- add pagination
+- add voting
