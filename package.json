@@ -14,6 +14,7 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
+    "dotenv": "^5.0.1",
     "express": "^4.16.2",
     "jsonwebtoken": "^8.2.0",
     "mongodb": "^2.2.34",
@@ -26,7 +27,6 @@
     "node": "6.9.3"
   },
   "devDependencies": {
-    "dotenv": "^5.0.1",
     "nodemon": "^1.18.5"
   }
 }
