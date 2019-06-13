@@ -2,7 +2,7 @@
 
 **Programming Quotes REST API for open source projects.**
 
-https://baza-podataka.herokuapp.com
+https://pqapi.herokuapp.com/
 
 See client app: [Programming Quotes React app](https://github.com/skolakoda/programming-quotes).
 
