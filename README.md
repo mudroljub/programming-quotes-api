@@ -2,13 +2,13 @@
 
 **Programming Quotes API for open source projects.**
 
-https://pqapi.herokuapp.com
+https://programming-quotes-api.herokuapp.com
 
 ## API Endpoints
 
 ### Get all quotes
 
-GET [`/quotes`](https://pqapi.herokuapp.com/quotes)
+GET [`/quotes`](https://programming-quotes-api.herokuapp.com/quotes)
 
 ```json
 [
