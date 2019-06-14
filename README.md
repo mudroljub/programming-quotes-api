@@ -33,6 +33,7 @@ POST `/quotes`
 
 PUT `/quotes`
 - required: `token`, `_id`,`author` and one language (`en` or `sr`)
+- optional: `source` and other language
 
 ### Delete a quote (admin)
 
