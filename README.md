@@ -4,9 +4,9 @@
 
 https://pqapi.herokuapp.com/
 
-## Documentation
+## API Endpoints
 
-### Quote model
+Quote model:
 
 ```json
 {
@@ -14,13 +14,15 @@ https://pqapi.herokuapp.com/
   "en": "Computer Science is no more about computers than astronomy is about telescopes.",
   "sr": "Računarska nauka se tiče računara koliko i astronomija teleskopa.",
   "author": "Edsger W. Dijkstra",
-  "source": null
+  "source": ""
 }
 ```
 
-### API endpoints
+### Get all quotes
 
 GET `/quotes`
+
+### Post new quote
 
 POST `/quotes`
 - required: `token`, `author` and one language (`en` or `sr`)
@@ -28,15 +30,19 @@ POST `/quotes`
 - author name should be from Wikipedia
 - user must be logged in
 
+### Update a quote
+
 PUT `/quotes`
 - required: `token`, `_id`,`author` and one language (`en` or `sr`)
 - user must be admin
+
+### Delete a quote
 
 DELETE: `/quotes`
 - required: `token` and `_id`
 - user must be admin
 
-### User authentication
+## User authentication
 
 GET `/auth/google`
 takes user to the Gmail login, and after success, redirects to
