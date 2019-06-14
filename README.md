@@ -6,21 +6,19 @@ https://pqapi.herokuapp.com/
 
 ## API Endpoints
 
-Quote model:
+### Get all quotes
+
+GET `/quotes`
 
 ```json
-{
+[{
   "_id": "5a6ce86e2af929789500e7e4",
   "en": "Computer Science is no more about computers than astronomy is about telescopes.",
   "sr": "Računarska nauka se tiče računara koliko i astronomija teleskopa.",
   "author": "Edsger W. Dijkstra",
   "source": ""
-}
+}]
 ```
-
-### Get all quotes
-
-GET `/quotes`
 
 ### Post a new quote (user)
 
