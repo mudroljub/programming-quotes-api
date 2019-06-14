@@ -74,7 +74,6 @@ Deploy will be done automatically after merge into master branch.
 
 ### TODO
 
-- add /random endpoint
 - add pagination
 - add voting
 - save who added and last edited quote
