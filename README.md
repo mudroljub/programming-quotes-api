@@ -22,25 +22,22 @@ Quote model:
 
 GET `/quotes`
 
-### Post new quote
+### Post new quote (registered user)
 
 POST `/quotes`
 - required: `token`, `author` and one language (`en` or `sr`)
 - optional: `source` and other language
 - author name should be from Wikipedia
-- user must be logged in
 
-### Update a quote
+### Update a quote (admin)
 
 PUT `/quotes`
 - required: `token`, `_id`,`author` and one language (`en` or `sr`)
-- user must be admin
 
-### Delete a quote
+### Delete a quote (admin)
 
 DELETE: `/quotes`
 - required: `token` and `_id`
-- user must be admin
 
 ## User authentication
 
@@ -79,3 +76,4 @@ Deploy will be done automatically after merge into master branch.
 - add /random endpoint
 - add pagination
 - add voting
+- save who added and last edited quote
