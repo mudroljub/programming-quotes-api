@@ -4,8 +4,6 @@
 
 https://programming-quotes-api.herokuapp.com
 
-## API Endpoints
-
 ```json
 {
   "en": "Computer Science is no more about computers than astronomy is about telescopes.",
@@ -13,6 +11,8 @@ https://programming-quotes-api.herokuapp.com
   "author": "Edsger W. Dijkstra",
 }
 ```
+
+## API Endpoints
 
 ### Get all quotes
 
