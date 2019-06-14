@@ -22,7 +22,7 @@ Quote model:
 
 GET `/quotes`
 
-### Post new quote (registered user)
+### Post a new quote (user)
 
 POST `/quotes`
 - required: `token`, `author` and one language (`en` or `sr`)
@@ -39,9 +39,9 @@ PUT `/quotes`
 DELETE: `/quotes`
 - required: `token` and `_id`
 
-## User authentication
+## Authentication
 
-### Login endpoint
+### Google login
 
 GET `/auth/google`
 
