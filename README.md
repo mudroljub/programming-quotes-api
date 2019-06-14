@@ -44,15 +44,17 @@ DELETE: `/quotes`
 
 ## User authentication
 
-### Login
+### Login endpoint
 
 GET `/auth/google`
 
-- takes user to Gmail login, and after success, redirects to client app
+- opens Google login page, and after success, redirects to client app
+
+### Client URL
 
 GET `${clientDomain}#/auth/google/${token}`
 
-- client route where token should be handled
+- the client app should handle token on this route after login
 
 ## Development
 
