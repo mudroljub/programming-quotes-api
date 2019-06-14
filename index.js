@@ -25,7 +25,7 @@ mongoose.set('useCreateIndex', true)
 /* ROUTES */
 
 app.get('/', (req, res) => res.send(
-  '<a href="https://github.com/skolakoda/programming-quotes-api">Programming Quotes API for open source projects.</a>'
+  '<a href="https://github.com/skolakoda/programming-quotes-api">Programming Quotes API</a> for open source projects.'
 ))
 app.use('/', router)
 

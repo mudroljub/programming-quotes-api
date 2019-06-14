@@ -6,41 +6,41 @@ https://programming-quotes-api.herokuapp.com
 
 ## API Endpoints
 
+```json
+{
+  "en": "Computer Science is no more about computers than astronomy is about telescopes.",
+  "sr": "Računarska nauka se tiče računara koliko i astronomija teleskopa.",
+  "author": "Edsger W. Dijkstra",
+}
+```
+
 ### Get all quotes
 
 GET [`/quotes`](https://programming-quotes-api.herokuapp.com/quotes)
 
-```json
-[
-  {
-    "_id": "5a6ce86e2af929789500e7e4",
-    "en": "Computer Science is no more about computers than astronomy is about telescopes.",
-    "sr": "Računarska nauka se tiče računara koliko i astronomija teleskopa.",
-    "author": "Edsger W. Dijkstra",
-    "source": ""
-  }
-]
-```
+### Get a random quote
+
+GET [`/quotes/random`](https://programming-quotes-api.herokuapp.com/quotes/random)
 
 ### Post a new quote (user)
 
 POST `/quotes`
-- required: `token`, `author` and one language (`en` or `sr`)
-- optional: `source` and other language
+- required: `token`, `author` and `en`
+- optional: `source` and `sr` language
 - author name should be from Wikipedia
 
 ### Update a quote (admin)
 
 PUT `/quotes`
-- required: `token`, `_id`,`author` and one language (`en` or `sr`)
-- optional: `source` and other language
+- required: `token`, `_id`,`author` and `en`
+- optional: `source` and `sr` language
 
 ### Delete a quote (admin)
 
 DELETE: `/quotes`
 - required: `token` and `_id`
 
-## Authentication
+## User Authentication
 
 ### Google login
 
@@ -74,7 +74,6 @@ Deploy will be done automatically after merge into master branch.
 
 ### TODO
 
-- add /random endpoint
 - add pagination
 - add voting
 - save who added and last edited quote
