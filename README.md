@@ -74,6 +74,8 @@ Deploy will be done automatically after merge into master branch.
 
 ### TODO
 
+- dodati readme kao naslovnu
+https://stackoverflow.com/questions/27971806/returning-rendered-markdown-with-express-and-marked
 - add pagination
 - add voting
 - save who added and last edited quote

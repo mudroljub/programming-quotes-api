@@ -18,6 +18,10 @@ const userSchema = Schema({
     type: String,
     unique: true
   },
+  githubId: {
+    type: String,
+    unique: true
+  },
   accessToken: {
     type: String,
     unique: true
