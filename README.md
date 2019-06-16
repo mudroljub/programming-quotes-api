@@ -83,7 +83,6 @@ Deploy will be done automatically after merge into master branch.
 
 ### TODO
 
-- add multilang routes (random and get)
 - save who added and last edited quote
 - add pagination
 - add voting
