@@ -87,6 +87,5 @@ Deploy will be done automatically after merge into master branch.
 
 ### TODO
 
-- save who added and last edited quote
 - get quote by Id
 - add voting
