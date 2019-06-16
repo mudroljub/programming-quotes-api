@@ -1,6 +1,12 @@
 # Programming Quotes API
 
-Programming Quotes API for open source projects: [programming-quotes-api.herokuapp.com](https://programming-quotes-api.herokuapp.com)
+Programming Quotes API for open source projects. You are welcome to contribute.
+
+Repo: [github.com/skolakoda/programming-quotes-api](https://github.com/skolakoda/programming-quotes-api)
+
+Homepage: [programming-quotes-api.herokuapp.com](https://programming-quotes-api.herokuapp.com)
+
+## API Documentation
 
 Suported languages: en, sr.
 
@@ -11,8 +17,6 @@ Suported languages: en, sr.
   "author": "Edsger W. Dijkstra",
 }
 ```
-
-## API Endpoints
 
 ### Get all quotes
 
@@ -34,20 +38,24 @@ GET [`/quotes/random`](https://programming-quotes-api.herokuapp.com/quotes/rando
 
 GET [`/quotes/random/lang/sr`](https://programming-quotes-api.herokuapp.com/quotes/random/lang/sr)
 
-### Post a new quote (user)
+### Get quote by id
+
+GET [`/quotes/id/5a6ce86f2af929789500e824`](https://programming-quotes-api.herokuapp.com/quotes/id/5a6ce86f2af929789500e824)
+
+### Post quote (user)
 
 POST `/quotes`
 - required: `token`, `author` and `en`
 - optional: `source` and `sr` language
 - author name should be from Wikipedia
 
-### Update a quote (admin)
+### Update quote (admin)
 
 PUT `/quotes`
 - required: `token`, `_id`,`author` and `en`
 - optional: `source` and `sr` language
 
-### Delete a quote (admin)
+### Delete quote (admin)
 
 DELETE: `/quotes`
 - required: `token` and `_id`
@@ -87,5 +95,4 @@ Deploy will be done automatically after merge into master branch.
 
 ### TODO
 
-- get quote by Id
 - add voting
