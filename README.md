@@ -1,8 +1,8 @@
 # Programming Quotes API
 
-**Programming Quotes API for open source projects.**
+Programming Quotes API for open source projects: [programming-quotes-api.herokuapp.com](https://programming-quotes-api.herokuapp.com)
 
-https://programming-quotes-api.herokuapp.com
+Suported languages: en, sr.
 
 ```json
 {
@@ -18,15 +18,17 @@ https://programming-quotes-api.herokuapp.com
 
 GET [`/quotes`](https://programming-quotes-api.herokuapp.com/quotes)
 
-### Get quotes by language
-
-Suported languages: en, sr
+### Get all quotes by language
 
 GET [`/quotes/lang/en`](https://programming-quotes-api.herokuapp.com/quotes/lang/en)
 
 ### Get random quote
 
 GET [`/quotes/random`](https://programming-quotes-api.herokuapp.com/quotes/random)
+
+### Get random quote by language
+
+GET [`/quotes/random/lang/sr`](https://programming-quotes-api.herokuapp.com/quotes/random/lang/sr)
 
 ### Post a new quote (user)
 
