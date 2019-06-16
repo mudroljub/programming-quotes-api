@@ -1,5 +1,5 @@
 module.exports = (req, res) => {
-  const {lang} = req.params
+  const { lang } = req.params
   const { Quote } = res.locals
   Quote
     .find({ [lang]: { $ne: '' } })
