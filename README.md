@@ -18,7 +18,13 @@ https://programming-quotes-api.herokuapp.com
 
 GET [`/quotes`](https://programming-quotes-api.herokuapp.com/quotes)
 
-### Get a random quote
+### Get quotes by language
+
+Suported languages: en, sr
+
+GET [`/quotes/lang/en`](https://programming-quotes-api.herokuapp.com/quotes/lang/en)
+
+### Get random quote
 
 GET [`/quotes/random`](https://programming-quotes-api.herokuapp.com/quotes/random)
 
@@ -75,6 +81,7 @@ Deploy will be done automatically after merge into master branch.
 
 ### TODO
 
+- add multilang routes (random and get)
+- save who added and last edited quote
 - add pagination
 - add voting
-- save who added and last edited quote
