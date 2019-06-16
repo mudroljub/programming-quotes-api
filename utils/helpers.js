@@ -9,7 +9,7 @@ const validateUser = (req, res, next) => {
   if (!token) return res.status(403).send({success: false, message: 'No token.'})
 
   jwt.verify(token, process.env.JWTSECRET, (err, data) => {
-    if (err) return res.json({success: false, message: 'Bad token.'})
+    if (err) return res.status(403).json({success: false, message: 'Bad token.'})
     res.locals.user = data.user
     next()
   })
