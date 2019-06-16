@@ -9,7 +9,7 @@ module.exports = (req, res) => {
       const rand = Math.floor(Math.random() * n)
       Quote
         .findOne(query)
-        .select({ 'author': 1, [lang]: 1, '_id': 0})
+        .select({ 'author': 1, [lang]: 1 })
         .skip(rand)
         .exec((err, quote) => res.send(quote))
     })
