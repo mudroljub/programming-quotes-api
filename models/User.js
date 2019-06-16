@@ -14,14 +14,6 @@ const userSchema = Schema({
     match: /\S+@\S+\.\S+/,
     index: true
   },
-  googleId: {
-    type: String,
-    unique: true
-  },
-  githubId: {
-    type: String,
-    unique: true
-  },
   accessToken: {
     type: String,
     unique: true

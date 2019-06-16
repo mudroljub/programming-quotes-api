@@ -7,12 +7,12 @@ let clientDomain = ''
 // prihvata zahtev klijenta i salje na google login
 router.get('/google', (req, res, next) => {
   clientDomain = req.headers.referer
-  passport.authenticate('google', { scope: ['profile'] })(req, res, next)
+  passport.authenticate('google')(req, res, next)
 })
 
 router.get('/github', (req, res, next) => {
   clientDomain = req.headers.referer
-  passport.authenticate('github', { scope: [ 'user:email' ] })(req, res, next)
+  passport.authenticate('github')(req, res, next)
 })
 
 // prihvata token od googla nakon autentifikacije i prosledjuje ga klijentu
