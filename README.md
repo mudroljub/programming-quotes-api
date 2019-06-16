@@ -20,7 +20,7 @@ Suported languages: en, sr.
 
 ### Get all quotes
 
-accessTokenGET [`/quotes`](https://programming-quotes-api.herokuapp.com/quotes)
+GET [`/quotes`](https://programming-quotes-api.herokuapp.com/quotes)
 
 ### Get quotes by language
 
@@ -41,6 +41,11 @@ GET [`/quotes/random/lang/sr`](https://programming-quotes-api.herokuapp.com/quot
 ### Get quote by id
 
 GET [`/quotes/id/5a6ce86f2af929789500e824`](https://programming-quotes-api.herokuapp.com/quotes/id/5a6ce86f2af929789500e824)
+
+### Post vote
+
+POST `/quotes/vote`
+- required: `_id` and `newVote` (number from 1 to 5)
 
 ### Post quote (user)
 
