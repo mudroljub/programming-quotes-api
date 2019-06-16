@@ -7,7 +7,7 @@ const marked = require('marked')
 
 const {mongoUri} = require('./config/db')
 const {port, domain} = require('./config/host')
-const passport = require('./config/passport')
+const passport = require('./utils/passport')
 const {readFileAsync} = require('./utils/helpers')
 const router = require('./routes/router')
 

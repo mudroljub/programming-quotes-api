@@ -28,11 +28,10 @@ const userSchema = Schema({
     type: Boolean,
     default: false
   },
-  createdAt: {
+  memberSince: {
     type: Date,
     default: new Date()
-  },
-  updatedAt: Date
+  }
 })
 
 module.exports = mongoose.model('User', userSchema)

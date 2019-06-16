@@ -8,6 +8,8 @@ router.get('/random', require('./random'))
 router.get('/random/lang/:lang', require('./randomByLang'))
 router.get('/id/:_id', require('./getById'))
 
+router.post('/vote', require('./vote'))
+
 router.use(validateUser) // auth middleware (all routes bellow are protected)
 router.post('/', require('./create'))
 router.use(validateAdmin)

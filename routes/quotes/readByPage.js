@@ -7,6 +7,6 @@ module.exports = async(req, res) => {
     .find()
     .skip((pageNumber - 1) * pageSize)
     .limit(pageSize)
-    .select({ 'numberOfVotes': 0, 'source': 0 })
+    .select({ author: 1, en: 1, sr: 1, rating: 1 })
   res.send(quotes)
 }

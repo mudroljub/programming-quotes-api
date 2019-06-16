@@ -1,6 +1,6 @@
 # Programming Quotes API
 
-Programming Quotes API for open source projects. You are welcome to contribute.
+Programming Quotes API for open source projects. You are welcome to contribute!
 
 Repo: [github.com/skolakoda/programming-quotes-api](https://github.com/skolakoda/programming-quotes-api)
 
@@ -20,7 +20,7 @@ Suported languages: en, sr.
 
 ### Get all quotes
 
-accessTokenGET [`/quotes`](https://programming-quotes-api.herokuapp.com/quotes)
+GET [`/quotes`](https://programming-quotes-api.herokuapp.com/quotes)
 
 ### Get quotes by language
 
@@ -42,23 +42,28 @@ GET [`/quotes/random/lang/sr`](https://programming-quotes-api.herokuapp.com/quot
 
 GET [`/quotes/id/5a6ce86f2af929789500e824`](https://programming-quotes-api.herokuapp.com/quotes/id/5a6ce86f2af929789500e824)
 
+### Post vote
+
+POST `/quotes/vote`
+- required params: `_id`, `newVote` (number from 1 to 5)
+
 ### Post quote (user)
 
 POST `/quotes`
-- required: `token`, `author` and `en`
-- optional: `source` and `sr` language
+- required params: `token`, `author`, `en`
+- optional: `source`, `sr`
 - author name should be from Wikipedia
 
 ### Update quote (admin)
 
 PUT `/quotes`
-- required: `token`, `_id`,`author` and `en`
-- optional: `source` and `sr` language
+- required params: `token`, `_id`, `author`, `en`
+- optional: `source`, `sr`
 
 ### Delete quote (admin)
 
 DELETE: `/quotes`
-- required: `token` and `_id`
+- required params: `token`, `_id`
 
 ## Authentication
 
@@ -68,7 +73,7 @@ GET `/auth/{provider}`
 - suported providers: Github, Google
 - opens login page
 
-After successful login, user will be returned to the client app. The client app will get token in this format: `#/auth/{provider}/${token}`.
+After successful login, user will be redirected to client app. The client app should handle token on this route: `#/auth/{provider}/${token}`.
 
 ### Get user data
 
