@@ -16,11 +16,15 @@ Suported languages: en, sr.
 
 ### Get all quotes
 
-GET [`/quotes`](https://programming-quotes-api.herokuapp.com/quotes)
+accessTokenGET [`/quotes`](https://programming-quotes-api.herokuapp.com/quotes)
 
-### Get all quotes by language
+### Get quotes by language
 
 GET [`/quotes/lang/en`](https://programming-quotes-api.herokuapp.com/quotes/lang/en)
+
+### Get quotes by page
+
+GET [`/quotes/page/2`](https://programming-quotes-api.herokuapp.com/quotes/page/2)
 
 ### Get random quote
 
@@ -28,7 +32,7 @@ GET [`/quotes/random`](https://programming-quotes-api.herokuapp.com/quotes/rando
 
 ### Get random quote by language
 
-GET [`/quotes/random/lang/en`](https://programming-quotes-api.herokuapp.com/quotes/random/lang/en)
+GET [`/quotes/random/lang/sr`](https://programming-quotes-api.herokuapp.com/quotes/random/lang/sr)
 
 ### Post a new quote (user)
 
