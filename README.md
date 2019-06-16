@@ -28,7 +28,7 @@ GET [`/quotes/random`](https://programming-quotes-api.herokuapp.com/quotes/rando
 
 ### Get random quote by language
 
-GET [`/quotes/random/lang/sr`](https://programming-quotes-api.herokuapp.com/quotes/random/lang/sr)
+GET [`/quotes/random/lang/en`](https://programming-quotes-api.herokuapp.com/quotes/random/lang/en)
 
 ### Post a new quote (user)
 
