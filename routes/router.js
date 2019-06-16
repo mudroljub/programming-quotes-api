@@ -4,15 +4,12 @@ const QuotesSchema = require('../models/QuoteSchema')
 const quotesRouter = require('./quotes/')
 const authRouter = require('./auth')
 
-router.use('/quotes/', (req, res, next) => {
-  res.locals.Quote = model('Quote', QuotesSchema, 'programmingQuotes')
-  next()
-}, quotesRouter)
-
-router.use('/svetemisli/', (req, res, next) => {
-  res.locals.Quote = model('Quote', QuotesSchema, 'svetemisli')
-  next()
-}, quotesRouter)
+const collections = ['quotes', 'svetemisli']
+for (const collection of collections) 
+  router.use('/' + collection, (req, res, next) => {
+    res.locals.Quote = model('Quote', QuotesSchema, collection)
+    next()
+  }, quotesRouter)
 
 router.use('/auth', authRouter)
 
