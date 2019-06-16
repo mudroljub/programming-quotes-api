@@ -45,25 +45,25 @@ GET [`/quotes/id/5a6ce86f2af929789500e824`](https://programming-quotes-api.herok
 ### Post vote
 
 POST `/quotes/vote`
-- required: `_id` and `newVote` (number from 1 to 5)
+- required params: `_id`, `newVote` (number from 1 to 5)
 
 ### Post quote (user)
 
 POST `/quotes`
-- required: `token`, `author` and `en`
-- optional: `source` and `sr` language
+- required params: `token`, `author`, `en`
+- optional: `source`, `sr`
 - author name should be from Wikipedia
 
 ### Update quote (admin)
 
 PUT `/quotes`
-- required: `token`, `_id`,`author` and `en`
-- optional: `source` and `sr` language
+- required params: `token`, `_id`, `author`, `en`
+- optional: `source`, `sr`
 
 ### Delete quote (admin)
 
 DELETE: `/quotes`
-- required: `token` and `_id`
+- required params: `token`, `_id`
 
 ## Authentication
 
