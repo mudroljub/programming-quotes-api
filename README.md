@@ -40,19 +40,20 @@ PUT `/quotes`
 DELETE: `/quotes`
 - required: `token` and `_id`
 
-## User Authentication
+## Authentication
 
-### Google login
+### User login
 
-GET `/auth/google`
+GET `/auth/{provider}`
+- suported providers: Github, Google
+- opens login page
 
-- opens Google login page, and after success, redirects to client app
+After successful login, user will be returned to the client app. The client app will get token in this format: `#/auth/{provider}/${token}`.
 
-### Client URL
+### Get user data
 
-GET `${clientDomain}#/auth/google/${token}`
-
-- the client app should handle token on this route after login
+GET `/auth/{provider}:token`
+- returns info on current user
 
 ## Development
 
@@ -74,6 +75,8 @@ Deploy will be done automatically after merge into master branch.
 
 ### TODO
 
+- dodati readme kao naslovnu
+https://stackoverflow.com/questions/27971806/returning-rendered-markdown-with-express-and-marked
 - add pagination
 - add voting
 - save who added and last edited quote
