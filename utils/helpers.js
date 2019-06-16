@@ -4,7 +4,7 @@ const { promisify } = require('util')
 
 const readFileAsync = promisify(fs.readFile)
 
-const validateToken = (req, res, next) => {
+const validateUser = (req, res, next) => {
   const token = req.body.token || req.query.token
   if (!token) return res.status(403).send({success: false, message: 'No token.'})
 
@@ -21,7 +21,7 @@ const validateAdmin = (req, res, next) => {
 }
 
 module.exports = {
-  validateToken,
+  validateUser,
   validateAdmin,
   readFileAsync
 }

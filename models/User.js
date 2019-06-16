@@ -21,7 +21,7 @@ const userSchema = Schema({
   voted: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'ProgrammingQuote'
+      ref: 'Quote'
     }
   ],
   admin: {
