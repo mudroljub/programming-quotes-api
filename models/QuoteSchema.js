@@ -2,8 +2,7 @@ const mongoose = require('mongoose')
 
 const Quote = {
   author: {
-    type: String, // Schema.Types.ObjectId,
-    // ref: 'Author',
+    type: String,
     required: true,
     trim: true,
   },
@@ -19,6 +18,10 @@ const Quote = {
   source: {
     type: String,
     trim: true,
+  },
+  addedBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
   },
   numberOfVotes: {
     type: Number,
