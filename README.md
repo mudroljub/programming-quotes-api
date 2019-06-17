@@ -99,7 +99,3 @@ npm run dev
 ### Deploy
 
 Deploy will be done automatically after merge into master branch.
-
-### TODO
-
-- add voting
