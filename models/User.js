@@ -1,5 +1,5 @@
-const { Schema, model } = require('mongoose')
-const arrayUniquePlugin = require('mongoose-unique-array')
+const { Schema, model } = require("mongoose");
+const arrayUniquePlugin = require("mongoose-unique-array");
 
 const userSchema = Schema({
   name: {
@@ -21,7 +21,7 @@ const userSchema = Schema({
   voted: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Quote',
+      ref: "Quote",
       unique: true
     }
   ],
@@ -33,8 +33,8 @@ const userSchema = Schema({
     type: Date,
     default: new Date()
   }
-})
+});
 
-userSchema.plugin(arrayUniquePlugin)
+userSchema.plugin(arrayUniquePlugin);
 
-module.exports = model('User', userSchema)
+module.exports = model("User", userSchema);
