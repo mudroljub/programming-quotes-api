@@ -47,7 +47,7 @@ GET [`/quotes/id/5a6ce86f2af929789500e824`](https://programming-quotes-api.herok
 ### Post vote
 
 POST `/quotes/vote`
-- required params: `_id`, `newVote` (number from 1 to 5)
+- required params: `quoteId`, `newVote` (number from 1 to 5)
 
 ### Post quote (user)
 
