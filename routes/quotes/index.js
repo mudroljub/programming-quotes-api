@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { validateUser, validateAdmin } = require('../../utils/helpers')
+const { validateUser, validateAdmin, findIfUser } = require('../../utils/helpers')
 
 router.get('/', require('./read'))
 router.get('/lang/:lang', require('./readByLang'))
@@ -8,6 +8,7 @@ router.get('/random', require('./random'))
 router.get('/random/lang/:lang', require('./randomByLang'))
 router.get('/id/:_id', require('./getById'))
 
+router.use(findIfUser)
 router.post('/vote', require('./vote'))
 
 router.use(validateUser) // auth middleware (all routes bellow are protected)

@@ -4,8 +4,18 @@ const { promisify } = require('util')
 
 const readFileAsync = promisify(fs.readFile)
 
+const findIfUser = (req, res, next) => {
+  if (req.body.token) {
+    try {
+      const data = jwt.verify(req.body.token, process.env.JWTSECRET)
+      res.locals.user = data.user
+    } catch (err) {}
+  }
+  next()
+}
+
 const validateUser = (req, res, next) => {
-  const token = req.body.token || req.query.token
+  const token = req.body.token
   if (!token) return res.status(403).send({success: false, message: 'No token.'})
 
   jwt.verify(token, process.env.JWTSECRET, (err, data) => {
@@ -21,6 +31,7 @@ const validateAdmin = (req, res, next) => {
 }
 
 module.exports = {
+  findIfUser,
   validateUser,
   validateAdmin,
   readFileAsync
