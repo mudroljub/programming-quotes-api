@@ -4,12 +4,12 @@ const QuotesSchema = require('../models/QuoteSchema')
 const quotesRouter = require('./quotes/')
 const authRouter = require('./auth')
 
-const collections = ['quotes', 'svetemisli']
-for (const collection of collections) 
-  router.use('/' + collection, (req, res, next) => {
-    res.locals.Quote = model('Quote', QuotesSchema, collection)
+for (const collection of ['quotes', 'svetemisli']) {
+  router.use(`/${collection}`, (req, res, next) => {
+    res.locals.Quote = model('Quote', QuotesSchema, collection) // dynamically asign collection
     next()
   }, quotesRouter)
+}
 
 router.use('/auth', authRouter)
 
