@@ -1,6 +1,6 @@
 # Programming Quotes API
 
-Programming Quotes API for open source projects. You are welcome to contribute!
+**Programming Quotes API for open source projects.** You are welcome to contribute!
 
 Homepage: [programming-quotes-api.herokuapp.com](https://programming-quotes-api.herokuapp.com)
 
