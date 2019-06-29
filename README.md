@@ -4,7 +4,7 @@ Programming Quotes API for open source projects. You are welcome to contribute!
 
 Homepage: [programming-quotes-api.herokuapp.com](https://programming-quotes-api.herokuapp.com)
 
-Repo: [github.com/skolakoda/programming-quotes-api](https://github.com/skolakoda/programming-quotes-api)
+Github repo: [github.com/skolakoda/programming-quotes-api](https://github.com/skolakoda/programming-quotes-api)
 
 Client app: [skolakoda.org/programming-quotes](https://skolakoda.org/programming-quotes/)
 
