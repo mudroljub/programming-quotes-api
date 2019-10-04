@@ -34,9 +34,16 @@ const Quote = {
     min: 0,
     max: 5,
   },
-  tags: String
+  tags: {
+    type: [{ type: String }],
+    get(arr) {
+      return arr.join(', ')
+    }
+  },
 }
 
 const QuotesSchema = mongoose.Schema(Quote)
+
+QuotesSchema.set('toJSON', { getters: true }) // enable getters
 
 module.exports = QuotesSchema

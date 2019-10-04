@@ -3,10 +3,10 @@ module.exports = (req, res) => {
   const { Quote } = res.locals
 
   Quote.findById(_id, (err, quote) => {
-    // const tagArray = tags.split(",").map(s => s.trim())
+    const tagArray = tags.split(',').map(s => s.trim())
     
     if (err) return console.error(err)
-    quote.set({ en, sr, author, source, tags })
+    quote.set({ en, sr, author, source, tags: tagArray })
     quote.save(err => {
       if (err) return console.error(err)
       res.send({message: 'SUCCESS_SAVED', quote})
