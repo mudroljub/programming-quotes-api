@@ -1,6 +1,6 @@
 # Programming Quotes API
 
-**Programming Quotes API for open source projects.** You are welcome to contribute!
+**Programming Quotes API for open source projects.**
 
 Homepage: [programming-quotes-api.herokuapp.com](https://programming-quotes-api.herokuapp.com)
 
@@ -15,71 +15,50 @@ Suported languages: en, sr.
 ```json
 {
   "en": "Computer Science is no more about computers than astronomy is about telescopes.",
-  "sr": "Računarska nauka se tiče računara koliko i astronomija teleskopa.",
   "author": "Edsger W. Dijkstra",
 }
 ```
 
-### Get all quotes
+### Public routes
 
-GET [`/quotes`](https://programming-quotes-api.herokuapp.com/quotes)
+GET [`/quotes`](https://programming-quotes-api.herokuapp.com/quotes) (get all quotes)
 
-### Get quotes by language
+GET [`/quotes/lang/en`](https://programming-quotes-api.herokuapp.com/quotes/lang/en) (get quotes by language)
 
-GET [`/quotes/lang/en`](https://programming-quotes-api.herokuapp.com/quotes/lang/en)
+GET [`/quotes/page/2`](https://programming-quotes-api.herokuapp.com/quotes/page/2) (get quotes by page)
 
-### Get quotes by page
+GET [`/quotes/random`](https://programming-quotes-api.herokuapp.com/quotes/random) (get random quote)
 
-GET [`/quotes/page/2`](https://programming-quotes-api.herokuapp.com/quotes/page/2)
+GET [`/quotes/random/lang/sr`](https://programming-quotes-api.herokuapp.com/quotes/random/lang/sr) (get random quote by language)
 
-### Get random quote
+GET [`/quotes/id/5a6ce86f2af929789500e824`](https://programming-quotes-api.herokuapp.com/quotes/id/5a6ce86f2af929789500e824) (get quote by id)
 
-GET [`/quotes/random`](https://programming-quotes-api.herokuapp.com/quotes/random)
+### Protected routes
 
-### Get random quote by language
-
-GET [`/quotes/random/lang/sr`](https://programming-quotes-api.herokuapp.com/quotes/random/lang/sr)
-
-### Get quote by id
-
-GET [`/quotes/id/5a6ce86f2af929789500e824`](https://programming-quotes-api.herokuapp.com/quotes/id/5a6ce86f2af929789500e824)
-
-### Post vote
-
-POST `/quotes/vote`
+POST `/quotes/vote` (post vote)
 - required params: `quoteId`, `newVote` (number from 1 to 5)
 
-### Post quote (user)
-
-POST `/quotes`
+POST `/quotes` (for registered user)
 - required params: `token`, `author`, `en`
 - optional: `source`, `sr`
 - author name should be from Wikipedia
 
-### Update quote (admin)
-
-PUT `/quotes`
+PUT `/quotes` (update quote for admin)
 - required params: `token`, `_id`, `author`, `en`
 - optional: `source`, `sr`
 
-### Delete quote (admin)
-
-DELETE: `/quotes`
+DELETE: `/quotes` (for admin)
 - required params: `token`, `_id`
 
-## Authentication
+### Authentication
 
-### User login
-
-GET `/auth/{provider}`
+GET `/auth/{provider}` (user login)
 - suported providers: Github, Google
 - opens login page
 
 After successful login, user will be redirected to client app. The client app should handle token on this route: `#/auth/{provider}/${token}`.
 
-### Get user data
-
-GET `/auth/{provider}:token`
+GET `/auth/{provider}:token` (get user data)
 - returns info on current user
 
 ## Development
