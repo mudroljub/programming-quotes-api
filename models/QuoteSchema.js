@@ -27,12 +27,13 @@ const Quote = {
   numberOfVotes: {
     type: Number,
     min: 0,
-    default: 0,
+    // default: 0,
   },
   rating: {
     type: Number,
     min: 0,
     max: 5,
+    // default: 0,
   },
   tags: {
     type: [{ type: String }],
