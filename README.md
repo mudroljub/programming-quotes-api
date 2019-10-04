@@ -12,13 +12,6 @@ Client app: [skolakoda.org/programming-quotes](https://skolakoda.org/programming
 
 Suported languages: en, sr.
 
-```json
-{
-  "en": "Computer Science is no more about computers than astronomy is about telescopes.",
-  "author": "Edsger W. Dijkstra",
-}
-```
-
 ### Public routes
 
 GET [`/quotes`](https://programming-quotes-api.herokuapp.com/quotes) (get all quotes)
