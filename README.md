@@ -68,6 +68,12 @@ npm i
 npm run dev
 ```
 
+See server logs:
+
+```
+heroku logs --app programming-quotes-api
+```
+
 ### Deploy
 
 Deploy will be done automatically after merge into master branch.
