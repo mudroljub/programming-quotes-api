@@ -33,7 +33,8 @@ const Quote = {
     type: Number,
     min: 0,
     max: 5,
-  }
+  },
+  tags: String
 }
 
 const QuotesSchema = mongoose.Schema(Quote)
