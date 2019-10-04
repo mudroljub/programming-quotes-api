@@ -33,7 +33,6 @@ const Quote = {
     type: Number,
     min: 0,
     max: 5,
-    default: 0,
   }
 }
 
