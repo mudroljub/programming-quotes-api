@@ -37,6 +37,9 @@ const Quote = {
   },
   tags: {
     type: [{ type: String }],
+    set(str) {
+      return str.split(',').map(s => s.trim())
+    },
     get(arr) {
       return arr.join(', ')
     }
