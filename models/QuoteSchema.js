@@ -37,10 +37,10 @@ const Quote = {
   },
   tags: {
     type: [{ type: String }],
-    set(str) {
+    set(str = '') {
       return str.split(',').map(s => s.trim())
     },
-    get(arr) {
+    get(arr = []) {
       return arr.join(', ')
     }
   },
