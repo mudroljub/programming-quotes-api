@@ -58,7 +58,7 @@ GET `/auth/{provider}:token` (get user data)
 
 ### Prerequisites
 
-- Intall Node.js
+- Install Node.js
 - Set [environment variables](https://github.com/skolakoda/baza-podataka/wiki/Environment-variables)
 
 ### Start
