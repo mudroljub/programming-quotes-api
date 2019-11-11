@@ -16,6 +16,10 @@ const Quote = {
     required() { return !this.en },
     trim: true,
   },
+  ms: {
+    type: String,
+    trim: true,
+  },
   source: {
     type: String,
     trim: true,
