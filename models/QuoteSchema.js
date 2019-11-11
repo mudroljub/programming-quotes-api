@@ -24,6 +24,10 @@ const Quote = {
     type: String,
     trim: true,
   },
+  wiki: {
+    type: String,
+    trim: true,
+  },
   addedBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
