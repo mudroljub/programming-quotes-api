@@ -11,19 +11,18 @@ const azurirano = require('./backup/azurirano.json')
 mongoose.connect(mongoUri, { useNewUrlParser: true })
 mongoose.set('useCreateIndex', true)
 
-console.log(azurirano)
+// console.log(azurirano)
 
-// Quote.find()
-//   .then(res => {
-//     console.log(res)
-//     fs.writeFileSync('azurirano.json', JSON.stringify(res))
-//   })
+Quote.find()
+  .then(res => {
+    console.log(res)
+    fs.writeFileSync('azurirano.json', JSON.stringify(res, null, 2))
+  })
 
-// utovar
 // azurirano.forEach(q => {
-//   console.log(q)
-//   // if (q.source || q.wiki)
-//   Quote.findByIdAndUpdate(q.id, {
-//     $set: {source: q.source, wiki: q.wiki}
-//   }, {useFindAndModify: false}, res => console.log(res))
+//   Quote.findOne({_id: q.id}, (err, obj) => {
+//     if (!obj.wiki) obj.wiki = undefined
+//     if (!obj.source) obj.source = undefined
+//     obj.save()
+//   })
 // })
