@@ -12,7 +12,7 @@ mongoose.connect(mongoUri, { useNewUrlParser: true })
 mongoose.set('useCreateIndex', true)
 
 const filtrirano = azurirano
-  .filter(q => q.author == 'Isus')
+  .filter(q => q.author == 'Isus' && (q.source.includes('Jovanu') || q.source.includes('Mateju') || q.source.includes('Luki') || q.source.includes('Marku')))
   .map(({_id, sr, ms, source}) => ({_id, sr, ms, source}))
 fs.writeFileSync('filtrirano.json', JSON.stringify(filtrirano, null, 2))
 
