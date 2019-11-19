@@ -11,18 +11,20 @@ const azurirano = require('./backup/azurirano.json')
 mongoose.connect(mongoUri, { useNewUrlParser: true })
 mongoose.set('useCreateIndex', true)
 
-// console.log(azurirano)
+const filtrirano = azurirano
+  .filter(q => q.author == 'Isus')
+  .map(({_id, sr, ms, source}) => ({_id, sr, ms, source}))
+fs.writeFileSync('filtrirano.json', JSON.stringify(filtrirano, null, 2))
 
-Quote.find()
-  .then(res => {
-    console.log(res)
-    fs.writeFileSync('azurirano.json', JSON.stringify(res, null, 2))
-  })
+// Quote.find()
+//   .then(res => {
+//     console.log(res)
+//     fs.writeFileSync('azurirano.json', JSON.stringify(res, null, 2))
+//   })
 
 // azurirano.forEach(q => {
-//   Quote.findOne({_id: q.id}, (err, obj) => {
+//   Quote.findOne({_id: q._id}, (err, obj) => {
 //     if (!obj.wiki) obj.wiki = undefined
-//     if (!obj.source) obj.source = undefined
 //     obj.save()
 //   })
 // })
