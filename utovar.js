@@ -11,16 +11,29 @@ const azurirano = require('./backup/azurirano.json')
 mongoose.connect(mongoUri, { useNewUrlParser: true })
 mongoose.set('useCreateIndex', true)
 
-const filtrirano = azurirano
-  .filter(q => q.author == 'Isus' && (q.source.includes('Jovanu') || q.source.includes('Mateju') || q.source.includes('Luki') || q.source.includes('Marku')))
-  .map(({_id, sr, ms, source}) => ({_id, sr, ms, source}))
-fs.writeFileSync('filtrirano.json', JSON.stringify(filtrirano, null, 2))
+// const filtrirano = azurirano
+//   .filter(q => q.author == 'Isus' && (q.source.includes('Jovanu') || q.source.includes('Mateju') || q.source.includes('Luki') || q.source.includes('Marku')))
+//   .map(({_id, sr, ms, source}) => ({_id, ms, source}))
+// fs.writeFileSync('filtrirano.json', JSON.stringify(filtrirano, null, 2))
 
-// Quote.find()
-//   .then(res => {
-//     console.log(res)
-//     fs.writeFileSync('azurirano.json', JSON.stringify(res, null, 2))
-//   })
+const getNum = source => {
+  let num
+  const izvori = source.split(';')
+  izvori.forEach(izvor => {
+    if (izvor.includes('izreka'))
+      num = izvor.match(/\d+/)[0]
+  })
+  return Number(num)
+}
+
+Quote.find()
+  .then(res => {  
+    const filtrirano = res
+      .filter(q => q.author == 'Isus' && (q.source.includes('Tomi')))
+      .sort((a, b) => getNum(a.source) - getNum(b.source))
+      .map(({_id, ms, source}) => ({_id, ms, source: getNum(source) }))
+    fs.writeFileSync('filtrirano.json', JSON.stringify(filtrirano, null, 2))
+  })
 
 // azurirano.forEach(q => {
 //   Quote.findOne({_id: q._id}, (err, obj) => {
