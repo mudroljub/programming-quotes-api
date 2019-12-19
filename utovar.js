@@ -6,7 +6,7 @@ const {model} = require('mongoose')
 const {mongoUri} = require('./config/db')
 const QuotesSchema = require('./models/QuoteSchema')
 const Quote = model('Quote', QuotesSchema, 'svetemisli')
-const azurirano = require('./backup/azurirano.json')
+// const azurirano = require('./backup/azurirano.json')
 
 mongoose.connect(mongoUri, { useNewUrlParser: true })
 mongoose.set('useCreateIndex', true)
@@ -16,23 +16,12 @@ mongoose.set('useCreateIndex', true)
 //   .map(({_id, sr, ms, source}) => ({_id, ms, source}))
 // fs.writeFileSync('filtrirano.json', JSON.stringify(filtrirano, null, 2))
 
-const getNum = source => {
-  let num
-  const izvori = source.split(';')
-  izvori.forEach(izvor => {
-    if (izvor.includes('izreka'))
-      num = izvor.match(/\d+/)[0]
-  })
-  return Number(num)
-}
-
 Quote.find()
-  .then(res => {  
+  .then(res => {
     const filtrirano = res
-      .filter(q => q.author == 'Isus' && (q.source.includes('Tomi')))
-      .sort((a, b) => getNum(a.source) - getNum(b.source))
-      .map(({_id, ms, source}) => ({_id, ms, source: getNum(source) }))
-    fs.writeFileSync('filtrirano.json', JSON.stringify(filtrirano, null, 2))
+      // .filter(q => q.author == 'Isus' && (q.source.includes('Tomi')))
+      .map(({_id, ms, source}) => ({_id, ms, source }))
+    fs.writeFileSync('citati.json', JSON.stringify(filtrirano, null, 2))
   })
 
 // azurirano.forEach(q => {
