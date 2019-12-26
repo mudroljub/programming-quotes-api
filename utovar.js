@@ -15,6 +15,7 @@ Quote.find()
   .then(res => {
     const filtrirano = res
       .filter(q => !q.ms)
+      .sort((a, b) => a.sr.length - b.sr.length)
       .map(({_id, ms, sr, source }) => ({_id, ms, sr, source }))
     fs.writeFileSync('citati.json', JSON.stringify(filtrirano, null, 2))
   })
