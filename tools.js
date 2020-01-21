@@ -14,10 +14,11 @@ mongoose.set('useCreateIndex', true)
 Quote.find()
   .then(res => {
     const filtrirano = res
-      .filter(q => q.ms && q.sr)
-      .sort((a, b) => (b.sr.length - b.ms.length) - (a.sr.length - a.ms.length))
-      .map(({_id, ms, sr, source }) => ({_id, ms, sr, source }))
-    fs.writeFileSync('citati.json', JSON.stringify(filtrirano, null, 2))
+      .filter(q => q.ms)
+      .sort((a, b) => b.ms.length - a.ms.length)
+      .map(({ ms }) => ms)
+      .join('\n\n')
+    fs.writeFileSync('citati.txt', filtrirano)
   })
 
 // citati.forEach(q => {
