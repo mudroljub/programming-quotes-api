@@ -18,7 +18,8 @@ for (const provider of providers) {
     if (referrer.includes('programming-quotes'))
       res.redirect(`${referrer}#/auth/${provider}/${token}`)
     else {
-      const clientDomain = referrer.split('/')[2]
+      const arr = referrer.split('/')
+      const clientDomain = arr[0] + arr[1] + arr[2]
       res.redirect(`${clientDomain}/auth/${provider}/${token}`)
     }
   })
