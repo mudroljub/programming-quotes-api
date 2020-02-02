@@ -15,13 +15,10 @@ for (const provider of providers) {
   // pass token from provider to client on callback
   router.get(`/${provider}/redirect`, passport.authenticate(provider), (req, res) => {
     const token = jwt.sign({user: req.user}, process.env.JWTSECRET)
-    if (referrer.includes('programming-quotes'))
+    if (referrer.includes('svetemysli'))
+      res.redirect(`https://svetemysli.github.io/auth/${provider}/${token}`)
+    else
       res.redirect(`${referrer}#/auth/${provider}/${token}`)
-    else {
-      const arr = referrer.split('/')
-      const clientDomain = arr[0] + arr[1] + arr[2]
-      res.redirect(`${clientDomain}/auth/${provider}/${token}`)
-    }
   })
 
   // find user
