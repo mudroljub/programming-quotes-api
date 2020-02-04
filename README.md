@@ -59,6 +59,31 @@ GET `/auth/{provider}:token` (get user data)
 - Install Node.js
 - Set [environment variables](https://github.com/skolakoda/baza-podataka/wiki/Environment-variables)
 
+
+### Env variables
+
+Create `.env` file proper values:
+
+```
+# Database credentials (obtain from MongoDB)
+DB_NAME=
+DB_USER=
+DB_PASSWORD=
+DB_DOMAIN=
+
+# obtain from Github (have two separate OAuth apps, for local and for production)
+GITHUB_CLIENT_ID=
+GITHUB_CLIENT_SECRET=
+# OAuth 2.0 client IDs (obtain from Google API Console)
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+# whatever random string you like
+JWTSECRET=
+
+# use development for local testing
+NODE_ENV=development 
+```
+
 ### Start
 
 ```
