@@ -8,7 +8,7 @@ const QuotesSchema = require('./models/QuoteSchema')
 const Quote = model('Quote', QuotesSchema, 'svetemisli')
 // const citati = require('./citati.json')
 
-mongoose.connect(mongoUri, { useNewUrlParser: true })
+mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.set('useCreateIndex', true)
 
 Quote.find()

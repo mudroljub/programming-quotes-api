@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 app.use(compression())
 
-mongoose.connect(mongoUri, { useNewUrlParser: true })
+mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.set('useCreateIndex', true)
 
 /* ROUTES */
