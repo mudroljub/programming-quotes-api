@@ -1,12 +1,9 @@
 const Twit = require('twit')
 const quotes = require('./backup/svetemysli.json')
-const {shuffle} = require('./utils/helpers')
+const {shuffle, getName} = require('./utils/helpers')
 const {toCyrillic} = require('./utils/transliterate')
 
-/* TODO:
-- ms imena autora
-*/
-
+const twitLength = 280
 const msQuotes = quotes.filter(q => q.ms)
 shuffle(msQuotes)
 
@@ -26,17 +23,19 @@ function post(status) {
   })
 }
 
-function twitQuote() {
+function postQuote() {
   const quote = msQuotes[++i % msQuotes.length]
+  const author = getName(quote.author)
   const text = `${quote.ms} 
-  — ${quote.author}`
+  — ${author}`
+  if (text.length > twitLength) return
   post(text)
   post(toCyrillic(text))
 }
 
 function initBot() {
-  twitQuote()
-  setInterval(twitQuote, 6 * 60 * 60 * 1000) // hours * min * sec * ms
+  // postQuote()
+  setInterval(postQuote, 6 * 60 * 60 * 1000) // hours * min * sec * ms
 }
 
 module.exports = {

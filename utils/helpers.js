@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
 const fs = require('fs')
 const { promisify } = require('util')
+const authors = require('../backup/authors')
 
 const readFileAsync = promisify(fs.readFile)
 
@@ -30,6 +31,8 @@ const validateAdmin = (req, res, next) => {
   next()
 }
 
+// bot helpers
+
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -37,10 +40,15 @@ function shuffle(array) {
   }
 }
 
+const get = (obj, lev1, lev2) => ((obj || {})[lev1] || {})[lev2]
+
+const getName = name => get(authors, name, 'common') || get(authors, name, 'ms') || name
+
 module.exports = {
   findIfUser,
   validateUser,
   validateAdmin,
   readFileAsync,
   shuffle,
+  getName,
 }
