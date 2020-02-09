@@ -11,6 +11,7 @@ const {port, domain} = require('./config/host')
 const passport = require('./utils/passport')
 const {readFileAsync} = require('./utils/helpers')
 const router = require('./routes/router')
+const {initBot} = require('./twitBot')
 
 const app = express()
 
@@ -37,3 +38,7 @@ app.use('/', router)
 /* SERVER */
 
 app.listen(port, () => console.log(`Serving on ${domain}`))
+
+/* BOT */
+
+if (process.env.TWITTER_BOT) initBot()

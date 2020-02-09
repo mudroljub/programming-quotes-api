@@ -25,6 +25,7 @@
     "passport": "^0.4.0",
     "passport-github2": "^0.1.11",
     "passport-google-oauth20": "^1.0.0",
+    "twit": "^2.2.11",
     "ws": "^3.3.3"
   },
   "engines": {
