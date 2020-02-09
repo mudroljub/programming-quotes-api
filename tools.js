@@ -16,15 +16,14 @@ Quote.find()
     const filtrirano = res
       .filter(q => q.ms)
       .sort((a, b) => b.ms.length - a.ms.length)
-      .map(({ ms }) => ms)
-      .join('\n\n')
-    fs.writeFileSync('citati.txt', filtrirano)
+      // .map(({ _id, ms }) => ({ _id, ms }))
+    fs.writeFileSync('citati.json', JSON.stringify(filtrirano, null, 2))
   })
 
 // citati.forEach(q => {
 //   Quote.findOne({_id: q._id}, (err, obj) => {
-//     obj.sr = q.sr
-//     obj.ms = q.ms
+//     delete obj.tags
+//     // obj.ms = q.ms
 //     obj.save()
 //   })
 // })
