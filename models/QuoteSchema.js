@@ -43,10 +43,10 @@ const Quote = {
     max: 5,
     // default: 0,
   },
-  tags: {
-    type: [{ type: Number }],
-    default: [],
-  },
+  // tags: {
+  //   type: [{ type: Number }],
+  //   default: [],
+  // },
 }
 
 const QuotesSchema = mongoose.Schema(Quote)
