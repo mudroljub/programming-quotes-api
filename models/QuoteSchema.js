@@ -43,15 +43,10 @@ const Quote = {
     max: 5,
     // default: 0,
   },
-  // tags: {
-  //   type: [{ type: String }],
-  //   set(str = '') {
-  //     return str.split(',').map(s => s.trim())
-  //   },
-  //   get(arr = []) {
-  //     return arr.join(', ')
-  //   }
-  // },
+  tags: {
+    type: [{ type: Number }],
+    default: [],
+  },
 }
 
 const QuotesSchema = mongoose.Schema(Quote)
