@@ -70,4 +70,6 @@ const toCyrillic = text => text
   .replace(/Ź/g, 'Зь')
   .replace(/Ž/g, 'Ж')
 
-export default toCyrillic
+module.exports = {
+  toCyrillic,
+}
