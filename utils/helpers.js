@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const fs = require('fs')
 const { promisify } = require('util')
-const authors = require('../backup/authors')
+const authors = require('../backup/authors.json')
 
 const readFileAsync = promisify(fs.readFile)
 

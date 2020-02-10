@@ -29,14 +29,21 @@ function postQuote() {
   const text = `${quote.ms}
 — ${author}`
   if (text.length > twitLength) return
-  post(text)
-  post(toCyrillic(text))
+
+  const tags = '\n#medžuslovjansky #mudrosti'
+  const fullText = (text + tags).length < twitLength ? text + tags : text
+  post(fullText)
+
+  const cTags = '\n#interslavic #мудрости'
+  const cText = toCyrillic(text)
+  const fullCText = (cText + cTags).length < twitLength ? cText + cTags : cText
+  post(fullCText)
 }
 
 function initBot() {
   console.log('initBot')
   postQuote()
-  setInterval(postQuote, 6 * 60 * 60 * 1000) // hours * min * sec * ms
+  setInterval(postQuote, 8 * 60 * 60 * 1000) // hours * min * sec * ms
 }
 
 module.exports = {
