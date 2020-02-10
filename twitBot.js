@@ -34,8 +34,8 @@ function postQuote() {
 }
 
 function initBot() {
-  // postQuote()
   console.log('initBot')
+  postQuote()
   setInterval(postQuote, 6 * 60 * 60 * 1000) // hours * min * sec * ms
 }
 
