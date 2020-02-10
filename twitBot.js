@@ -26,8 +26,9 @@ function post(status) {
 function postQuote() {
   const quote = msQuotes[++i % msQuotes.length]
   const author = getName(quote.author)
-  const text = `${quote.ms} 
-  — ${author}`
+  const text = `${quote.ms}
+— ${author}
+#medžuslovjansky`
   if (text.length > twitLength) return
   post(text)
   post(toCyrillic(text))
