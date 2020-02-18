@@ -41,4 +41,4 @@ app.listen(port, () => console.log(`Serving on ${domain}`))
 
 /* BOT */
 
-if (process.env.TWITTER_BOT) initBot()
+if (process.env.TWITTER_BOT == 'true') initBot()

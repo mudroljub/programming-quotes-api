@@ -5,7 +5,7 @@
   "repository": "https://github.com/skolakoda/programming-quotes-api",
   "main": "index.js",
   "scripts": {
-    "save": "wget https://svetemysli-api.herokuapp.com/svetemisli/ -O backup/svetemysli.json && wget https://raw.githubusercontent.com/svetemysli/svetemysli.github.io/dev/src/data/authors.json  -O backup/authors.json",
+    "save": "wget https://programming-quotes-api.herokuapp.com/quotes/ -O backup/quotes.json",
     "start": "node index.js",
     "dev": "nodemon index.js",
     "lint": "eslint . --fix"

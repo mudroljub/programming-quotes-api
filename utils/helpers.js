@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken')
 const fs = require('fs')
 const { promisify } = require('util')
-const authors = require('../backup/authors.json')
 
 const readFileAsync = promisify(fs.readFile)
 
@@ -40,15 +39,10 @@ function shuffle(array) {
   }
 }
 
-const get = (obj, lev1, lev2) => ((obj || {})[lev1] || {})[lev2]
-
-const getName = name => get(authors, name, 'common') || get(authors, name, 'ms') || name
-
 module.exports = {
   findIfUser,
   validateUser,
   validateAdmin,
   readFileAsync,
   shuffle,
-  getName,
 }

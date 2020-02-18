@@ -1,11 +1,10 @@
 const Twit = require('twit')
-const quotes = require('./backup/svetemysli.json')
-const {shuffle, getName} = require('./utils/helpers')
-const {toCyrillic} = require('./utils/transliterate')
+const quotes = require('./backup/quotes.json')
+const {shuffle} = require('./utils/helpers')
 
 const twitLength = 280
-const msQuotes = quotes.filter(q => q.ms)
-shuffle(msQuotes)
+const srQuotes = quotes.filter(q => q.sr)
+shuffle(srQuotes)
 
 let i = 0
 
@@ -24,20 +23,14 @@ function post(status) {
 }
 
 function postQuote() {
-  const quote = msQuotes[++i % msQuotes.length]
-  const author = getName(quote.author)
-  const text = `${quote.ms}
-— ${author}`
+  const quote = srQuotes[++i % srQuotes.length]
+  const text = `${quote.sr}
+— ${quote.author}`
   if (text.length > twitLength) return
 
-  const tags = '\n#medžuslovjansky #mudrosti'
+  const tags = '\n#programiranje'
   const fullText = (text + tags).length < twitLength ? text + tags : text
   post(fullText)
-
-  const cTags = '\n#interslavic #мудрости'
-  const cText = toCyrillic(text)
-  const fullCText = (cText + cTags).length < twitLength ? cText + cTags : cText
-  post(fullCText)
 }
 
 function initBot() {
