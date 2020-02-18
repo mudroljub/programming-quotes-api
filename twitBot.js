@@ -28,7 +28,7 @@ function postQuote() {
 — ${quote.author}`
   if (text.length > twitLength) return
 
-  const tags = '\n#programiranje'
+  const tags = '\n#programiranje #citati'
   const fullText = (text + tags).length < twitLength ? text + tags : text
   post(fullText)
 }
