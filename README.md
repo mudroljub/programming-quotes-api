@@ -2,101 +2,23 @@
 
 **Programming Quotes API for open source projects.**
 
-Homepage: [programming-quotes-api.herokuapp.com](https://programming-quotes-api.herokuapp.com)
-
-Github repo: [github.com/skolakoda/programming-quotes-api](https://github.com/skolakoda/programming-quotes-api)
+Docs: [https://programmingquotesapi.azurewebsites.net/swagger/](https://https://programmingquotesapi.azurewebsites.net/swagger/)
 
 ## API Documentation
 
-Suported languages: en, sr.
+GET [`/quotes`](https://programmingquotesapi.azurewebsites.net/quotes) (get all quotes)
 
-### Public routes
+GET [`/quotes/random`](https://programmingquotesapi.azurewebsites.net/quotes/random) (get random quote)
 
-GET [`/quotes`](https://programming-quotes-api.herokuapp.com/quotes) (get all quotes)
+GET [`/quotes/5a6ce86f2af929789500e824`](https://programmingquotesapi.azurewebsites.net/quotes/5a6ce86f2af929789500e824) (get quote by id)
 
-GET [`/quotes/lang/en`](https://programming-quotes-api.herokuapp.com/quotes/lang/en) (get quotes by language)
-
-GET [`/quotes/page/2`](https://programming-quotes-api.herokuapp.com/quotes/page/2) (get quotes by page)
-
-GET [`/quotes/random`](https://programming-quotes-api.herokuapp.com/quotes/random) (get random quote)
-
-GET [`/quotes/random/lang/sr`](https://programming-quotes-api.herokuapp.com/quotes/random/lang/sr) (get random quote by language)
-
-GET [`/quotes/id/5a6ce86f2af929789500e824`](https://programming-quotes-api.herokuapp.com/quotes/id/5a6ce86f2af929789500e824) (get quote by id)
-
-### Protected routes
-
-POST `/quotes/vote` (post vote)
-- required params: `quoteId`, `newVote` (number from 1 to 5)
-
-POST `/quotes` (for registered user)
-- required params: `token`, `author`, `en`
-- optional: `source`, `sr`
-- author name should be from Wikipedia
-
-PUT `/quotes` (update quote for admin)
-- required params: `token`, `_id`, `author`, `en`
-- optional: `source`, `sr`
-
-DELETE: `/quotes` (for admin)
-- required params: `token`, `_id`
-
-### Authentication
-
-GET `/auth/{provider}` (user login)
-- suported providers: Github, Google
-- opens login page
-
-After successful login, user will be redirected to client app. The client app should handle token on this route: `#/auth/{provider}/${token}`.
-
-GET `/auth/{provider}:token` (get user data)
-- returns info on current user
+You can also POST, PUT and DELETE. See [docs](https://https://programmingquotesapi.azurewebsites.net/swagger/) for more.
 
 ## Development
 
-### Prerequisites
-
-- Install Node.js
-- Set [environment variables](https://github.com/skolakoda/baza-podataka/wiki/Environment-variables)
-
-
-### Env variables
-
-Create `.env` file proper values:
-
 ```
-# Database credentials (obtain from MongoDB)
-DB_NAME=
-DB_USER=
-DB_PASSWORD=
-DB_DOMAIN=
-
-# obtain from Github (have two separate OAuth apps, for local and for production)
-GITHUB_CLIENT_ID=
-GITHUB_CLIENT_SECRET=
-# OAuth 2.0 client IDs (obtain from Google API Console)
-GOOGLE_CLIENT_ID=
-GOOGLE_CLIENT_SECRET=
-# whatever random string you like
-JWTSECRET=
-
-# use development for local testing
-NODE_ENV=development 
+dotnet build
+dotnet watch run
 ```
 
-### Start
-
-```
-npm i
-npm run dev
-```
-
-See server logs:
-
-```
-heroku logs --app programming-quotes-api
-```
-
-### Deploy
-
-Deploy will be done automatically after merge into master branch.
+Tutorial: https://docs.microsoft.com/en-us/learn/modules/build-web-api-aspnet-core/
