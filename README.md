@@ -2,7 +2,7 @@
 
 **Programming Quotes API for open source projects.**
 
-Docs: [https://programmingquotesapi.azurewebsites.net/swagger/](https://https://programmingquotesapi.azurewebsites.net/swagger/)
+Docs: [programmingquotesapi.azurewebsites.net/swagger/](https://programmingquotesapi.azurewebsites.net/swagger/)
 
 ## API Documentation
 
