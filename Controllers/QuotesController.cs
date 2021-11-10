@@ -35,10 +35,11 @@ namespace ProgrammingQuotesApi.Controllers
         public ActionResult<Quote> GetRandom() => Ok(QuotesService.GetRandom());
 
         [HttpPost]
-        public IActionResult Create(Quote quote)
+        public ActionResult Create([FromBody] Quote quote)
         {            
             QuotesService.Add(quote);
-            return CreatedAtAction(nameof(Create), new { id = quote.Id }, quote);
+            // return CreatedAtAction(nameof(Create), new { id = quote.Id }, quote);
+            return Created("", quote);
         }
 
         [HttpGet("author/{author}")]
