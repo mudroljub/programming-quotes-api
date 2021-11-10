@@ -22,11 +22,18 @@ namespace ProgrammingQuotesApi.Services
           Quotes = JsonSerializer.Deserialize<List<Quote>>(fileContent, options);
         }
 
-        public static List<Quote> GetAll() => Quotes;
+        public static List<Quote> GetQuotes(int count)
+        {
+            if (count == 0) return Quotes;
+
+            return Quotes.GetRange(0, count);
+        }
 
         public static Quote Get(string id) => Quotes.FirstOrDefault(p => p.Id == id);
 
         public static Quote GetRandom() => Quotes[new Random().Next(0, Quotes.Count)];
+
+        public static List<Quote> GetByAuthor(string author) => Quotes.Where(p => p.Author == author).ToList();
 
         public static void Add(Quote quote)
         {

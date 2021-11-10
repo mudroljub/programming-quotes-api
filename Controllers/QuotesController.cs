@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using ProgrammingQuotesApi.Models;
 using ProgrammingQuotesApi.Services;
+using System.Linq;
 
 namespace ProgrammingQuotesApi.Controllers
 {
@@ -14,7 +15,10 @@ namespace ProgrammingQuotesApi.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Quote>> GetAll() => QuotesService.GetAll();
+        public ActionResult<List<Quote>> GetQuotes([FromQuery] int count = 0)
+        {
+            return QuotesService.GetQuotes(count);
+        }
 
         [HttpGet("{id}")]
         public ActionResult<Quote> Get(string id)
@@ -24,11 +28,11 @@ namespace ProgrammingQuotesApi.Controllers
             if(quote == null)
                 return NotFound();
 
-            return quote;
+            return Ok(quote);
         }
 
         [HttpGet("random")]
-        public ActionResult<Quote> GetRandom() => QuotesService.GetRandom();
+        public ActionResult<Quote> GetRandom() => Ok(QuotesService.GetRandom());
 
         [HttpPost]
         public IActionResult Create(Quote quote)
@@ -36,6 +40,9 @@ namespace ProgrammingQuotesApi.Controllers
             QuotesService.Add(quote);
             return CreatedAtAction(nameof(Create), new { id = quote.Id }, quote);
         }
+
+        [HttpGet("author/{author}")]
+        public ActionResult<List<Quote>> GetQuotesByAuthor(string author) => QuotesService.GetByAuthor(author);
 
         [HttpPut("{id}")]
         public IActionResult Update(string id, Quote quote)
@@ -51,6 +58,25 @@ namespace ProgrammingQuotesApi.Controllers
 
             return NoContent();
         }
+
+        // [HttpPatch("{id}")]
+        // public async Task<ActionResult> Patch(string id, JsonPatchDocument<Quote> quoteUpdates)
+        // {
+        //     Quote quote = await QuotesService.Get(id);
+        // }
+
+    
+        // public IActionResult Update(string id, [FromBody]JsonPatchDocument<Quote> patch)
+        // {
+        //     Quote quote = QuotesService.Get(id);
+        //     if (quote is null)
+        //         return NotFound();
+
+        //     patch.ApplyTo(quote);
+        //     QuotesService.Update(quote);
+
+        //     return NoContent();
+        // }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(string id)

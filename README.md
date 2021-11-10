@@ -22,3 +22,7 @@ dotnet watch run
 ```
 
 Tutorial: https://docs.microsoft.com/en-us/learn/modules/build-web-api-aspnet-core/
+
+## TODO
+
+- add PATCH https://channel9.msdn.com/Series/Beginners-Series-to-Web-APIs/Updating-data-with-JsonPatch-13-of-18--Beginners-Series-to-Web-APIs
