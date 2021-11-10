@@ -12,7 +12,9 @@ GET [`/quotes/random`](https://programmingquotesapi.azurewebsites.net/quotes/ran
 
 GET [`/quotes/5a6ce86f2af929789500e824`](https://programmingquotesapi.azurewebsites.net/quotes/5a6ce86f2af929789500e824) (get quote by id)
 
-You can also POST, PUT and DELETE. See [docs](https://https://programmingquotesapi.azurewebsites.net/swagger/) for more.
+GET [`/quotes/author/Edsger W. Dijkstra`](https://programmingquotesapi.azurewebsites.net/quotes/author/Edsger%20W.%20Dijkstra) (get quote by author)
+
+You can also POST, PUT, PATCH, DELETE and more. See [docs](https://https://programmingquotesapi.azurewebsites.net/swagger/) for more.
 
 ## Development
 
