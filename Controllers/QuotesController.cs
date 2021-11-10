@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using ProgrammingQuotesApi.Models;
 using ProgrammingQuotesApi.Services;
-using System.Linq;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace ProgrammingQuotesApi.Controllers
 {
@@ -60,25 +60,19 @@ namespace ProgrammingQuotesApi.Controllers
             return NoContent();
         }
 
-        // [HttpPatch("{id}")]
-        // public async Task<ActionResult> Patch(string id, JsonPatchDocument<Quote> quoteUpdates)
-        // {
-        //     Quote quote = await QuotesService.Get(id);
-        // }
+        [HttpPatch("{id}")]
+        public ActionResult Patch(string id, JsonPatchDocument<Quote> patch)
+        {
+            Quote quote = QuotesService.Get(id);
+            if (quote is null)
+                return NotFound();
 
+            patch.ApplyTo(quote);
+            QuotesService.Update(quote);
+
+            return NoContent();
+        }
     
-        // public IActionResult Update(string id, [FromBody]JsonPatchDocument<Quote> patch)
-        // {
-        //     Quote quote = QuotesService.Get(id);
-        //     if (quote is null)
-        //         return NotFound();
-
-        //     patch.ApplyTo(quote);
-        //     QuotesService.Update(quote);
-
-        //     return NoContent();
-        // }
-
         [HttpDelete("{id}")]
         public IActionResult Delete(string id)
         {
