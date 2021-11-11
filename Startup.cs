@@ -32,9 +32,8 @@ namespace ProgrammingQuotesApi
                     Description = "Programming Quotes API for open source projects.",
                     Contact = new OpenApiContact
                     {
-                        Name = "Damjan Pavlica",
+                        Name = "author",
                         Email = "mudroljub@gmail.com",
-                        Url = new Uri("https://www.linkedin.com/in/damjanpavlica/"),
                     },
                     Version = "v1" 
                 });
