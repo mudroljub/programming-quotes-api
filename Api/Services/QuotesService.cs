@@ -31,7 +31,6 @@ namespace ProgrammingQuotesApi.Services
 
         public static Quote Get(string id) => Quotes.FirstOrDefault(p => p.Id == id);
 
-        // TODO: implement better randomness
         public static Quote GetRandom() => Quotes[new Random().Next(0, Quotes.Count)];
 
         public static List<Quote> GetByAuthor(string author) => Quotes.Where(p => p.Author == author).ToList();
@@ -45,7 +44,7 @@ namespace ProgrammingQuotesApi.Services
         public static void Delete(string id)
         {
             var quote = Get(id);
-            if(quote is null)
+            if (quote is null)
                 return;
 
             Quotes.Remove(quote);

@@ -49,6 +49,12 @@ namespace ProgrammingQuotesApi.Controllers
         public ActionResult<Quote> GetRandom() => Ok(QuotesService.GetRandom());
 
         /// <summary>
+        /// Returns total number of quotes
+        /// </summary>
+        [HttpGet("count")]
+        public ActionResult<int> GetCount() => Ok(QuotesService.GetQuotes().Count);
+
+        /// <summary>
         /// Create new quote
         /// </summary>
         [HttpPost]
@@ -69,7 +75,7 @@ namespace ProgrammingQuotesApi.Controllers
         /// Replace an existing quote with a new one
         /// </summary>
         [HttpPut("{id}")]
-        public IActionResult Update(string id, Quote quote)
+        public ActionResult Update(string id, Quote quote)
         {
             if (id != quote.Id)
                 return BadRequest();
@@ -103,7 +109,7 @@ namespace ProgrammingQuotesApi.Controllers
         /// Delete an existing quote by id
         /// </summary>
         [HttpDelete("{id}")]
-        public IActionResult Delete(string id)
+        public ActionResult Delete(string id)
         {
             Quote quote = QuotesService.Get(id);
 

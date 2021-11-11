@@ -19,6 +19,11 @@
             Returns a random quote
             </summary>
         </member>
+        <member name="M:ProgrammingQuotesApi.Controllers.QuotesController.GetCount">
+            <summary>
+            Returns total number of quotes
+            </summary>
+        </member>
         <member name="M:ProgrammingQuotesApi.Controllers.QuotesController.Create(ProgrammingQuotesApi.Models.Quote)">
             <summary>
             Create new quote

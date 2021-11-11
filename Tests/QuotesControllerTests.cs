@@ -52,5 +52,17 @@ namespace ProgrammingQuotesApi.Tests
             Assert.IsType<NotFoundResult>(result);
         }
 
+        [Fact]
+        public void Delete_A_Quote_By_Id()
+        {
+            var controller = new QuotesController();
+            var result1 = controller.GetQuotes().Result as OkObjectResult;
+            var oldQuotesCount = (result1.Value as List<Quote>).Count;
+            controller.Delete("5a6ce86e2af929789500e7e4");
+            var result2 = controller.GetQuotes().Result as OkObjectResult;
+            var newQuotesCount = (result2.Value as List<Quote>).Count;
+            Assert.Equal(oldQuotesCount - 1, newQuotesCount);
+        }
+
     }
 }
