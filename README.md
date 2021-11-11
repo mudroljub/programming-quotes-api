@@ -19,6 +19,7 @@ You can also POST, PUT, PATCH and DELETE. See [docs](https://https://programming
 ## Development
 
 ```
+cd Api
 dotnet build
 dotnet watch run
 ```

@@ -32,7 +32,7 @@ namespace ProgrammingQuotesApi
                     Description = "Programming Quotes API for open source projects.",
                     Contact = new OpenApiContact
                     {
-                        Name = "author",
+                        Name = "Damjan Pavlica",
                         Email = "mudroljub@gmail.com",
                     },
                     Version = "v1" 
