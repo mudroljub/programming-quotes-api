@@ -1,15 +1,11 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.IO;
+using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
 namespace ProgrammingQuotesApi
@@ -30,7 +26,22 @@ namespace ProgrammingQuotesApi
             services.AddControllers().AddNewtonsoftJson();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ProgrammingQuotesApi", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo 
+                { 
+                    Title = "ProgrammingQuotesApi", 
+                    Description = "Programming Quotes API for open source projects.",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Damjan Pavlica",
+                        Email = "mudroljub@gmail.com",
+                        Url = new Uri("https://www.linkedin.com/in/damjanpavlica/"),
+                    },
+                    Version = "v1" 
+                });
+                // generate the xml documentation file
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             }).AddSwaggerGenNewtonsoftSupport();
         }
 

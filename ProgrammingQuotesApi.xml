@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ProgrammingQuotesApi</name>
+    </assembly>
+    <members>
+        <member name="M:ProgrammingQuotesApi.Controllers.QuotesController.GetQuotes(System.Int32)">
+            <summary>
+            Returns an array of quotes
+            </summary>
+        </member>
+        <member name="M:ProgrammingQuotesApi.Controllers.QuotesController.Get(System.String)">
+            <summary>
+            Returns a quote for a given id
+            </summary>
+        </member>
+        <member name="M:ProgrammingQuotesApi.Controllers.QuotesController.GetRandom">
+            <summary>
+            Returns a random quote
+            </summary>
+        </member>
+        <member name="M:ProgrammingQuotesApi.Controllers.QuotesController.Create(ProgrammingQuotesApi.Models.Quote)">
+            <summary>
+            Create new quote
+            </summary>
+        </member>
+        <member name="M:ProgrammingQuotesApi.Controllers.QuotesController.GetQuotesByAuthor(System.String)">
+            <summary>
+            Returns all quotes for a given author
+            </summary>
+        </member>
+        <member name="M:ProgrammingQuotesApi.Controllers.QuotesController.Update(System.String,ProgrammingQuotesApi.Models.Quote)">
+            <summary>
+            Replace an existing quote with a new one
+            </summary>
+        </member>
+        <member name="M:ProgrammingQuotesApi.Controllers.QuotesController.Patch(System.String,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{ProgrammingQuotesApi.Models.Quote})">
+            <summary>
+            Update certain properties of an existing quote
+            </summary>
+        </member>
+        <member name="M:ProgrammingQuotesApi.Controllers.QuotesController.Delete(System.String)">
+            <summary>
+            Delete an existing quote by id
+            </summary>
+        </member>
+    </members>
+</doc>
