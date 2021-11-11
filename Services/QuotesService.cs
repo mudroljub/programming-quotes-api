@@ -24,7 +24,7 @@ namespace ProgrammingQuotesApi.Services
 
         public static List<Quote> GetQuotes(int count)
         {
-            if (count == 0 || count > Quotes.Count) return Quotes;
+            if (count <= 0 || count > Quotes.Count) return Quotes;
 
             return Quotes.GetRange(0, count);
         }
