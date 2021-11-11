@@ -18,15 +18,26 @@ You can also POST, PUT, PATCH and DELETE. See [docs](https://https://programming
 
 ## Development
 
+Start the project locally:
+
 ```
 cd Api
 dotnet build
 dotnet watch run
 ```
 
-Tutorial: https://docs.microsoft.com/en-us/learn/modules/build-web-api-aspnet-core/
+Unit testing:
+
+```
+cd Tests
+dotnet test
+```
+
+Tutorials: 
+- https://docs.microsoft.com/en-us/learn/modules/build-web-api-aspnet-core/
+- https://channel9.msdn.com/Series/Beginners-Series-to-Web-APIs?page=2
 
 ## TODO
 
-- https://channel9.msdn.com/Series/Beginners-Series-to-Web-APIs?page=2
+- unit tests
 - auth

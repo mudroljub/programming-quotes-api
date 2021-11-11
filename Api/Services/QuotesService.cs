@@ -22,7 +22,7 @@ namespace ProgrammingQuotesApi.Services
           Quotes = JsonSerializer.Deserialize<List<Quote>>(fileContent, options);
         }
 
-        public static List<Quote> GetQuotes(int count)
+        public static List<Quote> GetQuotes(int count = 0)
         {
             if (count <= 0 || count > Quotes.Count) return Quotes;
 
@@ -31,6 +31,7 @@ namespace ProgrammingQuotesApi.Services
 
         public static Quote Get(string id) => Quotes.FirstOrDefault(p => p.Id == id);
 
+        // TODO: implement better randomness
         public static Quote GetRandom() => Quotes[new Random().Next(0, Quotes.Count)];
 
         public static List<Quote> GetByAuthor(string author) => Quotes.Where(p => p.Author == author).ToList();

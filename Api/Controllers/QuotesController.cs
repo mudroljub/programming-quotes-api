@@ -14,9 +14,7 @@ namespace ProgrammingQuotesApi.Controllers
     [Consumes(MediaTypeNames.Application.Json)]
     public class QuotesController : ControllerBase
     {
-        public QuotesController()
-        {
-        }
+        public QuotesController() {}
 
         /// <summary>
         /// Returns an array of quotes
@@ -38,7 +36,7 @@ namespace ProgrammingQuotesApi.Controllers
         {
             Quote quote = QuotesService.Get(id);
 
-            if(quote == null)
+            if (quote == null)
                 return NotFound();
 
             return Ok(quote);
