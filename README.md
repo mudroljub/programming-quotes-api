@@ -28,3 +28,4 @@ Tutorial: https://docs.microsoft.com/en-us/learn/modules/build-web-api-aspnet-co
 ## TODO
 
 - https://channel9.msdn.com/Series/Beginners-Series-to-Web-APIs?page=2
+- auth
