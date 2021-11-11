@@ -14,7 +14,7 @@ GET [`/quotes/5a6ce86f2af929789500e824`](https://programmingquotesapi.azurewebsi
 
 GET [`/quotes/author/Edsger W. Dijkstra`](https://programmingquotesapi.azurewebsites.net/quotes/author/Edsger%20W.%20Dijkstra) (get quote by author)
 
-You can also POST, PUT, PATCH, DELETE and more. See [docs](https://https://programmingquotesapi.azurewebsites.net/swagger/) for more.
+You can also POST, PUT, PATCH and DELETE. See [docs](https://https://programmingquotesapi.azurewebsites.net/swagger/) for more.
 
 ## Development
 
