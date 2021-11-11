@@ -24,7 +24,8 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpGet]
         public ActionResult<List<Quote>> GetQuotes([FromQuery] int count = 0)
         {
-            return QuotesService.GetQuotes(count);
+            var quotes = QuotesService.GetQuotes(count);
+            return Ok(quotes);
         }
 
         /// <summary>
