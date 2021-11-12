@@ -1,4 +1,7 @@
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using System.ComponentModel;
 
 namespace ProgrammingQuotesApi.Models
 {
@@ -7,11 +10,14 @@ namespace ProgrammingQuotesApi.Models
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }
+        [Required]
+        public int QuoteCount { get; set; }
         [Url]
         [Required]
         public string QuotesUrl { get; set; }
         [Url]
         public string WikiUrl { get; set; }
-        public int QuoteCount { get; set; }
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public List<Quote> Quotes { get; set; }
     }
 }

@@ -14,9 +14,9 @@
             Returns total number of authors
             </summary>
         </member>
-        <member name="M:ProgrammingQuotesApi.Controllers.AuthorsController.GetQuotesByAuthor(System.String)">
+        <member name="M:ProgrammingQuotesApi.Controllers.AuthorsController.GetAuthorDetails(System.String)">
             <summary>
-            Returns all authors for a given author
+            Returns author details
             </summary>
         </member>
         <member name="M:ProgrammingQuotesApi.Controllers.QuotesController.GetQuotes(System.Int32)">

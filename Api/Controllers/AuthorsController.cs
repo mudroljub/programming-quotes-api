@@ -32,10 +32,10 @@ namespace ProgrammingQuotesApi.Controllers
         public ActionResult<int> GetCount() => Ok(AuthorsService.GetAuthors().Count);
 
         /// <summary>
-        /// Returns all authors for a given author
+        /// Returns author details
         /// </summary>
         [HttpGet("{author}")]
-        public ActionResult<List<Quote>> GetQuotesByAuthor(string author) => QuotesService.GetByAuthor(author);
+        public ActionResult<Author> GetAuthorDetails(string author) => AuthorsService.GetAuthorDetails(author);
 
     }
 }

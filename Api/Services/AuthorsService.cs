@@ -32,9 +32,21 @@ namespace ProgrammingQuotesApi.Services
             }
         }
 
-        public static Dictionary<string, Author> GetAuthors()
-        { 
-            return Authors;
+        public static Dictionary<string, Author> GetAuthors() => Authors;
+
+        public static Author GetAuthorDetails(string author)
+        {
+            var authorQuotes = QuotesService.GetByAuthor(author);
+            var authorDetails = new Author()
+            {
+                Name = author,
+                QuotesUrl = $"https://programmingquotesapi.azurewebsites.net/quotes/author/{author}",
+                WikiUrl = $"https://en.wikipedia.org/wiki/{author}",
+                QuoteCount = authorQuotes.Count(),
+                Quotes = authorQuotes
+            };
+            return authorDetails;
         }
+
     }
 }
