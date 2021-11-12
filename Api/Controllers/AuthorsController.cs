@@ -19,29 +19,23 @@ namespace ProgrammingQuotesApi.Controllers
         /// Returns a list of authors
         /// </summary>
         [HttpGet]
-        public ActionResult<List<Author>> GetAuthors()
+        public ActionResult<Dictionary<string, Author>> GetAuthors()
         {
             var authors = AuthorsService.GetAuthors();
             return Ok(authors);
         }
 
         /// <summary>
-        /// Returns a random author
-        /// </summary>
-        // [HttpGet("random")]
-        // public ActionResult<Author> GetRandom() => Ok(AuthorsService.GetRandom());
-
-        /// <summary>
         /// Returns total number of authors
         /// </summary>
-        // [HttpGet("count")]
-        // public ActionResult<int> GetCount() => Ok(AuthorsService.GetAuthors().Count);
+        [HttpGet("count")]
+        public ActionResult<int> GetCount() => Ok(AuthorsService.GetAuthors().Count);
 
         /// <summary>
         /// Returns all authors for a given author
         /// </summary>
-        // [HttpGet("quotes/{author}")]
-        // public ActionResult<List<Author>> GetAuthorsByAuthor(string author) => AuthorsService.GetByAuthor(author);
+        [HttpGet("{author}")]
+        public ActionResult<List<Quote>> GetQuotesByAuthor(string author) => QuotesService.GetByAuthor(author);
 
     }
 }

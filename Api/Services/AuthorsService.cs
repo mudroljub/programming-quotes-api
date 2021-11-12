@@ -11,21 +11,17 @@ namespace ProgrammingQuotesApi.Services
 {
     public static class AuthorsService
     {
+        static Dictionary<string, Author> Authors = new Dictionary<string, Author>();
         static AuthorsService()
-        { }
-
-        public static Dictionary<string, Author> GetAuthors()
-        {   
+        {
             var quotes = QuotesService.GetQuotes();
-            Dictionary<string, Author> authors = new Dictionary<string, Author>();
-
             foreach (var q in quotes)
             {
-                if (authors.ContainsKey(q.Author)) {  
-                    authors[q.Author].QuoteCount++;  
+                if (Authors.ContainsKey(q.Author)) {  
+                    Authors[q.Author].QuoteCount++;  
                 }
                 else {  
-                    authors.Add(q.Author, new Author()
+                    Authors.Add(q.Author, new Author()
                     {
                         Name = q.Author,
                         QuotesUrl = $"https://programmingquotesapi.azurewebsites.net/quotes/author/{q.Author}",
@@ -34,8 +30,11 @@ namespace ProgrammingQuotesApi.Services
                     });  
                 }
             }
+        }
 
-            return authors;
+        public static Dictionary<string, Author> GetAuthors()
+        { 
+            return Authors;
         }
     }
 }
