@@ -11,25 +11,16 @@ namespace ProgrammingQuotesApi.Services
 {
     public static class AuthorsService
     {
-        static List<Quote> Quotes { get; }
-
         static AuthorsService()
-        {
-          var options = new JsonSerializerOptions
-          {
-              PropertyNameCaseInsensitive = true
-          };
-          string fileContent = File.ReadAllText("Data/quotes.json");
-          Quotes = JsonSerializer.Deserialize<List<Quote>>(fileContent, options);
-        }
+        { }
 
         public static List<Author> GetAuthors()
         {   
-            // TODO: call QuotesService.GetQuotes() to get all quotes
-            var authors = Quotes.Select(a => new Author() { 
-                Name = a.Author, 
-                QuotesUrl = $"https://programmingquotesapi.azurewebsites.net/quotes/author/{a.Author}",
-                WikiUrl = $"https://en.wikipedia.org/wiki/{a.Author}"
+            var quotes = QuotesService.GetQuotes();
+            var authors = quotes.Select(q => new Author() { 
+                Name = q.Author, 
+                QuotesUrl = $"https://programmingquotesapi.azurewebsites.net/quotes/author/{q.Author}",
+                WikiUrl = $"https://en.wikipedia.org/wiki/{q.Author}"
             }).ToList();
             return authors;
         }
