@@ -12,5 +12,6 @@ namespace ProgrammingQuotesApi.Models
         public string QuotesUrl { get; set; }
         [Url]
         public string WikiUrl { get; set; }
+        public int QuoteCount { get; set; }
     }
 }
