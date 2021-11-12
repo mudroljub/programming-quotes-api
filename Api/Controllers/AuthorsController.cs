@@ -2,9 +2,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using ProgrammingQuotesApi.Models;
 using ProgrammingQuotesApi.Services;
-using Microsoft.AspNetCore.JsonPatch;
 using System.Net.Mime;
-using Microsoft.AspNetCore.Http;
 
 namespace ProgrammingQuotesApi.Controllers
 {

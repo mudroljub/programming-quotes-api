@@ -41,6 +41,6 @@ Tutorials:
 
 ## TODO
 
-- authors
-- auth
-- more unit tests
+- fix swagger docs
+- add auth
+- add more unit tests
