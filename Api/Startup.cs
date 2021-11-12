@@ -38,9 +38,9 @@ namespace ProgrammingQuotesApi
                     Version = "v1" 
                 });
                 // generate the xml documentation file
-                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                c.IncludeXmlComments(xmlPath);
+                // var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                // var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                // c.IncludeXmlComments(xmlPath);
             }).AddSwaggerGenNewtonsoftSupport();
         }
 
