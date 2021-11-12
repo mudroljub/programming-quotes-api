@@ -17,7 +17,7 @@ namespace ProgrammingQuotesApi.Controllers
         public QuotesController() {}
 
         /// <summary>
-        /// Returns an array of quotes
+        /// Returns a list of quotes
         /// </summary>
         [HttpGet]
         public ActionResult<List<Quote>> GetQuotes([FromQuery] int count = 0)

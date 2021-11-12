@@ -4,9 +4,14 @@
         <name>ProgrammingQuotesApi</name>
     </assembly>
     <members>
+        <member name="M:ProgrammingQuotesApi.Controllers.AuthorsController.GetAuthors">
+            <summary>
+            Returns a list of authors
+            </summary>
+        </member>
         <member name="M:ProgrammingQuotesApi.Controllers.QuotesController.GetQuotes(System.Int32)">
             <summary>
-            Returns an array of quotes
+            Returns a list of quotes
             </summary>
         </member>
         <member name="M:ProgrammingQuotesApi.Controllers.QuotesController.Get(System.String)">

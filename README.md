@@ -4,6 +4,8 @@
 
 Docs: [programmingquotesapi.azurewebsites.net/swagger/](https://programmingquotesapi.azurewebsites.net/swagger/)
 
+Convention: The names of the authors are as on Wikipedia.
+
 ## API Documentation
 
 GET [`/quotes`](https://programmingquotesapi.azurewebsites.net/quotes) (get all quotes)
@@ -39,5 +41,6 @@ Tutorials:
 
 ## TODO
 
-- unit tests
+- authors
 - auth
+- more unit tests
