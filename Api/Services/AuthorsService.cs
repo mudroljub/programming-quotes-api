@@ -14,7 +14,7 @@ namespace ProgrammingQuotesApi.Services
         static AuthorsService()
         { }
 
-        public static IEnumerable<string> GetAuthors()
+        public static Dictionary<string, Author> GetAuthors()
         {   
             var quotes = QuotesService.GetQuotes();
             // var authors = quotes.Select(q => new Author() { 
@@ -22,7 +22,19 @@ namespace ProgrammingQuotesApi.Services
             //     QuotesUrl = $"https://programmingquotesapi.azurewebsites.net/quotes/author/{q.Author}",
             //     WikiUrl = $"https://en.wikipedia.org/wiki/{q.Author}"
             // }).ToList();
-            var authors = quotes.Select(q => q.Author).Distinct();
+            IEnumerable<string> authorNames = quotes.Select(q => q.Author).Distinct(); // .ToList();
+            Dictionary<string, Author> authors = new Dictionary<string, Author>();
+
+            foreach (var authorName in authorNames)
+            {
+                authors.Add(authorName, new Author()
+                {
+                    Name = authorName,
+                    QuotesUrl = $"https://programmingquotesapi.azurewebsites.net/quotes/author/{authorName}",
+                    WikiUrl = $"https://en.wikipedia.org/wiki/{authorName}"
+                });
+            }
+
             return authors;
         }
     }
