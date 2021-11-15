@@ -2,7 +2,7 @@
 
 **Programming Quotes API for open source projects.**
 
-Docs: [programmingquotesapi.azurewebsites.net/swagger/](https://programmingquotesapi.azurewebsites.net/swagger/)
+Docs: [programmingquotesapi.azurewebsites.net](https://programmingquotesapi.azurewebsites.net)
 
 Convention: The names of the authors are as on Wikipedia.
 
@@ -16,7 +16,7 @@ GET [`/quotes/5a6ce86f2af929789500e824`](https://programmingquotesapi.azurewebsi
 
 GET [`/quotes/author/Edsger W. Dijkstra`](https://programmingquotesapi.azurewebsites.net/quotes/author/Edsger%20W.%20Dijkstra) (get quote by author)
 
-You can also POST, PUT, PATCH and DELETE. See [docs](https://https://programmingquotesapi.azurewebsites.net/swagger/) for more.
+You can also POST, PUT, PATCH and DELETE. See [docs](https://https://programmingquotesapi.azurewebsites.net) for more.
 
 ## Development
 
@@ -41,6 +41,5 @@ Tutorials:
 
 ## TODO
 
-- fix swagger docs
 - add auth
 - add more unit tests
