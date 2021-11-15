@@ -29,7 +29,7 @@ namespace ProgrammingQuotesApi.Controllers
         /// <summary>
         /// Returns a quote for a given id
         /// </summary>
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "Get")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Quote> Get(string id)
@@ -58,11 +58,12 @@ namespace ProgrammingQuotesApi.Controllers
         /// Create new quote
         /// </summary>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult Create([FromBody] Quote quote)
         {            
             QuotesService.Add(quote);
-            // return CreatedAtAction(nameof(Create), new { id = quote.Id }, quote);
-            return Created("", quote);
+            return CreatedAtRoute("Get", new { id = quote.Id }, quote);
         }
 
         /// <summary>

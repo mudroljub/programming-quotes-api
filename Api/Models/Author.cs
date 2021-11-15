@@ -1,7 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using System.ComponentModel;
 
 namespace ProgrammingQuotesApi.Models
 {
