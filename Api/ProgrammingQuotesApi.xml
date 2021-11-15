@@ -18,6 +18,7 @@
             <summary>
             Returns author details
             </summary>
+            <param name="author">The name of the author from Wikipedia.</param>
         </member>
         <member name="M:ProgrammingQuotesApi.Controllers.QuotesController.GetQuotes(System.Int32)">
             <summary>
@@ -48,6 +49,7 @@
             <summary>
             Returns all quotes for a given author
             </summary>
+            <param name="author">The name of the author from Wikipedia.</param>
         </member>
         <member name="M:ProgrammingQuotesApi.Controllers.QuotesController.Update(System.String,ProgrammingQuotesApi.Models.Quote)">
             <summary>

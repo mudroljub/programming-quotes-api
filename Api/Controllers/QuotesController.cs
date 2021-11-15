@@ -69,6 +69,7 @@ namespace ProgrammingQuotesApi.Controllers
         /// <summary>
         /// Returns all quotes for a given author
         /// </summary>
+        /// <param name="author">The name of the author from Wikipedia.</param>
         [HttpGet("author/{author}")]
         public ActionResult<List<Quote>> GetQuotesByAuthor(string author) => QuotesService.GetByAuthor(author);
 

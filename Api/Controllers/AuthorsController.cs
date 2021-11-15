@@ -32,6 +32,7 @@ namespace ProgrammingQuotesApi.Controllers
         /// <summary>
         /// Returns author details
         /// </summary>
+        /// <param name="author">The name of the author from Wikipedia.</param>
         [HttpGet("{author}")]
         public ActionResult<Author> GetAuthorDetails(string author) => AuthorsService.GetAuthorDetails(author);
 
