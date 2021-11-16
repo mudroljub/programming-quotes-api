@@ -33,7 +33,6 @@ namespace ProgrammingQuotesApi.Authorization
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()) }),
-                // TODO: fix https://stackoverflow.com/questions/5906393/getting-error-string-reference-not-set-to-an-instance-of-a-string-parameter-na
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
