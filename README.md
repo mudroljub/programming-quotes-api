@@ -43,4 +43,5 @@ Tutorials:
 ## TODO
 
 - add auth
+- customize swagger ui, add github repo
 - add more unit tests

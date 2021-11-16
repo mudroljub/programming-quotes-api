@@ -1,15 +1,12 @@
-using BCryptNet = BCrypt.Net.BCrypt;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using System.Collections.Generic;
 using System.IO;
 using System;
 using ProgrammingQuotesApi.Authorization;
-using ProgrammingQuotesApi.Entities;
 using ProgrammingQuotesApi.Helpers;
 using ProgrammingQuotesApi.Services;
 
@@ -24,7 +21,7 @@ namespace ProgrammingQuotesApi
             Configuration = configuration;
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        // called by the runtime, use to configure services
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>();
@@ -44,8 +41,8 @@ namespace ProgrammingQuotesApi
                     },
                     Version = "v1"
                 });
-                // generate the xml documentation file
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, "ProgrammingQuotesApi.xml");
+                // generate xml documentation file
+                string xmlPath = Path.Combine(AppContext.BaseDirectory, "ProgrammingQuotesApi.xml");
                 c.IncludeXmlComments(xmlPath);
             }).AddSwaggerGenNewtonsoftSupport();
 
@@ -57,8 +54,8 @@ namespace ProgrammingQuotesApi
             services.AddScoped<IUserService, UserService>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataContext context)
+        // called by the runtime. use to configure HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -76,7 +73,6 @@ namespace ProgrammingQuotesApi
             });
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
 
             // global cors policy
@@ -84,9 +80,6 @@ namespace ProgrammingQuotesApi
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader());
-
-            // global error handler
-            app.UseMiddleware<ErrorHandlerMiddleware>();
 
             // custom jwt auth middleware
             app.UseMiddleware<JwtMiddleware>();
