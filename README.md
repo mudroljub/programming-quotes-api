@@ -42,4 +42,5 @@ Tutorials:
 ## TODO
 
 - add auth
+  https://jasonwatmore.com/post/2021/07/29/net-5-role-based-authorization-tutorial-with-example-api
 - add more unit tests
