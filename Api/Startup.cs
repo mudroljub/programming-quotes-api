@@ -18,11 +18,6 @@ namespace ProgrammingQuotesApi
     public class Startup
     {
         public IConfiguration Configuration { get; }
-        public List<User> testUsers = new()
-        {
-            new User { Id = 1, FirstName = "Dylan", LastName = "Dog", Username = "admin", PasswordHash = BCryptNet.HashPassword("admin"), Role = Role.Admin },
-            new User { Id = 2, FirstName = "Groucho", LastName = "Marx", Username = "user", PasswordHash = BCryptNet.HashPassword("user"), Role = Role.User }
-        };
 
         public Startup(IConfiguration configuration)
         {
@@ -65,9 +60,6 @@ namespace ProgrammingQuotesApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataContext context)
         {
-            context.Users.AddRange(this.testUsers);
-            context.SaveChanges();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

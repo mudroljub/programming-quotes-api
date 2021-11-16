@@ -20,9 +20,9 @@ namespace ProgrammingQuotesApi.Controllers
 
         [AllowAnonymous]
         [HttpPost("[action]")]
-        public IActionResult Authenticate(AuthenticateRequest model)
+        public IActionResult Authenticate(AuthenticateRequest req)
         {
-            var response = _userService.Authenticate(model);
+            var response = _userService.Authenticate(req);
             return Ok(response);
         }
 

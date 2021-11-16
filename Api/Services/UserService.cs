@@ -10,7 +10,7 @@ namespace ProgrammingQuotesApi.Services
 {
     public interface IUserService
     {
-        AuthenticateResponse Authenticate(AuthenticateRequest model);
+        AuthenticateResponse Authenticate(AuthenticateRequest req);
         IEnumerable<User> GetAll();
         User GetById(int id);
     }
@@ -26,20 +26,26 @@ namespace ProgrammingQuotesApi.Services
         {
             _context = context;
             _jwtUtils = jwtUtils;
+
+            // add dummy data
+            List<User> testUsers = new()
+            {
+                new User { Id = 1, FirstName = "Dylan", LastName = "Dog", Username = "admin", PasswordHash = BCryptNet.HashPassword("admin"), Role = Role.Admin },
+                new User { Id = 2, FirstName = "Groucho", LastName = "Marx", Username = "user", PasswordHash = BCryptNet.HashPassword("user"), Role = Role.User }
+            };
+            _context.Users.AddRange(testUsers);
+            _context.SaveChanges();
         }
 
 
-        public AuthenticateResponse Authenticate(AuthenticateRequest model)
+        public AuthenticateResponse Authenticate(AuthenticateRequest req)
         {
-            var user = _context.Users.SingleOrDefault(x => x.Username == model.Username);
+            var user = _context.Users.SingleOrDefault(x => x.Username == req.Username);
 
-            // validate
-            if (user == null || !BCryptNet.Verify(model.Password, user.PasswordHash))
+            if (user == null || !BCryptNet.Verify(req.Password, user.PasswordHash))
                 throw new AppException("Username or password is incorrect");
 
-            // authentication successful so generate jwt token
             var jwtToken = _jwtUtils.GenerateJwtToken(user);
-
             return new AuthenticateResponse(user, jwtToken);
         }
 
