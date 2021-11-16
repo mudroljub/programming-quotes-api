@@ -7,7 +7,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System.Collections.Generic;
 using System.IO;
-using System.Text.Json.Serialization;
 using System;
 using ProgrammingQuotesApi.Authorization;
 using ProgrammingQuotesApi.Entities;
@@ -19,6 +18,11 @@ namespace ProgrammingQuotesApi
     public class Startup
     {
         public IConfiguration Configuration { get; }
+        public List<User> testUsers = new()
+        {
+            new User { Id = 1, FirstName = "Dylan", LastName = "Dog", Username = "admin", PasswordHash = BCryptNet.HashPassword("admin"), Role = Role.Admin },
+            new User { Id = 2, FirstName = "Groucho", LastName = "Marx", Username = "user", PasswordHash = BCryptNet.HashPassword("user"), Role = Role.User }
+        };
 
         public Startup(IConfiguration configuration)
         {
@@ -34,16 +38,16 @@ namespace ProgrammingQuotesApi
             services.AddControllers().AddNewtonsoftJson();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo 
-                { 
-                    Title = "ProgrammingQuotesApi", 
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "ProgrammingQuotesApi",
                     Description = "Programming Quotes API for open source projects.",
                     Contact = new OpenApiContact
                     {
                         Name = "Damjan Pavlica",
                         Email = "mudroljub@gmail.com",
                     },
-                    Version = "v1" 
+                    Version = "v1"
                 });
                 // generate the xml documentation file
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, "ProgrammingQuotesApi.xml");
@@ -59,9 +63,10 @@ namespace ProgrammingQuotesApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataContext context) 
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataContext context)
         {
-            CreateTestUsers(context);
+            context.Users.AddRange(this.testUsers);
+            context.SaveChanges();
 
             if (env.IsDevelopment())
             {
@@ -72,7 +77,7 @@ namespace ProgrammingQuotesApi
             {
                 c.SerializeAsV2 = true;
             });
-            app.UseSwaggerUI(c => 
+            app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProgrammingQuotesApi v1");
                 c.RoutePrefix = string.Empty;
@@ -100,18 +105,6 @@ namespace ProgrammingQuotesApi
             {
                 endpoints.MapControllers();
             });
-        }
-
-        private static void CreateTestUsers(DataContext context)
-        {
-            // add hardcoded test users to db on startup
-            var testUsers = new List<User>
-            { 
-                new User { Id = 1, FirstName = "Dylan", LastName = "Dog", Username = "admin", PasswordHash = BCryptNet.HashPassword("admin"), Role = Role.Admin },
-                new User { Id = 2, FirstName = "Groucho", LastName = "Marx", Username = "user", PasswordHash = BCryptNet.HashPassword("user"), Role = Role.User } 
-            };
-            context.Users.AddRange(testUsers);
-            context.SaveChanges();
         }
     }
 }

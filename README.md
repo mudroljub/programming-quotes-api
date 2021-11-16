@@ -38,6 +38,7 @@ dotnet test
 Tutorials: 
 - https://docs.microsoft.com/en-us/learn/modules/build-web-api-aspnet-core/
 - https://channel9.msdn.com/Series/Beginners-Series-to-Web-APIs?page=2
+- Auth: https://jasonwatmore.com/post/2021/07/29/net-5-role-based-authorization-tutorial-with-example-api
 
 ## TODO
 

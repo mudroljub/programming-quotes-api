@@ -1,7 +1,6 @@
 using BCryptNet = BCrypt.Net.BCrypt;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Extensions.Options;
 using ProgrammingQuotesApi.Authorization;
 using ProgrammingQuotesApi.Entities;
 using ProgrammingQuotesApi.Helpers;
@@ -18,18 +17,15 @@ namespace ProgrammingQuotesApi.Services
 
     public class UserService : IUserService
     {
-        private DataContext _context;
-        private IJwtUtils _jwtUtils;
-        private readonly AppSettings _appSettings;
+        private readonly DataContext _context;
+        private readonly IJwtUtils _jwtUtils;
 
         public UserService(
             DataContext context,
-            IJwtUtils jwtUtils,
-            IOptions<AppSettings> appSettings)
+            IJwtUtils jwtUtils)
         {
             _context = context;
             _jwtUtils = jwtUtils;
-            _appSettings = appSettings.Value;
         }
 
 
