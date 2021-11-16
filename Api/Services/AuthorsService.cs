@@ -1,16 +1,14 @@
 using ProgrammingQuotesApi.Models;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace ProgrammingQuotesApi.Services
 {
     public static class AuthorsService
     {
-        static Dictionary<string, Author> Authors = new Dictionary<string, Author>();
+        static readonly Dictionary<string, Author> Authors = new();
         static AuthorsService()
         {
-            var quotes = QuotesService.GetQuotes();
-            foreach (var q in quotes)
+            foreach (var q in QuotesService.GetQuotes())
             {
                 if (Authors.ContainsKey(q.Author)) {  
                     Authors[q.Author].QuoteCount++;  
@@ -19,7 +17,6 @@ namespace ProgrammingQuotesApi.Services
                     Authors.Add(q.Author, new Author()
                     {
                         Name = q.Author,
-                        QuotesUrl = $"https://programmingquotesapi.azurewebsites.net/quotes/author/{q.Author}",
                         WikiUrl = $"https://en.wikipedia.org/wiki/{q.Author}",
                         QuoteCount = 1
                     });  
@@ -35,9 +32,8 @@ namespace ProgrammingQuotesApi.Services
             var authorDetails = new Author()
             {
                 Name = author,
-                QuotesUrl = $"https://programmingquotesapi.azurewebsites.net/quotes/author/{author}",
                 WikiUrl = $"https://en.wikipedia.org/wiki/{author}",
-                QuoteCount = authorQuotes.Count(),
+                QuoteCount = authorQuotes.Count,
                 Quotes = authorQuotes
             };
             return authorDetails;
