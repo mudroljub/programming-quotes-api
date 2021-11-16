@@ -59,14 +59,14 @@ namespace ProgrammingQuotesApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, DataContext context) // IWebHostEnvironment env 
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataContext context) 
         {
-            createTestUsers(context);
+            CreateTestUsers(context);
 
-            // if (env.IsDevelopment())
-            // {
-            //     app.UseDeveloperExceptionPage();
-            // }
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
 
             app.UseSwagger(c =>
             {
@@ -102,13 +102,13 @@ namespace ProgrammingQuotesApi
             });
         }
 
-        private void createTestUsers(DataContext context)
+        private static void CreateTestUsers(DataContext context)
         {
             // add hardcoded test users to db on startup
             var testUsers = new List<User>
             { 
-                new User { Id = 1, FirstName = "Admin", LastName = "User", Username = "admin", PasswordHash = BCryptNet.HashPassword("admin"), Role = Role.Admin },
-                new User { Id = 2, FirstName = "Normal", LastName = "User", Username = "user", PasswordHash = BCryptNet.HashPassword("user"), Role = Role.User } 
+                new User { Id = 1, FirstName = "Dylan", LastName = "Dog", Username = "admin", PasswordHash = BCryptNet.HashPassword("admin"), Role = Role.Admin },
+                new User { Id = 2, FirstName = "Groucho", LastName = "Marx", Username = "user", PasswordHash = BCryptNet.HashPassword("user"), Role = Role.User } 
             };
             context.Users.AddRange(testUsers);
             context.SaveChanges();
