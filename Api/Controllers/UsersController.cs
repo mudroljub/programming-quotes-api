@@ -37,7 +37,7 @@ namespace ProgrammingQuotesApi.Controllers
             return Ok(userDetail);
         }
 
-        [CustomAuthorize(Role.Admin)]
+        [CustomAuthorize("Admin")]
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -45,7 +45,7 @@ namespace ProgrammingQuotesApi.Controllers
             return Ok(users);
         }
 
-        [CustomAuthorize(Role.Admin)]
+        [CustomAuthorize("Admin")]
         [HttpGet("{id:int}")]
         public IActionResult GetById(int id)
         {

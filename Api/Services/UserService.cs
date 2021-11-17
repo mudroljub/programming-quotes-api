@@ -13,17 +13,15 @@ namespace ProgrammingQuotesApi.Services
         private readonly DataContext _context;
         private readonly JwtUtils _jwtUtils;
 
-        public UserService(
-            DataContext context,
-            JwtUtils jwtUtils)
+        public UserService(DataContext context, JwtUtils jwtUtils)
         {
             _context = context;
             _jwtUtils = jwtUtils;
 
             List<User> dummyUsers = new()
             {
-                new User { Id = 1, FirstName = "Dylan", LastName = "Dog", Username = "admin", PasswordHash = BCryptNet.HashPassword("admin"), Role = Role.Admin },
-                new User { Id = 2, FirstName = "Groucho", LastName = "Marx", Username = "user", PasswordHash = BCryptNet.HashPassword("user"), Role = Role.User }
+                new User { Id = 1, FirstName = "Dylan", LastName = "Dog", Username = "admin", PasswordHash = BCryptNet.HashPassword("admin"), Role = "Admin" },
+                new User { Id = 2, FirstName = "Groucho", LastName = "Marx", Username = "user", PasswordHash = BCryptNet.HashPassword("user"), Role = "User" }
             };
             _context.Users.AddRange(dummyUsers);
             _context.SaveChanges();

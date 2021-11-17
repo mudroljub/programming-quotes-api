@@ -12,11 +12,11 @@ namespace ProgrammingQuotesApi.Authorization
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class CustomAuthorizeAttribute : Attribute, IAuthorizationFilter
     {
-        private readonly IList<Role> _roles;
+        private readonly IList<string> _roles;
 
-        public CustomAuthorizeAttribute(params Role[] roles)
+        public CustomAuthorizeAttribute(params string[] roles)
         {
-            _roles = roles ?? Array.Empty<Role>();
+            _roles = roles ?? Array.Empty<string>();
         }
 
         public void OnAuthorization(AuthorizationFilterContext context)
