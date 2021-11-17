@@ -10,11 +10,11 @@ using Microsoft.AspNetCore.Authorization;
 namespace ProgrammingQuotesApi.Authorization
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-    public class AuthorizeAttribute : Attribute, IAuthorizationFilter
+    public class CustomAuthorizeAttribute : Attribute, IAuthorizationFilter
     {
         private readonly IList<Role> _roles;
 
-        public AuthorizeAttribute(params Role[] roles)
+        public CustomAuthorizeAttribute(params Role[] roles)
         {
             _roles = roles ?? Array.Empty<Role>();
         }

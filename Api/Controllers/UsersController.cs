@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 using ProgrammingQuotesApi.Entities;
 using ProgrammingQuotesApi.Models.Users;
 using ProgrammingQuotesApi.Services;
-using AuthorizeAttribute = ProgrammingQuotesApi.Authorization.AuthorizeAttribute;
+using ProgrammingQuotesApi.Authorization;
 
 namespace ProgrammingQuotesApi.Controllers
 {
-    [Authorize]
+    [CustomAuthorize]
     [ApiController]
     [Route("[controller]")]
     public class UsersController : ControllerBase
@@ -37,7 +37,7 @@ namespace ProgrammingQuotesApi.Controllers
             return Ok(response);
         }
 
-        [Authorize(Role.Admin)]
+        [CustomAuthorize(Role.Admin)]
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -45,14 +45,10 @@ namespace ProgrammingQuotesApi.Controllers
             return Ok(users);
         }
 
+        [CustomAuthorize(Role.Admin)]
         [HttpGet("{id:int}")]
         public IActionResult GetById(int id)
         {
-            // only for admins
-            User currentUser = (User)HttpContext.Items["User"];
-            if (id != currentUser.Id && currentUser.Role != Role.Admin)
-                return Unauthorized(new { message = "Unauthorized" });
-
             User user = _userService.GetById(id);
             return Ok(user);
         }
