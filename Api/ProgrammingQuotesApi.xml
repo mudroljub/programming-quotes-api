@@ -20,7 +20,7 @@
             </summary>
             <param name="author">The name of the author from Wikipedia.</param>
         </member>
-        <member name="M:ProgrammingQuotesApi.Controllers.QuotesController.GetQuotes(System.Int32)">
+        <member name="M:ProgrammingQuotesApi.Controllers.QuotesController.GetAll(System.Int32)">
             <summary>
             Returns a list of quotes
             </summary>

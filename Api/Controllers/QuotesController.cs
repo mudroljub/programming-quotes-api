@@ -20,9 +20,9 @@ namespace ProgrammingQuotesApi.Controllers
         /// Returns a list of quotes
         /// </summary>
         [HttpGet]
-        public ActionResult<List<Quote>> GetQuotes([FromQuery] int count = 0)
+        public ActionResult<List<Quote>> GetAll([FromQuery] int count = 0)
         {
-            List<Quote> quotes = QuoteService.GetQuotes(count);
+            List<Quote> quotes = QuoteService.GetAll(count);
             return Ok(quotes);
         }
 
@@ -49,7 +49,7 @@ namespace ProgrammingQuotesApi.Controllers
         /// Returns total number of quotes
         /// </summary>
         [HttpGet("count")]
-        public ActionResult<int> GetCount() => Ok(QuoteService.GetQuotes().Count);
+        public ActionResult<int> GetCount() => Ok(QuoteService.GetAll().Count);
 
         /// <summary>
         /// Create new quote

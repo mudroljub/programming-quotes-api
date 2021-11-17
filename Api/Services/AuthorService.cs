@@ -8,7 +8,7 @@ namespace ProgrammingQuotesApi.Services
         static readonly Dictionary<string, Author> Authors = new();
         static AuthorService()
         {
-            foreach (var q in QuoteService.GetQuotes())
+            foreach (var q in QuoteService.GetAll())
             {
                 if (Authors.ContainsKey(q.Author)) {  
                     Authors[q.Author].QuoteCount++;  

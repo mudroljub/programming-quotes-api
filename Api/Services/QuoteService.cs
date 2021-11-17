@@ -22,7 +22,7 @@ namespace ProgrammingQuotesApi.Services
           Quotes = JsonSerializer.Deserialize<List<Quote>>(fileContent, options);
         }
 
-        public static List<Quote> GetQuotes(int count = 0)
+        public static List<Quote> GetAll(int count = 0)
         {
             if (count <= 0 || count > Quotes.Count) return Quotes;
 

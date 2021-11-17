@@ -14,7 +14,7 @@ namespace ProgrammingQuotesApi.Tests
         {
             int count = 5;
             var controller = new QuotesController();
-            var response = controller.GetQuotes(count);
+            var response = controller.GetAll(count);
             var result = response.Result as OkObjectResult;
             var quotes = result.Value as List<Quote>;
             Assert.Equal(count, quotes.Count);
@@ -24,10 +24,10 @@ namespace ProgrammingQuotesApi.Tests
         public void GetQuotes_Returns_All_Quotes_By_Default()
         {
             var controller = new QuotesController();
-            var response = controller.GetQuotes();
+            var response = controller.GetAll();
             var result = response.Result as OkObjectResult;
             var quotes = result.Value as List<Quote>;
-            var serviceQuotes = QuoteService.GetQuotes();
+            var serviceQuotes = QuoteService.GetAll();
             Assert.Equal(quotes.Count, serviceQuotes.Count);
         }
 
@@ -56,10 +56,10 @@ namespace ProgrammingQuotesApi.Tests
         public void Delete_A_Quote_By_Id()
         {
             var controller = new QuotesController();
-            var result1 = controller.GetQuotes().Result as OkObjectResult;
+            var result1 = controller.GetAll().Result as OkObjectResult;
             var oldQuotesCount = (result1.Value as List<Quote>).Count;
             controller.Delete("5a6ce86e2af929789500e7e4");
-            var result2 = controller.GetQuotes().Result as OkObjectResult;
+            var result2 = controller.GetAll().Result as OkObjectResult;
             var newQuotesCount = (result2.Value as List<Quote>).Count;
             Assert.Equal(oldQuotesCount - 1, newQuotesCount);
         }
