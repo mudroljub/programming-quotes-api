@@ -42,6 +42,6 @@ Tutorials:
 
 ## TODO
 
-- add auth
-- customize swagger ui, add github repo
-- add more unit tests
+- add CRUD for User (add, delete, modify)
+- add Entities and DbContext for Quotes 
+- remove custom authorize

@@ -1,4 +1,4 @@
-using System.Text.Json.Serialization;
+using System.Runtime.Serialization;
 
 namespace ProgrammingQuotesApi.Entities
 {
@@ -10,7 +10,7 @@ namespace ProgrammingQuotesApi.Entities
         public string Username { get; set; }
         public Role Role { get; set; }
 
-        [JsonIgnore]
+        [IgnoreDataMember]
         public string PasswordHash { get; set; }
     }
 }
