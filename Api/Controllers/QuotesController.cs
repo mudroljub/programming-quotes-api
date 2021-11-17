@@ -34,7 +34,7 @@ namespace ProgrammingQuotesApi.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Quote> Get(string id)
         {
-            Quote quote = QuoteService.Get(id);
+            Quote quote = QuoteService.GetById(id);
 
             return quote == null ? NotFound() : Ok(quote);
         }
@@ -79,7 +79,7 @@ namespace ProgrammingQuotesApi.Controllers
             if (id != quote.Id)
                 return BadRequest();
 
-            Quote existingQuote = QuoteService.Get(id);
+            Quote existingQuote = QuoteService.GetById(id);
             if (existingQuote is null)
                 return NotFound();
 
@@ -94,7 +94,7 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpPatch("{id}")]
         public ActionResult Patch(string id, JsonPatchDocument<Quote> patch)
         {
-            Quote quote = QuoteService.Get(id);
+            Quote quote = QuoteService.GetById(id);
             if (quote is null)
                 return NotFound();
 
@@ -110,7 +110,7 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpDelete("{id}")]
         public ActionResult Delete(string id)
         {
-            Quote quote = QuoteService.Get(id);
+            Quote quote = QuoteService.GetById(id);
 
             if (quote is null)
                 return NotFound();

@@ -29,7 +29,7 @@ namespace ProgrammingQuotesApi.Services
             return Quotes.GetRange(0, count);
         }
 
-        public static Quote Get(string id) => Quotes.FirstOrDefault(p => p.Id == id);
+        public static Quote GetById(string id) => Quotes.FirstOrDefault(p => p.Id == id);
 
         public static Quote GetRandom() => Quotes[new Random().Next(0, Quotes.Count)];
 
@@ -43,7 +43,7 @@ namespace ProgrammingQuotesApi.Services
 
         public static void Delete(string id)
         {
-            var quote = Get(id);
+            var quote = GetById(id);
             if (quote is null)
                 return;
 
