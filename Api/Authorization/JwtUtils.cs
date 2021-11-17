@@ -8,13 +8,7 @@ using System;
 
 namespace ProgrammingQuotesApi.Authorization
 {
-    public interface IJwtUtils
-    {
-        public string GenerateJwtToken(User user);
-        public int? ValidateJwtToken(string token);
-    }
-
-    public class JwtUtils : IJwtUtils
+    public class JwtUtils
     {
         private readonly string _secret = "BILO ŠTA SAMO DA NIJE PREKRATKO";
 

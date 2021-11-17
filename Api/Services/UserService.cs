@@ -8,21 +8,14 @@ using ProgrammingQuotesApi.Models;
 
 namespace ProgrammingQuotesApi.Services
 {
-    public interface IUserService
-    {
-        UserDetail Authenticate(AuthRequest req);
-        IEnumerable<User> GetAll();
-        User GetById(int id);
-    }
-
-    public class UserService : IUserService
+    public class UserService
     {
         private readonly DataContext _context;
-        private readonly IJwtUtils _jwtUtils;
+        private readonly JwtUtils _jwtUtils;
 
         public UserService(
             DataContext context,
-            IJwtUtils jwtUtils)
+            JwtUtils jwtUtils)
         {
             _context = context;
             _jwtUtils = jwtUtils;

@@ -14,7 +14,7 @@ namespace ProgrammingQuotesApi.Authorization
             _next = next;
         }
 
-        public async Task Invoke(HttpContext context, IUserService userService, IJwtUtils jwtUtils)
+        public async Task Invoke(HttpContext context, UserService userService, JwtUtils jwtUtils)
         {
             string token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
             int? userId = jwtUtils.ValidateJwtToken(token);

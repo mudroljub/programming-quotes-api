@@ -13,9 +13,9 @@ namespace ProgrammingQuotesApi.Controllers
     [Route("[controller]")]
     public class UsersController : ControllerBase
     {
-        private readonly IUserService _userService;
+        private readonly UserService _userService;
 
-        public UsersController(IUserService userService)
+        public UsersController(UserService userService)
         {
             _userService = userService;
         }

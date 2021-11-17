@@ -42,14 +42,14 @@ namespace ProgrammingQuotesApi
                     },
                     Version = "v1"
                 });
-                // generate xml documentation file
+                // generate documentation file
                 string xmlPath = Path.Combine(AppContext.BaseDirectory, "ProgrammingQuotesApi.xml");
                 c.IncludeXmlComments(xmlPath);
             }).AddSwaggerGenNewtonsoftSupport();
 
-            // configure DI for application services
-            services.AddScoped<IJwtUtils, JwtUtils>();
-            services.AddScoped<IUserService, UserService>();
+            // Dependency injection
+            services.AddScoped<JwtUtils>();
+            services.AddScoped<UserService>();
         }
 
         // called by the runtime. use to configure HTTP request pipeline.
