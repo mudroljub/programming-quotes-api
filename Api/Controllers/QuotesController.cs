@@ -22,7 +22,7 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpGet]
         public ActionResult<List<Quote>> GetQuotes([FromQuery] int count = 0)
         {
-            List<Quote> quotes = QuotesService.GetQuotes(count);
+            List<Quote> quotes = QuoteService.GetQuotes(count);
             return Ok(quotes);
         }
 
@@ -34,7 +34,7 @@ namespace ProgrammingQuotesApi.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Quote> Get(string id)
         {
-            Quote quote = QuotesService.Get(id);
+            Quote quote = QuoteService.Get(id);
 
             return quote == null ? NotFound() : Ok(quote);
         }
@@ -43,13 +43,13 @@ namespace ProgrammingQuotesApi.Controllers
         /// Returns a random quote
         /// </summary>
         [HttpGet("random")]
-        public ActionResult<Quote> GetRandom() => Ok(QuotesService.GetRandom());
+        public ActionResult<Quote> GetRandom() => Ok(QuoteService.GetRandom());
 
         /// <summary>
         /// Returns total number of quotes
         /// </summary>
         [HttpGet("count")]
-        public ActionResult<int> GetCount() => Ok(QuotesService.GetQuotes().Count);
+        public ActionResult<int> GetCount() => Ok(QuoteService.GetQuotes().Count);
 
         /// <summary>
         /// Create new quote
@@ -59,7 +59,7 @@ namespace ProgrammingQuotesApi.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult Create([FromBody] Quote quote)
         {
-            QuotesService.Add(quote);
+            QuoteService.Add(quote);
             return CreatedAtRoute("Get", new { id = quote.Id }, quote);
         }
 
@@ -68,7 +68,7 @@ namespace ProgrammingQuotesApi.Controllers
         /// </summary>
         /// <param name="author">The name of the author from Wikipedia.</param>
         [HttpGet("author/{author}")]
-        public ActionResult<List<Quote>> GetQuotesByAuthor(string author) => QuotesService.GetByAuthor(author);
+        public ActionResult<List<Quote>> GetQuotesByAuthor(string author) => QuoteService.GetByAuthor(author);
 
         /// <summary>
         /// Replace an existing quote with a new one
@@ -79,11 +79,11 @@ namespace ProgrammingQuotesApi.Controllers
             if (id != quote.Id)
                 return BadRequest();
 
-            Quote existingQuote = QuotesService.Get(id);
+            Quote existingQuote = QuoteService.Get(id);
             if (existingQuote is null)
                 return NotFound();
 
-            QuotesService.Update(quote);
+            QuoteService.Update(quote);
 
             return NoContent();
         }
@@ -94,12 +94,12 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpPatch("{id}")]
         public ActionResult Patch(string id, JsonPatchDocument<Quote> patch)
         {
-            Quote quote = QuotesService.Get(id);
+            Quote quote = QuoteService.Get(id);
             if (quote is null)
                 return NotFound();
 
             patch.ApplyTo(quote);
-            QuotesService.Update(quote);
+            QuoteService.Update(quote);
 
             return NoContent();
         }
@@ -110,12 +110,12 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpDelete("{id}")]
         public ActionResult Delete(string id)
         {
-            Quote quote = QuotesService.Get(id);
+            Quote quote = QuoteService.Get(id);
 
             if (quote is null)
                 return NotFound();
 
-            QuotesService.Delete(id);
+            QuoteService.Delete(id);
 
             return NoContent();
         }

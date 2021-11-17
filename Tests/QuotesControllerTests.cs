@@ -27,7 +27,7 @@ namespace ProgrammingQuotesApi.Tests
             var response = controller.GetQuotes();
             var result = response.Result as OkObjectResult;
             var quotes = result.Value as List<Quote>;
-            var serviceQuotes = QuotesService.GetQuotes();
+            var serviceQuotes = QuoteService.GetQuotes();
             Assert.Equal(quotes.Count, serviceQuotes.Count);
         }
 

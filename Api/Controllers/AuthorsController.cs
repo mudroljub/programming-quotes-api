@@ -19,7 +19,7 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpGet]
         public ActionResult<Dictionary<string, Author>> GetAuthors()
         {
-            Dictionary<string, Author> authors = AuthorsService.GetAuthors();
+            Dictionary<string, Author> authors = AuthorService.GetAuthors();
             return Ok(authors);
         }
 
@@ -27,14 +27,14 @@ namespace ProgrammingQuotesApi.Controllers
         /// Returns total number of authors
         /// </summary>
         [HttpGet("count")]
-        public ActionResult<int> GetCount() => Ok(AuthorsService.GetAuthors().Count);
+        public ActionResult<int> GetCount() => Ok(AuthorService.GetAuthors().Count);
 
         /// <summary>
         /// Returns author details
         /// </summary>
         /// <param name="author">The name of the author from Wikipedia.</param>
         [HttpGet("{author}")]
-        public ActionResult<Author> GetAuthorDetails(string author) => AuthorsService.GetAuthorDetails(author);
+        public ActionResult<Author> GetAuthorDetails(string author) => AuthorService.GetAuthorDetails(author);
 
     }
 }

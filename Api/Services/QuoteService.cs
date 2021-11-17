@@ -8,11 +8,11 @@ using System;
 
 namespace ProgrammingQuotesApi.Services
 {
-    public static class QuotesService
+    public static class QuoteService
     {
         static List<Quote> Quotes { get; }
 
-        static QuotesService()
+        static QuoteService()
         {
           var options = new JsonSerializerOptions
           {

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace ProgrammingQuotesApi.Services
 {
-    public static class AuthorsService
+    public static class AuthorService
     {
         static readonly Dictionary<string, Author> Authors = new();
-        static AuthorsService()
+        static AuthorService()
         {
-            foreach (var q in QuotesService.GetQuotes())
+            foreach (var q in QuoteService.GetQuotes())
             {
                 if (Authors.ContainsKey(q.Author)) {  
                     Authors[q.Author].QuoteCount++;  
@@ -28,7 +28,7 @@ namespace ProgrammingQuotesApi.Services
 
         public static Author GetAuthorDetails(string author)
         {
-            var authorQuotes = QuotesService.GetByAuthor(author);
+            var authorQuotes = QuoteService.GetByAuthor(author);
             var authorDetails = new Author()
             {
                 Name = author,
