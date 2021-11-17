@@ -1,12 +1,12 @@
 using ProgrammingQuotesApi.Entities;
 
-namespace ProgrammingQuotesApi.Models.Users
+namespace ProgrammingQuotesApi.Models
 {
-    public class AuthenticateResponse : User
+    public class UserDetail : User
     {
         public string Token { get; set; }
 
-        public AuthenticateResponse(User user, string token)
+        public UserDetail(User user, string token)
         {
             Id = user.Id;
             FirstName = user.FirstName;

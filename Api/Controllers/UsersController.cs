@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProgrammingQuotesApi.Entities;
-using ProgrammingQuotesApi.Models.Users;
+using ProgrammingQuotesApi.Models;
 using ProgrammingQuotesApi.Services;
 using ProgrammingQuotesApi.Authorization;
 
@@ -31,9 +31,9 @@ namespace ProgrammingQuotesApi.Controllers
         /// </remarks>
         [AllowAnonymous]
         [HttpPost("[action]")]
-        public IActionResult Authenticate(AuthenticateRequest req)
+        public IActionResult Authenticate(LoginRequest req)
         {
-            AuthenticateResponse response = _userService.Authenticate(req);
+            UserDetail response = _userService.Authenticate(req);
             return Ok(response);
         }
 

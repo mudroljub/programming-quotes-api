@@ -66,7 +66,7 @@
             Delete an existing quote by id
             </summary>
         </member>
-        <member name="M:ProgrammingQuotesApi.Controllers.UsersController.Authenticate(ProgrammingQuotesApi.Models.Users.AuthenticateRequest)">
+        <member name="M:ProgrammingQuotesApi.Controllers.UsersController.Authenticate(ProgrammingQuotesApi.Models.LoginRequest)">
              <remarks>
              Sample request:
             

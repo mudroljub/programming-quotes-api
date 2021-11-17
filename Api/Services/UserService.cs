@@ -4,13 +4,13 @@ using System.Linq;
 using ProgrammingQuotesApi.Authorization;
 using ProgrammingQuotesApi.Entities;
 using ProgrammingQuotesApi.Helpers;
-using ProgrammingQuotesApi.Models.Users;
+using ProgrammingQuotesApi.Models;
 
 namespace ProgrammingQuotesApi.Services
 {
     public interface IUserService
     {
-        AuthenticateResponse Authenticate(AuthenticateRequest req);
+        UserDetail Authenticate(LoginRequest req);
         IEnumerable<User> GetAll();
         User GetById(int id);
     }
@@ -36,7 +36,7 @@ namespace ProgrammingQuotesApi.Services
             _context.SaveChanges();
         }
 
-        public AuthenticateResponse Authenticate(AuthenticateRequest req)
+        public UserDetail Authenticate(LoginRequest req)
         {
             User user = _context.Users.SingleOrDefault(x => x.Username == req.Username);
 
@@ -44,7 +44,7 @@ namespace ProgrammingQuotesApi.Services
                 throw new AppException("Username or password is incorrect");
 
             string jwtToken = _jwtUtils.GenerateJwtToken(user);
-            return new AuthenticateResponse(user, jwtToken);
+            return new UserDetail(user, jwtToken);
         }
 
         public IEnumerable<User> GetAll()
