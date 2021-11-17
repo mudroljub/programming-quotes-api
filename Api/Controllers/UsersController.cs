@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using ProgrammingQuotesApi.Authorization;
 using ProgrammingQuotesApi.Entities;
@@ -22,7 +23,7 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpPost("[action]")]
         public IActionResult Authenticate(AuthenticateRequest req)
         {
-            var response = _userService.Authenticate(req);
+            AuthenticateResponse response = _userService.Authenticate(req);
             return Ok(response);
         }
 
@@ -30,19 +31,19 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var users = _userService.GetAll();
+            IEnumerable<User> users = _userService.GetAll();
             return Ok(users);
         }
 
         [HttpGet("{id:int}")]
         public IActionResult GetById(int id)
         {
-            // only admins can access other user records
-            var currentUser = (User)HttpContext.Items["User"];
+            // only for admins
+            User currentUser = (User)HttpContext.Items["User"];
             if (id != currentUser.Id && currentUser.Role != Role.Admin)
                 return Unauthorized(new { message = "Unauthorized" });
 
-            var user =  _userService.GetById(id);
+            User user = _userService.GetById(id);
             return Ok(user);
         }
     }

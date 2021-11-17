@@ -14,7 +14,7 @@ namespace ProgrammingQuotesApi.Controllers
     [Consumes(MediaTypeNames.Application.Json)]
     public class QuotesController : ControllerBase
     {
-        public QuotesController() {}
+        public QuotesController() { }
 
         /// <summary>
         /// Returns a list of quotes
@@ -22,7 +22,7 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpGet]
         public ActionResult<List<Quote>> GetQuotes([FromQuery] int count = 0)
         {
-            var quotes = QuotesService.GetQuotes(count);
+            List<Quote> quotes = QuotesService.GetQuotes(count);
             return Ok(quotes);
         }
 
@@ -36,10 +36,7 @@ namespace ProgrammingQuotesApi.Controllers
         {
             Quote quote = QuotesService.Get(id);
 
-            if (quote == null)
-                return NotFound();
-
-            return Ok(quote);
+            return quote == null ? NotFound() : Ok(quote);
         }
 
         /// <summary>
@@ -61,7 +58,7 @@ namespace ProgrammingQuotesApi.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult Create([FromBody] Quote quote)
-        {            
+        {
             QuotesService.Add(quote);
             return CreatedAtRoute("Get", new { id = quote.Id }, quote);
         }
@@ -86,7 +83,7 @@ namespace ProgrammingQuotesApi.Controllers
             if (existingQuote is null)
                 return NotFound();
 
-            QuotesService.Update(quote);           
+            QuotesService.Update(quote);
 
             return NoContent();
         }
@@ -106,7 +103,7 @@ namespace ProgrammingQuotesApi.Controllers
 
             return NoContent();
         }
-    
+
         /// <summary>
         /// Delete an existing quote by id
         /// </summary>

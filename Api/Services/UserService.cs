@@ -27,25 +27,23 @@ namespace ProgrammingQuotesApi.Services
             _context = context;
             _jwtUtils = jwtUtils;
 
-            // add dummy data
-            List<User> testUsers = new()
+            List<User> dummyUsers = new()
             {
                 new User { Id = 1, FirstName = "Dylan", LastName = "Dog", Username = "admin", PasswordHash = BCryptNet.HashPassword("admin"), Role = Role.Admin },
                 new User { Id = 2, FirstName = "Groucho", LastName = "Marx", Username = "user", PasswordHash = BCryptNet.HashPassword("user"), Role = Role.User }
             };
-            _context.Users.AddRange(testUsers);
+            _context.Users.AddRange(dummyUsers);
             _context.SaveChanges();
         }
 
-
         public AuthenticateResponse Authenticate(AuthenticateRequest req)
         {
-            var user = _context.Users.SingleOrDefault(x => x.Username == req.Username);
+            User user = _context.Users.SingleOrDefault(x => x.Username == req.Username);
 
             if (user == null || !BCryptNet.Verify(req.Password, user.PasswordHash))
                 throw new AppException("Username or password is incorrect");
 
-            var jwtToken = _jwtUtils.GenerateJwtToken(user);
+            string jwtToken = _jwtUtils.GenerateJwtToken(user);
             return new AuthenticateResponse(user, jwtToken);
         }
 
@@ -54,11 +52,10 @@ namespace ProgrammingQuotesApi.Services
             return _context.Users;
         }
 
-        public User GetById(int id) 
+        public User GetById(int id)
         {
-            var user = _context.Users.Find(id);
-            if (user == null) throw new KeyNotFoundException("User not found");
-            return user;
+            User user = _context.Users.Find(id);
+            return user ?? throw new KeyNotFoundException("User not found");
         }
     }
 }

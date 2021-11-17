@@ -11,7 +11,7 @@ namespace ProgrammingQuotesApi.Controllers
     [Produces(MediaTypeNames.Application.Json)]
     public class AuthorsController : ControllerBase
     {
-        public AuthorsController() {}
+        public AuthorsController() { }
 
         /// <summary>
         /// Returns a list of authors
@@ -19,7 +19,7 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpGet]
         public ActionResult<Dictionary<string, Author>> GetAuthors()
         {
-            var authors = AuthorsService.GetAuthors();
+            Dictionary<string, Author> authors = AuthorsService.GetAuthors();
             return Ok(authors);
         }
 
