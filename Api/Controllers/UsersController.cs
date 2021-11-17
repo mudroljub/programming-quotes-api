@@ -31,10 +31,10 @@ namespace ProgrammingQuotesApi.Controllers
         /// </remarks>
         [AllowAnonymous]
         [HttpPost("[action]")]
-        public IActionResult Authenticate(LoginRequest req)
+        public IActionResult Authenticate(AuthRequest req)
         {
-            UserDetail response = _userService.Authenticate(req);
-            return Ok(response);
+            UserDetail userDetail = _userService.Authenticate(req);
+            return Ok(userDetail);
         }
 
         [CustomAuthorize(Role.Admin)]

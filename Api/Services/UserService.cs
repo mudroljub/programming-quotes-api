@@ -10,7 +10,7 @@ namespace ProgrammingQuotesApi.Services
 {
     public interface IUserService
     {
-        UserDetail Authenticate(LoginRequest req);
+        UserDetail Authenticate(AuthRequest req);
         IEnumerable<User> GetAll();
         User GetById(int id);
     }
@@ -36,7 +36,7 @@ namespace ProgrammingQuotesApi.Services
             _context.SaveChanges();
         }
 
-        public UserDetail Authenticate(LoginRequest req)
+        public UserDetail Authenticate(AuthRequest req)
         {
             User user = _context.Users.SingleOrDefault(x => x.Username == req.Username);
 
