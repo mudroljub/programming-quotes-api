@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace ProgrammingQuotesApi.Entities
+namespace ProgrammingQuotesApi.Models
 {
     public class User
     {

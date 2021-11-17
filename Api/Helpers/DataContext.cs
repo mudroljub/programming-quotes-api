@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using ProgrammingQuotesApi.Entities;
+using ProgrammingQuotesApi.Models;
 
 namespace ProgrammingQuotesApi.Helpers
 {

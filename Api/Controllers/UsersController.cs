@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ProgrammingQuotesApi.Entities;
 using ProgrammingQuotesApi.Models;
 using ProgrammingQuotesApi.Services;
 using ProgrammingQuotesApi.Authorization;

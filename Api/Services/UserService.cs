@@ -1,11 +1,9 @@
 using BCryptNet = BCrypt.Net.BCrypt;
-using System.Collections.Generic;
-using System.Linq;
 using ProgrammingQuotesApi.Authorization;
-using ProgrammingQuotesApi.Entities;
 using ProgrammingQuotesApi.Helpers;
 using ProgrammingQuotesApi.Models;
-using System.IdentityModel;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ProgrammingQuotesApi.Services
 {

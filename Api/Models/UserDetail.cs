@@ -1,5 +1,3 @@
-using ProgrammingQuotesApi.Entities;
-
 namespace ProgrammingQuotesApi.Models
 {
     public class UserDetail : User

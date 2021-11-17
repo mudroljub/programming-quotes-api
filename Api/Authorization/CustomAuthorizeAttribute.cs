@@ -1,11 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using System;
+using Microsoft.AspNetCore.Mvc;
+using ProgrammingQuotesApi.Models;
 using System.Collections.Generic;
 using System.Linq;
-using ProgrammingQuotesApi.Entities;
-using Microsoft.AspNetCore.Authorization;
+using System;
 
 namespace ProgrammingQuotesApi.Authorization
 {
