@@ -19,6 +19,15 @@ namespace ProgrammingQuotesApi.Controllers
             _userService = userService;
         }
 
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     {
+        ///        "username": "admin",
+        ///        "password": admin
+        ///     }
+        ///
+        /// </remarks>
         [AllowAnonymous]
         [HttpPost("[action]")]
         public IActionResult Authenticate(AuthenticateRequest req)
