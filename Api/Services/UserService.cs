@@ -5,6 +5,7 @@ using ProgrammingQuotesApi.Authorization;
 using ProgrammingQuotesApi.Entities;
 using ProgrammingQuotesApi.Helpers;
 using ProgrammingQuotesApi.Models;
+using System.IdentityModel;
 
 namespace ProgrammingQuotesApi.Services
 {
@@ -32,7 +33,7 @@ namespace ProgrammingQuotesApi.Services
             User user = _context.Users.SingleOrDefault(x => x.Username == req.Username);
 
             if (user == null || !BCryptNet.Verify(req.Password, user.PasswordHash))
-                throw new AppException("Username or password is incorrect");
+                return null;
 
             string jwtToken = _jwtUtils.GenerateJwtToken(user);
             return new UserDetail(user, jwtToken);

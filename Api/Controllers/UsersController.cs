@@ -34,7 +34,7 @@ namespace ProgrammingQuotesApi.Controllers
         public IActionResult Authenticate(AuthRequest req)
         {
             UserDetail userDetail = _userService.Authenticate(req);
-            return Ok(userDetail);
+            return userDetail == null ? Unauthorized() : Ok(userDetail); // 403
         }
 
         [CustomAuthorize("Admin")]
