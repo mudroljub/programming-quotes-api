@@ -21,9 +21,12 @@ namespace ProgrammingQuotesApi.Authorization
 
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            // skip authorization if [AllowAnonymous] attribute
+            // skip authorization if AllowAnonymous
             bool allowAnonymous = context.ActionDescriptor.EndpointMetadata.OfType<AllowAnonymousAttribute>().Any();
-            if (allowAnonymous) return;
+            if (allowAnonymous)
+            {
+                return;
+            }
 
             User user = (User)context.HttpContext.Items["User"];
             // if not logged in or role not authorized
