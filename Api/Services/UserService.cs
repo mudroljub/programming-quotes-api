@@ -49,5 +49,11 @@ namespace ProgrammingQuotesApi.Services
             User user = _context.Users.Find(id);
             return user ?? throw new KeyNotFoundException("User not found");
         }
+
+        public void Add(User user)
+        {
+            _context.Users.AddRange(user);
+            _context.SaveChanges();
+        }
     }
 }
