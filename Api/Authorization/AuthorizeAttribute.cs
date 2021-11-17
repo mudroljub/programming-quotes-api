@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ProgrammingQuotesApi.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ProgrammingQuotesApi.Authorization
 {

@@ -1,9 +1,10 @@
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ProgrammingQuotesApi.Authorization;
 using ProgrammingQuotesApi.Entities;
 using ProgrammingQuotesApi.Models.Users;
 using ProgrammingQuotesApi.Services;
+using AuthorizeAttribute = ProgrammingQuotesApi.Authorization.AuthorizeAttribute;
 
 namespace ProgrammingQuotesApi.Controllers
 {
@@ -24,7 +25,7 @@ namespace ProgrammingQuotesApi.Controllers
         ///
         ///     {
         ///        "username": "admin",
-        ///        "password": admin
+        ///        "password": "admin"
         ///     }
         ///
         /// </remarks>

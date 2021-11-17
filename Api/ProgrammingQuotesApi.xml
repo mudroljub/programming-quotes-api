@@ -72,7 +72,7 @@
             
                  {
                     "username": "admin",
-                    "password": admin
+                    "password": "admin"
                  }
             
              </remarks>
