@@ -42,6 +42,7 @@ Tutorials:
 
 ## TODO
 
+- implementirati Authorize
+  https://medium.com/@marcosvinicios_net/asp-net-core-3-authorization-and-authentication-with-bearer-and-jwt-3041c47c8b1d
 - add CRUD for User (add, delete, modify)
 - add Entities and DbContext for Quotes 
-- remove custom authorize

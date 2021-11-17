@@ -10,12 +10,10 @@ namespace ProgrammingQuotesApi.Services
     public class UserService
     {
         private readonly DataContext _context;
-        private readonly JwtUtils _jwtUtils;
 
-        public UserService(DataContext context, JwtUtils jwtUtils)
+        public UserService(DataContext context)
         {
             _context = context;
-            _jwtUtils = jwtUtils;
 
             List<User> dummyUsers = new()
             {
@@ -26,16 +24,16 @@ namespace ProgrammingQuotesApi.Services
             _context.SaveChanges();
         }
 
-        public UserDetail Authenticate(AuthRequest req)
-        {
-            User user = _context.Users.SingleOrDefault(x => x.Username == req.Username);
+        // public UserDetail Authenticate(AuthRequest req)
+        // {
+        //     User user = _context.Users.SingleOrDefault(x => x.Username == req.Username);
 
-            if (user == null || !BCryptNet.Verify(req.Password, user.PasswordHash))
-                return null;
+        //     if (user == null || !BCryptNet.Verify(req.Password, user.PasswordHash))
+        //         return null;
 
-            string jwtToken = _jwtUtils.GenerateJwtToken(user);
-            return new UserDetail(user, jwtToken);
-        }
+        //     string jwtToken = _jwtUtils.GenerateJwtToken(user);
+        //     return new UserDetail(user, jwtToken);
+        // }
 
         public IEnumerable<User> GetAll()
         {

@@ -9,6 +9,8 @@ using System;
 using ProgrammingQuotesApi.Authorization;
 using ProgrammingQuotesApi.Helpers;
 using ProgrammingQuotesApi.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace ProgrammingQuotesApi
 {
@@ -48,8 +50,26 @@ namespace ProgrammingQuotesApi
             }).AddSwaggerGenNewtonsoftSupport();
 
             // Dependency injection
-            services.AddScoped<JwtUtils>();
             services.AddScoped<UserService>();
+
+            // authentication
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Settings.Secret),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
         }
 
         // called by the runtime. use to configure HTTP request pipeline.
@@ -79,9 +99,7 @@ namespace ProgrammingQuotesApi
                 .AllowAnyMethod()
                 .AllowAnyHeader());
 
-            // custom jwt auth middleware
-            app.UseMiddleware<JwtMiddleware>();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
