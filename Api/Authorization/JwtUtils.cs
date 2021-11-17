@@ -1,12 +1,10 @@
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using System;
+using ProgrammingQuotesApi.Entities;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using ProgrammingQuotesApi.Entities;
-using ProgrammingQuotesApi.Helpers;
+using System;
 
 namespace ProgrammingQuotesApi.Authorization
 {
@@ -18,18 +16,16 @@ namespace ProgrammingQuotesApi.Authorization
 
     public class JwtUtils : IJwtUtils
     {
-        private readonly AppSettings _appSettings;
+        private readonly string _secret = "BILO ŠTA SAMO DA NIJE PREKRATKO";
 
-        public JwtUtils(IOptions<AppSettings> appSettings)
-        {
-            _appSettings = appSettings.Value;
-        }
+        public JwtUtils()
+        { }
 
         public string GenerateJwtToken(User user)
         {
             int validDays = 7;
             JwtSecurityTokenHandler tokenHandler = new();
-            byte[] key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            byte[] key = Encoding.ASCII.GetBytes(_secret);
             SecurityTokenDescriptor tokenDescriptor = new()
             {
                 Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()) }),
@@ -48,7 +44,7 @@ namespace ProgrammingQuotesApi.Authorization
             }
 
             JwtSecurityTokenHandler tokenHandler = new();
-            byte[] key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            byte[] key = Encoding.ASCII.GetBytes(_secret);
             try
             {
                 tokenHandler.ValidateToken(token, new TokenValidationParameters

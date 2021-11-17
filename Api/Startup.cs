@@ -47,9 +47,6 @@ namespace ProgrammingQuotesApi
                 c.IncludeXmlComments(xmlPath);
             }).AddSwaggerGenNewtonsoftSupport();
 
-            // configure strongly typed settings object
-            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
-
             // configure DI for application services
             services.AddScoped<IJwtUtils, JwtUtils>();
             services.AddScoped<IUserService, UserService>();
