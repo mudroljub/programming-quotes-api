@@ -1,29 +1,13 @@
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProgrammingQuotesApi.Models;
 using ProgrammingQuotesApi.Services;
-using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
 
 namespace ProgrammingQuotesApi.Controllers
 {
-    // TODO: move to UserService
-    public static class UserRepository
-    {
-        public static User Get(string username, string password)
-        {
-            List<User> users = new List<User>
-            {
-                new User { Id = 1, Username = "goku", Password = "goku", Role = "manager" },
-                new User { Id = 2, Username = "vejeta", Password = "vejeta", Role = "employee" },
-                new User { Id = 3, Username = "kuririn", Password = "kuririn", Role = "tester" }
-            };
-            return users.Where(x => x.Username.ToLower() == username.ToLower() && x.Password == password).FirstOrDefault();
-        }
-    }
-
     [Authorize]
     [ApiController]
     [Route("[controller]")]
@@ -36,7 +20,6 @@ namespace ProgrammingQuotesApi.Controllers
             _userService = userService;
         }
 
-/*
         /// <remarks>
         /// Sample request:
         ///
@@ -46,27 +29,19 @@ namespace ProgrammingQuotesApi.Controllers
         ///     }
         ///
         /// </remarks>
-        [AllowAnonymous]
-        [HttpPost("[action]")]
-        public IActionResult Authenticate(AuthRequest req)
-        {
-            UserDetail userDetail = _userService.Authenticate(req);
-            return userDetail == null ? Unauthorized() : Ok(userDetail); // 403
-        }
-*/
-
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public async Task<ActionResult<dynamic>> Authenticate([FromBody] AuthRequest model)
+        // public IActionResult Authenticate(AuthRequest req)
+        public async Task<ActionResult<dynamic>> Authenticate([FromBody] AuthRequest req)
         {
-            User user = UserRepository.Get(model.Username, model.Password);
+            User user = _userService.Login(req.Username, req.Password);
 
             if (user == null)
-                return NotFound(new { message = "User or password invalid" });
+                return NotFound(new { message = "User or password invalid" }); // Unauthorized
 
             string token = TokenService.CreateToken(user);
-            user.Password = "";
+            user.Password = ""; // TODO: hide password field
             return new
             {
                 user,
@@ -95,7 +70,7 @@ namespace ProgrammingQuotesApi.Controllers
 
         [HttpGet]
         [Route("tester")]
-        [Authorize(Roles = "tester")]
+        [Authorize(Roles = "Tester")]
         public string Tester()
         {
             return "Hello Tester";
@@ -103,12 +78,12 @@ namespace ProgrammingQuotesApi.Controllers
 
         [HttpGet]
         [Route("employee")]
-        [Authorize(Roles = "employee,manager")]
+        [Authorize(Roles = "Employee,Manager")]
         public string Employee() => "Hello Employee";
 
         [HttpGet]
         [Route("manager")]
-        [Authorize(Roles = "manager")]
+        [Authorize(Roles = "Manager")]
         public string Manager() => "Hello Manager";
 
     }

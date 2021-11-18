@@ -1,5 +1,4 @@
 using BCryptNet = BCrypt.Net.BCrypt;
-using ProgrammingQuotesApi.Authorization;
 using ProgrammingQuotesApi.Helpers;
 using ProgrammingQuotesApi.Models;
 using System.Collections.Generic;
@@ -14,27 +13,54 @@ namespace ProgrammingQuotesApi.Services
         public UserService(DataContext context)
         {
             _context = context;
-            _context.Database.EnsureDeleted(); // delete in memory database on start
-
             List<User> dummyUsers = new()
             {
-                new User { Id = 1, FirstName = "Dylan", LastName = "Dog", Username = "admin", PasswordHash = BCryptNet.HashPassword("admin"), Role = "Admin" },
-                new User { Id = 2, FirstName = "Groucho", LastName = "Marx", Username = "user", PasswordHash = BCryptNet.HashPassword("user"), Role = "User" }
+                new User
+                {
+                    Id = 1,
+                    Username = "admin",
+                    Password = "admin",
+                    PasswordHash = BCryptNet.HashPassword("admin"),
+                    Role = "Admin"
+                },
+                new User
+                {
+                    Id = 2,
+                    Username = "user",
+                    Password = "user",
+                    PasswordHash = BCryptNet.HashPassword("user"),
+                    Role = "User"
+                },
+                new User
+                {
+                    Id = 3,
+                    Username = "goku",
+                    Password = "goku",
+                    Role = "Manager"
+                },
+                new User
+                {
+                    Id = 4,
+                    Username = "vejeta",
+                    Password = "vejeta",
+                    Role = "Employee"
+                },
+                new User
+                {
+                    Id = 5,
+                    Username = "kuririn",
+                    Password = "kuririn",
+                    Role = "Tester"
+                }
             };
             _context.Users.AddRange(dummyUsers);
             _context.SaveChanges();
         }
 
-        // public UserDetail Authenticate(AuthRequest req)
-        // {
-        //     User user = _context.Users.SingleOrDefault(x => x.Username == req.Username);
-
-        //     if (user == null || !BCryptNet.Verify(req.Password, user.PasswordHash))
-        //         return null;
-
-        //     string jwtToken = _jwtUtils.GenerateJwtToken(user);
-        //     return new UserDetail(user, jwtToken);
-        // }
+        public User Login(string username, string password)
+        {
+            return _context.Users.Where(x => x.Username.ToLower() == username.ToLower() && x.Password == password).FirstOrDefault();
+        }
 
         public IEnumerable<User> GetAll()
         {
