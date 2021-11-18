@@ -13,12 +13,15 @@ namespace ProgrammingQuotesApi.Services
         public UserService(DataContext context)
         {
             _context = context;
+            _context.Database.EnsureDeleted();
             List<User> dummyUsers = new()
             {
                 new User
                 {
                     Id = 1,
                     Username = "admin",
+                    FirstName = "Admin",
+                    LastName = "Adminowsky",
                     Password = BCryptNet.HashPassword("admin"),
                     Role = "Admin"
                 },
@@ -34,14 +37,7 @@ namespace ProgrammingQuotesApi.Services
                     Id = 3,
                     Username = "goku",
                     Password = BCryptNet.HashPassword("goku"),
-                    Role = "Manager"
-                },
-                new User
-                {
-                    Id = 4,
-                    Username = "vejeta",
-                    Password = BCryptNet.HashPassword("vejeta"),
-                    Role = "Employee"
+                    Role = "Editor"
                 },
             };
             _context.Users.AddRange(dummyUsers);

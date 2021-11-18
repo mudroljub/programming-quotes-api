@@ -4,7 +4,6 @@ using ProgrammingQuotesApi.Models;
 using ProgrammingQuotesApi.Services;
 using System.Collections.Generic;
 using System;
-using Microsoft.AspNetCore.Http;
 
 namespace ProgrammingQuotesApi.Controllers
 {
@@ -54,7 +53,7 @@ namespace ProgrammingQuotesApi.Controllers
             return Ok(users);
         }
 
-        [HttpGet("{id:int}")]
+        [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
             User user = _userService.GetById(id);
@@ -62,27 +61,13 @@ namespace ProgrammingQuotesApi.Controllers
         }
 
         [HttpGet]
-        [Route("authenticated")]
-        [Authorize]
-        public string Authenticated() => String.Format("Your name is: {0}", User.Identity.Name);
+        [Route("me")]
+        public string Authenticated() => String.Format("Your username is: {0}", User.Identity.Name);
 
         [HttpGet]
-        [Route("tester")]
-        [Authorize(Roles = "Tester")]
-        public string Tester()
-        {
-            return "Hello Tester";
-        }
-
-        [HttpGet]
-        [Route("employee")]
-        [Authorize(Roles = "Employee,Manager")]
-        public string Employee() => "Hello Employee";
-
-        [HttpGet]
-        [Route("manager")]
-        [Authorize(Roles = "Manager")]
-        public string Manager() => "Hello Manager";
+        [Route("dashboard")]
+        [Authorize(Roles = "Admin,Editor")]
+        public string Admin() => "Admin Dashboard. Only for Admins and Editors here";
 
     }
 }

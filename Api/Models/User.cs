@@ -16,7 +16,7 @@ namespace ProgrammingQuotesApi.Models
         public string LastName { get; set; }
         [Required]
         public string Username { get; set; }
-        // [DefaultValue("User")] // not working
+        [DefaultValue("User")] // not working
         public string Role { get; set; }
         [Required]
         [IgnoreDataMember]

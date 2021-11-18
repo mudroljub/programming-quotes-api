@@ -9,7 +9,7 @@ namespace ProgrammingQuotesApi.Services
 {
     public static class TokenService
     {
-        private const double EXPIRE_HOURS = 1.0;
+        private const double EXPIRE_DAYS = 7;
         public static string CreateToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -20,7 +20,7 @@ namespace ProgrammingQuotesApi.Services
                     new Claim(ClaimTypes.Name, user.Username.ToString()),
                     new Claim(ClaimTypes.Role, user.Role.ToString())
                 }),
-                Expires = DateTime.UtcNow.AddHours(EXPIRE_HOURS),
+                Expires = DateTime.UtcNow.AddDays(EXPIRE_DAYS),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Settings.Secret), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(descriptor);
