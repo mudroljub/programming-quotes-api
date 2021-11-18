@@ -13,34 +13,6 @@ namespace ProgrammingQuotesApi.Services
         public UserService(DataContext context)
         {
             _context = context;
-            List<User> dummyData = new()
-            {
-                new User
-                {
-                    Username = "admin",
-                    FirstName = "Admin",
-                    LastName = "Adminowsky",
-                    Password = BCryptNet.HashPassword("admin"),
-                    Role = "Admin"
-                },
-                new User
-                {
-                    Username = "daman",
-                    Password = BCryptNet.HashPassword("daman"),
-                    Role = "User"
-                },
-                new User
-                {
-                    Username = "goku",
-                    Password = BCryptNet.HashPassword("goku"),
-                    Role = "Editor"
-                },
-            };
-            if (!_context.Users.Any())
-            {
-                _context.Users.AddRange(dummyData);
-                _context.SaveChanges();
-            }
         }
 
         private static bool VerifyPassword(string password, string hash)
