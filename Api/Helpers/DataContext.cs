@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using ProgrammingQuotesApi.Models;
-using BCryptNet = BCrypt.Net.BCrypt;
 
 namespace ProgrammingQuotesApi.Helpers
 {
@@ -10,37 +11,37 @@ namespace ProgrammingQuotesApi.Helpers
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Quote> Quotes { get; set; }
+        private readonly JsonSerializerOptions JsonOptions = new()
+        {
+            PropertyNameCaseInsensitive = true
+        };
 
         public DataContext()
         {
-            List<User> dummyData = new()
-            {
-                new User
-                {
-                    Username = "admin",
-                    FirstName = "Admin",
-                    LastName = "Adminowsky",
-                    Password = BCryptNet.HashPassword("admin"),
-                    Role = "Admin"
-                },
-                new User
-                {
-                    Username = "daman",
-                    Password = BCryptNet.HashPassword("daman"),
-                    Role = "User"
-                },
-                new User
-                {
-                    Username = "goku",
-                    Password = BCryptNet.HashPassword("goku"),
-                    Role = "Editor"
-                },
-            };
-            if (!Users.Any())
-            {
-                Users.AddRange(dummyData);
-                SaveChanges();
-            }
+            InitQuotes();
+            InitUsers();
+        }
+
+        private void InitQuotes()
+        {
+            if (Quotes.Any()) return;
+
+            string fileContent = File.ReadAllText("Data/quotes.json");
+            List<Quote> quotes = JsonSerializer.Deserialize<List<Quote>>(fileContent, JsonOptions);
+
+            Quotes.AddRange(quotes);
+            SaveChanges();
+        }
+
+        private void InitUsers()
+        {
+            if (Users.Any()) return;
+
+            string fileContent = File.ReadAllText("Data/users.json");
+            List<User> users = JsonSerializer.Deserialize<List<User>>(fileContent, JsonOptions);
+
+            Users.AddRange(users);
+            SaveChanges();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

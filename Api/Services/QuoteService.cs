@@ -2,9 +2,7 @@ using MongoDB.Bson;
 using ProgrammingQuotesApi.Helpers;
 using ProgrammingQuotesApi.Models;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text.Json;
 using System;
 
 namespace ProgrammingQuotesApi.Services
@@ -16,14 +14,6 @@ namespace ProgrammingQuotesApi.Services
         public QuoteService(DataContext context)
         {
             _context = context;
-            JsonSerializerOptions options = new() { PropertyNameCaseInsensitive = true };
-            string fileContent = File.ReadAllText("Data/quotes.json");
-            List<Quote> quotes = JsonSerializer.Deserialize<List<Quote>>(fileContent, options);
-            if (!_context.Quotes.Any())
-            {
-                _context.Quotes.AddRange(quotes);
-                _context.SaveChanges();
-            }
         }
 
         public IEnumerable<Quote> GetAll(int count = 0)
