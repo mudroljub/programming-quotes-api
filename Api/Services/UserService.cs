@@ -57,7 +57,7 @@ namespace ProgrammingQuotesApi.Services
             _context.SaveChanges();
         }
 
-        public User Login(string username, string password)
+        public User Authenticate(string username, string password)
         {
             return _context.Users.Where(x => x.Username.ToLower() == username.ToLower() && x.Password == password).FirstOrDefault();
         }

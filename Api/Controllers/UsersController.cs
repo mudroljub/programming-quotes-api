@@ -35,7 +35,7 @@ namespace ProgrammingQuotesApi.Controllers
         // public IActionResult Authenticate(AuthRequest req)
         public async Task<ActionResult<dynamic>> Authenticate([FromBody] AuthRequest req)
         {
-            User user = _userService.Login(req.Username, req.Password);
+            User user = _userService.Authenticate(req.Username, req.Password);
 
             if (user == null)
                 return NotFound(new { message = "User or password invalid" }); // Unauthorized
