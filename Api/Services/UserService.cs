@@ -19,37 +19,35 @@ namespace ProgrammingQuotesApi.Services
                 {
                     Id = 1,
                     Username = "admin",
-                    Password = "admin",
-                    PasswordHash = BCryptNet.HashPassword("admin"),
+                    Password = BCryptNet.HashPassword("admin"),
                     Role = "Admin"
                 },
                 new User
                 {
                     Id = 2,
                     Username = "user",
-                    Password = "user",
-                    PasswordHash = BCryptNet.HashPassword("user"),
+                    Password = BCryptNet.HashPassword("user"),
                     Role = "User"
                 },
                 new User
                 {
                     Id = 3,
                     Username = "goku",
-                    Password = "goku",
+                    Password = BCryptNet.HashPassword("goku"),
                     Role = "Manager"
                 },
                 new User
                 {
                     Id = 4,
                     Username = "vejeta",
-                    Password = "vejeta",
+                    Password = BCryptNet.HashPassword("vejeta"),
                     Role = "Employee"
                 },
                 new User
                 {
                     Id = 5,
                     Username = "kuririn",
-                    Password = "kuririn",
+                    Password = BCryptNet.HashPassword("kuririn"),
                     Role = "Tester"
                 }
             };
@@ -57,9 +55,14 @@ namespace ProgrammingQuotesApi.Services
             _context.SaveChanges();
         }
 
+        private static bool VerifyPassword(string password, string hash)
+        {
+            return BCryptNet.Verify(password, hash);
+        }
+
         public User Authenticate(string username, string password)
         {
-            return _context.Users.FirstOrDefault(x => x.Username.ToLower() == username.ToLower() && x.Password == password);
+            return _context.Users.FirstOrDefault(x => x.Username.ToLower() == username.ToLower() && VerifyPassword(password, x.Password));
         }
 
         public IEnumerable<User> GetAll()

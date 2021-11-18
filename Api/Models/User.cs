@@ -21,7 +21,5 @@ namespace ProgrammingQuotesApi.Models
         [Required]
         [IgnoreDataMember]
         public string Password { get; set; }
-        [IgnoreDataMember]
-        public string PasswordHash { get; set; }
     }
 }
