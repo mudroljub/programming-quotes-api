@@ -13,12 +13,11 @@ namespace ProgrammingQuotesApi.Services
         public UserService(DataContext context)
         {
             _context = context;
-            _context.Database.EnsureDeleted();
-            List<User> dummyUsers = new()
+            // _context.Database.EnsureDeleted();
+            List<User> dummyData = new()
             {
                 new User
                 {
-                    Id = 1,
                     Username = "admin",
                     FirstName = "Admin",
                     LastName = "Adminowsky",
@@ -27,21 +26,22 @@ namespace ProgrammingQuotesApi.Services
                 },
                 new User
                 {
-                    Id = 2,
-                    Username = "user",
-                    Password = BCryptNet.HashPassword("user"),
+                    Username = "daman",
+                    Password = BCryptNet.HashPassword("daman"),
                     Role = "User"
                 },
                 new User
                 {
-                    Id = 3,
                     Username = "goku",
                     Password = BCryptNet.HashPassword("goku"),
                     Role = "Editor"
                 },
             };
-            _context.Users.AddRange(dummyUsers);
-            _context.SaveChanges();
+            if (!_context.Users.Any())
+            {
+                _context.Users.AddRange(dummyData);
+                _context.SaveChanges();
+            }
         }
 
         private static bool VerifyPassword(string password, string hash)

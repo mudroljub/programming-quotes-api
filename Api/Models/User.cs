@@ -7,15 +7,16 @@ namespace ProgrammingQuotesApi.Models
 {
     public class User
     {
+        // [Key]
+        // [Required]
+        // public int Id { get; set; }
         [Key]
         [Required]
-        public int Id { get; set; }
+        public string Username { get; set; }
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string FirstName { get; set; }
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string LastName { get; set; }
-        [Required]
-        public string Username { get; set; }
         [DefaultValue("User")] // not working
         public string Role { get; set; }
         [Required]
