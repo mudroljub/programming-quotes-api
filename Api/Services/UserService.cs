@@ -59,7 +59,7 @@ namespace ProgrammingQuotesApi.Services
 
         public User Authenticate(string username, string password)
         {
-            return _context.Users.Where(x => x.Username.ToLower() == username.ToLower() && x.Password == password).FirstOrDefault();
+            return _context.Users.FirstOrDefault(x => x.Username.ToLower() == username.ToLower() && x.Password == password);
         }
 
         public IEnumerable<User> GetAll()

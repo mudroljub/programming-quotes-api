@@ -66,5 +66,16 @@
             Delete an existing quote by id
             </summary>
         </member>
+        <member name="M:ProgrammingQuotesApi.Controllers.UsersController.Authenticate(ProgrammingQuotesApi.Models.AuthRequest)">
+             <remarks>
+             Sample request:
+            
+                 {
+                    "username": "admin",
+                    "password": "admin"
+                 }
+            
+             </remarks>
+        </member>
     </members>
 </doc>

@@ -28,7 +28,6 @@ namespace ProgrammingQuotesApi
         {
             services.AddDbContext<DataContext>();
             services.AddCors();
-
             services.AddControllers().AddNewtonsoftJson();
             services.AddSwaggerGen(c =>
             {
