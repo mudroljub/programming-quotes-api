@@ -14,6 +14,7 @@ namespace ProgrammingQuotesApi.Services
         public UserService(DataContext context)
         {
             _context = context;
+            _context.Database.EnsureDeleted(); // delete in memory database on start
 
             List<User> dummyUsers = new()
             {
