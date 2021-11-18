@@ -11,30 +11,26 @@ namespace ProgrammingQuotesApi.Services
 {
     public class QuoteService
     {
-        List<Quote> Quotes { get; }
         private readonly DataContext _context;
 
         public QuoteService(DataContext context)
         {
             _context = context;
-            JsonSerializerOptions options = new()
-            {
-                PropertyNameCaseInsensitive = true
-            };
+            JsonSerializerOptions options = new() { PropertyNameCaseInsensitive = true };
             string fileContent = File.ReadAllText("Data/quotes.json");
-            Quotes = JsonSerializer.Deserialize<List<Quote>>(fileContent, options);
+            List<Quote> quotes = JsonSerializer.Deserialize<List<Quote>>(fileContent, options);
             if (!_context.Quotes.Any())
             {
-                _context.Quotes.AddRange(Quotes);
+                _context.Quotes.AddRange(quotes);
                 _context.SaveChanges();
             }
         }
 
         public IEnumerable<Quote> GetAll(int count = 0)
         {
-            if (count <= 0 || count > _context.Quotes.Count()) return _context.Quotes;
-
-            return _context.Quotes.Take(count);
+            return (count > 0 && count <= _context.Quotes.Count())
+            ? _context.Quotes.Take(count)
+            : _context.Quotes;
         }
 
         public Quote GetById(string id) => _context.Quotes.FirstOrDefault(p => p.Id == id);
