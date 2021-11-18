@@ -11,13 +11,14 @@ namespace ProgrammingQuotesApi.Models
         [MaxLength(50)]
         public string Name { get; set; }
         
-        [Required]
-        public int QuoteCount { get; set; }
-        
         [Url]
         public string WikiUrl { get; set; }
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public IEnumerable<Quote> Quotes { get; set; }
+
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]        
+        public int QuoteCount { get; set; }
+
     }
 }

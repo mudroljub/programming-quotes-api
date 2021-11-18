@@ -1,5 +1,6 @@
 using ProgrammingQuotesApi.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ProgrammingQuotesApi.Services
 {
@@ -36,7 +37,7 @@ namespace ProgrammingQuotesApi.Services
             {
                 Name = author,
                 WikiUrl = $"https://en.wikipedia.org/wiki/{author}",
-                // QuoteCount = authorQuotes.Count(),
+                QuoteCount = authorQuotes.Count(),
                 Quotes = authorQuotes
             };
             return authorDetails;
