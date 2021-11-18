@@ -5,6 +5,7 @@ using ProgrammingQuotesApi.Services;
 using Microsoft.AspNetCore.JsonPatch;
 using System.Net.Mime;
 using Microsoft.AspNetCore.Http;
+using System.Linq;
 
 namespace ProgrammingQuotesApi.Controllers
 {
@@ -23,9 +24,9 @@ namespace ProgrammingQuotesApi.Controllers
         /// Returns a list of quotes
         /// </summary>
         [HttpGet]
-        public ActionResult<List<Quote>> GetAll([FromQuery] int count = 0)
+        public ActionResult<IEnumerable<Quote>> GetAll([FromQuery] int count = 0)
         {
-            List<Quote> quotes = _quoteService.GetAll(count);
+            IEnumerable<Quote> quotes = _quoteService.GetAll(count);
             return Ok(quotes);
         }
 
@@ -52,7 +53,7 @@ namespace ProgrammingQuotesApi.Controllers
         /// Returns total number of quotes
         /// </summary>
         [HttpGet("count")]
-        public ActionResult<int> GetCount() => Ok(_quoteService.GetAll().Count);
+        public ActionResult<int> GetCount() => Ok(_quoteService.GetAll().Count());
 
         /// <summary>
         /// Create new quote

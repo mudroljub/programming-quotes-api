@@ -13,7 +13,6 @@ namespace ProgrammingQuotesApi.Services
         public UserService(DataContext context)
         {
             _context = context;
-            // _context.Database.EnsureDeleted();
             List<User> dummyData = new()
             {
                 new User

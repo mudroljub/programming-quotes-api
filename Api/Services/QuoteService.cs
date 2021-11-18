@@ -5,28 +5,37 @@ using MongoDB.Bson;
 using System.Text.Json;
 using System.IO;
 using System;
+using ProgrammingQuotesApi.Helpers;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProgrammingQuotesApi.Services
 {
     public class QuoteService
     {
         List<Quote> Quotes { get; }
+        private readonly DataContext _context;
 
-        public QuoteService()
+        public QuoteService(DataContext context)
         {
-          var options = new JsonSerializerOptions
-          {
-              PropertyNameCaseInsensitive = true
-          };
-          string fileContent = File.ReadAllText("Data/quotes.json");
-          Quotes = JsonSerializer.Deserialize<List<Quote>>(fileContent, options);
+            _context = context;
+            JsonSerializerOptions options = new()
+            {
+                PropertyNameCaseInsensitive = true
+            };
+            string fileContent = File.ReadAllText("Data/quotes.json");
+            Quotes = JsonSerializer.Deserialize<List<Quote>>(fileContent, options);
+            if (!_context.Quotes.Any())
+            {
+                _context.Quotes.AddRange(Quotes);
+                _context.SaveChanges();
+            }
         }
 
-        public List<Quote> GetAll(int count = 0)
+        public IEnumerable<Quote> GetAll(int count = 0)
         {
-            if (count <= 0 || count > Quotes.Count) return Quotes;
+            if (count <= 0 || count > _context.Quotes.Count()) return _context.Quotes;
 
-            return Quotes.GetRange(0, count);
+            return _context.Quotes.Take(count);
         }
 
         public Quote GetById(string id) => Quotes.FirstOrDefault(p => p.Id == id);
@@ -43,7 +52,7 @@ namespace ProgrammingQuotesApi.Services
 
         public void Delete(string id)
         {
-            var quote = GetById(id);
+            Quote quote = GetById(id);
             if (quote is null)
                 return;
 
@@ -52,8 +61,8 @@ namespace ProgrammingQuotesApi.Services
 
         public void Update(Quote quote)
         {
-            var index = Quotes.FindIndex(p => p.Id == quote.Id);
-            if(index == -1)
+            int index = Quotes.FindIndex(p => p.Id == quote.Id);
+            if (index == -1)
                 return;
 
             Quotes[index] = quote;
