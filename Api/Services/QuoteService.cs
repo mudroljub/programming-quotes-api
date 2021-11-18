@@ -47,7 +47,8 @@ namespace ProgrammingQuotesApi.Services
         public void Add(Quote quote)
         {
             quote.Id = ObjectId.GenerateNewId().ToString();
-            Quotes.Add(quote);
+            _context.Quotes.Add(quote);
+            _context.SaveChanges();
         }
 
         public void Delete(string id)
