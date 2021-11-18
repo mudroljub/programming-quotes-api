@@ -38,9 +38,9 @@ namespace ProgrammingQuotesApi.Services
             return _context.Quotes.Take(count);
         }
 
-        public Quote GetById(string id) => Quotes.FirstOrDefault(p => p.Id == id);
+        public Quote GetById(string id) => _context.Quotes.FirstOrDefault(p => p.Id == id);
 
-        public Quote GetRandom() => Quotes[new Random().Next(0, Quotes.Count)];
+        public Quote GetRandom() => _context.Quotes.ToList()[new Random().Next(0, _context.Quotes.Count())];
 
         public List<Quote> GetByAuthor(string author) => Quotes.Where(p => p.Author == author).ToList();
 
