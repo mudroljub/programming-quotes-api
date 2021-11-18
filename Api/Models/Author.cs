@@ -18,6 +18,6 @@ namespace ProgrammingQuotesApi.Models
         public string WikiUrl { get; set; }
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public List<Quote> Quotes { get; set; }
+        public IEnumerable<Quote> Quotes { get; set; }
     }
 }

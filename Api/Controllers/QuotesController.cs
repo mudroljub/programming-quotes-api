@@ -72,7 +72,7 @@ namespace ProgrammingQuotesApi.Controllers
         /// </summary>
         /// <param name="author">The name of the author from Wikipedia.</param>
         [HttpGet("author/{author}")]
-        public ActionResult<List<Quote>> GetQuotesByAuthor(string author) => _quoteService.GetByAuthor(author);
+        public IEnumerable<Quote> GetQuotesByAuthor(string author) => _quoteService.GetByAuthor(author);
 
         /// <summary>
         /// Replace an existing quote with a new one
