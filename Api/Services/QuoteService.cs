@@ -6,7 +6,6 @@ using System.Text.Json;
 using System.IO;
 using System;
 using ProgrammingQuotesApi.Helpers;
-using Microsoft.EntityFrameworkCore;
 
 namespace ProgrammingQuotesApi.Services
 {
@@ -51,22 +50,16 @@ namespace ProgrammingQuotesApi.Services
             _context.SaveChanges();
         }
 
-        public void Delete(string id)
+        public void Delete(Quote quote)
         {
-            Quote quote = GetById(id);
-            if (quote is null)
-                return;
-
-            Quotes.Remove(quote);
+            _context.Quotes.Remove(quote);
+            _context.SaveChanges();
         }
 
         public void Update(Quote quote)
         {
-            int index = Quotes.FindIndex(p => p.Id == quote.Id);
-            if (index == -1)
-                return;
-
-            Quotes[index] = quote;
+            _context.Quotes.Update(quote);
+            _context.SaveChanges();
         }
     }
 }

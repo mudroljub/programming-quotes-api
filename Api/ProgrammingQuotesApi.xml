@@ -18,7 +18,7 @@
             <summary>
             Returns author details
             </summary>
-            <param name="author">The name of the author from Wikipedia.</param>
+            <param name="author">The name of the author from Wikipedia. For example: Edsger W. Dijkstra</param>
         </member>
         <member name="M:ProgrammingQuotesApi.Controllers.QuotesController.GetAll(System.Int32)">
             <summary>
@@ -29,6 +29,9 @@
             <summary>
             Returns a quote for a given id
             </summary>
+            <remarks>
+            For example: 5a6ce86e2af929789500e7e4
+            </remarks>
         </member>
         <member name="M:ProgrammingQuotesApi.Controllers.QuotesController.GetRandom">
             <summary>
@@ -49,7 +52,7 @@
             <summary>
             Returns all quotes for a given author
             </summary>
-            <param name="author">The name of the author from Wikipedia.</param>
+            <param name="author">The name of the author from Wikipedia. For example: Edsger W. Dijkstra</param>
         </member>
         <member name="M:ProgrammingQuotesApi.Controllers.QuotesController.Update(System.String,ProgrammingQuotesApi.Models.Quote)">
             <summary>
@@ -65,6 +68,9 @@
             <summary>
             Delete an existing quote by id
             </summary>
+            <remarks>
+            For example: 5a6ce86e2af929789500e7e4
+            </remarks>
         </member>
         <member name="M:ProgrammingQuotesApi.Controllers.UsersController.Authenticate(ProgrammingQuotesApi.Models.AuthRequest)">
              <remarks>

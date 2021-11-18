@@ -33,6 +33,9 @@ namespace ProgrammingQuotesApi.Controllers
         /// <summary>
         /// Returns a quote for a given id
         /// </summary>
+        /// <remarks>
+        /// For example: 5a6ce86e2af929789500e7e4
+        /// </remarks>
         [HttpGet("{id}", Name = "Get")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -70,7 +73,7 @@ namespace ProgrammingQuotesApi.Controllers
         /// <summary>
         /// Returns all quotes for a given author
         /// </summary>
-        /// <param name="author">The name of the author from Wikipedia.</param>
+        /// <param name="author">The name of the author from Wikipedia. For example: Edsger W. Dijkstra</param>
         [HttpGet("author/{author}")]
         public IEnumerable<Quote> GetQuotesByAuthor(string author) => _quoteService.GetByAuthor(author);
 
@@ -111,6 +114,9 @@ namespace ProgrammingQuotesApi.Controllers
         /// <summary>
         /// Delete an existing quote by id
         /// </summary>
+        /// <remarks>
+        /// For example: 5a6ce86e2af929789500e7e4
+        /// </remarks>
         [HttpDelete("{id}")]
         public ActionResult Delete(string id)
         {
@@ -119,7 +125,7 @@ namespace ProgrammingQuotesApi.Controllers
             if (quote is null)
                 return NotFound();
 
-            _quoteService.Delete(id);
+            _quoteService.Delete(quote);
 
             return NoContent();
         }
