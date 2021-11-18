@@ -11,7 +11,10 @@ namespace ProgrammingQuotesApi.Controllers
     [Produces(MediaTypeNames.Application.Json)]
     public class AuthorsController : ControllerBase
     {
-        public AuthorsController() { }
+        private readonly AuthorService _authorService;
+        public AuthorsController(AuthorService authorService) {
+            _authorService = authorService;
+         }
 
         /// <summary>
         /// Returns a list of authors
@@ -19,7 +22,7 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpGet]
         public ActionResult<Dictionary<string, Author>> GetAuthors()
         {
-            Dictionary<string, Author> authors = AuthorService.GetAuthors();
+            Dictionary<string, Author> authors = _authorService.GetAuthors();
             return Ok(authors);
         }
 
@@ -27,14 +30,14 @@ namespace ProgrammingQuotesApi.Controllers
         /// Returns total number of authors
         /// </summary>
         [HttpGet("count")]
-        public ActionResult<int> GetCount() => Ok(AuthorService.GetAuthors().Count);
+        public ActionResult<int> GetCount() => Ok(_authorService.GetAuthors().Count);
 
         /// <summary>
         /// Returns author details
         /// </summary>
         /// <param name="author">The name of the author from Wikipedia.</param>
         [HttpGet("{author}")]
-        public ActionResult<Author> GetAuthorDetails(string author) => AuthorService.GetAuthorDetails(author);
+        public ActionResult<Author> GetAuthorDetails(string author) => _authorService.GetAuthorDetails(author);
 
     }
 }

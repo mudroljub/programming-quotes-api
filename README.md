@@ -43,6 +43,5 @@ Tutorials:
 
 ## TODO
 
-- implementirati Authorize
+- and DbContext for Quotes 
 - add CRUD for User (add, delete, modify)
-- add Entities and DbContext for Quotes 

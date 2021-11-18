@@ -14,7 +14,10 @@ namespace ProgrammingQuotesApi.Controllers
     [Consumes(MediaTypeNames.Application.Json)]
     public class QuotesController : ControllerBase
     {
-        public QuotesController() { }
+        private readonly QuoteService _quoteService;
+        public QuotesController(QuoteService quoteService) {
+            _quoteService = quoteService;
+        }
 
         /// <summary>
         /// Returns a list of quotes
@@ -22,7 +25,7 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpGet]
         public ActionResult<List<Quote>> GetAll([FromQuery] int count = 0)
         {
-            List<Quote> quotes = QuoteService.GetAll(count);
+            List<Quote> quotes = _quoteService.GetAll(count);
             return Ok(quotes);
         }
 
@@ -34,7 +37,7 @@ namespace ProgrammingQuotesApi.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Quote> Get(string id)
         {
-            Quote quote = QuoteService.GetById(id);
+            Quote quote = _quoteService.GetById(id);
 
             return quote == null ? NotFound() : Ok(quote);
         }
@@ -43,13 +46,13 @@ namespace ProgrammingQuotesApi.Controllers
         /// Returns a random quote
         /// </summary>
         [HttpGet("random")]
-        public ActionResult<Quote> GetRandom() => Ok(QuoteService.GetRandom());
+        public ActionResult<Quote> GetRandom() => Ok(_quoteService.GetRandom());
 
         /// <summary>
         /// Returns total number of quotes
         /// </summary>
         [HttpGet("count")]
-        public ActionResult<int> GetCount() => Ok(QuoteService.GetAll().Count);
+        public ActionResult<int> GetCount() => Ok(_quoteService.GetAll().Count);
 
         /// <summary>
         /// Create new quote
@@ -59,7 +62,7 @@ namespace ProgrammingQuotesApi.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult Create([FromBody] Quote quote)
         {
-            QuoteService.Add(quote);
+            _quoteService.Add(quote);
             return CreatedAtRoute("Get", new { id = quote.Id }, quote);
         }
 
@@ -68,7 +71,7 @@ namespace ProgrammingQuotesApi.Controllers
         /// </summary>
         /// <param name="author">The name of the author from Wikipedia.</param>
         [HttpGet("author/{author}")]
-        public ActionResult<List<Quote>> GetQuotesByAuthor(string author) => QuoteService.GetByAuthor(author);
+        public ActionResult<List<Quote>> GetQuotesByAuthor(string author) => _quoteService.GetByAuthor(author);
 
         /// <summary>
         /// Replace an existing quote with a new one
@@ -79,11 +82,11 @@ namespace ProgrammingQuotesApi.Controllers
             if (id != quote.Id)
                 return BadRequest();
 
-            Quote existingQuote = QuoteService.GetById(id);
+            Quote existingQuote = _quoteService.GetById(id);
             if (existingQuote is null)
                 return NotFound();
 
-            QuoteService.Update(quote);
+            _quoteService.Update(quote);
 
             return NoContent();
         }
@@ -94,12 +97,12 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpPatch("{id}")]
         public ActionResult Patch(string id, JsonPatchDocument<Quote> patch)
         {
-            Quote quote = QuoteService.GetById(id);
+            Quote quote = _quoteService.GetById(id);
             if (quote is null)
                 return NotFound();
 
             patch.ApplyTo(quote);
-            QuoteService.Update(quote);
+            _quoteService.Update(quote);
 
             return NoContent();
         }
@@ -110,12 +113,12 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpDelete("{id}")]
         public ActionResult Delete(string id)
         {
-            Quote quote = QuoteService.GetById(id);
+            Quote quote = _quoteService.GetById(id);
 
             if (quote is null)
                 return NotFound();
 
-            QuoteService.Delete(id);
+            _quoteService.Delete(id);
 
             return NoContent();
         }

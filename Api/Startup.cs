@@ -48,8 +48,10 @@ namespace ProgrammingQuotesApi
                 c.IncludeXmlComments(xmlPath);
             }).AddSwaggerGenNewtonsoftSupport();
 
-            // Dependency injection
+            // Dependency Injection
             services.AddScoped<UserService>();
+            services.AddScoped<QuoteService>();
+            services.AddScoped<AuthorService>();
 
             // authentication
             services.AddAuthentication(x =>
