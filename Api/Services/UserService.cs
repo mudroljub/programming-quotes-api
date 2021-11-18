@@ -43,13 +43,6 @@ namespace ProgrammingQuotesApi.Services
                     Password = BCryptNet.HashPassword("vejeta"),
                     Role = "Employee"
                 },
-                new User
-                {
-                    Id = 5,
-                    Username = "kuririn",
-                    Password = BCryptNet.HashPassword("kuririn"),
-                    Role = "Tester"
-                }
             };
             _context.Users.AddRange(dummyUsers);
             _context.SaveChanges();

@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using ProgrammingQuotesApi.Models;
 using ProgrammingQuotesApi.Services;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System;
+using Microsoft.AspNetCore.Http;
 
 namespace ProgrammingQuotesApi.Controllers
 {
@@ -32,21 +32,19 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        // public IActionResult Authenticate(AuthRequest req)
-        public async Task<ActionResult<dynamic>> Authenticate([FromBody] AuthRequest req)
+        public ActionResult Authenticate([FromBody] AuthRequest req)
         {
             User user = _userService.Authenticate(req.Username, req.Password);
 
             if (user == null)
-                return NotFound(new { message = "User or password invalid" }); // Unauthorized
+                return Unauthorized(new { message = "User or password invalid" });
 
             string token = TokenService.CreateToken(user);
-            user.Password = ""; // TODO: hide password field
-            return new
+            return Ok(new
             {
                 user,
                 token
-            };
+            });
         }
 
         [HttpGet]
