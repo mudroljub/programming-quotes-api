@@ -12,7 +12,7 @@ namespace ProgrammingQuotesApi.Services
         public AuthorService(QuoteService quoteService)
         {
             _quoteService = quoteService;
-            foreach (var q in _quoteService.GetAll())
+            foreach (Quote q in _quoteService.GetAll())
             {
                 if (Authors.ContainsKey(q.Author)) {  
                     Authors[q.Author].QuoteCount++;  
@@ -32,8 +32,8 @@ namespace ProgrammingQuotesApi.Services
 
         public Author GetAuthorDetails(string author)
         {
-            var authorQuotes = _quoteService.GetByAuthor(author);
-            var authorDetails = new Author()
+            IEnumerable<Quote> authorQuotes = _quoteService.GetByAuthor(author);
+            Author authorDetails = new Author()
             {
                 Name = author,
                 WikiUrl = $"https://en.wikipedia.org/wiki/{author}",

@@ -43,7 +43,6 @@ Tutorials:
 
 ## TODO
 
-- and DbContext for Quotes 
 - utovar podataka uraditi na jednom mestu
 - sklanjati id sa swaggera za post operacije
 - add CRUD for User (add, delete, modify)
