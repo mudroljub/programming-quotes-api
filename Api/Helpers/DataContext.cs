@@ -48,5 +48,15 @@ namespace ProgrammingQuotesApi.Helpers
         {
             optionsBuilder.UseInMemoryDatabase("TestDb");
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // if has multiple keys
+            modelBuilder.Entity<User>().HasKey(u => new
+            {
+                u.Id,
+                u.Username
+            });
+        }
     }
 }
