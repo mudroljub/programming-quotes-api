@@ -44,3 +44,4 @@ Tutorials:
 ## TODO
 
 - add CRUD for User (add, delete, modify)
+- user praviti hash pasword

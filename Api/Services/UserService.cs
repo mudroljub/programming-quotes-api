@@ -3,7 +3,6 @@ using ProgrammingQuotesApi.Helpers;
 using ProgrammingQuotesApi.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 
 namespace ProgrammingQuotesApi.Services
 {
@@ -39,6 +38,7 @@ namespace ProgrammingQuotesApi.Services
 
         public void Add(User user)
         {
+            user.Password = BCryptNet.HashPassword(user.Password);
             _context.Users.Add(user);
             _context.SaveChanges();
         }
