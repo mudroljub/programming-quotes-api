@@ -9,7 +9,7 @@ namespace ProgrammingQuotesApi.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        internal int Id { get; set; }
+        public int Id { get; set; }
 
         [Key]
         [Required]

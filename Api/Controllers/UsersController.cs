@@ -60,21 +60,26 @@ namespace ProgrammingQuotesApi.Controllers
         }
 
         /// <summary>
-        /// Returns a user for a given username
+        /// Returns a user data for a given username
         /// </summary>
         [HttpGet("{username}")]
-        public IActionResult GetByUsername(string username)
+        public ActionResult<User> GetByUsername(string username)
         {
             User user = _userService.GetByUsername(username);
             return Ok(user);
         }
 
         /// <summary>
-        /// Returns logged-in user details 🔒
+        /// Returns my user details 🔒
         /// </summary>
         [HttpGet]
+        [Authorize]
         [Route("me")]
-        public string Authenticated() => String.Format("Your username is: {0}", User.Identity.Name);
+        public ActionResult<User> GetMyUser()
+        {
+            User user = _userService.GetByUsername(User.Identity.Name);
+            return Ok(user);
+        }
 
         /// <summary>
         /// Admin dashboard 🔒
@@ -82,7 +87,7 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpGet]
         [Route("dashboard")]
         [Authorize(Roles = "Admin,Editor")]
-        public string Admin() => "Admin Dashboard. Only for Admins and Editors here";
+        public string Dashboard() => "Admin Dashboard. Only for Admins and Editors here";
 
         /// <summary>
         /// Create a new user
@@ -105,8 +110,32 @@ namespace ProgrammingQuotesApi.Controllers
         }
 
         /// <summary>
-        /// Delete a user by id
+        /// Replace my old user data with a new one 🔒
         /// </summary>
+        [HttpPut]
+        [Route("me")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult Update([FromBody] User newUser)
+        {
+            User oldUser = _userService.GetByUsername(User.Identity.Name);
+            if (oldUser.Id != newUser.Id)
+                return BadRequest("You must send your user ID.");
+            try
+            {
+                _userService.Update(newUser);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Delete a user by id 🔒
+        /// </summary>
+        [Authorize]
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
