@@ -2,9 +2,11 @@
 
 **Programming Quotes API for open source projects.**
 
-Docs: [programmingquotesapi.azurewebsites.net](https://programmingquotesapi.azurewebsites.net)
+**Docs**: [programmingquotesapi.azurewebsites.net](https://programmingquotesapi.azurewebsites.net)
 
-Convention: The names of the authors are as on Wikipedia.
+**Convention**: The names of the authors are as on Wikipedia.
+
+I am open to your feature requests. Also, you can send me your client apps if you want to share it with the world :)
 
 ## API Documentation
 
@@ -40,9 +42,9 @@ Tutorials:
 - Web API: https://channel9.msdn.com/Series/Beginners-Series-to-Web-APIs?page=2
 - Auth: https://jasonwatmore.com/post/2021/07/29/net-5-role-based-authorization-tutorial-with-example-api
 - Auth: https://medium.com/@marcosvinicios_net/asp-net-core-3-authorization-and-authentication-with-bearer-and-jwt-3041c47c8b1d
+- Deploy: https://stackoverflow.com/questions/29100993/how-to-deploy-net-application-to-heroku
 
 ## TODO
 
-- add CRUD for User (add, delete, modify)
 - username should be uniq
 - ne updatovati nedozvoljena polja, Role, Password, itd...

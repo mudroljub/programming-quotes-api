@@ -92,7 +92,7 @@ namespace ProgrammingQuotesApi.Controllers
 
             _quoteService.Replace(oldQuote, newQuote);
 
-            return NoContent();
+            return Ok(newQuote);
         }
 
         /// <remarks>
@@ -106,6 +106,7 @@ namespace ProgrammingQuotesApi.Controllers
         ///       }
         ///     ]
         ///
+        /// You could use Id: 5a6ce86e2af929789500e7e4
         /// </remarks>
         /// <summary>
         /// Update certain properties of an existing quote
@@ -120,7 +121,7 @@ namespace ProgrammingQuotesApi.Controllers
             patch.ApplyTo(quote);
             _quoteService.Update(quote);
 
-            return NoContent();
+            return Ok(quote);
         }
 
         /// <summary>
