@@ -22,7 +22,8 @@ namespace ProgrammingQuotesApi.Models
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string LastName { get; set; }
 
-        [DefaultValue("User")] // not working
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+        [DefaultValue("User")]
         public string Role { get; set; }
 
         [Required]
