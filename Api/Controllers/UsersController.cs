@@ -19,6 +19,9 @@ namespace ProgrammingQuotesApi.Controllers
             _userService = userService;
         }
 
+        /// <summary>
+        /// Authenticates an existing user
+        /// </summary>
         /// <remarks>
         /// Sample request:
         ///
@@ -46,6 +49,9 @@ namespace ProgrammingQuotesApi.Controllers
             });
         }
 
+        /// <summary>
+        /// Returns all users
+        /// </summary>
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -53,6 +59,9 @@ namespace ProgrammingQuotesApi.Controllers
             return Ok(users);
         }
 
+        /// <summary>
+        /// Returns a user for a given id
+        /// </summary>
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -60,10 +69,16 @@ namespace ProgrammingQuotesApi.Controllers
             return Ok(user);
         }
 
+        /// <summary>
+        /// Returns current user details
+        /// </summary>
         [HttpGet]
         [Route("me")]
         public string Authenticated() => String.Format("Your username is: {0}", User.Identity.Name);
 
+        /// <summary>
+        /// Admin dashboard
+        /// </summary>
         [HttpGet]
         [Route("dashboard")]
         [Authorize(Roles = "Admin,Editor")]

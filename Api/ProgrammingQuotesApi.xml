@@ -73,6 +73,9 @@
             </remarks>
         </member>
         <member name="M:ProgrammingQuotesApi.Controllers.UsersController.Authenticate(ProgrammingQuotesApi.Models.UserAuth)">
+             <summary>
+             Authenticates an existing user
+             </summary>
              <remarks>
              Sample request:
             
@@ -82,6 +85,26 @@
                  }
             
              </remarks>
+        </member>
+        <member name="M:ProgrammingQuotesApi.Controllers.UsersController.GetAll">
+            <summary>
+            Returns all users
+            </summary>
+        </member>
+        <member name="M:ProgrammingQuotesApi.Controllers.UsersController.GetById(System.Int32)">
+            <summary>
+            Returns a user for a given id
+            </summary>
+        </member>
+        <member name="M:ProgrammingQuotesApi.Controllers.UsersController.Authenticated">
+            <summary>
+            Returns current user details
+            </summary>
+        </member>
+        <member name="M:ProgrammingQuotesApi.Controllers.UsersController.Admin">
+            <summary>
+            Admin dashboard
+            </summary>
         </member>
     </members>
 </doc>
