@@ -42,11 +42,8 @@ namespace ProgrammingQuotesApi.Services
             _context.SaveChanges();
         }
 
-        public void Update(Quote newQuote)
-        {
-            Quote oldQuote = _context.Quotes.Where(q => q.Id == newQuote.Id).FirstOrDefault();
-            if (oldQuote == null) return;
- 
+        public void Update(Quote oldQuote, Quote newQuote)
+        { 
             _context.Entry(oldQuote).CurrentValues.SetValues(newQuote);
             _context.SaveChanges();
         }

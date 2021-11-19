@@ -62,11 +62,6 @@
             Replace an existing quote with a new one
             </summary>
         </member>
-        <member name="M:ProgrammingQuotesApi.Controllers.QuotesController.Patch(System.String,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{ProgrammingQuotesApi.Models.Quote})">
-            <summary>
-            Update certain properties of an existing quote
-            </summary>
-        </member>
         <member name="M:ProgrammingQuotesApi.Controllers.QuotesController.Delete(System.String)">
             <summary>
             Delete a quote by id

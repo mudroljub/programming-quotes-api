@@ -51,9 +51,12 @@ namespace ProgrammingQuotesApi.Services
             _context.SaveChanges();
         }
 
-        public void Update(User user)
+        public void Update(User newUser)
         {
-            _context.Users.Update(user);
+            User oldUser = _context.Users.Where(u => u.Id == newUser.Id).FirstOrDefault();
+            if (oldUser == null) throw new KeyNotFoundException("User not found");;
+ 
+            _context.Entry(oldUser).CurrentValues.SetValues(newUser);
             _context.SaveChanges();
         }
     }

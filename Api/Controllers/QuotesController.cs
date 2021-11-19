@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using ProgrammingQuotesApi.Models;
 using ProgrammingQuotesApi.Services;
@@ -84,29 +83,13 @@ namespace ProgrammingQuotesApi.Controllers
         /// Replace an existing quote with a new one
         /// </summary>
         [HttpPut]
-        public ActionResult Update(Quote quote)
+        public ActionResult Update(Quote newQuote)
         {
-            Quote existingQuote = _quoteService.GetById(quote.Id);
-            if (existingQuote is null)
+            Quote oldQuote = _quoteService.GetById(newQuote.Id);
+            if (oldQuote is null)
                 return NotFound(new { message = "The quote Id does not exist." });
 
-            _quoteService.Update(quote);
-
-            return NoContent();
-        }
-
-        /// <summary>
-        /// Update certain properties of an existing quote
-        /// </summary>
-        [HttpPatch("{id}")]
-        public ActionResult Patch(string id, JsonPatchDocument<Quote> patch)
-        {
-            Quote quote = _quoteService.GetById(id);
-            if (quote is null)
-                return NotFound();
-
-            patch.ApplyTo(quote);
-            _quoteService.Update(quote);
+            _quoteService.Update(oldQuote, newQuote);
 
             return NoContent();
         }
