@@ -64,9 +64,9 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult Create([FromBody] QuoteNew req)
+        public ActionResult Create([FromBody] Quote quote)
         {
-            Quote quote = _quoteService.Add(req);
+            _quoteService.Add(quote);
             return CreatedAtRoute("Get", new { id = quote.Id }, quote);
         }
 
