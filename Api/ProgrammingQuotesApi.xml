@@ -69,7 +69,7 @@
         </member>
         <member name="M:ProgrammingQuotesApi.Controllers.QuotesController.Delete(System.String)">
             <summary>
-            Delete an existing quote by id
+            Delete a quote by id
             </summary>
             <remarks>
             For example: 5a6ce86e2af929789500e7e4
@@ -112,6 +112,11 @@
         <member name="M:ProgrammingQuotesApi.Controllers.UsersController.Create(ProgrammingQuotesApi.Models.User)">
             <summary>
             Create a new user
+            </summary>
+        </member>
+        <member name="M:ProgrammingQuotesApi.Controllers.UsersController.Delete(System.Int32)">
+            <summary>
+            Delete a user by id
             </summary>
         </member>
     </members>

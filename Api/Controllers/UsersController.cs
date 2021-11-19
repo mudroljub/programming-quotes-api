@@ -104,5 +104,21 @@ namespace ProgrammingQuotesApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Delete a user by id
+        /// </summary>
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
+        {
+            User user = _userService.GetById(id);
+
+            if (user is null)
+                return NotFound();
+
+            _userService.Delete(user);
+
+            return NoContent();
+        }
+
     }
 }

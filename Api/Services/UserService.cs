@@ -30,6 +30,8 @@ namespace ProgrammingQuotesApi.Services
             return _context.Users;
         }
 
+        public User GetById(int id) => _context.Users.FirstOrDefault(p => p.Id == id);
+
         public User GetByUsername(string username)
         {
             User user = _context.Users.FirstOrDefault(x => x.Username.ToLower() == username.ToLower());
@@ -40,6 +42,18 @@ namespace ProgrammingQuotesApi.Services
         {
             user.Password = BCryptNet.HashPassword(user.Password);
             _context.Users.Add(user);
+            _context.SaveChanges();
+        }
+        
+        public void Delete(User user)
+        {
+            _context.Users.Remove(user);
+            _context.SaveChanges();
+        }
+
+        public void Update(User user)
+        {
+            _context.Users.Update(user);
             _context.SaveChanges();
         }
     }

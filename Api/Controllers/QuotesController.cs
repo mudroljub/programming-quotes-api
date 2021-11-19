@@ -115,7 +115,7 @@ namespace ProgrammingQuotesApi.Controllers
         }
 
         /// <summary>
-        /// Delete an existing quote by id
+        /// Delete a quote by id
         /// </summary>
         /// <remarks>
         /// For example: 5a6ce86e2af929789500e7e4
