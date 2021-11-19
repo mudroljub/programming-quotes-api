@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace ProgrammingQuotesApi.Models
 {
-    public class Quote : QuoteReq
+    public class Quote : QuoteNew
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]

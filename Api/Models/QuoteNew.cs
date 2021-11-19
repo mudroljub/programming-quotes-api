@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ProgrammingQuotesApi.Models
 {
-    public class QuoteReq
+    public class QuoteNew
     {
         [Required]
         [MaxLength(50)]
