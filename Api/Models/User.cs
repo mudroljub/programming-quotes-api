@@ -25,7 +25,7 @@ namespace ProgrammingQuotesApi.Models
         public string Role { get; set; }
 
         [Required]
-        [System.Text.Json.Serialization.JsonIgnore]
+        [JsonIgnore]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string Password { get; set; }
     }

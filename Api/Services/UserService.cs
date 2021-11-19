@@ -3,6 +3,7 @@ using ProgrammingQuotesApi.Helpers;
 using ProgrammingQuotesApi.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace ProgrammingQuotesApi.Services
 {
@@ -17,7 +18,10 @@ namespace ProgrammingQuotesApi.Services
 
         private static bool VerifyPassword(string password, string hash)
         {
+            Console.WriteLine(password);
+            Console.WriteLine(hash); // hash ne postoji (u bazi?)
             return BCryptNet.Verify(password, hash);
+            // return true;
         }
 
         public User Authenticate(string username, string password)

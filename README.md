@@ -46,5 +46,5 @@ Tutorials:
 
 ## TODO
 
+- ne updatovati Password polje?
 - username should be uniq
-- ne updatovati nedozvoljena polja, Role, Password, itd...
