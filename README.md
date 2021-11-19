@@ -44,5 +44,3 @@ Tutorials:
 ## TODO
 
 - add CRUD for User (add, delete, modify)
-- hide id in POST quote
-- hide password in GET all users
