@@ -3,6 +3,7 @@ using ProgrammingQuotesApi.Helpers;
 using ProgrammingQuotesApi.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace ProgrammingQuotesApi.Services
 {
@@ -38,7 +39,7 @@ namespace ProgrammingQuotesApi.Services
 
         public void Add(User user)
         {
-            _context.Users.AddRange(user);
+            _context.Users.Add(user);
             _context.SaveChanges();
         }
     }

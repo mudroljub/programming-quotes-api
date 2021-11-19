@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
@@ -8,6 +9,7 @@ namespace ProgrammingQuotesApi.Models
     public class User
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Key]
@@ -24,7 +26,7 @@ namespace ProgrammingQuotesApi.Models
         public string Role { get; set; }
 
         [Required]
-        [IgnoreDataMember]
+        // [IgnoreDataMember]
         public string Password { get; set; }
     }
 }

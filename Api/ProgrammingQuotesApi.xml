@@ -88,12 +88,12 @@
         </member>
         <member name="M:ProgrammingQuotesApi.Controllers.UsersController.GetAll">
             <summary>
-            Returns all users 🔒
+            Returns all users
             </summary>
         </member>
         <member name="M:ProgrammingQuotesApi.Controllers.UsersController.GetById(System.Int32)">
             <summary>
-            Returns a user for a given id 🔒
+            Returns a user for a given id
             </summary>
         </member>
         <member name="M:ProgrammingQuotesApi.Controllers.UsersController.Authenticated">
@@ -104,6 +104,11 @@
         <member name="M:ProgrammingQuotesApi.Controllers.UsersController.Admin">
             <summary>
             Admin dashboard 🔒
+            </summary>
+        </member>
+        <member name="M:ProgrammingQuotesApi.Controllers.UsersController.Create(ProgrammingQuotesApi.Models.User)">
+            <summary>
+            Create a new user
             </summary>
         </member>
     </members>

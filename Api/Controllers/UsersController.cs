@@ -4,10 +4,10 @@ using ProgrammingQuotesApi.Models;
 using ProgrammingQuotesApi.Services;
 using System.Collections.Generic;
 using System;
+using Microsoft.AspNetCore.Http;
 
 namespace ProgrammingQuotesApi.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class UsersController : ControllerBase
@@ -50,7 +50,7 @@ namespace ProgrammingQuotesApi.Controllers
         }
 
         /// <summary>
-        /// Returns all users 🔒
+        /// Returns all users
         /// </summary>
         [HttpGet]
         public IActionResult GetAll()
@@ -60,7 +60,7 @@ namespace ProgrammingQuotesApi.Controllers
         }
 
         /// <summary>
-        /// Returns a user for a given id 🔒
+        /// Returns a user for a given id
         /// </summary>
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
@@ -83,6 +83,26 @@ namespace ProgrammingQuotesApi.Controllers
         [Route("dashboard")]
         [Authorize(Roles = "Admin,Editor")]
         public string Admin() => "Admin Dashboard. Only for Admins and Editors here";
+
+        /// <summary>
+        /// Create a new user
+        /// </summary>
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [AllowAnonymous]
+        public ActionResult Create([FromBody] User req)
+        {
+            try
+            {
+                _userService.Add(req);
+                return Created("", req);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
     }
 }
