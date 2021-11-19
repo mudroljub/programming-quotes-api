@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Http;
+// using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using ProgrammingQuotesApi.Models;
 using ProgrammingQuotesApi.Services;
@@ -93,6 +94,22 @@ namespace ProgrammingQuotesApi.Controllers
 
             return NoContent();
         }
+
+        // /// <summary>
+        // /// Update certain properties of an existing quote
+        // /// </summary>
+        // [HttpPatch("{id}")]
+        // public ActionResult Patch(string id, JsonPatchDocument<Quote> patch)
+        // {
+        //     Quote quote = _quoteService.GetById(id);
+        //     if (quote is null)
+        //         return NotFound();
+
+        //     patch.ApplyTo(quote);
+        //     _quoteService.Update(quote);
+
+        //     return NoContent();
+        // }
 
         /// <summary>
         /// Delete a quote by id

@@ -113,23 +113,22 @@ namespace ProgrammingQuotesApi.Controllers
         /// Replace my old user data with a new one 🔒
         /// </summary>
         [HttpPut]
+        [Authorize]
         [Route("me")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult Update([FromBody] User newUser)
+        public ActionResult Update([FromBody] User req)
         {
             User oldUser = _userService.GetByUsername(User.Identity.Name);
-            if (oldUser.Id != newUser.Id)
-                return BadRequest("You must send your user ID.");
-            try
+            User newUser = new()
             {
-                _userService.Update(newUser);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+                Id = oldUser.Id,
+                Role = oldUser.Role,
+                Username = req.Username,
+                Password = req.Password,
+                FirstName = req.FirstName,
+                LastName = req.LastName,
+            };
+            _userService.Update(oldUser, newUser);
+            return Ok(newUser); // or NoContent();
         }
 
         /// <summary>
@@ -137,6 +136,7 @@ namespace ProgrammingQuotesApi.Controllers
         /// </summary>
         [Authorize]
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             User user = _userService.GetById(id);

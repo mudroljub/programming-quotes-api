@@ -11,7 +11,6 @@ namespace ProgrammingQuotesApi.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Key]
         [Required]
         public string Username { get; set; }
 

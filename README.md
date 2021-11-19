@@ -44,3 +44,5 @@ Tutorials:
 ## TODO
 
 - add CRUD for User (add, delete, modify)
+- username should be uniq
+- ne updatovati nedozvoljena polja, Role, Password, itd...

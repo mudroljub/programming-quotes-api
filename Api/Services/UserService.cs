@@ -51,11 +51,9 @@ namespace ProgrammingQuotesApi.Services
             _context.SaveChanges();
         }
 
-        public void Update(User newUser)
+        public void Update(User oldUser, User newUser)
         {
-            User oldUser = _context.Users.Where(u => u.Id == newUser.Id).FirstOrDefault();
-            if (oldUser == null) throw new KeyNotFoundException("User not found");;
- 
+            newUser.Password = BCryptNet.HashPassword(newUser.Password);
             _context.Entry(oldUser).CurrentValues.SetValues(newUser);
             _context.SaveChanges();
         }
