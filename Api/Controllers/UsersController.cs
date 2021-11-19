@@ -50,7 +50,7 @@ namespace ProgrammingQuotesApi.Controllers
         }
 
         /// <summary>
-        /// Returns all users
+        /// Returns all users 🔒
         /// </summary>
         [HttpGet]
         public IActionResult GetAll()
@@ -60,7 +60,7 @@ namespace ProgrammingQuotesApi.Controllers
         }
 
         /// <summary>
-        /// Returns a user for a given id
+        /// Returns a user for a given id 🔒
         /// </summary>
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
@@ -70,14 +70,14 @@ namespace ProgrammingQuotesApi.Controllers
         }
 
         /// <summary>
-        /// Returns current user details
+        /// Returns logged-in user details 🔒
         /// </summary>
         [HttpGet]
         [Route("me")]
         public string Authenticated() => String.Format("Your username is: {0}", User.Identity.Name);
 
         /// <summary>
-        /// Admin dashboard
+        /// Admin dashboard 🔒
         /// </summary>
         [HttpGet]
         [Route("dashboard")]
