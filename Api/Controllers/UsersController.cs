@@ -60,12 +60,12 @@ namespace ProgrammingQuotesApi.Controllers
         }
 
         /// <summary>
-        /// Returns a user for a given id
+        /// Returns a user for a given username
         /// </summary>
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        [HttpGet("{username}")]
+        public IActionResult GetByUsername(string username)
         {
-            User user = _userService.GetById(id);
+            User user = _userService.GetByUsername(username);
             return Ok(user);
         }
 

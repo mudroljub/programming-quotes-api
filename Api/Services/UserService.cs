@@ -30,9 +30,9 @@ namespace ProgrammingQuotesApi.Services
             return _context.Users;
         }
 
-        public User GetById(int id)
+        public User GetByUsername(string username)
         {
-            User user = _context.Users.Find(id);
+            User user = _context.Users.FirstOrDefault(x => x.Username.ToLower() == username.ToLower());
             return user ?? throw new KeyNotFoundException("User not found");
         }
 

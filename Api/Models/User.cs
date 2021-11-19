@@ -1,7 +1,6 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace ProgrammingQuotesApi.Models
@@ -10,7 +9,7 @@ namespace ProgrammingQuotesApi.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        internal int Id { get; set; }
 
         [Key]
         [Required]
@@ -27,7 +26,8 @@ namespace ProgrammingQuotesApi.Models
         public string Role { get; set; }
 
         [Required]
-        // [IgnoreDataMember]
+        [System.Text.Json.Serialization.JsonIgnore]
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string Password { get; set; }
     }
 }
