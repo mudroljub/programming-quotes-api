@@ -43,7 +43,7 @@
             Returns total number of quotes
             </summary>
         </member>
-        <member name="M:ProgrammingQuotesApi.Controllers.QuotesController.Create(ProgrammingQuotesApi.Models.Quote)">
+        <member name="M:ProgrammingQuotesApi.Controllers.QuotesController.Create(ProgrammingQuotesApi.Models.QuoteReq)">
             <summary>
             Create new quote
             </summary>

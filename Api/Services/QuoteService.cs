@@ -29,11 +29,17 @@ namespace ProgrammingQuotesApi.Services
 
         public IEnumerable<Quote> GetByAuthor(string author) => _context.Quotes.Where(p => p.Author == author);
 
-        public void Add(Quote quote)
+        public Quote Add(QuoteReq req)
         {
-            quote.Id = ObjectId.GenerateNewId().ToString();
+            Quote quote = new()
+            {
+                Id = ObjectId.GenerateNewId().ToString(),
+                Author = req.Author,
+                En = req.En,
+            };
             _context.Quotes.Add(quote);
             _context.SaveChanges();
+            return quote;
         }
 
         public void Delete(Quote quote)
