@@ -83,15 +83,12 @@ namespace ProgrammingQuotesApi.Controllers
         /// <summary>
         /// Replace an existing quote with a new one
         /// </summary>
-        [HttpPut("{id}")]
-        public ActionResult Update(string id, Quote quote)
+        [HttpPut]
+        public ActionResult Update(Quote quote)
         {
-            if (id != quote.Id)
-                return BadRequest();
-
-            Quote existingQuote = _quoteService.GetById(id);
+            Quote existingQuote = _quoteService.GetById(quote.Id);
             if (existingQuote is null)
-                return NotFound();
+                return NotFound(new { message = "The quote Id does not exist." });
 
             _quoteService.Update(quote);
 
