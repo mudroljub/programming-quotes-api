@@ -127,7 +127,7 @@ namespace ProgrammingQuotesApi.Controllers
                 FirstName = req.FirstName,
                 LastName = req.LastName,
             };
-            _userService.Update(oldUser, newUser);
+            _userService.Replace(oldUser, newUser);
             return Ok(newUser); // or NoContent();
         }
 

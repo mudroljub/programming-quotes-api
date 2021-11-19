@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Http;
-// using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using ProgrammingQuotesApi.Models;
 using ProgrammingQuotesApi.Services;
@@ -90,26 +90,38 @@ namespace ProgrammingQuotesApi.Controllers
             if (oldQuote is null)
                 return NotFound(new { message = "The quote Id does not exist." });
 
-            _quoteService.Update(oldQuote, newQuote);
+            _quoteService.Replace(oldQuote, newQuote);
 
             return NoContent();
         }
 
-        // /// <summary>
-        // /// Update certain properties of an existing quote
-        // /// </summary>
-        // [HttpPatch("{id}")]
-        // public ActionResult Patch(string id, JsonPatchDocument<Quote> patch)
-        // {
-        //     Quote quote = _quoteService.GetById(id);
-        //     if (quote is null)
-        //         return NotFound();
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     [
+        ///       {
+        ///          "path": "/author",
+        ///          "op": "replace",
+        ///          "value": "Anonymous",
+        ///       }
+        ///     ]
+        ///
+        /// </remarks>
+        /// <summary>
+        /// Update certain properties of an existing quote
+        /// </summary>
+        [HttpPatch("{id}")]
+        public ActionResult Patch(string id, JsonPatchDocument<Quote> patch)
+        {
+            Quote quote = _quoteService.GetById(id);
+            if (quote is null)
+                return NotFound();
 
-        //     patch.ApplyTo(quote);
-        //     _quoteService.Update(quote);
+            patch.ApplyTo(quote);
+            _quoteService.Update(quote);
 
-        //     return NoContent();
-        // }
+            return NoContent();
+        }
 
         /// <summary>
         /// Delete a quote by id

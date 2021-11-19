@@ -51,7 +51,7 @@ namespace ProgrammingQuotesApi.Services
             _context.SaveChanges();
         }
 
-        public void Update(User oldUser, User newUser)
+        public void Replace(User oldUser, User newUser)
         {
             newUser.Password = BCryptNet.HashPassword(newUser.Password);
             _context.Entry(oldUser).CurrentValues.SetValues(newUser);
