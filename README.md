@@ -46,5 +46,4 @@ Tutorials:
 
 ## TODO
 
-- ne updatovati Password polje?
-- username should be uniq
+- deploy on heroku

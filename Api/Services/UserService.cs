@@ -44,7 +44,7 @@ namespace ProgrammingQuotesApi.Services
             _context.Users.Add(user);
             _context.SaveChanges();
         }
-        
+
         public void Delete(User user)
         {
             _context.Users.Remove(user);

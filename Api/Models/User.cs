@@ -2,9 +2,11 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Newtonsoft.Json;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProgrammingQuotesApi.Models
 {
+    [Index(nameof(Username), IsUnique = true)] // not working?
     public class User
     {
         [Key]
@@ -25,8 +27,6 @@ namespace ProgrammingQuotesApi.Models
         public string Role { get; set; }
 
         [Required]
-        [JsonIgnore]
-        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string Password { get; set; }
     }
 }
