@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31829.152
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProgrammingQuotesApi", "Api\ProgrammingQuotesApi.csproj", "{12EF93C9-1717-4BDE-B55D-CE165FA6CCA9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgrammingQuotesApi.Tests", "Tests\ProgrammingQuotesApi.Tests.csproj", "{950567B0-57E7-4B01-81D7-EE2B809A7D6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProgrammingQuotesApi", "ProgrammingQuotesApi.csproj", "{12EF93C9-1717-4BDE-B55D-CE165FA6CCA9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
