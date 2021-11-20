@@ -2,9 +2,9 @@
 
 **Programming Quotes API for open source projects.**
 
-**Docs**: [programming-quotes-api.herokuapp.com](https://programming-quotes-api.herokuapp.com)
+Docs: [programming-quotes-api.herokuapp.com](https://programming-quotes-api.herokuapp.com)
 
-**Convention**: The names of the authors are as on Wikipedia.
+Convention: The names of the authors are as on Wikipedia.
 
 I am open to your feature requests. Also, you can send me your client apps if you want to share it with the world :)
 
@@ -25,16 +25,8 @@ You can also POST, PUT, PATCH and DELETE. See [docs](https://https://programming
 Start the project locally:
 
 ```
-cd Api
 dotnet build
 dotnet watch run
-```
-
-Unit testing:
-
-```
-cd Tests
-dotnet test
 ```
 
 ## Tutorials
