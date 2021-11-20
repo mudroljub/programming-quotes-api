@@ -4,13 +4,15 @@ using System.Linq;
 
 namespace ProgrammingQuotesApi.Services
 {
-    public static class AuthorsService
+    public class AuthorService
     {
-        static Dictionary<string, Author> Authors = new Dictionary<string, Author>();
-        static AuthorsService()
+        private readonly QuoteService _quoteService;
+        readonly Dictionary<string, Author> Authors = new();
+
+        public AuthorService(QuoteService quoteService)
         {
-            var quotes = QuotesService.GetQuotes();
-            foreach (var q in quotes)
+            _quoteService = quoteService;
+            foreach (Quote q in _quoteService.GetAll())
             {
                 if (Authors.ContainsKey(q.Author)) {  
                     Authors[q.Author].QuoteCount++;  
@@ -19,7 +21,6 @@ namespace ProgrammingQuotesApi.Services
                     Authors.Add(q.Author, new Author()
                     {
                         Name = q.Author,
-                        QuotesUrl = $"https://programmingquotesapi.azurewebsites.net/quotes/author/{q.Author}",
                         WikiUrl = $"https://en.wikipedia.org/wiki/{q.Author}",
                         QuoteCount = 1
                     });  
@@ -27,15 +28,14 @@ namespace ProgrammingQuotesApi.Services
             }
         }
 
-        public static Dictionary<string, Author> GetAuthors() => Authors;
+        public Dictionary<string, Author> GetAuthors() => Authors;
 
-        public static Author GetAuthorDetails(string author)
+        public Author GetAuthorDetails(string author)
         {
-            var authorQuotes = QuotesService.GetByAuthor(author);
-            var authorDetails = new Author()
+            IEnumerable<Quote> authorQuotes = _quoteService.GetByAuthor(author);
+            Author authorDetails = new Author()
             {
                 Name = author,
-                QuotesUrl = $"https://programmingquotesapi.azurewebsites.net/quotes/author/{author}",
                 WikiUrl = $"https://en.wikipedia.org/wiki/{author}",
                 QuoteCount = authorQuotes.Count(),
                 Quotes = authorQuotes

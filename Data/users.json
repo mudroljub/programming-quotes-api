@@ -1,0 +1,22 @@
+[
+  {
+      "id": 1,
+      "firstName": "Admin",
+      "lastName": "Adminowsky",
+      "username": "admin",
+      "role": "Admin",
+      "password": "$2a$11$n7AMYyDRVYf/XcKLUKjw4uFEIJoPGt2xC0SYwSxR8Mm0I30TijrWi"
+  },
+  {
+      "id": 2,
+      "username": "user",
+      "role": "User",
+      "password": "$2a$11$E18Py3IH1igojs0FFxgOd.i.WB2O80vIOjxloSpBdVQb.U4Io1/Ea"
+  },
+  {
+      "id": 3,
+      "username": "goku",
+      "role": "Editor",
+      "password": "$2a$11$wghDdc6tWN2w1eELG2i9E.jZC8vo6lucfSI5KtWeZ1bvAKvo8ck96"
+  }
+]

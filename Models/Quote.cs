@@ -9,9 +9,11 @@ namespace ProgrammingQuotesApi.Models
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
+
         [Required]
         [MaxLength(50)]
         public string Author { get; set; }
+
         [Required]
         [MinLength(10)]
         [MaxLength(500)]
