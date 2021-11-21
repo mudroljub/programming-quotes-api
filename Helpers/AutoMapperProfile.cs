@@ -8,11 +8,12 @@ namespace ProgrammingQuotesApi.Helpers
         public AutoMapperProfile()
         {
             CreateMap<User, UserAuthRes>();
+            CreateMap<UserRegister, User>();
             CreateMap<UserUpdate, User>()
                 .ForAllMembers(x => x.Condition(
                     (src, dest, prop) =>
                     {
-                        // ignore null & empty string properties
+                        // ignore empty fields
                         if (prop == null) return false;
                         if (prop.GetType() == typeof(string) && string.IsNullOrEmpty((string)prop)) return false;
 
