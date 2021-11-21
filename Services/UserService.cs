@@ -59,9 +59,9 @@ namespace ProgrammingQuotesApi.Services
         public void Register(UserRegister req)
         {
             req.Password = BCryptNet.HashPassword(req.Password);
-            User user = _mapper.Map<User>(req);
-            user.Role = "User";
-            _context.Users.Add(user);
+            User newUser = _mapper.Map<User>(req);
+            newUser.Role = "User";
+            _context.Users.Add(newUser);
             _context.SaveChanges();
         }
 

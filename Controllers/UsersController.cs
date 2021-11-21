@@ -24,12 +24,12 @@ namespace ProgrammingQuotesApi.Controllers
         /// </summary>
         [HttpPost("register")]
         [AllowAnonymous]
-        public ActionResult Create([FromBody] UserRegister newUser)
+        public ActionResult Create([FromBody] UserRegister req)
         {
-            if (_userService.UsernameTaken(newUser.Username))
-                return BadRequest(new { message = "Username " + newUser.Username + " is already taken" });
+            if (_userService.UsernameTaken(req.Username))
+                return BadRequest(new { message = "Username " + req.Username + " is already taken" });
 
-            _userService.Register(newUser);
+            _userService.Register(req);
             return Ok(new { message = "Registration successful" });
         }
 
