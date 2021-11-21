@@ -32,7 +32,7 @@ namespace ProgrammingQuotesApi.Controllers
             {
                 _userService.Add(req);
                 return Ok(new { message = "Registration successful" });
-                // return Created("", req); // should return UserResponse
+                // return Created("", req); // should return UserAuthRes
             }
             catch (Exception ex)
             {
@@ -55,9 +55,9 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public ActionResult Authenticate([FromBody] UserLogin req)
+        public ActionResult Authenticate([FromBody] UserAuthReq req)
         {
-            UserResponse user = _userService.Authenticate(req.Username, req.Password);
+            UserAuthRes user = _userService.Authenticate(req.Username, req.Password);
 
             if (user == null)
                 return Unauthorized(new { message = "User or password invalid" });

@@ -26,6 +26,7 @@ namespace ProgrammingQuotesApi.Models
         [DefaultValue("User")]
         public string Role { get; set; }
 
+        [JsonIgnore]
         [Required]
         public string Password { get; set; }
     }

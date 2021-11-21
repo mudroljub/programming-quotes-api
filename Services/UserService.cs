@@ -24,13 +24,13 @@ namespace ProgrammingQuotesApi.Services
             return BCryptNet.Verify(password, hash);
         }
 
-        public UserResponse Authenticate(string username, string password)
+        public UserAuthRes Authenticate(string username, string password)
         {
             User user = _context.Users.FirstOrDefault(x => x.Username.ToLower() == username.ToLower() && VerifyPassword(password, x.Password));
             if (user == null)         
                 return null;
 
-            UserResponse response = _mapper.Map<UserResponse>(user);
+            UserAuthRes response = _mapper.Map<UserAuthRes>(user);
             response.Token = TokenService.CreateToken(user);
             return response;
         }

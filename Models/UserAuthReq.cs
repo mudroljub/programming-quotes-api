@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ProgrammingQuotesApi.Models
 {
-    public class UserLogin
+    public class UserAuthReq
     {
         [Required]
         public string Username { get; set; }

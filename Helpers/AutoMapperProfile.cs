@@ -7,7 +7,7 @@ namespace ProgrammingQuotesApi.Helpers
     {
         public AutoMapperProfile()
         {
-            CreateMap<User, UserResponse>();
+            CreateMap<User, UserAuthRes>();
             CreateMap<UserUpdate, User>()
                 .ForAllMembers(x => x.Condition(
                     (src, dest, prop) =>

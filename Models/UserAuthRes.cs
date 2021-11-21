@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ProgrammingQuotesApi.Models
 {
-    public class UserResponse
+    public class UserAuthRes
     {
         [Key]
         public int Id { get; set; }
