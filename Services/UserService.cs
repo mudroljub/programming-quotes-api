@@ -71,7 +71,7 @@ namespace ProgrammingQuotesApi.Services
 
         public void Update(User myUser, UserUpdate req)
         {
-            if (req.Username != myUser.Username && _context.Users.Any(x => x.Username == req.Username))
+            if (req.Username != myUser.Username && UsernameTaken(req.Username))
                 throw new Exception("Username '" + req.Username + "' is already taken");
 
             if (!string.IsNullOrEmpty(req.Password))
@@ -82,8 +82,9 @@ namespace ProgrammingQuotesApi.Services
             _context.SaveChanges();
         }
 
-        public bool UsernameExists(string username)
+        public bool UsernameTaken(string username)
         {
+            if (string.IsNullOrEmpty(username)) return false;
             return _context.Users.Any(x => x.Username.ToLower() == username.ToLower());
         }
     }
