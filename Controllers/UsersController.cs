@@ -56,17 +56,12 @@ namespace ProgrammingQuotesApi.Controllers
         [AllowAnonymous]
         public ActionResult Authenticate([FromBody] UserAuth req)
         {
-            User user = _userService.Authenticate(req.Username, req.Password);
+            UserResponse user = _userService.Authenticate(req.Username, req.Password);
 
             if (user == null)
                 return Unauthorized(new { message = "User or password invalid" });
 
-            string token = TokenService.CreateToken(user);
-            return Ok(new
-            {
-                user,
-                token
-            });
+            return Ok(user);
         }
 
         /// <summary>

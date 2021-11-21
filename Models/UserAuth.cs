@@ -4,7 +4,6 @@ namespace ProgrammingQuotesApi.Models
 {
     public class UserAuth
     {
-        [Key]
         [Required]
         public string Username { get; set; }
 

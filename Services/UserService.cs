@@ -20,9 +20,21 @@ namespace ProgrammingQuotesApi.Services
             return BCryptNet.Verify(password, hash);
         }
 
-        public User Authenticate(string username, string password)
+        public UserResponse Authenticate(string username, string password)
         {
-            return _context.Users.FirstOrDefault(x => x.Username.ToLower() == username.ToLower() && VerifyPassword(password, x.Password));
+            var user = _context.Users.FirstOrDefault(x => x.Username.ToLower() == username.ToLower() && VerifyPassword(password, x.Password));
+            if (user == null)         
+                return null;
+
+            string token = TokenService.CreateToken(user);
+            return new UserResponse { 
+                Id = user.Id,
+                Username = user.Username, 
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Role = user.Role,
+                Token = token 
+            };
         }
 
         public IEnumerable<User> GetAll()
