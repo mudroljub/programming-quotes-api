@@ -69,19 +69,22 @@ namespace ProgrammingQuotesApi.Services
             _context.SaveChanges();
         }
 
-        public void Update(int id, UserUpdate req)
+        public void Update(User myUser, UserUpdate req)
         {
-            var user = GetById(id);
-
-            if (req.Username != user.Username && _context.Users.Any(x => x.Username == req.Username))
+            if (req.Username != myUser.Username && _context.Users.Any(x => x.Username == req.Username))
                 throw new Exception("Username '" + req.Username + "' is already taken");
 
             if (!string.IsNullOrEmpty(req.Password))
                 req.Password = BCryptNet.HashPassword(req.Password);
 
-            _mapper.Map(req, user);
-            _context.Users.Update(user);
+            _mapper.Map(req, myUser);
+            _context.Users.Update(myUser);
             _context.SaveChanges();
+        }
+
+        public bool UsernameExists(string username)
+        {
+            return _context.Users.Any(x => x.Username.ToLower() == username.ToLower());
         }
     }
 }

@@ -108,31 +108,13 @@ namespace ProgrammingQuotesApi.Controllers
         /// <summary>
         /// Replace my old user data with a new one 🔒
         /// </summary>
-        // [HttpPut]
-        // [Authorize]
-        // [Route("me")]
-        // public ActionResult Update([FromBody] UserUpdate req)
-        // {
-        //     var oldUser = _userService.GetByUsername(User.Identity.Name);
-        //     User newUser = new()
-        //     {
-        //         Id = oldUser.Id,
-        //         Role = oldUser.Role,
-        //         Username = req.Username,
-        //         Password = req.Password,
-        //         FirstName = req.FirstName,
-        //         LastName = req.LastName,
-        //     };
-        //     _userService.Replace(oldUser, newUser);
-        //     return Ok(newUser);
-        // }
         [HttpPut]
         [Authorize]
         [Route("me")]
-        public IActionResult Update(UserUpdate model)
+        public ActionResult Update([FromBody] UserUpdate model)
         {
             var myUser = _userService.GetByUsername(User.Identity.Name);
-            _userService.Update(myUser.Id, model);
+            _userService.Update(myUser, model);
             return Ok(new { message = "User updated successfully" });
         }
 
