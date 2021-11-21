@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using ProgrammingQuotesApi.Models;
 using ProgrammingQuotesApi.Services;
 using System.Collections.Generic;
-using System;
-using Microsoft.AspNetCore.Http;
 
 namespace ProgrammingQuotesApi.Controllers
 {

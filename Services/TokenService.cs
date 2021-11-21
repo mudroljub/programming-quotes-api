@@ -1,9 +1,9 @@
-using ProgrammingQuotesApi.Models;
 using Microsoft.IdentityModel.Tokens;
-using System;
+using ProgrammingQuotesApi.Helpers;
+using ProgrammingQuotesApi.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using ProgrammingQuotesApi.Authorization;
+using System;
 
 namespace ProgrammingQuotesApi.Services
 {

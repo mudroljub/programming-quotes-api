@@ -50,4 +50,3 @@ git push heroku master
 ## TODO
 
 - add User patch
-- merge Helpers and Authorization dir

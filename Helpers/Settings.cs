@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace ProgrammingQuotesApi.Authorization
+namespace ProgrammingQuotesApi.Helpers
 {
     public static class Settings
     {
