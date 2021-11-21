@@ -58,9 +58,6 @@ namespace ProgrammingQuotesApi.Services
 
         public void Register(UserRegister req)
         {
-            if (_context.Users.Any(x => x.Username == req.Username))
-                throw new Exception("Username '" + req.Username + "' is already taken");
-
             req.Password = BCryptNet.HashPassword(req.Password);
             User user = _mapper.Map<User>(req);
             user.Role = "User";

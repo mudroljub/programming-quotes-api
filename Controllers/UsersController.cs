@@ -26,6 +26,9 @@ namespace ProgrammingQuotesApi.Controllers
         [AllowAnonymous]
         public ActionResult Create([FromBody] UserRegister newUser)
         {
+            if (_userService.UsernameTaken(newUser.Username))
+                return BadRequest(new { message = "Username " + newUser.Username + " is already taken" });
+
             _userService.Register(newUser);
             return Ok(new { message = "Registration successful" });
         }
