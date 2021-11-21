@@ -111,10 +111,13 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpPut]
         [Authorize]
         [Route("me")]
-        public ActionResult Update([FromBody] UserUpdate model)
+        public ActionResult Update([FromBody] UserUpdate req)
         {
             var myUser = _userService.GetByUsername(User.Identity.Name);
-            _userService.Update(myUser, model);
+            if (req.Username != myUser.Username && _userService.UsernameTaken(req.Username))
+                return BadRequest(new { message = "Username " + req.Username + " is already taken" });
+
+            _userService.Update(myUser, req);
             return Ok(new { message = "User updated successfully" });
         }
 

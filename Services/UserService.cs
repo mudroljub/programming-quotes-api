@@ -71,9 +71,6 @@ namespace ProgrammingQuotesApi.Services
 
         public void Update(User myUser, UserUpdate req)
         {
-            if (req.Username != myUser.Username && UsernameTaken(req.Username))
-                throw new Exception("Username '" + req.Username + "' is already taken");
-
             if (!string.IsNullOrEmpty(req.Password))
                 req.Password = BCryptNet.HashPassword(req.Password);
 
