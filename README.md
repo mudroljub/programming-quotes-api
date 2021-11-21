@@ -36,3 +36,7 @@ dotnet watch run
 - Auth: https://jasonwatmore.com/post/2021/07/29/net-5-role-based-authorization-tutorial-with-example-api
 - Auth: https://medium.com/@marcosvinicios_net/asp-net-core-3-authorization-and-authentication-with-bearer-and-jwt-3041c47c8b1d
 - Deploy: https://stackoverflow.com/questions/29100993/how-to-deploy-net-application-to-heroku
+
+## TODO
+
+- patch User

@@ -20,6 +20,26 @@ namespace ProgrammingQuotesApi.Controllers
         }
 
         /// <summary>
+        /// Create a new user
+        /// </summary>
+        [HttpPost("register")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [AllowAnonymous]
+        public ActionResult Create([FromBody] User req)
+        {
+            try
+            {
+                _userService.Add(req);
+                return Created("", req);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
         /// Authenticates an existing user
         /// </summary>
         /// <remarks>
@@ -88,26 +108,6 @@ namespace ProgrammingQuotesApi.Controllers
         [Route("dashboard")]
         [Authorize(Roles = "Admin,Editor")]
         public string Dashboard() => "Admin Dashboard. Only for Admins and Editors here";
-
-        /// <summary>
-        /// Create a new user
-        /// </summary>
-        [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [AllowAnonymous]
-        public ActionResult Create([FromBody] User req)
-        {
-            try
-            {
-                _userService.Add(req);
-                return Created("", req);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
 
         /// <summary>
         /// Replace my old user data with a new one 🔒
