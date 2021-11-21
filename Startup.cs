@@ -1,22 +1,23 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.IO;
-using System;
 using ProgrammingQuotesApi.Authorization;
 using ProgrammingQuotesApi.Helpers;
 using ProgrammingQuotesApi.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
+using System.IO;
+using System;
 
 namespace ProgrammingQuotesApi
 {
     public class Startup
     {
         public IConfiguration Configuration { get; }
+        private readonly string version = "v2";
 
         public Startup(IConfiguration configuration)
         {
@@ -31,7 +32,7 @@ namespace ProgrammingQuotesApi
             services.AddControllers().AddNewtonsoftJson();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo
+                c.SwaggerDoc(version, new OpenApiInfo
                 {
                     Title = "ProgrammingQuotesApi",
                     Description = "Programming Quotes API for open source projects.",
@@ -41,7 +42,7 @@ namespace ProgrammingQuotesApi
                         Email = "mudroljub@gmail.com",
                         Url = new Uri("https://github.com/mudroljub"),
                     },
-                    Version = "v1"
+                    Version = version
                 });
                 // generate documentation file
                 string xmlPath = Path.Combine(AppContext.BaseDirectory, "ProgrammingQuotesApi.xml");
@@ -87,7 +88,7 @@ namespace ProgrammingQuotesApi
             });
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProgrammingQuotesApi v1");
+                c.SwaggerEndpoint($"/swagger/{version}/swagger.json", $"ProgrammingQuotesApi {version}");
                 c.RoutePrefix = string.Empty;
             });
 
