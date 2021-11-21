@@ -30,6 +30,7 @@ namespace ProgrammingQuotesApi
             services.AddDbContext<DataContext>();
             services.AddCors();
             services.AddControllers().AddNewtonsoftJson();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc(version, new OpenApiInfo

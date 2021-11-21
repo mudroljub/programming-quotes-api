@@ -1,18 +1,22 @@
+using AutoMapper;
 using BCryptNet = BCrypt.Net.BCrypt;
 using ProgrammingQuotesApi.Helpers;
 using ProgrammingQuotesApi.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace ProgrammingQuotesApi.Services
 {
     public class UserService
     {
         private readonly DataContext _context;
+        private readonly IMapper _mapper;
 
-        public UserService(DataContext context)
+        public UserService(DataContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         private static bool VerifyPassword(string password, string hash)
@@ -22,19 +26,13 @@ namespace ProgrammingQuotesApi.Services
 
         public UserResponse Authenticate(string username, string password)
         {
-            var user = _context.Users.FirstOrDefault(x => x.Username.ToLower() == username.ToLower() && VerifyPassword(password, x.Password));
+            User user = _context.Users.FirstOrDefault(x => x.Username.ToLower() == username.ToLower() && VerifyPassword(password, x.Password));
             if (user == null)         
                 return null;
 
-            string token = TokenService.CreateToken(user);
-            return new UserResponse { 
-                Id = user.Id,
-                Username = user.Username, 
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Role = user.Role,
-                Token = token 
-            };
+            UserResponse response = _mapper.Map<UserResponse>(user);
+            response.Token = TokenService.CreateToken(user);
+            return response;
         }
 
         public IEnumerable<User> GetAll()
@@ -68,6 +66,21 @@ namespace ProgrammingQuotesApi.Services
         {
             newUser.Password = BCryptNet.HashPassword(newUser.Password);
             _context.Entry(oldUser).CurrentValues.SetValues(newUser);
+            _context.SaveChanges();
+        }
+
+        public void Update(int id, UserUpdate req)
+        {
+            var user = GetById(id);
+
+            if (req.Username != user.Username && _context.Users.Any(x => x.Username == req.Username))
+                throw new Exception("Username '" + req.Username + "' is already taken");
+
+            if (!string.IsNullOrEmpty(req.Password))
+                req.Password = BCryptNet.HashPassword(req.Password);
+
+            _mapper.Map(req, user);
+            _context.Users.Update(user);
             _context.SaveChanges();
         }
     }

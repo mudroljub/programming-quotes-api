@@ -55,7 +55,7 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public ActionResult Authenticate([FromBody] UserRequest req)
+        public ActionResult Authenticate([FromBody] UserLogin req)
         {
             UserResponse user = _userService.Authenticate(req.Username, req.Password);
 
@@ -108,23 +108,32 @@ namespace ProgrammingQuotesApi.Controllers
         /// <summary>
         /// Replace my old user data with a new one 🔒
         /// </summary>
+        // [HttpPut]
+        // [Authorize]
+        // [Route("me")]
+        // public ActionResult Update([FromBody] UserUpdate req)
+        // {
+        //     var oldUser = _userService.GetByUsername(User.Identity.Name);
+        //     User newUser = new()
+        //     {
+        //         Id = oldUser.Id,
+        //         Role = oldUser.Role,
+        //         Username = req.Username,
+        //         Password = req.Password,
+        //         FirstName = req.FirstName,
+        //         LastName = req.LastName,
+        //     };
+        //     _userService.Replace(oldUser, newUser);
+        //     return Ok(newUser);
+        // }
         [HttpPut]
         [Authorize]
         [Route("me")]
-        public ActionResult Update([FromBody] User req)
+        public IActionResult Update(UserUpdate model)
         {
-            User oldUser = _userService.GetByUsername(User.Identity.Name);
-            User newUser = new()
-            {
-                Id = oldUser.Id,
-                Role = oldUser.Role,
-                Username = req.Username,
-                Password = req.Password,
-                FirstName = req.FirstName,
-                LastName = req.LastName,
-            };
-            _userService.Replace(oldUser, newUser);
-            return Ok(newUser);
+            var myUser = _userService.GetByUsername(User.Identity.Name);
+            _userService.Update(myUser.Id, model);
+            return Ok(new { message = "User updated successfully" });
         }
 
         /// <summary>

@@ -49,6 +49,7 @@ git push heroku master
 
 ## TODO
 
+- Authenticate service staviti tip UserUpdate
 - ne dozvoliti role: string
 - add User patch
 - merge Helpers and Authorization dir
