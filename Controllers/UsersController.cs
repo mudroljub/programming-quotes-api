@@ -54,7 +54,7 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public ActionResult Authenticate([FromBody] UserAuth req)
+        public ActionResult Authenticate([FromBody] UserRequest req)
         {
             UserResponse user = _userService.Authenticate(req.Username, req.Password);
 
