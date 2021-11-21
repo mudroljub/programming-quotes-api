@@ -53,6 +53,7 @@ namespace ProgrammingQuotesApi.Services
         public void Add(User user)
         {
             user.Password = BCryptNet.HashPassword(user.Password);
+            user.Role = "User";
             _context.Users.Add(user);
             _context.SaveChanges();
         }

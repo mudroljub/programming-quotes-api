@@ -49,5 +49,6 @@ git push heroku master
 
 ## TODO
 
+- ne dozvoliti role: string
 - add User patch
 - merge Helpers and Authorization dir

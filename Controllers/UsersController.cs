@@ -31,7 +31,8 @@ namespace ProgrammingQuotesApi.Controllers
             try
             {
                 _userService.Add(req);
-                return Created("", req);
+                return Ok(new { message = "Registration successful" });
+                // return Created("", req); // should return UserResponse
             }
             catch (Exception ex)
             {
