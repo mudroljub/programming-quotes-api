@@ -23,21 +23,11 @@ namespace ProgrammingQuotesApi.Controllers
         /// Create a new user
         /// </summary>
         [HttpPost("register")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [AllowAnonymous]
-        public ActionResult Create([FromBody] User req)
+        public ActionResult Create([FromBody] UserRegister newUser)
         {
-            try
-            {
-                _userService.Add(req);
-                return Ok(new { message = "Registration successful" });
-                // return Created("", req); // should return UserAuthRes
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            _userService.Register(newUser);
+            return Ok(new { message = "Registration successful" });
         }
 
         /// <summary>
