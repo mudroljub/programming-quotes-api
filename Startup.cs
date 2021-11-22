@@ -29,6 +29,11 @@ namespace ProgrammingQuotesApi
             services.AddDbContext<DataContext>();
             services.AddCors();
             services.AddControllers().AddNewtonsoftJson();
+            // services.AddMvc()
+            //  .AddJsonOptions(options =>
+            //  {
+            //      options.JsonSerializerOptions.IgnoreNullValues = true;
+            //  });
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddSwaggerGen(c =>
             {
