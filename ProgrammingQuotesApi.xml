@@ -88,12 +88,12 @@
             For example: 5a6ce86e2af929789500e7e4
             </remarks>
         </member>
-        <member name="M:ProgrammingQuotesApi.Controllers.UsersController.Create(ProgrammingQuotesApi.Models.User)">
+        <member name="M:ProgrammingQuotesApi.Controllers.UsersController.Create(ProgrammingQuotesApi.Models.UserRegister)">
             <summary>
             Create a new user
             </summary>
         </member>
-        <member name="M:ProgrammingQuotesApi.Controllers.UsersController.Authenticate(ProgrammingQuotesApi.Models.UserAuth)">
+        <member name="M:ProgrammingQuotesApi.Controllers.UsersController.Authenticate(ProgrammingQuotesApi.Models.UserAuthReq)">
              <summary>
              Authenticates an existing user
              </summary>
@@ -127,7 +127,7 @@
             Admin dashboard 🔒
             </summary>
         </member>
-        <member name="M:ProgrammingQuotesApi.Controllers.UsersController.Update(ProgrammingQuotesApi.Models.User)">
+        <member name="M:ProgrammingQuotesApi.Controllers.UsersController.Update(ProgrammingQuotesApi.Models.UserUpdate)">
             <summary>
             Replace my old user data with a new one 🔒
             </summary>

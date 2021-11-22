@@ -6,11 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ProgrammingQuotesApi.Models
 {
-    [Index(nameof(Username), IsUnique = true)] // not working?
-    public class User
+    public class UserAuthRes
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required]
@@ -26,8 +24,7 @@ namespace ProgrammingQuotesApi.Models
         [DefaultValue("User")]
         public string Role { get; set; }
 
-        [JsonIgnore]
         [Required]
-        public string Password { get; set; }
+        public string Token { get; set; }
     }
 }

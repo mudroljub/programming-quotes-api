@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using ProgrammingQuotesApi.Models;
 using ProgrammingQuotesApi.Services;
 using System.Collections.Generic;
-using System;
-using Microsoft.AspNetCore.Http;
 
 namespace ProgrammingQuotesApi.Controllers
 {
@@ -23,20 +21,14 @@ namespace ProgrammingQuotesApi.Controllers
         /// Create a new user
         /// </summary>
         [HttpPost("register")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [AllowAnonymous]
-        public ActionResult Create([FromBody] User req)
+        public ActionResult Create([FromBody] UserRegister req)
         {
-            try
-            {
-                _userService.Add(req);
-                return Created("", req);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            if (_userService.UsernameTaken(req.Username))
+                return BadRequest(new { message = "Username " + req.Username + " is already taken" });
+
+            _userService.Register(req);
+            return Ok(new { message = "Registration successful" });
         }
 
         /// <summary>
@@ -54,19 +46,14 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public ActionResult Authenticate([FromBody] UserAuth req)
+        public ActionResult Authenticate([FromBody] UserAuthReq req)
         {
-            User user = _userService.Authenticate(req.Username, req.Password);
+            UserAuthRes user = _userService.Authenticate(req.Username, req.Password);
 
             if (user == null)
                 return Unauthorized(new { message = "User or password invalid" });
 
-            string token = TokenService.CreateToken(user);
-            return Ok(new
-            {
-                user,
-                token
-            });
+            return Ok(user);
         }
 
         /// <summary>
@@ -115,20 +102,14 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpPut]
         [Authorize]
         [Route("me")]
-        public ActionResult Update([FromBody] User req)
+        public ActionResult Update([FromBody] UserUpdate req)
         {
-            User oldUser = _userService.GetByUsername(User.Identity.Name);
-            User newUser = new()
-            {
-                Id = oldUser.Id,
-                Role = oldUser.Role,
-                Username = req.Username,
-                Password = req.Password,
-                FirstName = req.FirstName,
-                LastName = req.LastName,
-            };
-            _userService.Replace(oldUser, newUser);
-            return Ok(newUser);
+            var myUser = _userService.GetByUsername(User.Identity.Name);
+            if (req.Username != myUser.Username && _userService.UsernameTaken(req.Username))
+                return BadRequest(new { message = "Username " + req.Username + " is already taken" });
+
+            _userService.Update(myUser, req);
+            return Ok(new { message = "User updated successfully" });
         }
 
         /// <summary>

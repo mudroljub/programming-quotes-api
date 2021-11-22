@@ -1,18 +1,22 @@
+using AutoMapper;
 using BCryptNet = BCrypt.Net.BCrypt;
 using ProgrammingQuotesApi.Helpers;
 using ProgrammingQuotesApi.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace ProgrammingQuotesApi.Services
 {
     public class UserService
     {
         private readonly DataContext _context;
+        private readonly IMapper _mapper;
 
-        public UserService(DataContext context)
+        public UserService(DataContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         private static bool VerifyPassword(string password, string hash)
@@ -20,9 +24,15 @@ namespace ProgrammingQuotesApi.Services
             return BCryptNet.Verify(password, hash);
         }
 
-        public User Authenticate(string username, string password)
+        public UserAuthRes Authenticate(string username, string password)
         {
-            return _context.Users.FirstOrDefault(x => x.Username.ToLower() == username.ToLower() && VerifyPassword(password, x.Password));
+            User user = _context.Users.FirstOrDefault(x => x.Username.ToLower() == username.ToLower() && VerifyPassword(password, x.Password));
+            if (user == null)         
+                return null;
+
+            UserAuthRes response = _mapper.Map<UserAuthRes>(user);
+            response.Token = TokenService.CreateToken(user);
+            return response;
         }
 
         public IEnumerable<User> GetAll()
@@ -41,7 +51,17 @@ namespace ProgrammingQuotesApi.Services
         public void Add(User user)
         {
             user.Password = BCryptNet.HashPassword(user.Password);
+            user.Role = "User";
             _context.Users.Add(user);
+            _context.SaveChanges();
+        }
+
+        public void Register(UserRegister req)
+        {
+            req.Password = BCryptNet.HashPassword(req.Password);
+            User newUser = _mapper.Map<User>(req);
+            newUser.Role = "User";
+            _context.Users.Add(newUser);
             _context.SaveChanges();
         }
 
@@ -56,6 +76,22 @@ namespace ProgrammingQuotesApi.Services
             newUser.Password = BCryptNet.HashPassword(newUser.Password);
             _context.Entry(oldUser).CurrentValues.SetValues(newUser);
             _context.SaveChanges();
+        }
+
+        public void Update(User myUser, UserUpdate req)
+        {
+            if (!string.IsNullOrEmpty(req.Password))
+                req.Password = BCryptNet.HashPassword(req.Password);
+
+            _mapper.Map(req, myUser);
+            _context.Users.Update(myUser);
+            _context.SaveChanges();
+        }
+
+        public bool UsernameTaken(string username)
+        {
+            if (string.IsNullOrEmpty(username)) return false;
+            return _context.Users.Any(x => x.Username.ToLower() == username.ToLower());
         }
     }
 }

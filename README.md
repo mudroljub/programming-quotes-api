@@ -29,6 +29,16 @@ dotnet build
 dotnet watch run
 ```
 
+Deploy:
+
+```
+heroku login
+heroku git:remote -a programming-quotes-api
+heroku buildpacks:set https://github.com/jincod/dotnetcore-buildpack
+
+git push heroku master
+```
+
 ## Tutorials
 
 - Web API: https://docs.microsoft.com/en-us/learn/modules/build-web-api-aspnet-core/
@@ -39,4 +49,4 @@ dotnet watch run
 
 ## TODO
 
-- patch User
+- add User patch
