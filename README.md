@@ -22,7 +22,7 @@ You can also POST, PUT, PATCH and DELETE. See [API documentation](https://progra
 
 ## Author info
 
-You can use Wikipedia API for author image and info. 
+You can use Wikipedia API for author's image and info. 
 
 To get author image:
 
@@ -32,7 +32,7 @@ To get author info:
 
 [`https://en.wikipedia.org/w/api.php?action=query&titles=Fred%20Brooks&prop=extracts&format=json&exintro=1`](https://en.wikipedia.org/w/api.php?action=query&titles=Fred%20Brooks&prop=extracts&format=json&exintro=1)
 
-Note that you can change `titles`, `pithumbsize` and other params. `%20` character (as in `Fred%20Brooks`) is for empty space.
+Note that you can change `titles`, `pithumbsize` and other params. The `%20` character (as in `Fred%20Brooks`) is for empty space.
 
 ## Development
 
