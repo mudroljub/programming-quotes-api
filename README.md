@@ -18,7 +18,21 @@ GET [`/quotes/5a6ce86f2af929789500e824`](https://programming-quotes-api.herokuap
 
 GET [`/quotes/author/Edsger W. Dijkstra`](https://programming-quotes-api.herokuapp.com/quotes/author/Edsger%20W.%20Dijkstra) (get quote by author)
 
-You can also POST, PUT, PATCH and DELETE. See [docs](https://programming-quotes-api.herokuapp.com) for more.
+You can also POST, PUT, PATCH and DELETE. See [API documentation](https://programming-quotes-api.herokuapp.com) for more.
+
+## Author info
+
+You can use Wikipedia API for author image and info. 
+
+To get author image:
+
+[`https://en.wikipedia.org/w/api.php?action=query&titles=Fred%20Brooks&prop=pageimages&format=json&pithumbsize=250`](https://en.wikipedia.org/w/api.php?action=query&titles=Fred%20Brooks&prop=pageimages&format=json&pithumbsize=250)
+
+To get author info:
+
+[`https://en.wikipedia.org/w/api.php?action=query&titles=Fred%20Brooks&prop=extracts&format=json&exintro=1`](https://en.wikipedia.org/w/api.php?action=query&titles=Fred%20Brooks&prop=extracts&format=json&exintro=1)
+
+Note that you can change `titles`, `pithumbsize` and other params. `%20` character (as in `Fred%20Brooks`) is for empty space.
 
 ## Development
 
@@ -28,6 +42,8 @@ Start the project locally:
 dotnet build
 dotnet watch run
 ```
+
+Listening on: http://localhost:5000
 
 Deploy:
 
