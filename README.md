@@ -24,7 +24,7 @@ You can also POST, PUT, PATCH and DELETE. See [API documentation](https://progra
 
 You can use Wikipedia API for author's image and info. 
 
-To get author image:
+To get author's image:
 
 [`https://en.wikipedia.org/w/api.php?action=query&titles=Fred%20Brooks&prop=pageimages&format=json&pithumbsize=250`](https://en.wikipedia.org/w/api.php?action=query&titles=Fred%20Brooks&prop=pageimages&format=json&pithumbsize=250)
 
