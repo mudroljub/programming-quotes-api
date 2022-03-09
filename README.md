@@ -18,7 +18,7 @@ GET [`/quotes/5a6ce86f2af929789500e824`](https://programming-quotes-api.herokuap
 
 GET [`/quotes/author/Edsger W. Dijkstra`](https://programming-quotes-api.herokuapp.com/quotes/author/Edsger%20W.%20Dijkstra) (get quote by author)
 
-You can also POST, PUT, PATCH and DELETE. See [docs](https://https://programming-quotes-api.herokuapp.com) for more.
+You can also POST, PUT, PATCH and DELETE. See [docs](https://programming-quotes-api.herokuapp.com) for more.
 
 ## Development
 
