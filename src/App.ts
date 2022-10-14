@@ -1,26 +1,60 @@
-import express from "express";
-import dotEnv from "dotenv";
-dotEnv.config();
+import express, { application, urlencoded } from "express";
+import mongoose from "mongoose";
+import { Config } from "./config/Config";
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+start();
 
-app.disable("x-powered-by");
+async function start() {
+	/** Connect to MongoDB */
+	try {
+		await mongoose.connect(Config.mongo.url, {
+			retryWrites: true,
+			w: "majority",
+		});
+		console.log("Connected to MongoDB.");
+		StartServer();
+	} catch (err) {
+		console.error("Failed to connect to MongoDB.");
+		console.error(err);
+	}
+}
 
-// Parse body as a Json object
-app.use((req, res, next) => {
-	express.json()(req, res, (err) => {
-		if (err) return res.sendStatus(400);
+function StartServer() {
+	const app = express();
+
+	app.use(urlencoded({ extended: true }));
+	app.use(express.json());
+
+	/** Server Calls */
+	app.use((req, res, next) => {
+		/** Log request */
+		console.info(
+			`Incoming -> ${req.method}${req.url} from ${req.socket.remoteAddress}`
+		);
+
+		res.on("finish", () => {
+			console.info(
+				`Outgoing -> ${req.method}${req.url} from ${req.socket.remoteAddress} -> ${res.statusCode}`
+			);
+		});
+
 		next();
 	});
-});
 
-app.listen(PORT, () => {
-	console.log(`Server running on port ${PORT}`);
-});
+	/** Routes */
 
-app.use((_, res) => {
-	res.sendStatus(404);
-});
+	/** Health-check */
+	app.get("/ping", (req, res, next) =>
+		res.status(200).json({ message: "Pong!" })
+	);
 
-export default app;
+	/** Error handling */
+	app.use((req, res, next) => {
+		return res.status(404).json({ message: "Not Found" });
+	});
+
+	// TODO: Use HTTP to host server
+	app.listen(Config.server.port, () =>
+		console.log(`Server online on port ${Config.server.port}.`)
+	);
+}
