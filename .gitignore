@@ -13,3 +13,6 @@ benchmarks/graphs
 
 dist
 *.env
+
+# Fleet config files
+.fleet
