@@ -1,6 +1,8 @@
 import express, { application, urlencoded } from "express";
 import mongoose from "mongoose";
+
 import { Config } from "./config/Config";
+import quotesRoute from "./route/Quote.route";
 
 start();
 
@@ -42,6 +44,7 @@ function StartServer() {
 	});
 
 	/** Routes */
+	app.use("/quotes", quotesRoute);
 
 	/** Health-check */
 	app.get("/ping", (req, res, next) =>

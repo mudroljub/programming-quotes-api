@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 /** Configure environment variables. */
 dotenv.config();
 
+/** Get environment variables for  */
 const MONGO_USERNAME = process.env.MONGO_USERNAME || "";
 const MONGO_PASSWORD = process.env.MONGO_PASSWORD || "";
 const MONGO_URL = `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@expressmongotut.qxyrkqq.mongodb.net`;

@@ -10,6 +10,7 @@ export interface IQuoteModel extends IQuote, Document {}
 const QuoteSchema: Schema = new Schema(
 	{
 		author: { type: String, required: true },
+		body: { type: String, required: true },
 	},
 	{
 		versionKey: false,
