@@ -5,7 +5,7 @@ import QuoteRepository from "../domain/repositories/Quote.repository";
 
 const repository = new QuoteRepository()
 
-const createQuote = async (req: Request, res: Response, next: NextFunction) => {
+const createQuote = async (req: Request, res: Response) => {
     const {author, body} = req.body;
     const quote = new Quote({
         _id: new mongoose.Types.ObjectId(),
@@ -21,7 +21,7 @@ const createQuote = async (req: Request, res: Response, next: NextFunction) => {
     }
 };
 
-const readQuote = async (req: Request, res: Response, next: NextFunction) => {
+const readQuote = async (req: Request, res: Response) => {
     try {
         const result = await repository.findQuoteById(req.params.quoteId)
         if (result) return res.json({result});
@@ -31,7 +31,7 @@ const readQuote = async (req: Request, res: Response, next: NextFunction) => {
     }
 };
 
-const readAll = async (req: Request, res: Response, next: NextFunction) => {
+const readAll = async (req: Request, res: Response) => {
     try {
         const quotes = await repository.getAllQuotes();
         return res.json({quotes});
@@ -40,7 +40,7 @@ const readAll = async (req: Request, res: Response, next: NextFunction) => {
     }
 };
 
-const updateQuote = async (req: Request, res: Response, next: NextFunction) => {
+const updateQuote = async (req: Request, res: Response) => {
     const {author, body} = req.body
     try {
         const _res = await repository.updateQuote(req.params.quoteId, new Quote({
@@ -55,7 +55,7 @@ const updateQuote = async (req: Request, res: Response, next: NextFunction) => {
     }
 };
 
-const deleteQuote = async (req: Request, res: Response, next: NextFunction) => {
+const deleteQuote = async (req: Request, res: Response) => {
     try {
         const _res = await repository.deleteQuote(req.params.quoteId);
         if (_res) return res.json({message: "Deleted"});
@@ -65,7 +65,7 @@ const deleteQuote = async (req: Request, res: Response, next: NextFunction) => {
     }
 };
 
-// const backupLocal = async (req: Request, res: Response, next: NextFunction) => {
+// const backupLocal = async (req: Request, res: Response) => {
 //     try {
 //         const quotes = (req.body as any)["quotes"] as Array<IQuoteModel>;
 //         for (const quote of quotes) {
