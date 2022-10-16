@@ -1,4 +1,5 @@
 import Quote, {IQuoteModel} from "../models/Quote";
+import mongoose from "mongoose";
 
 export default class QuoteRepository {
     async saveQuote(quote: IQuoteModel) {
@@ -17,7 +18,7 @@ export default class QuoteRepository {
         return Quote.findById(quoteId);
     }
 
-    async findQuote(searchQuery: any) {
+    async findQuote(searchQuery: mongoose.FilterQuery<IQuoteModel>) {
         return Quote.findOne(searchQuery)
     }
 
