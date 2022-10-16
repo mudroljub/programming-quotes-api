@@ -1,6 +1,6 @@
 {
   "name": "programming-quotes-api",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Node/Express API to find programming quotes",
   "main": "src/App.ts",
   "scripts": {
