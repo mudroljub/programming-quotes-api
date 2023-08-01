@@ -18,11 +18,6 @@ namespace ProgrammingQuotesApi.Services
             _mapper = mapper;
         }
 
-        private static bool VerifyPassword(string password, string hash)
-        {
-            return BCryptNet.Verify(password, hash);
-        }
-
         public UserAuthRes Authenticate(string username, string password)
         {
             User user = _context.Users.FirstOrDefault(x => x.Username.ToLower() == username.ToLower() && VerifyPassword(password, x.Password));
@@ -33,10 +28,7 @@ namespace ProgrammingQuotesApi.Services
             return response;
         }
 
-        public IEnumerable<User> GetAll()
-        {
-            return _context.Users;
-        }
+        public IEnumerable<User> GetAll() => _context.Users;
 
         public User GetById(int id) => _context.Users.FirstOrDefault(p => p.Id == id);
 
@@ -48,18 +40,10 @@ namespace ProgrammingQuotesApi.Services
             return user;
         }
 
-        public void Add(User user)
+        public void Register(UserRegister user)
         {
             user.Password = BCryptNet.HashPassword(user.Password);
-            user.Role = "User";
-            _context.Users.Add(user);
-            _context.SaveChanges();
-        }
-
-        public void Register(UserRegister req)
-        {
-            req.Password = BCryptNet.HashPassword(req.Password);
-            User newUser = _mapper.Map<User>(req);
+            User newUser = _mapper.Map<User>(user);
             newUser.Role = "User";
             _context.Users.Add(newUser);
             _context.SaveChanges();
@@ -101,11 +85,12 @@ namespace ProgrammingQuotesApi.Services
             _context.SaveChanges();
         }
 
-        public bool UsernameTaken(string username)
-        {
-            if (string.IsNullOrEmpty(username)) return false;
+        /* UTILS */
 
-            return _context.Users.Any(x => x.Username.ToLower() == username.ToLower());
-        }
+        private static bool VerifyPassword(string password, string hash) => BCryptNet.Verify(password, hash);
+
+        public bool UsernameTaken(string username) => string.IsNullOrEmpty(username) 
+            ? false 
+            : _context.Users.Any(x => x.Username.ToLower() == username.ToLower());
     }
 }
