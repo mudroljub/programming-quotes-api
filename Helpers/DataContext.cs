@@ -11,6 +11,7 @@ namespace ProgrammingQuotesApi.Helpers
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Quote> Quotes { get; set; }
+
         private readonly JsonSerializerOptions JsonOptions = new()
         {
             PropertyNameCaseInsensitive = true
