@@ -51,4 +51,4 @@ Note that you can change `titles`, `pithumbsize` and other params. The `%20` cha
 
 ## TODO
 
-- add User patch
+- create VS project

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using ProgrammingQuotesApi.Models;
 using ProgrammingQuotesApi.Services;
@@ -77,6 +78,14 @@ namespace ProgrammingQuotesApi.Controllers
         }
 
         /// <summary>
+        /// Admin dashboard 🔒
+        /// </summary>
+        [HttpGet]
+        [Route("dashboard")]
+        [Authorize(Roles = "Admin,Editor")]
+        public string Dashboard() => "Welcome to the Admin Dashboard";
+
+        /// <summary>
         /// Returns my user details 🔒
         /// </summary>
         [HttpGet]
@@ -87,14 +96,6 @@ namespace ProgrammingQuotesApi.Controllers
             User user = _userService.GetByUsername(User.Identity.Name);
             return Ok(user);
         }
-
-        /// <summary>
-        /// Admin dashboard 🔒
-        /// </summary>
-        [HttpGet]
-        [Route("dashboard")]
-        [Authorize(Roles = "Admin,Editor")]
-        public string Dashboard() => "Admin Dashboard. Only for Admins and Editors here";
 
         /// <summary>
         /// Replace my old user data with a new one 🔒
@@ -110,6 +111,36 @@ namespace ProgrammingQuotesApi.Controllers
 
             _userService.Update(myUser, req);
             return Ok(new { message = "User updated successfully" });
+        }
+
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     [
+        ///       {
+        ///          "path": "/firstName",
+        ///          "op": "replace",
+        ///          "value": "Master"
+        ///       }
+        ///     ]
+        ///
+        /// </remarks>
+        /// <summary>
+        /// Update certain properties of an my user 🔒
+        /// </summary>
+        [HttpPatch]
+        [Authorize]
+        [Route("me")]
+        public ActionResult Patch(JsonPatchDocument<User> patch)
+        {
+            User user = _userService.GetByUsername(User.Identity.Name);
+            if (user is null)
+                return NotFound();
+
+            patch.ApplyTo(user);
+            _userService.Update(user);
+
+            return Ok(user);
         }
 
         /// <summary>

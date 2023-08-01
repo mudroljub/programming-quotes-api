@@ -78,6 +78,12 @@ namespace ProgrammingQuotesApi.Services
             _context.SaveChanges();
         }
 
+        public void Update(User user)
+        {
+            _context.Users.Update(user);
+            _context.SaveChanges();
+        }
+
         public void Update(User myUser, UserUpdate req)
         {
             if (!string.IsNullOrEmpty(req.Password))

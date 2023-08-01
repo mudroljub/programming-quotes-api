@@ -117,20 +117,37 @@
             Returns a user data for a given username
             </summary>
         </member>
-        <member name="M:ProgrammingQuotesApi.Controllers.UsersController.GetMyUser">
-            <summary>
-            Returns my user details 🔒
-            </summary>
-        </member>
         <member name="M:ProgrammingQuotesApi.Controllers.UsersController.Dashboard">
             <summary>
             Admin dashboard 🔒
+            </summary>
+        </member>
+        <member name="M:ProgrammingQuotesApi.Controllers.UsersController.GetMyUser">
+            <summary>
+            Returns my user details 🔒
             </summary>
         </member>
         <member name="M:ProgrammingQuotesApi.Controllers.UsersController.Update(ProgrammingQuotesApi.Models.UserUpdate)">
             <summary>
             Replace my old user data with a new one 🔒
             </summary>
+        </member>
+        <member name="M:ProgrammingQuotesApi.Controllers.UsersController.Patch(Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{ProgrammingQuotesApi.Models.User})">
+             <remarks>
+             Sample request:
+            
+                 [
+                   {
+                      "path": "/firstName",
+                      "op": "replace",
+                      "value": "Master"
+                   }
+                 ]
+            
+             </remarks>
+             <summary>
+             Update certain properties of an my user 🔒
+             </summary>
         </member>
         <member name="M:ProgrammingQuotesApi.Controllers.UsersController.Delete(System.Int32)">
             <summary>
