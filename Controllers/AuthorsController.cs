@@ -37,7 +37,6 @@ namespace ProgrammingQuotesApi.Controllers
         /// </summary>
         /// <param name="author">The name of the author from Wikipedia. For example: Edsger W. Dijkstra</param>
         [HttpGet("{author}")]
-        public ActionResult<Author> GetAuthorDetails(string author) => _authorService.GetAuthorDetails(author);
-
+        public ActionResult<Author> GetAuthorDetails(string author) => Ok(_authorService.GetAuthorDetails(author));
     }
 }

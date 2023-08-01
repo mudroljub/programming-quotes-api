@@ -78,7 +78,7 @@ namespace ProgrammingQuotesApi.Controllers
         /// </summary>
         /// <param name="author">The name of the author from Wikipedia. For example: Edsger W. Dijkstra</param>
         [HttpGet("author/{author}")]
-        public IEnumerable<Quote> GetQuotesByAuthor(string author) => _quoteService.GetByAuthor(author);
+        public ActionResult<IEnumerable<Quote>> GetQuotesByAuthor(string author) => Ok(_quoteService.GetByAuthor(author));
 
         /// <summary>
         /// Replace an existing quote with a new one
