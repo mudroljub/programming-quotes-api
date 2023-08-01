@@ -47,3 +47,8 @@ Note that you can change `titles`, `pithumbsize` and other params. The `%20` cha
 - Web API: https://channel9.msdn.com/Series/Beginners-Series-to-Web-APIs?page=2
 - Auth: https://jasonwatmore.com/post/2021/07/29/net-5-role-based-authorization-tutorial-with-example-api
 - Auth: https://medium.com/@marcosvinicios_net/asp-net-core-3-authorization-and-authentication-with-bearer-and-jwt-3041c47c8b1d
+
+## TODO
+
+- add favorite quotes
+- deploy on server

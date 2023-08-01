@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Newtonsoft.Json;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace ProgrammingQuotesApi.Models
 {
@@ -16,6 +17,10 @@ namespace ProgrammingQuotesApi.Models
         [Required]
         public string Username { get; set; }
 
+        [JsonIgnore]
+        [Required]
+        public string Password { get; set; }
+
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string FirstName { get; set; }
 
@@ -26,8 +31,7 @@ namespace ProgrammingQuotesApi.Models
         [DefaultValue("User")]
         public string Role { get; set; }
 
-        [JsonIgnore]
-        [Required]
-        public string Password { get; set; }
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public List<string> favoriteQoutes { get; } = new List<string>();
     }
 }
