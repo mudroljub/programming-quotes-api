@@ -94,6 +94,13 @@ namespace ProgrammingQuotesApi.Services
             _context.SaveChanges();
         }
 
+        public void AddFavorite(User user, string quoteId)
+        {
+            user.favoriteQuotes.Add(quoteId);
+            _context.Users.Update(user);
+            _context.SaveChanges();
+        }
+
         public bool UsernameTaken(string username)
         {
             if (string.IsNullOrEmpty(username)) return false;

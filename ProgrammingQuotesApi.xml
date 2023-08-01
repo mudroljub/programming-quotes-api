@@ -149,6 +149,11 @@
              Update certain properties of my user 🔒
              </summary>
         </member>
+        <member name="M:ProgrammingQuotesApi.Controllers.UsersController.addFavorite(System.String)">
+            <summary>
+            Add favorite quote 🔒
+            </summary>
+        </member>
         <member name="M:ProgrammingQuotesApi.Controllers.UsersController.Delete(System.Int32)">
             <summary>
             Delete a user by id 🔒
