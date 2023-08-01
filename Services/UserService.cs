@@ -78,7 +78,7 @@ namespace ProgrammingQuotesApi.Services
             _context.SaveChanges();
         }
 
-        public void AddFavorite(User user, string quoteId)
+        public void addFavoriteQuote(User user, string quoteId)
         {
             user.favoriteQuotes.Add(quoteId);
             _context.Users.Update(user);

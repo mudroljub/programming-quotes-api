@@ -85,7 +85,7 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpGet]
         [Route("dashboard")]
         [Authorize(Roles = "Admin,Editor")]
-        public string Dashboard() => "Welcome to the Admin Dashboard";
+        public string Dashboard() => "Welcome to the Dashboard for admins and editors only.";
 
         /// <summary>
         /// Returns my user details 🔒
@@ -152,11 +152,11 @@ namespace ProgrammingQuotesApi.Controllers
         /// </remarks>
         [HttpPost]
         [Authorize]
-        [Route("addFavorite")]
+        [Route("addFavoriteQuote")]
         public ActionResult<User> addFavorite([FromBody] string quoteId)
         {
             User user = _userService.GetByUsername(User.Identity.Name);
-            _userService.AddFavorite(user, quoteId);
+            _userService.addFavoriteQuote(user, quoteId);
             return Ok(user);
         }
 
