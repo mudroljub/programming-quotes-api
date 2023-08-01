@@ -27,8 +27,7 @@ namespace ProgrammingQuotesApi.Services
         public UserAuthRes Authenticate(string username, string password)
         {
             User user = _context.Users.FirstOrDefault(x => x.Username.ToLower() == username.ToLower() && VerifyPassword(password, x.Password));
-            if (user == null)         
-                return null;
+            if (user is null) return null;
 
             UserAuthRes response = _mapper.Map<UserAuthRes>(user);
             response.Token = TokenService.CreateToken(user);
@@ -45,7 +44,9 @@ namespace ProgrammingQuotesApi.Services
         public User GetByUsername(string username)
         {
             User user = _context.Users.FirstOrDefault(x => x.Username.ToLower() == username.ToLower());
-            return user ?? throw new KeyNotFoundException("User not found");
+            if (user is null) return null;
+
+            return user;
         }
 
         public void Add(User user)
@@ -97,6 +98,7 @@ namespace ProgrammingQuotesApi.Services
         public bool UsernameTaken(string username)
         {
             if (string.IsNullOrEmpty(username)) return false;
+
             return _context.Users.Any(x => x.Username.ToLower() == username.ToLower());
         }
     }

@@ -146,7 +146,7 @@
             
              </remarks>
              <summary>
-             Update certain properties of an my user 🔒
+             Update certain properties of my user 🔒
              </summary>
         </member>
         <member name="M:ProgrammingQuotesApi.Controllers.UsersController.Delete(System.Int32)">
