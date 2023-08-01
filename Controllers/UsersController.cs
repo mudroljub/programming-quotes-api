@@ -60,7 +60,7 @@ namespace ProgrammingQuotesApi.Controllers
         /// Returns all users
         /// </summary>
         [HttpGet]
-        public IActionResult GetAll()
+        public ActionResult<IEnumerable<User>> GetAll()
         {
             IEnumerable<User> users = _userService.GetAll();
             return Ok(users);
