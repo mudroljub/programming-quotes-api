@@ -145,22 +145,6 @@ namespace ProgrammingQuotesApi.Controllers
         }
 
         /// <summary>
-        /// Add favorite quote 🔒
-        /// </summary>
-        /// <remarks>
-        /// For example: "5a6ce86e2af929789500e7e4"
-        /// </remarks>
-        [HttpPost]
-        [Authorize]
-        [Route("addFavoriteQuote")]
-        public ActionResult<User> addFavorite([FromBody] string quoteId)
-        {
-            User user = _userService.GetByUsername(User.Identity.Name);
-            _userService.addFavoriteQuote(user, quoteId);
-            return Ok(user);
-        }
-
-        /// <summary>
         /// Delete a user by id 🔒
         /// </summary>
         [Authorize]

@@ -10,6 +10,11 @@ namespace ProgrammingQuotesApi.Models
     [Index(nameof(Username), IsUnique = true)] // not working?
     public class User
     {
+        public User()
+        {
+            favoriteQuotes = new HashSet<Quote>();
+        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -32,6 +37,6 @@ namespace ProgrammingQuotesApi.Models
         public string Role { get; set; }
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public List<string> favoriteQuotes { get; } = new List<string>();
+        public HashSet<Quote> favoriteQuotes { get; set; }
     }
 }

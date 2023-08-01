@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -16,8 +17,11 @@ namespace ProgrammingQuotesApi.Controllers
     public class QuotesController : ControllerBase
     {
         private readonly QuoteService _quoteService;
-        public QuotesController(QuoteService quoteService) {
+        private readonly UserService _userService;
+
+        public QuotesController(QuoteService quoteService, UserService userService) {
             _quoteService = quoteService;
+            _userService = userService;
         }
 
         /// <summary>
@@ -134,13 +138,32 @@ namespace ProgrammingQuotesApi.Controllers
         public ActionResult Delete(string id)
         {
             Quote quote = _quoteService.GetById(id);
-
-            if (quote is null)
-                return NotFound();
+            if (quote is null) return NotFound();
 
             _quoteService.Delete(quote);
 
             return NoContent();
+        }
+
+        /// <summary>
+        /// Add favorite quote 🔒
+        /// </summary>
+        /// <remarks>
+        /// For example: "5a6ce86e2af929789500e7e4"
+        /// </remarks>
+        [HttpPost]
+        [Authorize]
+        [Route("addFavorite")]
+        public ActionResult<User> addFavorite([FromBody] string quoteId)
+        {
+            Quote quote = _quoteService.GetById(quoteId);
+            if (quote is null) return NotFound();
+
+            User user = _userService.GetByUsername(User.Identity.Name);
+            if (user is null) return NotFound();
+
+            _userService.addFavoriteQuote(user, quote);
+            return Ok(user);
         }
     }
 }
