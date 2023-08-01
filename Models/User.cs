@@ -32,6 +32,6 @@ namespace ProgrammingQuotesApi.Models
         public string Role { get; set; }
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public List<string> favoriteQoutes { get; } = new List<string>();
+        public List<string> favoriteQuotes { get; } = new List<string>();
     }
 }
