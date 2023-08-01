@@ -102,7 +102,7 @@ namespace ProgrammingQuotesApi.Controllers
         ///       {
         ///          "path": "/author",
         ///          "op": "replace",
-        ///          "value": "Anonymous",
+        ///          "value": "Anonymous"
         ///       }
         ///     ]
         ///

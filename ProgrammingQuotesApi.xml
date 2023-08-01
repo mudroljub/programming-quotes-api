@@ -70,7 +70,7 @@
                    {
                       "path": "/author",
                       "op": "replace",
-                      "value": "Anonymous",
+                      "value": "Anonymous"
                    }
                  ]
             
