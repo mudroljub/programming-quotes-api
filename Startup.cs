@@ -45,7 +45,7 @@ namespace ProgrammingQuotesApi
                     {
                         Name = "Damjan Pavlica",
                         Email = "mudroljub@gmail.com",
-                        Url = new Uri("https://github.com/mudroljub"),
+                        Url = new Uri("https://twitter.com/mudroljub"),
                     },
                     Version = version
                 });
