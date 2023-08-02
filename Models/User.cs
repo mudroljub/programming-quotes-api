@@ -26,17 +26,16 @@ namespace ProgrammingQuotesApi.Models
         [Required]
         public string Password { get; set; }
 
-        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)] // ignore null
         public string FirstName { get; set; }
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string LastName { get; set; }
 
-        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
         [DefaultValue("User")]
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
         public string Role { get; set; }
 
-        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
         public HashSet<Quote> favoriteQuotes { get; set; }
     }
 }
