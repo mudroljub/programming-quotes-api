@@ -27,8 +27,8 @@ namespace ProgrammingQuotesApi.Helpers
         {
             if (Quotes.Any()) return;
 
-            string fileContent = File.ReadAllText("Data/quotes.json");
-            List<Quote> quotes = JsonSerializer.Deserialize<List<Quote>>(fileContent, JsonOptions);
+            string data = File.ReadAllText("Data/quotes.json");
+            List<Quote> quotes = JsonSerializer.Deserialize<List<Quote>>(data, JsonOptions);
 
             Quotes.AddRange(quotes);
             SaveChanges();
@@ -38,8 +38,8 @@ namespace ProgrammingQuotesApi.Helpers
         {
             if (Users.Any()) return;
 
-            string fileContent = File.ReadAllText("Data/users.json");
-            List<User> users = JsonSerializer.Deserialize<List<User>>(fileContent, JsonOptions);
+            string data = File.ReadAllText("Data/users.json");
+            List<User> users = JsonSerializer.Deserialize<List<User>>(data, JsonOptions);
 
             Users.AddRange(users);
             SaveChanges();
