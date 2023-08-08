@@ -14,7 +14,7 @@ namespace ProgrammingQuotesApi.Services
             _quoteService = quoteService;
             foreach (Quote q in _quoteService.GetAll())
             {
-                if (Authors.ContainsKey(q.Author)) {  
+                if (Authors.ContainsKey(q.Author)) {
                     Authors[q.Author].QuoteCount++;  
                 }
                 else {  
@@ -28,7 +28,7 @@ namespace ProgrammingQuotesApi.Services
             }
         }
 
-        public Dictionary<string, Author> GetAuthors() => Authors;
+        public List<Author> GetAuthors() => Authors.Values.OrderByDescending(author => author.QuoteCount).ToList();
 
         public Author GetAuthorDetails(string author)
         {

@@ -20,9 +20,9 @@ namespace ProgrammingQuotesApi.Controllers
         /// Returns a list of authors
         /// </summary>
         [HttpGet]
-        public ActionResult<Dictionary<string, Author>> GetAuthors()
+        public ActionResult<List<Author>> GetAuthors()
         {
-            Dictionary<string, Author> authors = _authorService.GetAuthors();
+            List<Author> authors = _authorService.GetAuthors();
             return Ok(authors);
         }
 
