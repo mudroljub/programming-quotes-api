@@ -10,6 +10,7 @@ namespace ProgrammingQuotesApi.Services
     public static class TokenService
     {
         private const double EXPIRE_DAYS = 7;
+
         public static string CreateToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
