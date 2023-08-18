@@ -9,16 +9,12 @@ namespace ProgrammingQuotesApi.Helpers
         {
             CreateMap<User, UserAuthRes>();
             CreateMap<UserRegister, User>();
-            CreateMap<UserUpdate, User>()
-                .ForAllMembers(x => x.Condition((src, dest, prop) =>
-                    {
-                        // ignore empty fields
-                        if (prop == null) return false;
-                        if (prop.GetType() == typeof(string) && string.IsNullOrEmpty((string)prop)) return false;
-
-                        return true;
-                    }
-                ));
+            CreateMap<UserUpdate, User>().ForAllMembers(x => x.Condition((src, dest, prop) =>
+                {
+                    // ignore empty fields in update
+                    return !(prop is null || ((prop is string str) && str.Length == 0));
+                }
+            ));
         }
     }
 }
