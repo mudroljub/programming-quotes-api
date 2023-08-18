@@ -80,7 +80,7 @@ namespace ProgrammingQuotesApi.Controllers
         /// <summary>
         /// Returns all quotes for a given author
         /// </summary>
-        /// <param name="author">The name of the author from Wikipedia. For example: Edsger W. Dijkstra</param>
+        /// <param name="authorName">The name of the author from Wikipedia. For example: Edsger W. Dijkstra</param>
         [HttpGet("author/{authorName}")]
         public ActionResult<IEnumerable<Quote>> GetQuotesByAuthor(string authorName) => Ok(_quoteService.GetByAuthor(authorName));
 

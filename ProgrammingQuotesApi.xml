@@ -18,7 +18,7 @@
             <summary>
             Returns author details
             </summary>
-            <param name="author">The name of the author from Wikipedia. For example: Edsger W. Dijkstra</param>
+            <param name="authorName">The name of the author from Wikipedia. For example: Edsger W. Dijkstra</param>
         </member>
         <member name="M:ProgrammingQuotesApi.Controllers.QuotesController.GetAll(System.Int32)">
             <summary>
@@ -55,7 +55,7 @@
             <summary>
             Returns all quotes for a given author
             </summary>
-            <param name="author">The name of the author from Wikipedia. For example: Edsger W. Dijkstra</param>
+            <param name="authorName">The name of the author from Wikipedia. For example: Edsger W. Dijkstra</param>
         </member>
         <member name="M:ProgrammingQuotesApi.Controllers.QuotesController.Update(ProgrammingQuotesApi.Models.Quote)">
             <summary>
