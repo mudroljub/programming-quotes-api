@@ -39,12 +39,8 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpGet("{authorName}")]
         public ActionResult<Author> GetAuthorDetails(string authorName) {
             Author authorInfo = _authorService.GetAuthorDetails(authorName);
-            if (authorInfo == null)
-            {
-                return NotFound();
-            }
-            
-            return Ok(authorInfo);
+ 
+            return authorInfo == null ? NotFound() : Ok(authorInfo);
         }
     }
 }

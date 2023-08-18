@@ -74,9 +74,8 @@ namespace ProgrammingQuotesApi.Controllers
         public ActionResult<User> GetByUsername(string username)
         {
             User user = _userService.GetByUsername(username);
-            if (user == null) return NotFound();
 
-            return Ok(user);
+            return user == null ? NotFound() : Ok(user);
         }
 
         /// <summary>

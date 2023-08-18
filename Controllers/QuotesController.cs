@@ -82,7 +82,11 @@ namespace ProgrammingQuotesApi.Controllers
         /// </summary>
         /// <param name="authorName">The name of the author from Wikipedia. For example: Edsger W. Dijkstra</param>
         [HttpGet("author/{authorName}")]
-        public ActionResult<IEnumerable<Quote>> GetQuotesByAuthor(string authorName) => Ok(_quoteService.GetByAuthor(authorName));
+        public ActionResult<IEnumerable<Quote>> GetQuotesByAuthor(string authorName) {
+          var quotes = _quoteService.GetByAuthor(authorName);
+
+          return !quotes.Any() ? NotFound() : Ok(quotes);
+        }
 
         /// <summary>
         /// Replace an existing quote with a new one
