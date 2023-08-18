@@ -7,7 +7,7 @@ using System;
 
 namespace ProgrammingQuotesApi.Services
 {
-    public class QuoteService
+    public class QuoteService : IQuoteService
     {
         private readonly DataContext _context;
 

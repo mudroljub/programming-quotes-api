@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace ProgrammingQuotesApi.Services
 {
-    public class AuthorService
+    public class AuthorService : IAuthorService
     {
         private readonly QuoteService _quoteService;
         readonly Dictionary<string, Author> Authors = new();

@@ -28,7 +28,7 @@ namespace ProgrammingQuotesApi.Controllers
         /// Returns a list of quotes
         /// </summary>
         [HttpGet]
-        public ActionResult<IEnumerable<Quote>> GetAll([FromQuery] int count = 0)
+        public ActionResult<IEnumerable<Quote>> GetAll([FromQuery] int count = 20)
         {
             IEnumerable<Quote> quotes = _quoteService.GetAll(count);
             return Ok(quotes);

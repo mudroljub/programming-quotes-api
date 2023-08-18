@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace ProgrammingQuotesApi.Services
 {
-    public class UserService
+    public class UserService : IUserService
     {
         private readonly DataContext _context;
         private readonly IMapper _mapper;
