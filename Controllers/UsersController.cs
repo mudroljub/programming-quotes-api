@@ -74,7 +74,7 @@ namespace ProgrammingQuotesApi.Controllers
         public ActionResult<User> GetByUsername(string username)
         {
             User user = _userService.GetByUsername(username);
-            if (user is null) return NotFound();
+            if (user == null) return NotFound();
 
             return Ok(user);
         }
@@ -136,7 +136,7 @@ namespace ProgrammingQuotesApi.Controllers
         public ActionResult Patch(JsonPatchDocument<User> patch)
         {
             User user = _userService.GetByUsername(User.Identity.Name);
-            if (user is null) return NotFound();
+            if (user == null) return NotFound();
 
             patch.ApplyTo(user);
             _userService.Update(user);
@@ -154,7 +154,7 @@ namespace ProgrammingQuotesApi.Controllers
         {
             User user = _userService.GetById(id);
 
-            if (user is null)
+            if (user == null)
                 return NotFound();
 
             _userService.Delete(user);

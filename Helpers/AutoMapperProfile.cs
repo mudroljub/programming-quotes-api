@@ -12,7 +12,7 @@ namespace ProgrammingQuotesApi.Helpers
             CreateMap<UserUpdate, User>().ForAllMembers(x => x.Condition((src, dest, prop) =>
                 {
                     // ignore empty fields in update
-                    return !(prop is null || ((prop is string str) && str.Length == 0));
+                    return !(prop == null || ((prop is string str) && str.Length == 0));
                 }
             ));
         }

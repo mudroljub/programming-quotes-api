@@ -16,10 +16,10 @@ namespace ProgrammingQuotesApi.Services
             _context = context;
         }
 
-        public IEnumerable<Quote> GetAll(int count = 0)
+        public IEnumerable<Quote> GetAll(int num = 0)
         {
-            return (count > 0 && count <= _context.Quotes.Count())
-            ? _context.Quotes.Take(count)
+            return (num > 0 && num <= _context.Quotes.Count())
+            ? _context.Quotes.Take(num)
             : _context.Quotes;
         }
 
@@ -27,7 +27,7 @@ namespace ProgrammingQuotesApi.Services
 
         public Quote GetRandom() => _context.Quotes.ToList()[new Random().Next(0, _context.Quotes.Count())];
 
-        public IEnumerable<Quote> GetByAuthor(string author) => _context.Quotes.Where(p => p.Author == author);
+        public IEnumerable<Quote> GetByAuthor(string authorName) => _context.Quotes.Where(p => p.Author == authorName);
 
         public void Add(Quote quote)
         {

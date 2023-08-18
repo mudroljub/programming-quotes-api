@@ -21,7 +21,7 @@ namespace ProgrammingQuotesApi.Services
         public UserAuthRes Authenticate(string username, string password)
         {
             User user = _context.Users.FirstOrDefault(x => x.Username.ToLower() == username.ToLower() && VerifyPassword(password, x.Password));
-            if (user is null) return null;
+            if (user == null) return null;
 
             UserAuthRes response = _mapper.Map<UserAuthRes>(user);
             response.Token = TokenService.CreateToken(user);
@@ -35,7 +35,7 @@ namespace ProgrammingQuotesApi.Services
         public User GetByUsername(string username)
         {
             User user = _context.Users.FirstOrDefault(x => x.Username.ToLower() == username.ToLower());
-            if (user is null) return null;
+            if (user == null) return null;
 
             return user;
         }

@@ -53,3 +53,6 @@ Note that you can change `titles`, `pithumbsize` and other params. The `%20` cha
 - add favorite quotes
   - BUG: adding but not preserving
 - deploy on server
+- return Task<ActionResult>
+- mapLeft?
+- add async?

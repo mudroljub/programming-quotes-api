@@ -6,6 +6,6 @@ namespace ProgrammingQuotesApi.Services
     public interface IAuthorService
     {
         List<Author> GetAuthors();
-        Author GetAuthorDetails(string author);
+        Author GetAuthorDetails(string authorName);
     }
 }

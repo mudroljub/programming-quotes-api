@@ -30,13 +30,17 @@ namespace ProgrammingQuotesApi.Services
 
         public List<Author> GetAuthors() => Authors.Values.OrderByDescending(author => author.QuoteCount).ToList();
 
-        public Author GetAuthorDetails(string author)
+        public Author GetAuthorDetails(string authorName)
         {
-            IEnumerable<Quote> authorQuotes = _quoteService.GetByAuthor(author);
+            IEnumerable<Quote> authorQuotes = _quoteService.GetByAuthor(authorName);
+            if (!authorQuotes.Any()) {
+              return null;
+            }
+
             Author authorDetails = new Author()
             {
-                Name = author,
-                WikiUrl = $"https://en.wikipedia.org/wiki/{author}",
+                Name = authorName,
+                WikiUrl = $"https://en.wikipedia.org/wiki/{authorName}",
                 QuoteCount = authorQuotes.Count(),
                 Quotes = authorQuotes
             };

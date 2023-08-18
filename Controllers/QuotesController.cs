@@ -28,9 +28,9 @@ namespace ProgrammingQuotesApi.Controllers
         /// Returns a list of quotes
         /// </summary>
         [HttpGet]
-        public ActionResult<IEnumerable<Quote>> GetAll([FromQuery] int count = 20)
+        public ActionResult<IEnumerable<Quote>> GetAll([FromQuery] int num = 20)
         {
-            IEnumerable<Quote> quotes = _quoteService.GetAll(count);
+            IEnumerable<Quote> quotes = _quoteService.GetAll(num);
             return Ok(quotes);
         }
 
@@ -81,8 +81,8 @@ namespace ProgrammingQuotesApi.Controllers
         /// Returns all quotes for a given author
         /// </summary>
         /// <param name="author">The name of the author from Wikipedia. For example: Edsger W. Dijkstra</param>
-        [HttpGet("author/{author}")]
-        public ActionResult<IEnumerable<Quote>> GetQuotesByAuthor(string author) => Ok(_quoteService.GetByAuthor(author));
+        [HttpGet("author/{authorName}")]
+        public ActionResult<IEnumerable<Quote>> GetQuotesByAuthor(string authorName) => Ok(_quoteService.GetByAuthor(authorName));
 
         /// <summary>
         /// Replace an existing quote with a new one
@@ -91,7 +91,7 @@ namespace ProgrammingQuotesApi.Controllers
         public ActionResult Update(Quote newQuote)
         {
             Quote oldQuote = _quoteService.GetById(newQuote.Id);
-            if (oldQuote is null)
+            if (oldQuote == null)
                 return NotFound(new { message = "The quote Id does not exist." });
 
             _quoteService.Replace(oldQuote, newQuote);
@@ -119,7 +119,7 @@ namespace ProgrammingQuotesApi.Controllers
         public ActionResult Patch(string id, JsonPatchDocument<Quote> patch)
         {
             Quote quote = _quoteService.GetById(id);
-            if (quote is null)
+            if (quote == null)
                 return NotFound();
 
             patch.ApplyTo(quote);
@@ -138,7 +138,7 @@ namespace ProgrammingQuotesApi.Controllers
         public ActionResult Delete(string id)
         {
             Quote quote = _quoteService.GetById(id);
-            if (quote is null) return NotFound();
+            if (quote == null) return NotFound();
 
             _quoteService.Delete(quote);
 
@@ -157,10 +157,10 @@ namespace ProgrammingQuotesApi.Controllers
         public ActionResult<User> addFavorite([FromBody] string quoteId)
         {
             Quote quote = _quoteService.GetById(quoteId);
-            if (quote is null) return NotFound();
+            if (quote == null) return NotFound();
 
             User user = _userService.GetByUsername(User.Identity.Name);
-            if (user is null) return NotFound();
+            if (user == null) return NotFound();
 
             _userService.addFavoriteQuote(user, quote);
             return Ok(user);
