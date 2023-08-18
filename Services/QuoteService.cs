@@ -10,9 +10,9 @@ namespace ProgrammingQuotesApi.Services
 {
     public class QuoteService : IQuoteService
     {
-        private readonly DataContext _context;
+        private readonly ProgrammingContext _context;
 
-        public QuoteService(DataContext context)
+        public QuoteService(ProgrammingContext context)
         {
             _context = context;
         }

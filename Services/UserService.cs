@@ -10,10 +10,10 @@ namespace ProgrammingQuotesApi.Services
 {
     public class UserService : IUserService
     {
-        private readonly DataContext _context;
+        private readonly ProgrammingContext _context;
         private readonly IMapper _mapper;
 
-        public UserService(DataContext context, IMapper mapper)
+        public UserService(ProgrammingContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
