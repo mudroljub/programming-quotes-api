@@ -12,10 +12,12 @@ namespace ProgrammingQuotesApi.Controllers
     public class UsersController : ControllerBase
     {
         private readonly UserService _userService;
+        private readonly QuoteService _quoteService;
 
-        public UsersController(UserService userService)
+        public UsersController(UserService userService, QuoteService quoteService)
         {
             _userService = userService;
+            _quoteService = quoteService;
         }
 
         /// <summary>
@@ -161,5 +163,25 @@ namespace ProgrammingQuotesApi.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Add favorite quote 🔒
+        /// </summary>
+        /// <remarks>
+        /// For example: "5a6ce86e2af929789500e7e4"
+        /// </remarks>
+        [HttpPost]
+        [Authorize]
+        [Route("addFavorite")]
+        public ActionResult<User> addFavorite([FromBody] string quoteId)
+        {
+            Quote quote = _quoteService.GetById(quoteId);
+            if (quote == null) return NotFound();
+
+            User user = _userService.GetByUsername(User.Identity.Name);
+            if (user == null) return NotFound();
+
+            _userService.addFavoriteQuote(user, quote);
+            return Ok(user);
+        }
     }
 }

@@ -88,14 +88,6 @@
             For example: 5a6ce86e2af929789500e7e4
             </remarks>
         </member>
-        <member name="M:ProgrammingQuotesApi.Controllers.QuotesController.addFavorite(System.String)">
-            <summary>
-            Add favorite quote 🔒
-            </summary>
-            <remarks>
-            For example: "5a6ce86e2af929789500e7e4"
-            </remarks>
-        </member>
         <member name="M:ProgrammingQuotesApi.Controllers.UsersController.Create(ProgrammingQuotesApi.Models.UserRegister)">
             <summary>
             Create a new user
@@ -161,6 +153,14 @@
             <summary>
             Delete a user by id 🔒
             </summary>
+        </member>
+        <member name="M:ProgrammingQuotesApi.Controllers.UsersController.addFavorite(System.String)">
+            <summary>
+            Add favorite quote 🔒
+            </summary>
+            <remarks>
+            For example: "5a6ce86e2af929789500e7e4"
+            </remarks>
         </member>
     </members>
 </doc>
