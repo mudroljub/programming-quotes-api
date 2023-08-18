@@ -5,7 +5,7 @@ using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using ProgrammingQuotesApi.Models;
 
-namespace ProgrammingQuotesApi.Helpers
+namespace ProgrammingQuotesApi.DbContexts
 {
     public class DataContext : DbContext
     {

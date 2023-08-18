@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using ProgrammingQuotesApi.DbContexts;
 using ProgrammingQuotesApi.Helpers;
 using ProgrammingQuotesApi.Services;
 using System.IO;

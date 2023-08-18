@@ -1,5 +1,5 @@
 using MongoDB.Bson;
-using ProgrammingQuotesApi.Helpers;
+using ProgrammingQuotesApi.DbContexts;
 using ProgrammingQuotesApi.Models;
 using System.Collections.Generic;
 using System.Linq;
