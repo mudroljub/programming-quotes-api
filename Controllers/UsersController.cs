@@ -181,6 +181,7 @@ namespace ProgrammingQuotesApi.Controllers
             if (user == null) return NotFound();
 
             _userService.addFavoriteQuote(user, quote);
+
             return Ok(user);
         }
     }

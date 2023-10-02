@@ -4,6 +4,7 @@ using ProgrammingQuotesApi.Helpers;
 using ProgrammingQuotesApi.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProgrammingQuotesApi.Services
 {
@@ -28,13 +29,13 @@ namespace ProgrammingQuotesApi.Services
             return response;
         }
 
-        public IEnumerable<User> GetAll() => _context.Users;
+        public IEnumerable<User> GetAll() => _context.Users.Include(u => u.FavoriteQuotes);
 
-        public User GetById(int id) => _context.Users.FirstOrDefault(p => p.Id == id);
+        public User GetById(int id) => _context.Users.Include(u => u.FavoriteQuotes).FirstOrDefault(p => p.Id == id);
 
         public User GetByUsername(string username)
         {
-            User user = _context.Users.FirstOrDefault(x => x.Username.ToLower() == username.ToLower());
+            User user = _context.Users.Include(u => u.FavoriteQuotes).FirstOrDefault(x => x.Username.ToLower() == username.ToLower());
             if (user == null) return null;
 
             return user;
@@ -80,8 +81,7 @@ namespace ProgrammingQuotesApi.Services
 
         public void addFavoriteQuote(User user, Quote quote)
         {
-            user.favoriteQuotes.Add(quote);
-            _context.Users.Update(user);
+            user.FavoriteQuotes.Add(quote);
             _context.SaveChanges();
         }
 

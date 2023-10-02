@@ -31,6 +31,6 @@ namespace ProgrammingQuotesApi.Models
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
         public string Role { get; set; }
 
-        public HashSet<Quote> favoriteQuotes { get; set; } = new HashSet<Quote>();
+        public HashSet<Quote> FavoriteQuotes { get; set; } = new HashSet<Quote>();
     }
 }
