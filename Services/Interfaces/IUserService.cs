@@ -2,7 +2,7 @@ using ProgrammingQuotesApi.Helpers;
 using ProgrammingQuotesApi.Models;
 using System.Collections.Generic;
 
-namespace ProgrammingQuotesApi.Services
+namespace ProgrammingQuotesApi.Services.Interfaces
 {
     public interface IUserService
     {

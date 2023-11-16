@@ -10,6 +10,7 @@ using ProgrammingQuotesApi.Helpers;
 using ProgrammingQuotesApi.Services;
 using System.IO;
 using System;
+using ProgrammingQuotesApi.Services.Interfaces;
 
 namespace ProgrammingQuotesApi
 {
@@ -50,9 +51,9 @@ namespace ProgrammingQuotesApi
             }).AddSwaggerGenNewtonsoftSupport();
 
             // Dependency Injection
-            services.AddScoped<UserService>();
-            services.AddScoped<QuoteService>();
-            services.AddScoped<AuthorService>();
+            services.AddScoped<IUserService,UserService>();
+            services.AddScoped<IQuoteService,QuoteService>();
+            services.AddScoped<IAuthorService,AuthorService>();
 
             // authentication
             services.AddAuthentication(x =>
