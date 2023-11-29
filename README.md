@@ -4,6 +4,9 @@
 
 Convention: The names of the authors are as on Wikipedia.
 
+## Introduction
+This OpenSource API provides a large collection of quotes and their authors. These can be searched and favoured. This allows the citations to be filtered according to personal preferences. Quotes can also be edited, created and deleted. 
+
 ## Development
 
 Start the project locally:
