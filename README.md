@@ -59,12 +59,5 @@ Note that you can change `titles`, `pithumbsize` and other params. The `%20` cha
   - mapLeft?
 - add sql lite
   - add migration
-- refactor DbContext like CityInfo
 - remove Helpers, move settings to env
-
-- add favorite quotes
-  - BUG: adding but not preserving
-- deploy on server
-- return Task<ActionResult>
-- mapLeft?
-- add async?
+- deploy on some free server?
