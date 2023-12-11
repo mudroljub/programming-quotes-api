@@ -6,10 +6,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using ProgrammingQuotesApi.DbContexts;
 using ProgrammingQuotesApi.Helpers;
 using ProgrammingQuotesApi.Services;
 using System.IO;
 using System;
+using ProgrammingQuotesApi.Services.Interfaces;
 
 namespace ProgrammingQuotesApi
 {
@@ -26,7 +28,7 @@ namespace ProgrammingQuotesApi
         // called by the runtime, use to configure services
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>();
+            services.AddDbContext<ProgrammingContext>();
             services.AddCors();
             services.AddControllers().AddNewtonsoftJson();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -50,9 +52,9 @@ namespace ProgrammingQuotesApi
             }).AddSwaggerGenNewtonsoftSupport();
 
             // Dependency Injection
-            services.AddScoped<UserService>();
-            services.AddScoped<QuoteService>();
-            services.AddScoped<AuthorService>();
+            services.AddScoped<IUserService,UserService>();
+            services.AddScoped<IQuoteService,QuoteService>();
+            services.AddScoped<IAuthorService,AuthorService>();
 
             // authentication
             services.AddAuthentication(x =>

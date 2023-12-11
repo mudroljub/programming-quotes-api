@@ -1,19 +1,20 @@
 using AutoMapper;
 using BCryptNet = BCrypt.Net.BCrypt;
-using ProgrammingQuotesApi.Helpers;
+using ProgrammingQuotesApi.DbContexts;
 using ProgrammingQuotesApi.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using ProgrammingQuotesApi.Services.Interfaces;
 
 namespace ProgrammingQuotesApi.Services
 {
     public class UserService : IUserService
     {
-        private readonly DataContext _context;
+        private readonly ProgrammingContext _context;
         private readonly IMapper _mapper;
 
-        public UserService(DataContext context, IMapper mapper)
+        public UserService(ProgrammingContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

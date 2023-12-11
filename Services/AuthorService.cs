@@ -1,4 +1,5 @@
 using ProgrammingQuotesApi.Models;
+using ProgrammingQuotesApi.Services.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,10 +7,10 @@ namespace ProgrammingQuotesApi.Services
 {
     public class AuthorService : IAuthorService
     {
-        private readonly QuoteService _quoteService;
+        private readonly IQuoteService _quoteService;
         readonly Dictionary<string, Author> Authors = new();
 
-        public AuthorService(QuoteService quoteService)
+        public AuthorService(IQuoteService quoteService)
         {
             _quoteService = quoteService;
             foreach (Quote q in _quoteService.GetAll())

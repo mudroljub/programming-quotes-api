@@ -1,11 +1,11 @@
 using AutoMapper;
 using ProgrammingQuotesApi.Models;
 
-namespace ProgrammingQuotesApi.Helpers
+namespace ProgrammingQuotesApi.Profiles
 {
-    public class AutoMapperProfile : Profile
+    public class UserProfile : Profile
     {
-        public AutoMapperProfile()
+        public UserProfile()
         {
             CreateMap<User, UserAuthRes>();
             CreateMap<UserRegister, User>();

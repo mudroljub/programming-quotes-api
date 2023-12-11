@@ -5,9 +5,9 @@ using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using ProgrammingQuotesApi.Models;
 
-namespace ProgrammingQuotesApi.Helpers
+namespace ProgrammingQuotesApi.DbContexts
 {
-    public class DataContext : DbContext
+    public class ProgrammingContext : DbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Quote> Quotes { get; set; }
@@ -17,7 +17,7 @@ namespace ProgrammingQuotesApi.Helpers
             PropertyNameCaseInsensitive = true
         };
 
-        public DataContext()
+        public ProgrammingContext()
         {
             InitQuotes();
             InitUsers();

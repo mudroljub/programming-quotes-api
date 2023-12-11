@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using ProgrammingQuotesApi.Models;
-using ProgrammingQuotesApi.Services;
+using ProgrammingQuotesApi.Services.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mime;
@@ -16,9 +16,9 @@ namespace ProgrammingQuotesApi.Controllers
     [Consumes(MediaTypeNames.Application.Json)]
     public class QuotesController : ControllerBase
     {
-        private readonly QuoteService _quoteService;
+        private readonly IQuoteService _quoteService;
 
-        public QuotesController(QuoteService quoteService) {
+        public QuotesController(IQuoteService quoteService) {
             _quoteService = quoteService;
         }
 

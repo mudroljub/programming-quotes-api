@@ -1,17 +1,18 @@
 using MongoDB.Bson;
-using ProgrammingQuotesApi.Helpers;
+using ProgrammingQuotesApi.DbContexts;
 using ProgrammingQuotesApi.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using ProgrammingQuotesApi.Services.Interfaces;
 
 namespace ProgrammingQuotesApi.Services
 {
     public class QuoteService : IQuoteService
     {
-        private readonly DataContext _context;
+        private readonly ProgrammingContext _context;
 
-        public QuoteService(DataContext context)
+        public QuoteService(ProgrammingContext context)
         {
             _context = context;
         }

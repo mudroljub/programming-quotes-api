@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using ProgrammingQuotesApi.Models;
-using ProgrammingQuotesApi.Services;
+using ProgrammingQuotesApi.Services.Interfaces;
 using System.Collections.Generic;
 
 namespace ProgrammingQuotesApi.Controllers
@@ -11,10 +11,10 @@ namespace ProgrammingQuotesApi.Controllers
     [Route("[controller]")]
     public class UsersController : ControllerBase
     {
-        private readonly UserService _userService;
-        private readonly QuoteService _quoteService;
+        private readonly IUserService _userService;
+        private readonly IQuoteService _quoteService;
 
-        public UsersController(UserService userService, QuoteService quoteService)
+        public UsersController(IUserService userService, IQuoteService quoteService)
         {
             _userService = userService;
             _quoteService = quoteService;

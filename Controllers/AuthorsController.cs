@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using ProgrammingQuotesApi.Models;
-using ProgrammingQuotesApi.Services;
 using System.Net.Mime;
+using ProgrammingQuotesApi.Services.Interfaces;
 
 namespace ProgrammingQuotesApi.Controllers
 {
@@ -11,8 +11,8 @@ namespace ProgrammingQuotesApi.Controllers
     [Produces(MediaTypeNames.Application.Json)]
     public class AuthorsController : ControllerBase
     {
-        private readonly AuthorService _authorService;
-        public AuthorsController(AuthorService authorService) {
+        private readonly IAuthorService _authorService;
+        public AuthorsController(IAuthorService authorService) {
             _authorService = authorService;
          }
 
