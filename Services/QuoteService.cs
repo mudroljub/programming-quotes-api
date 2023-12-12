@@ -50,6 +50,7 @@ namespace ProgrammingQuotesApi.Services
         }
 
         public IEnumerable<Quote> GetByAuthor(string authorName) => _context.Quotes.Where(p => p.Author == authorName);
+        public async Task <IEnumerable<Quote>> GetByAuthorAsync(string authorName) => await _context.Quotes.Where(p => p.Author == authorName).ToListAsync();
 
         public async Task AddAsync(Quote quote)
         {

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProgrammingQuotesApi.Models;
 using System.Net.Mime;
 using ProgrammingQuotesApi.Services.Interfaces;
+using System.Threading.Tasks;
 
 namespace ProgrammingQuotesApi.Controllers
 {
@@ -37,8 +38,8 @@ namespace ProgrammingQuotesApi.Controllers
         /// </summary>
         /// <param name="authorName">The name of the author from Wikipedia. For example: Edsger W. Dijkstra</param>
         [HttpGet("{authorName}")]
-        public ActionResult<Author> GetAuthorDetails(string authorName) {
-            Author authorInfo = _authorService.GetAuthorDetails(authorName);
+        public async Task<ActionResult<Author>> GetAuthorDetails(string authorName) {
+            Author authorInfo = await _authorService.GetAuthorDetailsAsync(authorName);
  
             return authorInfo == null ? NotFound() : Ok(authorInfo);
         }

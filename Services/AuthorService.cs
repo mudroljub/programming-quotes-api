@@ -2,6 +2,7 @@ using ProgrammingQuotesApi.Models;
 using ProgrammingQuotesApi.Services.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ProgrammingQuotesApi.Services
 {
@@ -10,30 +11,37 @@ namespace ProgrammingQuotesApi.Services
         private readonly IQuoteService _quoteService;
         readonly Dictionary<string, Author> Authors = new();
 
-        public AuthorService(IQuoteService quoteService)
+        private void PopulateAuthors()
         {
-            _quoteService = quoteService;
             foreach (Quote q in _quoteService.GetAll())
             {
-                if (Authors.ContainsKey(q.Author)) {
-                    Authors[q.Author].QuoteCount++;  
+                if (Authors.ContainsKey(q.Author))
+                {
+                    Authors[q.Author].QuoteCount++;
                 }
-                else {  
+                else
+                {
                     Authors.Add(q.Author, new Author()
                     {
                         Name = q.Author,
                         WikiUrl = $"https://en.wikipedia.org/wiki/{q.Author}",
                         QuoteCount = 1
-                    });  
+                    });
                 }
             }
         }
 
+        public AuthorService(IQuoteService quoteService)
+        {
+            _quoteService = quoteService;
+            PopulateAuthors();
+        }
+
         public List<Author> GetAuthors() => Authors.Values.OrderByDescending(author => author.QuoteCount).ToList();
 
-        public Author GetAuthorDetails(string authorName)
+        public async Task<Author> GetAuthorDetailsAsync(string authorName)
         {
-            IEnumerable<Quote> authorQuotes = _quoteService.GetByAuthor(authorName);
+            IEnumerable<Quote> authorQuotes = await _quoteService.GetByAuthorAsync(authorName);
             if (!authorQuotes.Any()) {
               return null;
             }
