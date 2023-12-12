@@ -58,22 +58,22 @@ namespace ProgrammingQuotesApi.Services
             await _context.SaveChangesAsync();
         }
 
-        public void Delete(Quote quote)
+        public async Task DeleteAsync(Quote quote)
         {
             _context.Quotes.Remove(quote);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Replace(Quote oldQuote, Quote newQuote)
-        { 
+        public async Task ReplaceAsync(Quote oldQuote, Quote newQuote)
+        {
             _context.Entry(oldQuote).CurrentValues.SetValues(newQuote);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Update(Quote quote)
+        public async Task UpdateAsync(Quote quote)
         {
             _context.Quotes.Update(quote);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }

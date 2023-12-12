@@ -96,7 +96,7 @@ namespace ProgrammingQuotesApi.Controllers
             if (oldQuote == null)
                 return NotFound(new { message = "The quote Id does not exist." });
 
-            _quoteService.Replace(oldQuote, newQuote);
+            await _quoteService.ReplaceAsync(oldQuote, newQuote);
 
             return Ok(newQuote);
         }
@@ -125,7 +125,7 @@ namespace ProgrammingQuotesApi.Controllers
                 return NotFound();
 
             patch.ApplyTo(quote);
-            _quoteService.Update(quote);
+            await _quoteService.UpdateAsync(quote);
 
             return Ok(quote);
         }
@@ -142,7 +142,7 @@ namespace ProgrammingQuotesApi.Controllers
             Quote quote = await _quoteService.GetByIdAsync(id);
             if (quote == null) return NotFound();
 
-            _quoteService.Delete(quote);
+            await _quoteService.DeleteAsync(quote);
 
             return NoContent();
         }
