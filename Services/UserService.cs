@@ -50,26 +50,19 @@ namespace ProgrammingQuotesApi.Services
             return user;
         }
 
-        public void Register(UserRegister user)
+        public async Task RegisterAsync(UserRegister user)
         {
             user.Password = BCryptNet.HashPassword(user.Password);
             User newUser = _mapper.Map<User>(user);
             newUser.Role = "User";
-            _context.Users.Add(newUser);
-            _context.SaveChanges();
+            await _context.Users.AddAsync(newUser);
+            await _context.SaveChangesAsync();
         }
 
-        public void Delete(User user)
+        public async Task DeleteAsync(User user)
         {
             _context.Users.Remove(user);
-            _context.SaveChanges();
-        }
-
-        public void Replace(User oldUser, User newUser)
-        {
-            newUser.Password = BCryptNet.HashPassword(newUser.Password);
-            _context.Entry(oldUser).CurrentValues.SetValues(newUser);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         public void Update(User user)

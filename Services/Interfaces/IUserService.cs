@@ -11,9 +11,8 @@ namespace ProgrammingQuotesApi.Services.Interfaces
         IEnumerable<User> GetAll();
         Task<User> GetByIdAsync(int id);
         Task<User> GetByUsernameAsync(string username);
-        void Register(UserRegister user);
-        void Delete(User user);
-        void Replace(User user, User newUser);
+        Task RegisterAsync(UserRegister user);
+        Task DeleteAsync(User user);
         void Update(User user);
         void Update(User user, UserUpdate req);
         void AddFavoriteQuote(User user, Quote quote);

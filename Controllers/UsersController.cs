@@ -26,12 +26,12 @@ namespace ProgrammingQuotesApi.Controllers
         /// </summary>
         [HttpPost("register")]
         [AllowAnonymous]
-        public ActionResult Create([FromBody] UserRegister req)
+        public async Task<ActionResult> Create([FromBody] UserRegister req)
         {
             if (_userService.UsernameTaken(req.Username))
                 return BadRequest(new { message = "Username " + req.Username + " is already taken" });
 
-            _userService.Register(req);
+            await _userService.RegisterAsync(req);
             return Ok(new { message = "Registration successful" });
         }
 
@@ -159,7 +159,7 @@ namespace ProgrammingQuotesApi.Controllers
             if (user == null)
                 return NotFound();
 
-            _userService.Delete(user);
+            await _userService.DeleteAsync(user);
 
             return NoContent();
         }
