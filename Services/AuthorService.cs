@@ -42,6 +42,8 @@ namespace ProgrammingQuotesApi.Services
             return Authors.Values.OrderByDescending(author => author.QuoteCount).ToList();
         }
 
+        public async Task<int> GetCount() => (await GetAuthors()).Count;
+
         public async Task<Author> GetAuthorDetailsAsync(string authorName)
         {
             IEnumerable<Quote> authorQuotes = await _quoteService.GetByAuthorAsync(authorName);

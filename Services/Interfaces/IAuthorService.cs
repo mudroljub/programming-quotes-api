@@ -8,5 +8,6 @@ namespace ProgrammingQuotesApi.Services.Interfaces
     {
         Task<List<Author>> GetAuthors();
         Task<Author> GetAuthorDetailsAsync(string authorName);
+        Task<int> GetCount();
     }
 }

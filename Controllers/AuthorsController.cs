@@ -33,8 +33,8 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpGet("count")]
         public async Task<ActionResult<int>> GetCount()
         {
-            List<Author> authors = await _authorService.GetAuthors();
-            return Ok(authors.Count);
+            int count = await _authorService.GetCount();
+            return Ok(count);
         }
 
         /// <summary>
