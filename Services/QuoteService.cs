@@ -19,22 +19,43 @@ namespace ProgrammingQuotesApi.Services
             _context = context;
         }
 
+        public async Task<Quote> GetByIdAsync(string id)
+        {
+            return await _context.Quotes.FirstOrDefaultAsync(p => p.Id == id);
+        }
+
+        public async Task<int> CountAsync() => await _context.Quotes.CountAsync();
+
+        public async Task<IEnumerable<Quote>> GetAllAsync(int num = 0)
+        {
+            int length = await _context.Quotes.CountAsync();
+            return (num > 0 && num <= length)
+              ? _context.Quotes.Take(num)
+              : _context.Quotes;
+        }
+
         public IEnumerable<Quote> GetAll(int num = 0)
         {
-            return (num > 0 && num <= _context.Quotes.Count())
+          int length = _context.Quotes.Count();
+          return (num > 0 && num <= length)
             ? _context.Quotes.Take(num)
             : _context.Quotes;
         }
 
-        public Quote GetRandom() => _context.Quotes.ToList()[new Random().Next(0, _context.Quotes.Count())];
+        public async Task<Quote> GetRandomAsync()
+        {
+            List<Quote> quotes = await _context.Quotes.ToListAsync();
+            int index = new Random().Next(0, await _context.Quotes.CountAsync());
+            return quotes[index];
+        }
 
         public IEnumerable<Quote> GetByAuthor(string authorName) => _context.Quotes.Where(p => p.Author == authorName);
 
-        public void Add(Quote quote)
+        public async Task AddAsync(Quote quote)
         {
             quote.Id = ObjectId.GenerateNewId().ToString();
-            _context.Quotes.Add(quote);
-            _context.SaveChanges();
+            await _context.Quotes.AddAsync(quote);
+            await _context.SaveChangesAsync();
         }
 
         public void Delete(Quote quote)
@@ -53,11 +74,6 @@ namespace ProgrammingQuotesApi.Services
         {
             _context.Quotes.Update(quote);
             _context.SaveChanges();
-        }
-
-        public async Task<Quote> GetByIdAsync(string id)
-        {
-            return await _context.Quotes.FirstOrDefaultAsync(p => p.Id == id);
         }
     }
 }

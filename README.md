@@ -57,6 +57,12 @@ Note that you can change `titles`, `pithumbsize` and other params. The `%20` cha
 - add async?
   - return Task<ActionResult>
   - mapLeft?
+- fix create quote model:
+{
+  "id": "string",
+  "author": "string",
+  "en": "string"
+}
 - add sql lite
   - add migration
 - remove Helpers, move settings to env

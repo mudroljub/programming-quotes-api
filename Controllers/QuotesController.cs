@@ -27,10 +27,9 @@ namespace ProgrammingQuotesApi.Controllers
         /// Returns a list of quotes
         /// </summary>
         [HttpGet]
-        public ActionResult<IEnumerable<Quote>> GetAll([FromQuery] int num = 20)
+        public async Task<ActionResult<IEnumerable<Quote>>> GetAll([FromQuery] int num = 20)
         {
-            IEnumerable<Quote> quotes = _quoteService.GetAll(num);
-            return Ok(quotes);
+            return Ok(await _quoteService.GetAllAsync(num));
         }
 
         /// <summary>
@@ -46,22 +45,20 @@ namespace ProgrammingQuotesApi.Controllers
         {
             Quote quote = await _quoteService.GetByIdAsync(id);
 
-            return quote == null 
-              ? NotFound() 
-              : Ok(quote);
+            return quote == null ? NotFound() : Ok(quote);
         }
 
         /// <summary>
         /// Returns a random quote
         /// </summary>
         [HttpGet("random")]
-        public ActionResult<Quote> GetRandom() => Ok(_quoteService.GetRandom());
+        public async Task<ActionResult<Quote>> GetRandom() => Ok(await _quoteService.GetRandomAsync());
 
         /// <summary>
         /// Returns total number of quotes
         /// </summary>
         [HttpGet("count")]
-        public ActionResult<int> GetCount() => Ok(_quoteService.GetAll().Count());
+        public async Task<ActionResult<int>> GetCount() => Ok(await _quoteService.CountAsync());
 
         /// <remarks>
         /// Don't send quote id, it will be auto-generated.
@@ -72,9 +69,9 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult Create([FromBody] Quote quote)
+        public async Task<ActionResult> Create([FromBody] Quote quote)
         {
-            _quoteService.Add(quote);
+            await _quoteService.AddAsync(quote);
             return CreatedAtRoute("Get", new { id = quote.Id }, quote);
         }
 
