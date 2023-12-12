@@ -80,7 +80,7 @@ namespace ProgrammingQuotesApi.Services
             _context.SaveChanges();
         }
 
-        public void addFavoriteQuote(User user, Quote quote)
+        public void AddFavoriteQuote(User user, Quote quote)
         {
             user.FavoriteQuotes.Add(quote);
             _context.SaveChanges();

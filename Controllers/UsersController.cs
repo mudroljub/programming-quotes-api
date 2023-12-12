@@ -181,7 +181,7 @@ namespace ProgrammingQuotesApi.Controllers
             User user = _userService.GetByUsername(User.Identity.Name);
             if (user == null) return NotFound();
 
-            _userService.addFavoriteQuote(user, quote);
+            _userService.AddFavoriteQuote(user, quote);
 
             return Ok(user);
         }

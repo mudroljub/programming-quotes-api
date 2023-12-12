@@ -15,7 +15,7 @@ namespace ProgrammingQuotesApi.Services.Interfaces
         void Replace(User user, User newUser);
         void Update(User user);
         void Update(User user, UserUpdate req);
-        void addFavoriteQuote(User user, Quote quote); // Corrected method name
+        void AddFavoriteQuote(User user, Quote quote);
         bool UsernameTaken(string username);
     }
 }
