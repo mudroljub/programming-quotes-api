@@ -21,9 +21,9 @@ namespace ProgrammingQuotesApi.Controllers
         /// Returns a list of authors
         /// </summary>
         [HttpGet]
-        public ActionResult<List<Author>> GetAuthors()
+        public async Task<ActionResult<List<Author>>> GetAuthors()
         {
-            List<Author> authors = _authorService.GetAuthors();
+            List<Author> authors = await _authorService.GetAuthors();
             return Ok(authors);
         }
 
@@ -31,7 +31,11 @@ namespace ProgrammingQuotesApi.Controllers
         /// Returns total number of authors
         /// </summary>
         [HttpGet("count")]
-        public ActionResult<int> GetCount() => Ok(_authorService.GetAuthors().Count);
+        public async Task<ActionResult<int>> GetCount()
+        {
+            List<Author> authors = await _authorService.GetAuthors();
+            return Ok(authors.Count);
+        }
 
         /// <summary>
         /// Returns author details

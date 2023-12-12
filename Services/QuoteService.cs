@@ -34,14 +34,6 @@ namespace ProgrammingQuotesApi.Services
               : _context.Quotes;
         }
 
-        public IEnumerable<Quote> GetAll(int num = 0)
-        {
-          int length = _context.Quotes.Count();
-          return (num > 0 && num <= length)
-            ? _context.Quotes.Take(num)
-            : _context.Quotes;
-        }
-
         public async Task<Quote> GetRandomAsync()
         {
             List<Quote> quotes = await _context.Quotes.ToListAsync();
@@ -49,8 +41,10 @@ namespace ProgrammingQuotesApi.Services
             return quotes[index];
         }
 
-        public IEnumerable<Quote> GetByAuthor(string authorName) => _context.Quotes.Where(p => p.Author == authorName);
-        public async Task <IEnumerable<Quote>> GetByAuthorAsync(string authorName) => await _context.Quotes.Where(p => p.Author == authorName).ToListAsync();
+        public async Task <List<Quote>> GetByAuthorAsync(string authorName)
+        {
+            return await _context.Quotes.Where(p => p.Author == authorName).ToListAsync();
+        }
 
         public async Task AddAsync(Quote quote)
         {

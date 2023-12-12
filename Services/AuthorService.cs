@@ -11,9 +11,9 @@ namespace ProgrammingQuotesApi.Services
         private readonly IQuoteService _quoteService;
         readonly Dictionary<string, Author> Authors = new();
 
-        private void PopulateAuthors()
+        private async Task PopulateAuthors()
         {
-            foreach (Quote q in _quoteService.GetAll())
+            foreach (Quote q in await _quoteService.GetAllAsync())
             {
                 if (Authors.ContainsKey(q.Author))
                 {
@@ -34,10 +34,13 @@ namespace ProgrammingQuotesApi.Services
         public AuthorService(IQuoteService quoteService)
         {
             _quoteService = quoteService;
-            PopulateAuthors();
         }
 
-        public List<Author> GetAuthors() => Authors.Values.OrderByDescending(author => author.QuoteCount).ToList();
+        public async Task<List<Author>> GetAuthors()
+        {
+            await PopulateAuthors();
+            return Authors.Values.OrderByDescending(author => author.QuoteCount).ToList();
+        }
 
         public async Task<Author> GetAuthorDetailsAsync(string authorName)
         {
