@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using ProgrammingQuotesApi.Services.Interfaces;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProgrammingQuotesApi.Services
 {
@@ -23,8 +25,6 @@ namespace ProgrammingQuotesApi.Services
             ? _context.Quotes.Take(num)
             : _context.Quotes;
         }
-
-        public Quote GetById(string id) => _context.Quotes.FirstOrDefault(p => p.Id == id);
 
         public Quote GetRandom() => _context.Quotes.ToList()[new Random().Next(0, _context.Quotes.Count())];
 
@@ -53,6 +53,11 @@ namespace ProgrammingQuotesApi.Services
         {
             _context.Quotes.Update(quote);
             _context.SaveChanges();
+        }
+
+        public async Task<Quote> GetByIdAsync(string id)
+        {
+            return await _context.Quotes.FirstOrDefaultAsync(p => p.Id == id);
         }
     }
 }

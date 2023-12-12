@@ -7,6 +7,7 @@ using ProgrammingQuotesApi.Services.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mime;
+using System.Threading.Tasks;
 
 namespace ProgrammingQuotesApi.Controllers
 {
@@ -41,11 +42,13 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpGet("{id}", Name = "Get")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<Quote> Get(string id)
+        public async Task<ActionResult<Quote>> Get(string id)
         {
-            Quote quote = _quoteService.GetById(id);
+            Quote quote = await _quoteService.GetByIdAsync(id);
 
-            return quote == null ? NotFound() : Ok(quote);
+            return quote == null 
+              ? NotFound() 
+              : Ok(quote);
         }
 
         /// <summary>
@@ -90,9 +93,9 @@ namespace ProgrammingQuotesApi.Controllers
         /// Replace an existing quote with a new one
         /// </summary>
         [HttpPut]
-        public ActionResult Update(Quote newQuote)
+        public async Task<ActionResult> Update(Quote newQuote)
         {
-            Quote oldQuote = _quoteService.GetById(newQuote.Id);
+            Quote oldQuote = await _quoteService.GetByIdAsync(newQuote.Id);
             if (oldQuote == null)
                 return NotFound(new { message = "The quote Id does not exist." });
 
@@ -118,9 +121,9 @@ namespace ProgrammingQuotesApi.Controllers
         /// Update certain properties of an existing quote
         /// </summary>
         [HttpPatch("{id}")]
-        public ActionResult Patch(string id, JsonPatchDocument<Quote> patch)
+        public async Task<ActionResult> Patch(string id, JsonPatchDocument<Quote> patch)
         {
-            Quote quote = _quoteService.GetById(id);
+            Quote quote = await _quoteService.GetByIdAsync(id);
             if (quote == null)
                 return NotFound();
 
@@ -137,9 +140,9 @@ namespace ProgrammingQuotesApi.Controllers
         /// For example: 5a6ce86e2af929789500e7e4
         /// </remarks>
         [HttpDelete("{id}")]
-        public ActionResult Delete(string id)
+        public async Task<ActionResult> Delete(string id)
         {
-            Quote quote = _quoteService.GetById(id);
+            Quote quote = await _quoteService.GetByIdAsync(id);
             if (quote == null) return NotFound();
 
             _quoteService.Delete(quote);

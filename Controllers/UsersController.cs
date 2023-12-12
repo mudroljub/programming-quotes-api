@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProgrammingQuotesApi.Models;
 using ProgrammingQuotesApi.Services.Interfaces;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ProgrammingQuotesApi.Controllers
 {
@@ -172,9 +173,9 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpPost]
         [Authorize]
         [Route("addFavorite")]
-        public ActionResult<User> addFavorite([FromBody] string quoteId)
+        public async Task<ActionResult<User>> addFavorite([FromBody] string quoteId)
         {
-            Quote quote = _quoteService.GetById(quoteId);
+            Quote quote = await _quoteService.GetByIdAsync(quoteId);
             if (quote == null) return NotFound();
 
             User user = _userService.GetByUsername(User.Identity.Name);
