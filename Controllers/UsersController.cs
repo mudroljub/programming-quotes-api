@@ -50,9 +50,9 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public ActionResult Authenticate([FromBody] UserAuthReq req)
+        public async Task<ActionResult> Authenticate([FromBody] UserAuthReq req)
         {
-            UserAuthRes user = _userService.Authenticate(req.Username, req.Password);
+            UserAuthRes user = await _userService.AuthenticateAsync(req.Username, req.Password);
 
             if (user == null)
                 return Unauthorized(new { message = "User or password invalid" });
@@ -74,9 +74,9 @@ namespace ProgrammingQuotesApi.Controllers
         /// Returns a user data for a given username
         /// </summary>
         [HttpGet("{username}")]
-        public ActionResult<User> GetByUsername(string username)
+        public async Task<ActionResult<User>> GetByUsername(string username)
         {
-            User user = _userService.GetByUsername(username);
+            User user = await _userService.GetByUsernameAsync(username);
 
             return user == null ? NotFound() : Ok(user);
         }
@@ -95,9 +95,9 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpGet]
         [Authorize]
         [Route("me")]
-        public ActionResult<User> GetMyUser()
+        public async Task<ActionResult<User>> GetMyUser()
         {
-            User user = _userService.GetByUsername(User.Identity.Name);
+            User user = await _userService.GetByUsernameAsync(User.Identity.Name);
             return Ok(user);
         }
 
@@ -107,9 +107,9 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpPut]
         [Authorize]
         [Route("me")]
-        public ActionResult Update([FromBody] UserUpdate req)
+        public async Task<ActionResult> Update([FromBody] UserUpdate req)
         {
-            var myUser = _userService.GetByUsername(User.Identity.Name);
+            var myUser = await _userService.GetByUsernameAsync(User.Identity.Name);
             if (req.Username != myUser.Username && _userService.UsernameTaken(req.Username))
                 return BadRequest(new { message = "Username " + req.Username + " is already taken" });
 
@@ -135,9 +135,9 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpPatch]
         [Authorize]
         [Route("me")]
-        public ActionResult Patch(JsonPatchDocument<User> patch)
+        public async Task<ActionResult> Patch(JsonPatchDocument<User> patch)
         {
-            User user = _userService.GetByUsername(User.Identity.Name);
+            User user = await _userService.GetByUsernameAsync(User.Identity.Name);
             if (user == null) return NotFound();
 
             patch.ApplyTo(user);
@@ -152,9 +152,9 @@ namespace ProgrammingQuotesApi.Controllers
         [Authorize]
         [HttpDelete("{id}")]
         [Authorize(Roles = "Admin")]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            User user = _userService.GetById(id);
+            User user = await _userService.GetByIdAsync(id);
 
             if (user == null)
                 return NotFound();
@@ -178,7 +178,7 @@ namespace ProgrammingQuotesApi.Controllers
             Quote quote = await _quoteService.GetByIdAsync(quoteId);
             if (quote == null) return NotFound();
 
-            User user = _userService.GetByUsername(User.Identity.Name);
+            User user = await _userService.GetByUsernameAsync(User.Identity.Name);
             if (user == null) return NotFound();
 
             _userService.AddFavoriteQuote(user, quote);

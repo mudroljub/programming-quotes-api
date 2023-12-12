@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using ProgrammingQuotesApi.Services.Interfaces;
+using System.Threading.Tasks;
 
 namespace ProgrammingQuotesApi.Services
 {
@@ -20,9 +21,11 @@ namespace ProgrammingQuotesApi.Services
             _mapper = mapper;
         }
 
-        public UserAuthRes Authenticate(string username, string password)
+        public async Task<UserAuthRes> AuthenticateAsync(string username, string password)
         {
-            User user = _context.Users.FirstOrDefault(x => x.Username.ToLower() == username.ToLower() && VerifyPassword(password, x.Password));
+            User user = await _context.Users.FirstOrDefaultAsync(
+                x => x.Username.ToLower() == username.ToLower() && VerifyPassword(password, x.Password)
+            );
             if (user == null) return null;
 
             UserAuthRes response = _mapper.Map<UserAuthRes>(user);
@@ -32,11 +35,16 @@ namespace ProgrammingQuotesApi.Services
 
         public IEnumerable<User> GetAll() => _context.Users.Include(u => u.FavoriteQuotes);
 
-        public User GetById(int id) => _context.Users.Include(u => u.FavoriteQuotes).FirstOrDefault(p => p.Id == id);
-
-        public User GetByUsername(string username)
+        public async Task<User> GetByIdAsync(int id)
         {
-            User user = _context.Users.Include(u => u.FavoriteQuotes).FirstOrDefault(x => x.Username.ToLower() == username.ToLower());
+            return await _context.Users.Include(u => u.FavoriteQuotes).FirstOrDefaultAsync(p => p.Id == id);
+        }
+
+        public async Task<User> GetByUsernameAsync(string username)
+        {
+            User user = await _context.Users
+                .Include(u => u.FavoriteQuotes)
+                .FirstOrDefaultAsync(x => x.Username.ToLower() == username.ToLower());
             if (user == null) return null;
 
             return user;

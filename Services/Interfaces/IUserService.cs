@@ -1,15 +1,16 @@
 using ProgrammingQuotesApi.Helpers;
 using ProgrammingQuotesApi.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ProgrammingQuotesApi.Services.Interfaces
 {
     public interface IUserService
     {
-        UserAuthRes Authenticate(string username, string password);
+        Task<UserAuthRes> AuthenticateAsync(string username, string password);
         IEnumerable<User> GetAll();
-        User GetById(int id);
-        User GetByUsername(string username);
+        Task<User> GetByIdAsync(int id);
+        Task<User> GetByUsernameAsync(string username);
         void Register(UserRegister user);
         void Delete(User user);
         void Replace(User user, User newUser);
