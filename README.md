@@ -2,11 +2,13 @@
 
 **Programming Quotes API for open source projects.**
 
-Convention: The names of the authors are as on Wikipedia.
+Status: [currently without free hosting](https://github.com/mudroljub/programming-quotes-api/issues/54).
 
 ## Introduction
 
-This OpenSource API provides a large collection of quotes and their authors. These can be searched and favoured. This allows the citations to be filtered according to personal preferences. Quotes can also be edited, created and deleted. 
+This open source API provides a large collection of programming quotes and their authors. These can be searched and favoured. This allows the citations to be filtered according to personal preferences. Quotes can also be edited, created and deleted. 
+
+Convention: The names of the authors are as on Wikipedia.
 
 ## Development
 
