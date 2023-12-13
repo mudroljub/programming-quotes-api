@@ -46,11 +46,17 @@ namespace ProgrammingQuotesApi.Services
             return await _context.Quotes.Where(p => p.Author == authorName).ToListAsync();
         }
 
-        public async Task Add(Quote quote)
+        public async Task<Quote> Add(QuoteCreate data)
         {
-            quote.Id = ObjectId.GenerateNewId().ToString();
+            Quote quote = new Quote()
+            {
+                Id = ObjectId.GenerateNewId().ToString(),
+                Author = data.Author,
+                En = data.En,
+            };
             await _context.Quotes.AddAsync(quote);
             await _context.SaveChangesAsync();
+            return quote;
         }
 
         public async Task Delete(Quote quote)

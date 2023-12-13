@@ -11,7 +11,7 @@ namespace ProgrammingQuotesApi.Services.Interfaces
         Task<Quote> GetById(string id);
         Task<Quote> GetRandom();
         Task<List<Quote>> GetByAuthor(string authorName);
-        Task Add(Quote quote);
+        Task<Quote> Add(QuoteCreate quote);
         Task Delete(Quote quote);
         Task Replace(Quote oldQuote, Quote newQuote);
         Task Update(Quote quote);
