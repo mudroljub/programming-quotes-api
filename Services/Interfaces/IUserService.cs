@@ -7,15 +7,15 @@ namespace ProgrammingQuotesApi.Services.Interfaces
 {
     public interface IUserService
     {
-        Task<UserAuthRes> AuthenticateAsync(string username, string password);
-        IEnumerable<User> GetAll();
-        Task<User> GetByIdAsync(int id);
-        Task<User> GetByUsernameAsync(string username);
-        Task RegisterAsync(UserRegister user);
-        Task DeleteAsync(User user);
-        Task UpdateAsync(User user);
-        Task UpdateAsync(User myUser, UserUpdate req);
-        Task AddFavoriteQuoteAsync(User user, Quote quote);
-        Task<bool> UsernameTakenAsync(string username);
+        Task<UserAuthRes> Authenticate(string username, string password);
+        Task<List<User>> GetAll();
+        Task<User> GetById(int id);
+        Task<User> GetByUsername(string username);
+        Task Register(UserRegister user);
+        Task Delete(User user);
+        Task Update(User user);
+        Task Update(User myUser, UserUpdate req);
+        Task AddFavoriteQuote(User user, Quote quote);
+        Task<bool> UsernameTaken(string username);
     }
 }

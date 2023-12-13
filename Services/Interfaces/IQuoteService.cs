@@ -6,14 +6,14 @@ namespace ProgrammingQuotesApi.Services.Interfaces
 {
     public interface IQuoteService
     {
-        Task<IEnumerable<Quote>> GetAllAsync(int num = 0);
-        Task<int> CountAsync();
-        Task<Quote> GetByIdAsync(string id);
-        Task<Quote> GetRandomAsync();
-        Task<List<Quote>> GetByAuthorAsync(string authorName);
-        Task AddAsync(Quote quote);
-        Task DeleteAsync(Quote quote);
-        Task ReplaceAsync(Quote oldQuote, Quote newQuote);
-        Task UpdateAsync(Quote quote);
+        Task<IEnumerable<Quote>> GetAll(int num = 0);
+        Task<int> Count();
+        Task<Quote> GetById(string id);
+        Task<Quote> GetRandom();
+        Task<List<Quote>> GetByAuthor(string authorName);
+        Task Add(Quote quote);
+        Task Delete(Quote quote);
+        Task Replace(Quote oldQuote, Quote newQuote);
+        Task Update(Quote quote);
     }
 }

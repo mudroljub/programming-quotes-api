@@ -13,7 +13,7 @@ namespace ProgrammingQuotesApi.Services
 
         private async Task PopulateAuthors()
         {
-            foreach (Quote q in await _quoteService.GetAllAsync())
+            foreach (Quote q in await _quoteService.GetAll())
             {
                 if (Authors.ContainsKey(q.Author))
                 {
@@ -44,9 +44,9 @@ namespace ProgrammingQuotesApi.Services
 
         public async Task<int> GetCount() => (await GetAuthors()).Count;
 
-        public async Task<Author> GetAuthorDetailsAsync(string authorName)
+        public async Task<Author> GetAuthorDetails(string authorName)
         {
-            IEnumerable<Quote> authorQuotes = await _quoteService.GetByAuthorAsync(authorName);
+            IEnumerable<Quote> authorQuotes = await _quoteService.GetByAuthor(authorName);
             if (!authorQuotes.Any()) {
               return null;
             }

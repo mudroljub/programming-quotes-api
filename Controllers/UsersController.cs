@@ -28,10 +28,10 @@ namespace ProgrammingQuotesApi.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> Create([FromBody] UserRegister req)
         {
-            if (await _userService.UsernameTakenAsync(req.Username))
+            if (await _userService.UsernameTaken(req.Username))
                 return BadRequest(new { message = "Username " + req.Username + " is already taken" });
 
-            await _userService.RegisterAsync(req);
+            await _userService.Register(req);
             return Ok(new { message = "Registration successful" });
         }
 
@@ -52,7 +52,7 @@ namespace ProgrammingQuotesApi.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> Authenticate([FromBody] UserAuthReq req)
         {
-            UserAuthRes user = await _userService.AuthenticateAsync(req.Username, req.Password);
+            UserAuthRes user = await _userService.Authenticate(req.Username, req.Password);
 
             if (user == null)
                 return Unauthorized(new { message = "User or password invalid" });
@@ -64,9 +64,9 @@ namespace ProgrammingQuotesApi.Controllers
         /// Returns all users
         /// </summary>
         [HttpGet]
-        public ActionResult<IEnumerable<User>> GetAll()
+        public async Task<ActionResult<List<User>>> GetAll()
         {
-            IEnumerable<User> users = _userService.GetAll();
+            List<User> users = await _userService.GetAll();
             return Ok(users);
         }
 
@@ -76,7 +76,7 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpGet("{username}")]
         public async Task<ActionResult<User>> GetByUsername(string username)
         {
-            User user = await _userService.GetByUsernameAsync(username);
+            User user = await _userService.GetByUsername(username);
 
             return user == null ? NotFound() : Ok(user);
         }
@@ -97,7 +97,7 @@ namespace ProgrammingQuotesApi.Controllers
         [Route("me")]
         public async Task<ActionResult<User>> GetMyUser()
         {
-            User user = await _userService.GetByUsernameAsync(User.Identity.Name);
+            User user = await _userService.GetByUsername(User.Identity.Name);
             return Ok(user);
         }
 
@@ -109,12 +109,12 @@ namespace ProgrammingQuotesApi.Controllers
         [Route("me")]
         public async Task<ActionResult> Update([FromBody] UserUpdate req)
         {
-            User myUser = await _userService.GetByUsernameAsync(User.Identity.Name);
-            bool usernameTaken = await _userService.UsernameTakenAsync(req.Username);
+            User myUser = await _userService.GetByUsername(User.Identity.Name);
+            bool usernameTaken = await _userService.UsernameTaken(req.Username);
             if ((req.Username != myUser.Username) && usernameTaken)
                 return BadRequest(new { message = "Username " + req.Username + " is already taken" });
 
-            await _userService.UpdateAsync(myUser, req);
+            await _userService.Update(myUser, req);
             return Ok(new { message = "User updated successfully" });
         }
 
@@ -138,11 +138,11 @@ namespace ProgrammingQuotesApi.Controllers
         [Route("me")]
         public async Task<ActionResult> Patch(JsonPatchDocument<User> patch)
         {
-            User user = await _userService.GetByUsernameAsync(User.Identity.Name);
+            User user = await _userService.GetByUsername(User.Identity.Name);
             if (user == null) return NotFound();
 
             patch.ApplyTo(user);
-            await _userService.UpdateAsync(user);
+            await _userService.Update(user);
 
             return Ok(user);
         }
@@ -155,12 +155,12 @@ namespace ProgrammingQuotesApi.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int id)
         {
-            User user = await _userService.GetByIdAsync(id);
+            User user = await _userService.GetById(id);
 
             if (user == null)
                 return NotFound();
 
-            await _userService.DeleteAsync(user);
+            await _userService.Delete(user);
 
             return NoContent();
         }
@@ -176,13 +176,13 @@ namespace ProgrammingQuotesApi.Controllers
         [Route("addFavorite")]
         public async Task<ActionResult<User>> addFavorite([FromBody] string quoteId)
         {
-            Quote quote = await _quoteService.GetByIdAsync(quoteId);
+            Quote quote = await _quoteService.GetById(quoteId);
             if (quote == null) return NotFound();
 
-            User user = await _userService.GetByUsernameAsync(User.Identity.Name);
+            User user = await _userService.GetByUsername(User.Identity.Name);
             if (user == null) return NotFound();
 
-            await _userService.AddFavoriteQuoteAsync(user, quote);
+            await _userService.AddFavoriteQuote(user, quote);
 
             return Ok(user);
         }

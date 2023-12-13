@@ -54,9 +54,6 @@ Note that you can change `titles`, `pithumbsize` and other params. The `%20` cha
 
 ## TODO
 
-- add async?
-  - return Task<ActionResult>
-  - mapLeft?
 - fix create quote model:
 {
   "id": "string",

@@ -21,7 +21,7 @@ namespace ProgrammingQuotesApi.Services
             _mapper = mapper;
         }
 
-        public async Task<UserAuthRes> AuthenticateAsync(string username, string password)
+        public async Task<UserAuthRes> Authenticate(string username, string password)
         {
             User user = await _context.Users.FirstOrDefaultAsync(
                 x => x.Username.ToLower() == username.ToLower() && VerifyPassword(password, x.Password)
@@ -33,14 +33,14 @@ namespace ProgrammingQuotesApi.Services
             return response;
         }
 
-        public IEnumerable<User> GetAll() => _context.Users.Include(u => u.FavoriteQuotes);
+        public async Task<List<User>> GetAll() => await _context.Users.Include(u => u.FavoriteQuotes).ToListAsync();
 
-        public async Task<User> GetByIdAsync(int id)
+        public async Task<User> GetById(int id)
         {
             return await _context.Users.Include(u => u.FavoriteQuotes).FirstOrDefaultAsync(p => p.Id == id);
         }
 
-        public async Task<User> GetByUsernameAsync(string username)
+        public async Task<User> GetByUsername(string username)
         {
             User user = await _context.Users
                 .Include(u => u.FavoriteQuotes)
@@ -50,7 +50,7 @@ namespace ProgrammingQuotesApi.Services
             return user;
         }
 
-        public async Task RegisterAsync(UserRegister user)
+        public async Task Register(UserRegister user)
         {
             user.Password = BCryptNet.HashPassword(user.Password);
             User newUser = _mapper.Map<User>(user);
@@ -59,19 +59,19 @@ namespace ProgrammingQuotesApi.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(User user)
+        public async Task Delete(User user)
         {
             _context.Users.Remove(user);
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(User user)
+        public async Task Update(User user)
         {
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(User myUser, UserUpdate req)
+        public async Task Update(User myUser, UserUpdate req)
         {
             if (!string.IsNullOrEmpty(req.Password))
                 req.Password = BCryptNet.HashPassword(req.Password);
@@ -81,7 +81,7 @@ namespace ProgrammingQuotesApi.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task AddFavoriteQuoteAsync(User user, Quote quote)
+        public async Task AddFavoriteQuote(User user, Quote quote)
         {
             user.FavoriteQuotes.Add(quote);
             await _context.SaveChangesAsync();
@@ -89,7 +89,7 @@ namespace ProgrammingQuotesApi.Services
 
         /* UTILS */
 
-        public async Task<bool> UsernameTakenAsync(string username) => string.IsNullOrEmpty(username)
+        public async Task<bool> UsernameTaken(string username) => string.IsNullOrEmpty(username)
             ? false
             : await _context.Users.AnyAsync(x => x.Username.ToLower() == username.ToLower());
 

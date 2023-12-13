@@ -7,7 +7,7 @@ namespace ProgrammingQuotesApi.Services.Interfaces
     public interface IAuthorService
     {
         Task<List<Author>> GetAuthors();
-        Task<Author> GetAuthorDetailsAsync(string authorName);
+        Task<Author> GetAuthorDetails(string authorName);
         Task<int> GetCount();
     }
 }
