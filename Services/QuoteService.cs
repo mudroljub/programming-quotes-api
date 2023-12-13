@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using ProgrammingQuotesApi.Services.Interfaces;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProgrammingQuotesApi.Services
 {
@@ -17,42 +19,62 @@ namespace ProgrammingQuotesApi.Services
             _context = context;
         }
 
-        public IEnumerable<Quote> GetAll(int num = 0)
+        public async Task<Quote> GetById(string id)
         {
-            return (num > 0 && num <= _context.Quotes.Count())
-            ? _context.Quotes.Take(num)
-            : _context.Quotes;
+            return await _context.Quotes.FirstOrDefaultAsync(p => p.Id == id);
         }
 
-        public Quote GetById(string id) => _context.Quotes.FirstOrDefault(p => p.Id == id);
+        public async Task<int> Count() => await _context.Quotes.CountAsync();
 
-        public Quote GetRandom() => _context.Quotes.ToList()[new Random().Next(0, _context.Quotes.Count())];
-
-        public IEnumerable<Quote> GetByAuthor(string authorName) => _context.Quotes.Where(p => p.Author == authorName);
-
-        public void Add(Quote quote)
+        public async Task<IEnumerable<Quote>> GetAll(int num = 0)
         {
-            quote.Id = ObjectId.GenerateNewId().ToString();
-            _context.Quotes.Add(quote);
-            _context.SaveChanges();
+            int length = await _context.Quotes.CountAsync();
+            return (num > 0 && num <= length)
+              ? _context.Quotes.Take(num)
+              : _context.Quotes;
         }
 
-        public void Delete(Quote quote)
+        public async Task<Quote> GetRandom()
+        {
+            List<Quote> quotes = await _context.Quotes.ToListAsync();
+            int index = new Random().Next(0, await _context.Quotes.CountAsync());
+            return quotes[index];
+        }
+
+        public async Task <List<Quote>> GetByAuthor(string authorName)
+        {
+            return await _context.Quotes.Where(p => p.Author == authorName).ToListAsync();
+        }
+
+        public async Task<Quote> Add(QuoteCreate data)
+        {
+            Quote quote = new Quote()
+            {
+                Id = ObjectId.GenerateNewId().ToString(),
+                Author = data.Author,
+                En = data.En,
+            };
+            await _context.Quotes.AddAsync(quote);
+            await _context.SaveChangesAsync();
+            return quote;
+        }
+
+        public async Task Delete(Quote quote)
         {
             _context.Quotes.Remove(quote);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Replace(Quote oldQuote, Quote newQuote)
-        { 
+        public async Task Replace(Quote oldQuote, Quote newQuote)
+        {
             _context.Entry(oldQuote).CurrentValues.SetValues(newQuote);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Update(Quote quote)
+        public async Task Update(Quote quote)
         {
             _context.Quotes.Update(quote);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }

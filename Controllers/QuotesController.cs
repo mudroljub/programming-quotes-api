@@ -7,6 +7,7 @@ using ProgrammingQuotesApi.Services.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mime;
+using System.Threading.Tasks;
 
 namespace ProgrammingQuotesApi.Controllers
 {
@@ -26,10 +27,9 @@ namespace ProgrammingQuotesApi.Controllers
         /// Returns a list of quotes
         /// </summary>
         [HttpGet]
-        public ActionResult<IEnumerable<Quote>> GetAll([FromQuery] int num = 20)
+        public async Task<ActionResult<IEnumerable<Quote>>> GetAll([FromQuery] int num = 20)
         {
-            IEnumerable<Quote> quotes = _quoteService.GetAll(num);
-            return Ok(quotes);
+            return Ok(await _quoteService.GetAll(num));
         }
 
         /// <summary>
@@ -41,9 +41,9 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpGet("{id}", Name = "Get")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<Quote> Get(string id)
+        public async Task<ActionResult<Quote>> Get(string id)
         {
-            Quote quote = _quoteService.GetById(id);
+            Quote quote = await _quoteService.GetById(id);
 
             return quote == null ? NotFound() : Ok(quote);
         }
@@ -52,13 +52,13 @@ namespace ProgrammingQuotesApi.Controllers
         /// Returns a random quote
         /// </summary>
         [HttpGet("random")]
-        public ActionResult<Quote> GetRandom() => Ok(_quoteService.GetRandom());
+        public async Task<ActionResult<Quote>> GetRandom() => Ok(await _quoteService.GetRandom());
 
         /// <summary>
         /// Returns total number of quotes
         /// </summary>
         [HttpGet("count")]
-        public ActionResult<int> GetCount() => Ok(_quoteService.GetAll().Count());
+        public async Task<ActionResult<int>> GetCount() => Ok(await _quoteService.Count());
 
         /// <remarks>
         /// Don't send quote id, it will be auto-generated.
@@ -69,9 +69,9 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult Create([FromBody] Quote quote)
+        public async Task<ActionResult> Create([FromBody] QuoteCreate data)
         {
-            _quoteService.Add(quote);
+            Quote quote = await _quoteService.Add(data);
             return CreatedAtRoute("Get", new { id = quote.Id }, quote);
         }
 
@@ -80,8 +80,8 @@ namespace ProgrammingQuotesApi.Controllers
         /// </summary>
         /// <param name="authorName">The name of the author from Wikipedia. For example: Edsger W. Dijkstra</param>
         [HttpGet("author/{authorName}")]
-        public ActionResult<IEnumerable<Quote>> GetQuotesByAuthor(string authorName) {
-          var quotes = _quoteService.GetByAuthor(authorName);
+        public async Task<ActionResult<List<Quote>>> GetQuotesByAuthor(string authorName) {
+          var quotes = await _quoteService.GetByAuthor(authorName);
 
           return !quotes.Any() ? NotFound() : Ok(quotes);
         }
@@ -90,13 +90,13 @@ namespace ProgrammingQuotesApi.Controllers
         /// Replace an existing quote with a new one
         /// </summary>
         [HttpPut]
-        public ActionResult Update(Quote newQuote)
+        public async Task<ActionResult> Update(Quote newQuote)
         {
-            Quote oldQuote = _quoteService.GetById(newQuote.Id);
+            Quote oldQuote = await _quoteService.GetById(newQuote.Id);
             if (oldQuote == null)
                 return NotFound(new { message = "The quote Id does not exist." });
 
-            _quoteService.Replace(oldQuote, newQuote);
+            await _quoteService.Replace(oldQuote, newQuote);
 
             return Ok(newQuote);
         }
@@ -118,14 +118,14 @@ namespace ProgrammingQuotesApi.Controllers
         /// Update certain properties of an existing quote
         /// </summary>
         [HttpPatch("{id}")]
-        public ActionResult Patch(string id, JsonPatchDocument<Quote> patch)
+        public async Task<ActionResult> Patch(string id, JsonPatchDocument<Quote> patch)
         {
-            Quote quote = _quoteService.GetById(id);
+            Quote quote = await _quoteService.GetById(id);
             if (quote == null)
                 return NotFound();
 
             patch.ApplyTo(quote);
-            _quoteService.Update(quote);
+            await _quoteService.Update(quote);
 
             return Ok(quote);
         }
@@ -137,12 +137,12 @@ namespace ProgrammingQuotesApi.Controllers
         /// For example: 5a6ce86e2af929789500e7e4
         /// </remarks>
         [HttpDelete("{id}")]
-        public ActionResult Delete(string id)
+        public async Task<ActionResult> Delete(string id)
         {
-            Quote quote = _quoteService.GetById(id);
+            Quote quote = await _quoteService.GetById(id);
             if (quote == null) return NotFound();
 
-            _quoteService.Delete(quote);
+            await _quoteService.Delete(quote);
 
             return NoContent();
         }

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProgrammingQuotesApi.Models;
 using ProgrammingQuotesApi.Services.Interfaces;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ProgrammingQuotesApi.Controllers
 {
@@ -25,12 +26,12 @@ namespace ProgrammingQuotesApi.Controllers
         /// </summary>
         [HttpPost("register")]
         [AllowAnonymous]
-        public ActionResult Create([FromBody] UserRegister req)
+        public async Task<ActionResult> Create([FromBody] UserRegister req)
         {
-            if (_userService.UsernameTaken(req.Username))
+            if (await _userService.UsernameTaken(req.Username))
                 return BadRequest(new { message = "Username " + req.Username + " is already taken" });
 
-            _userService.Register(req);
+            await _userService.Register(req);
             return Ok(new { message = "Registration successful" });
         }
 
@@ -49,9 +50,9 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public ActionResult Authenticate([FromBody] UserAuthReq req)
+        public async Task<ActionResult> Authenticate([FromBody] UserAuthReq req)
         {
-            UserAuthRes user = _userService.Authenticate(req.Username, req.Password);
+            UserAuthRes user = await _userService.Authenticate(req.Username, req.Password);
 
             if (user == null)
                 return Unauthorized(new { message = "User or password invalid" });
@@ -63,9 +64,9 @@ namespace ProgrammingQuotesApi.Controllers
         /// Returns all users
         /// </summary>
         [HttpGet]
-        public ActionResult<IEnumerable<User>> GetAll()
+        public async Task<ActionResult<List<User>>> GetAll()
         {
-            IEnumerable<User> users = _userService.GetAll();
+            List<User> users = await _userService.GetAll();
             return Ok(users);
         }
 
@@ -73,9 +74,9 @@ namespace ProgrammingQuotesApi.Controllers
         /// Returns a user data for a given username
         /// </summary>
         [HttpGet("{username}")]
-        public ActionResult<User> GetByUsername(string username)
+        public async Task<ActionResult<User>> GetByUsername(string username)
         {
-            User user = _userService.GetByUsername(username);
+            User user = await _userService.GetByUsername(username);
 
             return user == null ? NotFound() : Ok(user);
         }
@@ -94,9 +95,9 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpGet]
         [Authorize]
         [Route("me")]
-        public ActionResult<User> GetMyUser()
+        public async Task<ActionResult<User>> GetMyUser()
         {
-            User user = _userService.GetByUsername(User.Identity.Name);
+            User user = await _userService.GetByUsername(User.Identity.Name);
             return Ok(user);
         }
 
@@ -106,13 +107,14 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpPut]
         [Authorize]
         [Route("me")]
-        public ActionResult Update([FromBody] UserUpdate req)
+        public async Task<ActionResult> Update([FromBody] UserUpdate req)
         {
-            var myUser = _userService.GetByUsername(User.Identity.Name);
-            if (req.Username != myUser.Username && _userService.UsernameTaken(req.Username))
+            User myUser = await _userService.GetByUsername(User.Identity.Name);
+            bool usernameTaken = await _userService.UsernameTaken(req.Username);
+            if ((req.Username != myUser.Username) && usernameTaken)
                 return BadRequest(new { message = "Username " + req.Username + " is already taken" });
 
-            _userService.Update(myUser, req);
+            await _userService.Update(myUser, req);
             return Ok(new { message = "User updated successfully" });
         }
 
@@ -134,13 +136,13 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpPatch]
         [Authorize]
         [Route("me")]
-        public ActionResult Patch(JsonPatchDocument<User> patch)
+        public async Task<ActionResult> Patch(JsonPatchDocument<User> patch)
         {
-            User user = _userService.GetByUsername(User.Identity.Name);
+            User user = await _userService.GetByUsername(User.Identity.Name);
             if (user == null) return NotFound();
 
             patch.ApplyTo(user);
-            _userService.Update(user);
+            await _userService.Update(user);
 
             return Ok(user);
         }
@@ -151,14 +153,14 @@ namespace ProgrammingQuotesApi.Controllers
         [Authorize]
         [HttpDelete("{id}")]
         [Authorize(Roles = "Admin")]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            User user = _userService.GetById(id);
+            User user = await _userService.GetById(id);
 
             if (user == null)
                 return NotFound();
 
-            _userService.Delete(user);
+            await _userService.Delete(user);
 
             return NoContent();
         }
@@ -172,15 +174,15 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpPost]
         [Authorize]
         [Route("addFavorite")]
-        public ActionResult<User> addFavorite([FromBody] string quoteId)
+        public async Task<ActionResult<User>> addFavorite([FromBody] string quoteId)
         {
-            Quote quote = _quoteService.GetById(quoteId);
+            Quote quote = await _quoteService.GetById(quoteId);
             if (quote == null) return NotFound();
 
-            User user = _userService.GetByUsername(User.Identity.Name);
+            User user = await _userService.GetByUsername(User.Identity.Name);
             if (user == null) return NotFound();
 
-            _userService.addFavoriteQuote(user, quote);
+            await _userService.AddFavoriteQuote(user, quote);
 
             return Ok(user);
         }

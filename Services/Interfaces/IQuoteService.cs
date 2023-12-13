@@ -1,17 +1,19 @@
 using ProgrammingQuotesApi.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ProgrammingQuotesApi.Services.Interfaces
 {
     public interface IQuoteService
     {
-        IEnumerable<Quote> GetAll(int num = 0);
-        Quote GetById(string id);
-        Quote GetRandom();
-        IEnumerable<Quote> GetByAuthor(string authorName);
-        void Add(Quote quote);
-        void Delete(Quote quote);
-        void Replace(Quote quote, Quote newQuote);
-        void Update(Quote quote);
+        Task<IEnumerable<Quote>> GetAll(int num = 0);
+        Task<int> Count();
+        Task<Quote> GetById(string id);
+        Task<Quote> GetRandom();
+        Task<List<Quote>> GetByAuthor(string authorName);
+        Task<Quote> Add(QuoteCreate quote);
+        Task Delete(Quote quote);
+        Task Replace(Quote oldQuote, Quote newQuote);
+        Task Update(Quote quote);
     }
 }

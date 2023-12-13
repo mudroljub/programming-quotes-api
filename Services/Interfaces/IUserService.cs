@@ -1,21 +1,21 @@
 using ProgrammingQuotesApi.Helpers;
 using ProgrammingQuotesApi.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ProgrammingQuotesApi.Services.Interfaces
 {
     public interface IUserService
     {
-        UserAuthRes Authenticate(string username, string password);
-        IEnumerable<User> GetAll();
-        User GetById(int id);
-        User GetByUsername(string username);
-        void Register(UserRegister user);
-        void Delete(User user);
-        void Replace(User user, User newUser);
-        void Update(User user);
-        void Update(User user, UserUpdate req);
-        void addFavoriteQuote(User user, Quote quote); // Corrected method name
-        bool UsernameTaken(string username);
+        Task<UserAuthRes> Authenticate(string username, string password);
+        Task<List<User>> GetAll();
+        Task<User> GetById(int id);
+        Task<User> GetByUsername(string username);
+        Task Register(UserRegister user);
+        Task Delete(User user);
+        Task Update(User user);
+        Task Update(User myUser, UserUpdate req);
+        Task AddFavoriteQuote(User user, Quote quote);
+        Task<bool> UsernameTaken(string username);
     }
 }

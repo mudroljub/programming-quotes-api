@@ -2,6 +2,7 @@ using ProgrammingQuotesApi.Models;
 using ProgrammingQuotesApi.Services.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ProgrammingQuotesApi.Services
 {
@@ -10,30 +11,42 @@ namespace ProgrammingQuotesApi.Services
         private readonly IQuoteService _quoteService;
         readonly Dictionary<string, Author> Authors = new();
 
-        public AuthorService(IQuoteService quoteService)
+        private async Task PopulateAuthors()
         {
-            _quoteService = quoteService;
-            foreach (Quote q in _quoteService.GetAll())
+            foreach (Quote q in await _quoteService.GetAll())
             {
-                if (Authors.ContainsKey(q.Author)) {
-                    Authors[q.Author].QuoteCount++;  
+                if (Authors.ContainsKey(q.Author))
+                {
+                    Authors[q.Author].QuoteCount++;
                 }
-                else {  
+                else
+                {
                     Authors.Add(q.Author, new Author()
                     {
                         Name = q.Author,
                         WikiUrl = $"https://en.wikipedia.org/wiki/{q.Author}",
                         QuoteCount = 1
-                    });  
+                    });
                 }
             }
         }
 
-        public List<Author> GetAuthors() => Authors.Values.OrderByDescending(author => author.QuoteCount).ToList();
-
-        public Author GetAuthorDetails(string authorName)
+        public AuthorService(IQuoteService quoteService)
         {
-            IEnumerable<Quote> authorQuotes = _quoteService.GetByAuthor(authorName);
+            _quoteService = quoteService;
+        }
+
+        public async Task<List<Author>> GetAuthors()
+        {
+            await PopulateAuthors();
+            return Authors.Values.OrderByDescending(author => author.QuoteCount).ToList();
+        }
+
+        public async Task<int> GetCount() => (await GetAuthors()).Count;
+
+        public async Task<Author> GetAuthorDetails(string authorName)
+        {
+            IEnumerable<Quote> authorQuotes = await _quoteService.GetByAuthor(authorName);
             if (!authorQuotes.Any()) {
               return null;
             }
