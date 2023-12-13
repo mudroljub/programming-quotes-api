@@ -28,7 +28,7 @@ namespace ProgrammingQuotesApi.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> Create([FromBody] UserRegister req)
         {
-            if (_userService.UsernameTaken(req.Username))
+            if (await _userService.UsernameTakenAsync(req.Username))
                 return BadRequest(new { message = "Username " + req.Username + " is already taken" });
 
             await _userService.RegisterAsync(req);
@@ -109,11 +109,12 @@ namespace ProgrammingQuotesApi.Controllers
         [Route("me")]
         public async Task<ActionResult> Update([FromBody] UserUpdate req)
         {
-            var myUser = await _userService.GetByUsernameAsync(User.Identity.Name);
-            if (req.Username != myUser.Username && _userService.UsernameTaken(req.Username))
+            User myUser = await _userService.GetByUsernameAsync(User.Identity.Name);
+            bool usernameTaken = await _userService.UsernameTakenAsync(req.Username);
+            if ((req.Username != myUser.Username) && usernameTaken)
                 return BadRequest(new { message = "Username " + req.Username + " is already taken" });
 
-            _userService.Update(myUser, req);
+            await _userService.UpdateAsync(myUser, req);
             return Ok(new { message = "User updated successfully" });
         }
 
@@ -141,7 +142,7 @@ namespace ProgrammingQuotesApi.Controllers
             if (user == null) return NotFound();
 
             patch.ApplyTo(user);
-            _userService.Update(user);
+            await _userService.UpdateAsync(user);
 
             return Ok(user);
         }
@@ -181,7 +182,7 @@ namespace ProgrammingQuotesApi.Controllers
             User user = await _userService.GetByUsernameAsync(User.Identity.Name);
             if (user == null) return NotFound();
 
-            _userService.AddFavoriteQuote(user, quote);
+            await _userService.AddFavoriteQuoteAsync(user, quote);
 
             return Ok(user);
         }

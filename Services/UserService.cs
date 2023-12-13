@@ -65,34 +65,34 @@ namespace ProgrammingQuotesApi.Services
             await _context.SaveChangesAsync();
         }
 
-        public void Update(User user)
+        public async Task UpdateAsync(User user)
         {
             _context.Users.Update(user);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Update(User myUser, UserUpdate req)
+        public async Task UpdateAsync(User myUser, UserUpdate req)
         {
             if (!string.IsNullOrEmpty(req.Password))
                 req.Password = BCryptNet.HashPassword(req.Password);
 
             _mapper.Map(req, myUser);
             _context.Users.Update(myUser);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void AddFavoriteQuote(User user, Quote quote)
+        public async Task AddFavoriteQuoteAsync(User user, Quote quote)
         {
             user.FavoriteQuotes.Add(quote);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         /* UTILS */
 
-        private static bool VerifyPassword(string password, string hash) => BCryptNet.Verify(password, hash);
+        public async Task<bool> UsernameTakenAsync(string username) => string.IsNullOrEmpty(username)
+            ? false
+            : await _context.Users.AnyAsync(x => x.Username.ToLower() == username.ToLower());
 
-        public bool UsernameTaken(string username) => string.IsNullOrEmpty(username) 
-            ? false 
-            : _context.Users.Any(x => x.Username.ToLower() == username.ToLower());
+        private static bool VerifyPassword(string password, string hash) => BCryptNet.Verify(password, hash);
     }
 }

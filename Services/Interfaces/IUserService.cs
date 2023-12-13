@@ -13,9 +13,9 @@ namespace ProgrammingQuotesApi.Services.Interfaces
         Task<User> GetByUsernameAsync(string username);
         Task RegisterAsync(UserRegister user);
         Task DeleteAsync(User user);
-        void Update(User user);
-        void Update(User user, UserUpdate req);
-        void AddFavoriteQuote(User user, Quote quote);
-        bool UsernameTaken(string username);
+        Task UpdateAsync(User user);
+        Task UpdateAsync(User myUser, UserUpdate req);
+        Task AddFavoriteQuoteAsync(User user, Quote quote);
+        Task<bool> UsernameTakenAsync(string username);
     }
 }
