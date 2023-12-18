@@ -19,8 +19,9 @@ namespace ProgrammingQuotesApi.DbContexts
 
         public ProgrammingContext()
         {
-            InitQuotes();
-            InitUsers();
+            Database.EnsureCreated();
+            //InitQuotes();
+            //InitUsers();
         }
 
         private void InitQuotes()
@@ -47,7 +48,8 @@ namespace ProgrammingQuotesApi.DbContexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseInMemoryDatabase("TestDb");
+            // optionsBuilder.UseInMemoryDatabase("TestDb");
+            optionsBuilder.UseSqlite("Filename=ProgrammingQuotes.db");
         }
 
     }
