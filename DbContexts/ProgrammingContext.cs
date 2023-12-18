@@ -20,14 +20,12 @@ namespace ProgrammingQuotesApi.DbContexts
         public ProgrammingContext()
         {
             Database.EnsureCreated();
-            //InitQuotes();
-            //InitUsers();
+            if (!Quotes.Any()) InitQuotes();
+            if (!Users.Any()) InitUsers();
         }
 
         private void InitQuotes()
         {
-            if (Quotes.Any()) return;
-
             string data = File.ReadAllText("Data/quotes.json");
             List<Quote> quotes = JsonSerializer.Deserialize<List<Quote>>(data, JsonOptions);
 
@@ -37,8 +35,6 @@ namespace ProgrammingQuotesApi.DbContexts
 
         private void InitUsers()
         {
-            if (Users.Any()) return;
-
             string data = File.ReadAllText("Data/users.json");
             List<User> users = JsonSerializer.Deserialize<List<User>>(data, JsonOptions);
 
@@ -48,9 +44,7 @@ namespace ProgrammingQuotesApi.DbContexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // optionsBuilder.UseInMemoryDatabase("TestDb");
             optionsBuilder.UseSqlite("Filename=ProgrammingQuotes.db");
         }
-
     }
 }
