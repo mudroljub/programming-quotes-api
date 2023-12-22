@@ -28,7 +28,6 @@ namespace ProgrammingQuotesApi
         // called by the runtime, use to configure services
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddDbContext<ProgrammingContext>();
             services.AddEntityFrameworkSqlite().AddDbContext<ProgrammingContext>();
             services.AddCors();
             services.AddControllers().AddNewtonsoftJson();
