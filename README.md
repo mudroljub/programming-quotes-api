@@ -56,7 +56,5 @@ Note that you can change `titles`, `pithumbsize` and other params. The `%20` cha
 
 ## TODO
 
-- add sql lite
-  - add migration
 - remove Helpers, move settings to env
 - deploy on some free server?
