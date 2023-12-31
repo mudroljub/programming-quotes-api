@@ -1,5 +1,5 @@
 const express = require("express")
-const path = require("path")
+// const path = require("path")
 const quotes = require("./Data/quotes.json")
 const app = express()
 const PORT = 80
