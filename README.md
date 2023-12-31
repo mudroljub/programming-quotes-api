@@ -2,7 +2,7 @@
 
 **Programming Quotes API for open source projects.**
 
-Status: ~~[currently without free hosting](https://github.com/mudroljub/programming-quotes-api/issues/54).~~ [live](https://programming-quotes-api-seven.vercel.app/)
+Status: ~~[currently without free hosting](https://github.com/mudroljub/programming-quotes-api/issues/54).~~ [live](https://vercel-programming-quotes-api-2-q0zt47sdi-arham-sayyed.vercel.app/)
 
 ## Introduction
 
@@ -35,13 +35,13 @@ You can also POST, PUT, PATCH and DELETE. See Swagger docs for more.
 
 ## Express Implementation
 
-GET [`/quotes`](https://programming-quotes-api-seven.vercel.app/quotes) (get all quotes)
+GET [`/quotes`](https://vercel-programming-quotes-api-2-q0zt47sdi-arham-sayyed.vercel.app/quotes) (get all quotes)
 
-GET [`/quotes/random`](https://programming-quotes-api-seven.vercel.app/quotes/random) (get random quote)
+GET [`/quotes/random`](https://vercel-programming-quotes-api-2-q0zt47sdi-arham-sayyed.vercel.app/quotes/random) (get random quote)
 
-GET [`/quotes/5a6ce86f2af929789500e824`](https://programming-quotes-api-seven.vercel.app/quotes/5a6ce86f2af929789500e824) (get quote by id)
+GET [`/quotes/5a6ce86f2af929789500e824`](https://vercel-programming-quotes-api-2-q0zt47sdi-arham-sayyed.vercel.app/quotes/5a6ce86f2af929789500e824) (get quote by id)
 
-GET [`/quotes/author/Edsger W. Dijkstra`](https://programming-quotes-api-seven.vercel.app/quotes/author/Edsger%20W.%20Dijkstra) (get quote by author)
+GET [`/quotes/author/Edsger W. Dijkstra`](https://vercel-programming-quotes-api-2-q0zt47sdi-arham-sayyed.vercel.app/quotes/author/Edsger%20W.%20Dijkstra) (get quote by author)
 
 
 ## Author info

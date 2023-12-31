@@ -1,6 +1,7 @@
 const express = require("express")
-// const path = require("path")
-const quotes = require("./Data/quotes.json")
+const path = require("path"); // Add this line
+const quotesPath = path.join(__dirname, "quotes.json"); // Adjust the path accordingly
+const quotes = require(quotesPath);
 const app = express()
 const PORT = 80
 
