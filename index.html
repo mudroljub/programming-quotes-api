@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programming Quotes API</title>
+    <style>
+        body {
+            font-family: 'Helvetica', sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+
+        h2 {
+            color: #007BFF;
+            border-bottom: 2px solid #007BFF;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #28a745;
+        }
+
+        p,
+        a {
+            color: #6c757d;
+        }
+
+        a {
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .center {
+            border: 0.05em solid transparent;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .center a button {
+            color: #f0f8ff;
+        }
+
+        .center a button:hover {
+            color: #007BFF;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        code {
+            background-color: #f0f8ff;
+            padding: 2px 5px;
+            border: 1px solid #d6d6d6;
+            border-radius: 4px;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #d6d6d6;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h2 id="welcome-to-the-programming-quotes-api">Welcome to the Programming Quotes API!</h2>
+    <p><strong>Programming Quotes API for open source projects.</strong></p>
+    <p>Status: <a href="https://programming-quotes-api-seven.vercel.app/quotes/random">Live</a></p>
+
+    <h3 id="introduction">Introduction</h3>
+    <p>Welcome to the Programming Quotes API, an open-source project that provides a vast collection of programming
+        quotes and their authors. This API allows you to explore, search, and enjoy programming-related wisdom from
+        various sources.</p>
+
+    <h3 id="getting-started">Getting Started</h3>
+    <p>To get started, you can use the following endpoints:</p>
+    <ul>
+        <li><strong>GET <a
+                    href="https://programming-quotes-api-seven.vercel.app/quotes"><code>/quotes</code></a></strong>
+            Retrieve all quotes.</li>
+        <li><strong>GET <a
+                    href="https://programming-quotes-api-seven.vercel.app/quotes/random"><code>/quotes/random</code></a></strong>
+            Get a random quote.</li>
+        <li><strong>GET <a
+                    href="https://programming-quotes-api-seven.vercel.app/quotes/5a6ce8702af929789500e8a4"><code>/quotes/{id}</code></a></strong>
+            Get a quote by ID.</li>
+        <li><strong>GET <a
+                    href="https://programming-quotes-api-seven.vercel.app/quotes/author/Edsger%20W.%20Dijkstra"><code>/quotes/author/{authorName}</code></a></strong>
+            Get quotes by a specific author.</li>
+    </ul>
+
+    <h3 id="author-info">Author Info</h3>
+    <p>For additional information about authors, you can use the Wikipedia API:</p>
+    <ul>
+        <li>To get an author's image: <a
+                href="https://en.wikipedia.org/w/api.php?action=query&titles=Author%20Name&prop=pageimages&format=json&pithumbsize=250"><code>https://en.wikipedia.org/w/api.php?action=query&amp;titles=Author%20Name&amp;prop=pageimages&amp;format=json&amp;pithumbsize=250</code></a>
+        </li>
+        <li>To get author info: <a
+                href="https://en.wikipedia.org/w/api.php?action=query&titles=Author%20Name&prop=extracts&format=json&exintro=1"><code>https://en.wikipedia.org/w/api.php?action=query&amp;titles=Author%20Name&amp;prop=extracts&amp;format=json&amp;exintro=1</code></a>
+        </li>
+    </ul>
+    <p>Replace "Author%20Name" with the actual name of the author.</p>
+
+    <h3 id="tutorials">Tutorials</h3>
+    <p>Explore these tutorials to enhance your understanding of web APIs and authentication:</p>
+    <ul>
+        <li>Web API: <a href="https://docs.microsoft.com/en-us/learn/modules/build-web-api-aspnet-core/">Microsoft
+                Learn</a></li>
+        <li>Web API: <a href="https://channel9.msdn.com/Series/Beginners-Series-to-Web-APIs?page=2">Channel 9</a></li>
+        <li>Auth: <a
+                href="https://jasonwatmore.com/post/2021/07/29/net-5-role-based-authorization-tutorial-with-example-api">Role-Based
+                Authorization Tutorial</a></li>
+        <li>Auth: <a
+                href="https://medium.com/@marcosvinicios_net/asp-net-core-3-authorization-and-authentication-with-bearer-and-jwt-3041c47c8b1d">Authentication
+                with Bearer and JWT</a></li>
+    </ul>
+
+    <h3 id="additional-resources">Additional Resources</h3>
+    <p>For more details about the project, visit the <a
+            href="https://github.com/mudroljub/programming-quotes-api">GitHub Repository</a>.</p>
+
+    <hr>
+
+    <p>Enjoy exploring the world of programming quotes with the Programming Quotes API!</p>
+
+    <div class="center">
+        <a href="https://github.com/arham-sayyed/" style="text-decoration: none;">
+            <button
+                style="padding: 10px 20px; background-color: #24292e; border: none; border-radius: 5px; cursor: pointer;">
+                My GitHub 🚀
+            </button>
+        </a>
+        <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js"
+            data-name="bmc-button" data-slug="arhamsayyed" data-color="#BD5FFF" data-emoji="" data-font="Cookie"
+            data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#ffffff"
+            data-coffee-color="#FFDD00"></script>
+        <a href="https://github.com/mudroljub/programming-quotes-api" style="text-decoration: none;">
+            <button
+                style="padding: 10px 20px; background-color: #24292e;  border: none; border-radius: 5px; cursor: pointer;">
+                Project's GitHub 🚀
+            </button>
+        </a>
+    </div>
+
+</body>
+
+</html>

@@ -2,7 +2,7 @@
 
 **Programming Quotes API for open source projects.**
 
-Status: [currently without free hosting](https://github.com/mudroljub/programming-quotes-api/issues/54).
+Status: ~~[currently without free hosting](https://github.com/mudroljub/programming-quotes-api/issues/54).~~ [live](https://programming-quotes-api-seven.vercel.app/)
 
 ## Introduction
 
@@ -33,6 +33,17 @@ GET `/quotes/author/Edsger W. Dijkstra` (get quote by author)
 
 You can also POST, PUT, PATCH and DELETE. See Swagger docs for more.
 
+## Express Implementation
+
+GET [`/quotes`](https://programming-quotes-api-seven.vercel.app/quotes) (get all quotes)
+
+GET [`/quotes/random`](https://programming-quotes-api-seven.vercel.app/quotes/random) (get random quote)
+
+GET [`/quotes/5a6ce86f2af929789500e824`](https://programming-quotes-api-seven.vercel.app/quotes/5a6ce86f2af929789500e824) (get quote by id)
+
+GET [`/quotes/author/Edsger W. Dijkstra`](https://programming-quotes-api-seven.vercel.app/quotes/author/Edsger%20W.%20Dijkstra) (get quote by author)
+
+
 ## Author info
 
 You can use Wikipedia API for author's image and info. 
@@ -57,4 +68,4 @@ Note that you can change `titles`, `pithumbsize` and other params. The `%20` cha
 ## TODO
 
 - remove Helpers, move settings to env
-- deploy on some free server?
+- ~~deploy on some free server?~~ 

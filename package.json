@@ -1,0 +1,15 @@
+{
+  "name": "programming-quotes-api",
+  "version": "1.0.0",
+  "description": "**Programming Quotes API for open source projects.**",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
