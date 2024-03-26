@@ -19,7 +19,8 @@ namespace ProgrammingQuotesApi.DbContexts
 
         public ProgrammingContext()
         {
-            Database.EnsureCreated();
+            //Database.EnsureDeleted();
+            Database.Migrate();
             if (!Quotes.Any()) InitQuotes();
             if (!Users.Any()) InitUsers();
         }
