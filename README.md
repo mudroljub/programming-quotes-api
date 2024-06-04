@@ -47,13 +47,6 @@ To get author info:
 
 Note that you can change `titles`, `pithumbsize` and other params. The `%20` character (as in `Fred%20Brooks`) is for empty space.
 
-## Tutorials
-
-- Web API: https://docs.microsoft.com/en-us/learn/modules/build-web-api-aspnet-core/
-- Web API: https://channel9.msdn.com/Series/Beginners-Series-to-Web-APIs?page=2
-- Auth: https://jasonwatmore.com/post/2021/07/29/net-5-role-based-authorization-tutorial-with-example-api
-- Auth: https://medium.com/@marcosvinicios_net/asp-net-core-3-authorization-and-authentication-with-bearer-and-jwt-3041c47c8b1d
-
 ## TODO
 
 - remove Helpers, move settings to env
