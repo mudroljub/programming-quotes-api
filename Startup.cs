@@ -7,19 +7,20 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using ProgrammingQuotesApi.DbContexts;
-using ProgrammingQuotesApi.Helpers;
 using ProgrammingQuotesApi.Services;
 using System.IO;
 using System;
 using ProgrammingQuotesApi.Services.Interfaces;
+using System.Text;
 
 namespace ProgrammingQuotesApi
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; }      
         private readonly string version = "v2";
-
+        private readonly string secret = Environment.GetEnvironmentVariable("ProgrammingQuotesSecret");
+ 
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -69,7 +70,7 @@ namespace ProgrammingQuotesApi
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Settings.Secret),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secret)),
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };

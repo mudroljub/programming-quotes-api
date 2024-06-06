@@ -12,7 +12,9 @@ Convention: The names of the authors are as on Wikipedia.
 
 ## Development
 
-Start the project locally:
+First, set env variable `ProgrammingQuotesSecret` to any string you like (not too short).
+
+Then, start the project locally:
 
 ```
 dotnet build
@@ -49,5 +51,4 @@ Note that you can change `titles`, `pithumbsize` and other params. The `%20` cha
 
 ## TODO
 
-- remove Helpers, move settings to env
 - deploy on some free server?
