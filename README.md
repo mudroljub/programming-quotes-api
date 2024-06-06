@@ -2,7 +2,7 @@
 
 **Programming Quotes API for open source projects.**
 
-Status: [currently without free hosting](https://github.com/mudroljub/programming-quotes-api/issues/54).
+Status: [currently without free hosting](https://github.com/mudroljub/programming-quotes-api/issues/54). You can help the project by hosting this API.
 
 ## Introduction
 
