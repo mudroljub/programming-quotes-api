@@ -1,4 +1,3 @@
-using ProgrammingQuotesApi.Helpers;
 using ProgrammingQuotesApi.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
