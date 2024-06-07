@@ -50,7 +50,7 @@ namespace ProgrammingQuotesApi.Controllers
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public async Task<ActionResult> Authenticate([FromBody] UserAuthReq req)
+        public async Task<ActionResult> Authenticate([FromBody] UserAuthRequest req)
         {
             UserAuthRes user = await _userService.Authenticate(req.Username, req.Password);
 

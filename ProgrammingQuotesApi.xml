@@ -93,7 +93,7 @@
             Create a new user
             </summary>
         </member>
-        <member name="M:ProgrammingQuotesApi.Controllers.UsersController.Authenticate(ProgrammingQuotesApi.Models.UserAuthReq)">
+        <member name="M:ProgrammingQuotesApi.Controllers.UsersController.Authenticate(ProgrammingQuotesApi.Models.UserAuthRequest)">
              <summary>
              Authenticates an existing user
              </summary>
