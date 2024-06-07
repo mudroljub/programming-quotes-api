@@ -12,7 +12,7 @@ Convention: The names of the authors are as on Wikipedia.
 
 ## Development
 
-First, set env variable `ProgrammingQuotesSecret` to any string you like (not too short).
+First, set env variable `ProgrammingQuotesSecret` to any string you like (but not too short).
 
 Then, start the project locally:
 
