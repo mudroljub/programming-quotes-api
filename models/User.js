@@ -1,7 +1,6 @@
 const { Schema, model } = require('mongoose')
-const arrayUniquePlugin = require('mongoose-unique-array')
 
-const userSchema = Schema({
+const userSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -34,7 +33,5 @@ const userSchema = Schema({
     default: new Date()
   }
 })
-
-userSchema.plugin(arrayUniquePlugin)
 
 module.exports = model('User', userSchema)

@@ -5,13 +5,15 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const { marked } = require('marked')
 const compression = require('compression')
+const { promisify } = require('util')
+const fs = require('fs')
 
 const { mongoUri } = require('./config/db')
 const { port, domain } = require('./config/host')
-const { readFileAsync } = require('./utils/helpers')
 const router = require('./routes/router')
 
 const app = express()
+const readFileAsync = promisify(fs.readFile)
 
 /* CONFIG */
 

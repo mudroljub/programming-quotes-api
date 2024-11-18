@@ -1,8 +1,4 @@
 const jwt = require('jsonwebtoken')
-const fs = require('fs')
-const { promisify } = require('util')
-
-const readFileAsync = promisify(fs.readFile)
 
 const validateUser = (req, res, next) => {
   const {token} = req.body
@@ -23,5 +19,4 @@ const validateAdmin = (req, res, next) => {
 module.exports = {
   validateUser,
   validateAdmin,
-  readFileAsync,
 }

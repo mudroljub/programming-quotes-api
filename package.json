@@ -21,12 +21,7 @@
     "jsonwebtoken": "^9.0.2",
     "marked": "^15.0.1",
     "mongodb": "^3.3.4",
-    "mongoose": "^5.13.22",
-    "mongoose-unique-array": "^0.3.4",
-    "passport": "^0.7.0",
-    "passport-github2": "^0.1.12",
-    "passport-google-oauth20": "^1.0.0",
-    "ws": "^8.18.0"
+    "mongoose": "^5.13.22"
   },
   "devDependencies": {
     "eslint": "^9.15.0",
