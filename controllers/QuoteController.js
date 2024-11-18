@@ -1,15 +1,17 @@
 const Quote = require('../models/Quote')
 const User = require('../models/User')
 
-exports.create = (req, res) => {
+exports.create = async(req, res) => {
   const { user } = res.locals
   const params = { ...req.body }
   delete params._id // error if try to convert empty _id
 
-  Quote.create({ ...params, addedBy: user._id }, (err, quote) => {
-    if (err) return res.status(500).send(err)
+  try {
+    const quote = await Quote.create({ ...params, addedBy: user._id })
     res.send({ message: 'SUCCESS_SAVED', quote })
-  })
+  } catch (err) {
+    res.status(500).send(err)
+  }
 }
 
 exports.getAll = async(req, res) => {
@@ -21,74 +23,87 @@ exports.getAll = async(req, res) => {
   }
 }
 
-exports.getById = (req, res) => {
+exports.getById = async(req, res) => {
   const { _id } = req.params
 
-  Quote.findById(_id, (err, quote) => {
-    if (err) return console.error(err)
+  try {
+    const quote = await Quote.findById(_id)
     res.send(quote)
-  })
+  } catch (err) {
+    console.error(err)
+    res.send('SERVER_ERROR', err.message)
+  }
 }
 
-exports.readByLang = (req, res) => {
+exports.readByLang = async(req, res) => {
   const { lang } = req.params
-  Quote
-    .find({ [lang]: { $ne: '' } })
-    .select({ author: 1, [lang]: 1, rating: 1 })
-    .then(quotes => res.send(quotes))
-    .catch(e => res.send('SERVER_ERROR', e.message))
+  try {
+    const quotes = await Quote
+      .find({ [lang]: { $ne: '' } })
+      .select({ author: 1, [lang]: 1, rating: 1 })
+    res.send(quotes)
+  } catch (e) {
+    res.send('SERVER_ERROR', e.message)
+  }
 }
 
 exports.readByPage = async(req, res) => {
   const { pageNumber } = req.params
   const pageSize = 20
 
-  const quotes = await Quote
-    .find()
-    .skip((pageNumber - 1) * pageSize)
-    .limit(pageSize)
-    .select({ author: 1, en: 1, sr: 1, rating: 1 })
-  res.send(quotes)
+  try {
+    const quotes = await Quote
+      .find()
+      .skip((pageNumber - 1) * pageSize)
+      .limit(pageSize)
+      .select({ author: 1, en: 1, sr: 1, rating: 1 })
+    res.send(quotes)
+  } catch (err) {
+    res.send('SERVER_ERROR', err.message)
+  }
 }
 
-exports.random = (req, res) => {
-  Quote.estimatedDocumentCount().exec((err, count) => {
+exports.random = async(req, res) => {
+  try {
+    const count = await Quote.estimatedDocumentCount()
     const rand = Math.floor(Math.random() * count)
-    Quote
+    const quote = await Quote
       .findOne()
-      .select({ author: 1, en: 1 }) // '_id': 0
+      .select({ author: 1, en: 1 })
       .skip(rand)
-      .exec((err, quote) => res.send(quote))
-  })
+    res.send(quote)
+  } catch (err) {
+    res.send(err)
+  }
 }
 
-exports.randomByLang = (req, res) => {
+exports.randomByLang = async(req, res) => {
   const { lang } = req.params
   const query = { [lang]: { $ne: '' } }
 
-  Quote
-    .countDocuments(query)
-    .exec((err, n) => {
-      const rand = Math.floor(Math.random() * n)
-      Quote
-        .findOne(query)
-        // .select({ author: 1, [lang]: 1 })
-        .skip(rand)
-        .exec((err, quote) => res.send(quote))
-    })
+  try {
+    const n = await Quote.countDocuments(query)
+    const rand = Math.floor(Math.random() * n)
+    const quote = await Quote
+      .findOne(query)
+      .skip(rand)
+    res.send(quote)
+  } catch (err) {
+    res.send('SERVER_ERROR', err.message)
+  }
 }
 
-exports.update = (req, res) => {
+exports.update = async(req, res) => {
   const { _id } = req.body
 
-  Quote.findById(_id, (err, quote) => {
-    if (err) return console.error(err)
+  try {
+    const quote = await Quote.findById(_id)
     quote.set({ ...req.body })
-    quote.save(err => {
-      if (err) return console.error(err)
-      res.send({ message: 'SUCCESS_SAVED', quote })
-    })
-  })
+    await quote.save()
+    res.send({ message: 'SUCCESS_SAVED', quote })
+  } catch (err) {
+    res.send('SERVER_ERROR', err.message)
+  }
 }
 
 exports.vote = async(req, res) => {
@@ -101,21 +116,23 @@ exports.vote = async(req, res) => {
     const { rating, numberOfVotes } = quote
     const newRating = (rating * numberOfVotes + Number(newVote)) / (numberOfVotes + 1)
     quote.rating = newRating.toFixed(1)
-    quote.save(err => {
-      if (err) return res.status(500).send(err.message)
-      if (user) User.update({ _id: user._id }, { $addToSet: { voted: quoteId } })
-      res.send({ message: 'SUCCESS_SAVED', quote })
-    })
+    await quote.save()
+    if (user)
+      await User.updateOne({ _id: user._id }, { $addToSet: { voted: quoteId } })
+
+    res.send({ message: 'SUCCESS_SAVED', quote })
   } catch (e) {
-    res.send({ message: e.message })
+    res.send('SERVER_ERROR', e.message)
   }
 }
 
-exports.delete = (req, res) => {
+exports.delete = async(req, res) => {
   const { _id } = req.body
 
-  Quote.findOneAndRemove({ _id }, err => {
-    if (err) throw err
+  try {
+    await Quote.findOneAndRemove({ _id })
     res.send('QUOTE_DELETED')
-  })
+  } catch (err) {
+    res.send('SERVER_ERROR', err.message)
+  }
 }
