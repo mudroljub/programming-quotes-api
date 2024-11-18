@@ -1,5 +1,7 @@
+const Quote = require('../../models/Quote')
+
 module.exports =  (req, res) => {
-  const { Quote, user } = res.locals
+  const { user } = res.locals
   const params = {...req.body}
   delete params._id // error if try to convert empty _id
 

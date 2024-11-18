@@ -1,8 +1,9 @@
 const User = require('../../models/User')
+const Quote = require('../../models/Quote')
 
 module.exports = async(req, res) => {
   const {quoteId, newVote} = req.body
-  const { Quote, user } = res.locals
+  const { user } = res.locals
   if (newVote > 5 || newVote < 1) return res.status(400).send({message: 'Invalid vote'})
 
   try {

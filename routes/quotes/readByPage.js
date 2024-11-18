@@ -1,6 +1,7 @@
+const Quote = require('../../models/Quote')
+
 module.exports = async(req, res) => {
   const { pageNumber } = req.params
-  const { Quote } = res.locals
   const pageSize = 20
 
   const quotes = await Quote

@@ -1,6 +1,7 @@
+const Quote = require('../../models/Quote')
+
 module.exports = (req, res) => {
   const { lang } = req.params
-  const { Quote } = res.locals
   Quote
     .find({ [lang]: { $ne: '' } })
     .select({ author: 1, [lang]: 1, rating: 1 })

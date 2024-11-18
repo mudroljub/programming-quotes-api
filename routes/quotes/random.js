@@ -1,5 +1,6 @@
+const Quote = require('../../models/Quote')
+
 module.exports = (req, res) => {
-  const { Quote } = res.locals
 
   Quote.estimatedDocumentCount().exec((err, count) => {
     const rand = Math.floor(Math.random() * count)

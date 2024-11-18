@@ -1,5 +1,6 @@
+const Quote = require('../../models/Quote')
+
 module.exports = (req, res) => {
-  const { Quote } = res.locals
   Quote
     .find()
     .select()
