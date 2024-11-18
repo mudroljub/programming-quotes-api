@@ -6,9 +6,9 @@ const mongoose = require('mongoose')
 const { marked } = require('marked')
 const compression = require('compression')
 
-const {mongoUri} = require('./config/db')
-const {port, domain} = require('./config/host')
-const {readFileAsync} = require('./utils/helpers')
+const { mongoUri } = require('./config/db')
+const { port, domain } = require('./config/host')
+const { readFileAsync } = require('./utils/helpers')
 const router = require('./routes/router')
 
 const app = express()
@@ -16,7 +16,7 @@ const app = express()
 /* CONFIG */
 
 app.use(cors())
-app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(compression())
 

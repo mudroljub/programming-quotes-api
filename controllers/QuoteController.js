@@ -3,12 +3,12 @@ const User = require('../models/User')
 
 exports.create = (req, res) => {
   const { user } = res.locals
-  const params = {...req.body}
+  const params = { ...req.body }
   delete params._id // error if try to convert empty _id
 
   Quote.create({ ...params, addedBy: user._id }, (err, quote) => {
     if (err) return res.status(500).send(err)
-    res.send({message: 'SUCCESS_SAVED', quote})
+    res.send({ message: 'SUCCESS_SAVED', quote })
   })
 }
 
@@ -56,7 +56,7 @@ exports.random = (req, res) => {
     const rand = Math.floor(Math.random() * count)
     Quote
       .findOne()
-      .select({ author: 1, en: 1}) // '_id': 0
+      .select({ author: 1, en: 1 }) // '_id': 0
       .skip(rand)
       .exec((err, quote) => res.send(quote))
   })
@@ -79,22 +79,22 @@ exports.randomByLang = (req, res) => {
 }
 
 exports.update = (req, res) => {
-  const {_id} = req.body
+  const { _id } = req.body
 
   Quote.findById(_id, (err, quote) => {
     if (err) return console.error(err)
-    quote.set({...req.body})
+    quote.set({ ...req.body })
     quote.save(err => {
       if (err) return console.error(err)
-      res.send({message: 'SUCCESS_SAVED', quote})
+      res.send({ message: 'SUCCESS_SAVED', quote })
     })
   })
 }
 
 exports.vote = async(req, res) => {
-  const {quoteId, newVote} = req.body
+  const { quoteId, newVote } = req.body
   const { user } = res.locals
-  if (newVote > 5 || newVote < 1) return res.status(400).send({message: 'Invalid vote'})
+  if (newVote > 5 || newVote < 1) return res.status(400).send({ message: 'Invalid vote' })
 
   try {
     const quote = await Quote.findById(quoteId)
@@ -103,18 +103,18 @@ exports.vote = async(req, res) => {
     quote.rating = newRating.toFixed(1)
     quote.save(err => {
       if (err) return res.status(500).send(err.message)
-      if (user) User.update({_id: user._id}, {$addToSet: {voted: quoteId}})
-      res.send({message: 'SUCCESS_SAVED', quote})
+      if (user) User.update({ _id: user._id }, { $addToSet: { voted: quoteId } })
+      res.send({ message: 'SUCCESS_SAVED', quote })
     })
   } catch (e) {
-    res.send({message: e.message })
+    res.send({ message: e.message })
   }
 }
 
 exports.delete = (req, res) => {
-  const {_id} = req.body
+  const { _id } = req.body
 
-  Quote.findOneAndRemove({_id}, err => {
+  Quote.findOneAndRemove({ _id }, err => {
     if (err) throw err
     res.send('QUOTE_DELETED')
   })
