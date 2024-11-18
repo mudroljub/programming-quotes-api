@@ -24,7 +24,11 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 app.use(compression())
 
-mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(mongoUri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+  .catch(err => console.error('MongoDB connection error:', err))
 mongoose.set('useCreateIndex', true)
 
 /* ROUTES */

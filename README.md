@@ -2,8 +2,6 @@
 
 **Programming Quotes API for open source projects.**
 
-Homepage: [programming-quotes-api.herokuapp.com](https://programming-quotes-api.herokuapp.com)
-
 Github repo: [github.com/skolakoda/programming-quotes-api](https://github.com/skolakoda/programming-quotes-api)
 
 ## API Documentation
@@ -12,17 +10,17 @@ Suported languages: en, sr.
 
 ### Public routes
 
-GET [`/quotes`](https://programming-quotes-api.herokuapp.com/quotes) (get all quotes)
+GET [`/quotes`](/quotes) (get all quotes)
 
-GET [`/quotes/lang/en`](https://programming-quotes-api.herokuapp.com/quotes/lang/en) (get quotes by language)
+GET [`/quotes/lang/en`](/quotes/lang/en) (get quotes by language)
 
-GET [`/quotes/page/2`](https://programming-quotes-api.herokuapp.com/quotes/page/2) (get quotes by page)
+GET [`/quotes/page/2`](/quotes/page/2) (get quotes by page)
 
-GET [`/quotes/random`](https://programming-quotes-api.herokuapp.com/quotes/random) (get random quote)
+GET [`/quotes/random`](/quotes/random) (get random quote)
 
-GET [`/quotes/random/lang/sr`](https://programming-quotes-api.herokuapp.com/quotes/random/lang/sr) (get random quote by language)
+GET [`/quotes/random/lang/sr`](/quotes/random/lang/sr) (get random quote by language)
 
-GET [`/quotes/id/5a6ce86f2af929789500e824`](https://programming-quotes-api.herokuapp.com/quotes/id/5a6ce86f2af929789500e824) (get quote by id)
+GET [`/quotes/id/5a6ce86f2af929789500e824`](/quotes/id/5a6ce86f2af929789500e824) (get quote by id)
 
 ### Protected routes
 
@@ -59,6 +57,13 @@ GET `/auth/{provider}:token` (get user data)
 - Install Node.js
 - Set [environment variables](https://github.com/skolakoda/baza-podataka/wiki/Environment-variables)
 
+### Setup database
+
+Import json file into local MongoDB database, if needed:
+
+```
+mongoimport --db quotes --collection quotes --file quotes.json --jsonArray
+```
 
 ### Env variables
 
@@ -74,9 +79,11 @@ DB_DOMAIN=
 # obtain from Github (have two separate OAuth apps, for local and for production)
 GITHUB_CLIENT_ID=
 GITHUB_CLIENT_SECRET=
+
 # OAuth 2.0 client IDs (obtain from Google API Console)
 GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=
+
 # whatever random string you like
 JWTSECRET=
 
