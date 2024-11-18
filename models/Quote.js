@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
+const { Schema, model } = require('mongoose')
 
-const Quote = {
+const QuotesSchema = new Schema({
   author: {
     type: String,
     required: true,
@@ -29,7 +29,7 @@ const Quote = {
     trim: true,
   },
   addedBy: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'User',
   },
   numberOfVotes: {
@@ -43,14 +43,8 @@ const Quote = {
     max: 5,
     // default: 0,
   },
-  // tags: {
-  //   type: [{ type: Number }],
-  //   default: [],
-  // },
-}
-
-const QuotesSchema = mongoose.Schema(Quote)
+})
 
 QuotesSchema.set('toJSON', { getters: true }) // enable getters
 
-module.exports = QuotesSchema
+module.exports = model('Quote', QuotesSchema)
