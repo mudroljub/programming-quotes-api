@@ -1,6 +1,6 @@
 const router = require('express').Router()
-const { validateUser, validateAdmin } = require('../../utils/helpers')
-const QuoteController = require('../../controllers/QuoteController')
+const { validateUser, validateAdmin } = require('../utils/helpers')
+const QuoteController = require('../controllers/QuoteController')
 
 router.get('/', QuoteController.getAll)
 router.get('/lang/:lang', QuoteController.readByLang)
