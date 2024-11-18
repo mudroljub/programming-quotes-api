@@ -10,7 +10,6 @@ router.get('/random/lang/:lang', QuoteController.randomByLang)
 router.get('/id/:_id', QuoteController.getById)
 
 router.use(validateUser) // all routes bellow are protected
-
 router.post('/vote', QuoteController.vote)
 router.post('/', QuoteController.create)
 router.use(validateAdmin)
