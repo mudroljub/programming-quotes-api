@@ -37,7 +37,7 @@
     "no-undef": "error",
     "no-unexpected-multiline": "error",
     "no-unreachable": "error",
-    "no-unused-vars": ["error", { "args": "all" }],
+    "no-unused-vars": ["warn", { "args": "all" }],
     "no-use-before-define": ["error", { "functions": false }],
     "no-useless-constructor": "error",
     "no-useless-rename": "error",

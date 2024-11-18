@@ -8,7 +8,6 @@ const compression = require('compression')
 
 const {mongoUri} = require('./config/db')
 const {port, domain} = require('./config/host')
-// const passport = require('./utils/passport')
 const {readFileAsync} = require('./utils/helpers')
 const router = require('./routes/router')
 
@@ -16,8 +15,6 @@ const app = express()
 
 /* CONFIG */
 
-// app.use(passport.initialize())
-// app.use(passport.session())
 app.use(cors())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
