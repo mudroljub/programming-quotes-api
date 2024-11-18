@@ -29,9 +29,6 @@
     "twit": "^2.2.11",
     "ws": "^3.3.3"
   },
-  "engines": {
-    "node": "12.4.0"
-  },
   "devDependencies": {
     "eslint": "^5.16.0",
     "nodemon": "^1.19.4"
