@@ -6,7 +6,7 @@ const authRouter = require('./auth')
 
 for (const collection of ['quotes', 'svetemisli']) {
   router.use(`/${collection}`, (req, res, next) => {
-    res.locals.Quote = model('Quote', QuotesSchema, collection) // dynamically asign collection
+    res.locals.Quote = model('Quote', QuotesSchema, collection) // dynamically assign collection
     next()
   }, quotesRouter)
 }

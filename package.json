@@ -18,19 +18,19 @@
     "cors": "^2.8.5",
     "dotenv": "^5.0.1",
     "express": "^4.21.1",
-    "jsonwebtoken": "^8.5.1",
-    "marked": "^0.7.0",
+    "jsonwebtoken": "^9.0.2",
+    "marked": "^15.0.1",
     "mongodb": "^3.3.4",
     "mongoose": "^5.13.22",
     "mongoose-unique-array": "^0.3.4",
-    "passport": "^0.4.1",
+    "passport": "^0.7.0",
     "passport-github2": "^0.1.12",
     "passport-google-oauth20": "^1.0.0",
-    "twit": "^2.2.11",
-    "ws": "^3.3.3"
+    "twit": "^1.1.20",
+    "ws": "^8.18.0"
   },
   "devDependencies": {
-    "eslint": "^5.16.0",
-    "nodemon": "^1.19.4"
+    "eslint": "^9.15.0",
+    "nodemon": "^3.1.7"
   }
 }
