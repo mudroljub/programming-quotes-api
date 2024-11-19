@@ -3,7 +3,6 @@ import { Schema, model } from 'mongoose'
 const userSchema = new Schema({
   name: {
     type: String,
-    required: true,
     trim: true,
     maxlength: 100,
   },
@@ -14,6 +13,10 @@ const userSchema = new Schema({
     match: /\S+@\S+\.\S+/,
     index: true,
     maxlength: 100,
+  },
+  password: { 
+    type: String, 
+    required: true 
   },
   accessToken: {
     type: String,

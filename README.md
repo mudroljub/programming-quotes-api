@@ -85,7 +85,7 @@ GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=
 
 # whatever random string you like
-JWTSECRET=
+JWT_SECRET=
 
 # use development for local testing
 NODE_ENV=development 

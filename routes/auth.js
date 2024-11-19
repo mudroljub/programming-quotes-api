@@ -1,30 +1,35 @@
 import express from 'express'
-import passport from 'passport'
+import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import User from '../models/User.js'
 
-let referrer = ''
+const router = express.Router()
 
-const providers = ['google', 'github']
-for (const provider of providers) {
-  // login
-  router.get(`/${provider}`, (req, res, next) => {
-    referrer = req.headers.referer
-    passport.authenticate(provider)(req, res, next)
-  })
+router.post('/enter', async (req, res) => {
+  const { email, password } = req.body
 
-  // pass token from provider to client on callback
-  router.get(`/${provider}/redirect`, passport.authenticate(provider), (req, res) => {
-    const token = jwt.sign({ user: req.user }, process.env.JWTSECRET)
-    res.redirect(`${referrer}#/auth/${provider}/${token}`)
-  })
+  try {
+    let user = await User.findOne({ email })
+    const message = user ? 'Login successful' : 'Registration successful'
+    if (user) {
+      const isMatch = await bcrypt.compare(password, user.password)
+      if (!isMatch) 
+        return res.status(400).json({ message: 'Invalid credentials' })
+    } else {
+      const hashedPassword = await bcrypt.hash(password, 10)
+      user = new User({
+        email,
+        password: hashedPassword
+      })
+      await user.save()
+    }
 
-  // find user
-  router.get(`/${provider}/:token`, (req, res) => {
-    jwt.verify(req.params.token, process.env.JWTSECRET, (err, user) => {
-      if (err) return res.send({ res: false })
-      res.send(user)
-    })
-  })
-}
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '24h' })
+    return res.json({ message, token })
 
-export router
+  } catch (er) {
+    res.status(500).send({ message: 'SERVER_ERROR', error: er.message })
+  }
+})
+
+export default router
