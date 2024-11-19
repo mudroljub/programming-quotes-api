@@ -1,16 +1,21 @@
 import Quote from '../models/Quote.js'
 import User from '../models/User.js'
+import QuoteCreateDTO from '../dto/QuoteCreateDTO.js'
 
 const create = async(req, res) => {
   const { user } = res.locals
   const params = { ...req.body }
-  delete params._id // error if try to convert empty _id
 
   try {
-    const quote = await Quote.create({ ...params, addedBy: user._id })
+    const quoteDTO = new QuoteCreateDTO(req.body)
+    const quote = await Quote.create({ ...quoteDTO, addedBy: user._id })
     res.send({ message: 'SUCCESS_SAVED', quote })
+
   } catch (err) {
-    res.status(500).send({ message: 'SERVER_ERROR', error: err.message })
+    if (err.name === 'ValidationError')
+      res.status(400).json({ message: 'Validation failed', errors: err.errors })
+    else
+      res.status(500).send({ message: 'SERVER_ERROR', error: err.message })
   }
 }
 

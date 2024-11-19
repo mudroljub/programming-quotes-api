@@ -1,6 +1,5 @@
 import { Schema, model } from 'mongoose'
 
-// mongodb.ObjectID
 const QuotesSchema = new Schema({
   _id: {
     type: Schema.Types.ObjectId,
@@ -12,23 +11,14 @@ const QuotesSchema = new Schema({
   },
   en: {
     type: String,
-    required() { return !this.sr },
+    required: true,
     trim: true
   },
   sr: {
     type: String,
-    required() { return !this.en },
-    trim: true,
-  },
-  ms: {
-    type: String,
     trim: true,
   },
   source: {
-    type: String,
-    trim: true,
-  },
-  wiki: {
     type: String,
     trim: true,
   },
@@ -39,13 +29,11 @@ const QuotesSchema = new Schema({
   numberOfVotes: {
     type: Number,
     min: 0,
-    // default: 0,
   },
   rating: {
     type: Number,
     min: 0,
     max: 5,
-    // default: 0,
   },
 })
 

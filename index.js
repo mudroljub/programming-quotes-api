@@ -1,4 +1,5 @@
 import 'dotenv/config.js'
+import fs from 'fs'
 import express from 'express'
 import cors from 'cors'
 import bodyParser from 'body-parser'
@@ -6,7 +7,6 @@ import mongoose from 'mongoose'
 import { marked } from 'marked'
 import compression from 'compression'
 import { promisify } from 'util'
-import fs from 'fs'
 
 import { mongoUri } from './config/db.js'
 import { port, domain } from './config/host.js'
