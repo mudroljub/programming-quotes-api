@@ -110,6 +110,7 @@ npm run dev
   - lista korisnika (za admine)
   - dodela privilegije (za admine)
 - zameniti admin sa privilege (1, 2, 3...)
+- en u text, sr u?
 
 - možda
   UserService za validaciju korisnika, dobijanje ili ažuriranje podataka.

@@ -28,19 +28,23 @@ const getToken = async (req, res) => {
   }
 }
 
-const validateUser = (req, res, next) => {
+const validateUser = async (req, res, next) => {
   const { token } = req.body
   if (!token) return res.status(403).send({ success: false, message: 'No token.' })
 
-  jwt.verify(token, process.env.JWT_SECRET, (err, data) => {
-    if (err) return res.status(403).json({ success: false, message: 'Bad token.' })
-    res.locals.user = data.user
+  try {
+    const data = jwt.verify(token, process.env.JWT_SECRET)
+    console.log(data)
     next()
-  })
+  } catch {
+    res.status(403).json({ success: false, message: 'Bad token.' })
+  }
 }
 
 const validateAdmin = (req, res, next) => {
-  if (!res.locals.user.admin) return res.json({ success: false, message: 'Not admin.' })
+  // TODO: if (privilege > 2)
+  if (true) 
+      return res.json({ success: false, message: 'Not admin.' })
   next()
 }
 

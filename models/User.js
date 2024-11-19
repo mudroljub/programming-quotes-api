@@ -32,9 +32,10 @@ const userSchema = new Schema({
       unique: true
     }
   ],
-  admin: {
-    type: Boolean,
-    default: false
+  privilege: {
+    type: Number,
+    default: 1, // 1. unverified user, 2. verified user, 3. editor, 4. admin
+    max: 5,
   },
   memberSince: {
     type: Date,
