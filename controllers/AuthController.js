@@ -28,21 +28,19 @@ const getToken = async (req, res) => {
   }
 }
 
-const validatePrivilege = (requiredPrivilege) => {
-  return async (req, res, next) => {
-    const { token } = req.body
-    if (!token) return res.status(403).send({ message: 'No token.' })
+const validatePrivilege = (level) => async (req, res, next) => {
+  const { token } = req.body
+  if (!token) return res.status(403).send({ message: 'No token.' })
 
-    try {
-      const data = jwt.verify(token, process.env.JWT_SECRET)
+  try {
+    const { privilege } = jwt.verify(token, process.env.JWT_SECRET)
 
-      if (data.privilege < requiredPrivilege)
-        return res.status(403).json({ message: 'Not authorized.' })
+    if (privilege < level)
+      return res.status(403).json({ message: 'Not authorized.' })
 
-      next()
-    } catch (err) {
-      res.status(403).json({ message: 'Bad token.', error: err.message })
-    }
+    next()
+  } catch (err) {
+    res.status(403).json({ message: 'Bad token.', error: err.message })
   }
 }
 
