@@ -1,22 +1,25 @@
 import { Schema, model } from 'mongoose'
 
 const userSchema = new Schema({
-  name: {
-    type: String,
-    trim: true,
-    maxlength: 100,
-  },
   email: {
     type: String,
     lowercase: true,
     required: true,
     match: /\S+@\S+\.\S+/,
     index: true,
+    trim: true,
     maxlength: 100,
   },
   password: { 
     type: String, 
-    required: true 
+    trim: true,
+    required: true,
+    maxlength: 100,
+  },
+  name: {
+    type: String,
+    trim: true,
+    maxlength: 100,
   },
   accessToken: {
     type: String,

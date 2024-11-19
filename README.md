@@ -100,4 +100,5 @@ npm run dev
 
 ## TODO
 
-- implement user login
+- implement user auth
+- zameniti admin sa privilege (1, 2, 3...)
