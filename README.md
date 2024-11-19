@@ -59,10 +59,10 @@ GET `/auth/{provider}:token` (get user data)
 
 ### Setup database
 
-Import json file into local MongoDB database, if needed:
+Import json file into local MongoDB database, if needed (replace with real values):
 
 ```
-mongoimport --db quotes --collection quotes --file quotes.json --jsonArray
+mongoimport --db quotes --collection quotes --file quotes.json --jsonArray --username quotes --password quotes
 ```
 
 ### Env variables
