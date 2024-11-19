@@ -109,8 +109,6 @@ npm run dev
   - brisanje korisnika
   - lista korisnika (za admine)
   - dodela privilegije (za admine)
-- zameniti admin sa privilege (1, 2, 3...)
-  - validateUser i validateAdmin u validatePrivilege
 - en u text, sr u?
 
 - možda

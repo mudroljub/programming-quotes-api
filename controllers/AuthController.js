@@ -28,28 +28,27 @@ const getToken = async (req, res) => {
   }
 }
 
-const validateUser = async (req, res, next) => {
-  const { token } = req.body
-  if (!token) return res.status(403).send({  message: 'No token.' })
+const validatePrivilege = (requiredPrivilege) => {
+  return async (req, res, next) => {
+    const { token } = req.body
+    if (!token) return res.status(403).send({ message: 'No token.' })
 
-  try {
-    jwt.verify(token, process.env.JWT_SECRET)
-    next()
-  } catch (err) {
-    res.status(403).json({ message: 'Bad token.', error: err.message })
-  }
-}
+    try {
+      const data = jwt.verify(token, process.env.JWT_SECRET)
 
-const validateAdmin = (req, res, next) => {
-  try {
-    const data = jwt.verify(req.body.token, process.env.JWT_SECRET)
-    if (data.privilege > 2) 
+      if (data.privilege < requiredPrivilege)
+        return res.status(403).json({ message: 'Not authorized.' })
+
       next()
-    return res.json({ message: 'Not admin.' })
-  } catch (err) {
-    res.status(403).json({ message: 'Bad token.', error: err.message })
+    } catch (err) {
+      res.status(403).json({ message: 'Bad token.', error: err.message })
+    }
   }
 }
+
+const validateUser = validatePrivilege(1)
+
+const validateAdmin = validatePrivilege(3)
 
 export default {
   getToken,
