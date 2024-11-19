@@ -4,14 +4,16 @@ const userSchema = new Schema({
   name: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
+    maxlength: 100,
   },
   email: {
     type: String,
     lowercase: true,
     required: true,
     match: /\S+@\S+\.\S+/,
-    index: true
+    index: true,
+    maxlength: 100,
   },
   accessToken: {
     type: String,

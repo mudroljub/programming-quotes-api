@@ -44,6 +44,4 @@ const QuotesSchema = new Schema({
   },
 })
 
-QuotesSchema.set('toJSON', { getters: true }) // enable getters
-
 export default model('Quote', QuotesSchema)
