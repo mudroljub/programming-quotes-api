@@ -58,10 +58,7 @@
     "space-infix-ops": "warn",
     "spaced-comment": ["warn", "always"],
     "vars-on-top": "error",
-    "yoda": "error",
-    "new-cap": ["warn", {
-      "capIsNewExceptions": ["mongodb.ObjectID", "express.Router"]
-    }]
+    "yoda": "error"
   },
   "parserOptions": {
     "ecmaVersion": 2018,

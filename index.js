@@ -1,22 +1,21 @@
-require('dotenv').config()
-const express = require('express')
-const cors = require('cors')
-const bodyParser = require('body-parser')
-const mongoose = require('mongoose')
-const { marked } = require('marked')
-const compression = require('compression')
-const { promisify } = require('util')
-const fs = require('fs')
+import 'dotenv/config.js'
+import express from 'express'
+import cors from 'cors'
+import bodyParser from 'body-parser'
+import mongoose from 'mongoose'
+import { marked } from 'marked'
+import compression from 'compression'
+import { promisify } from 'util'
+import fs from 'fs'
 
-const { mongoUri } = require('./config/db')
-const { port, domain } = require('./config/host')
-const router = require('./routes/router')
+import { mongoUri } from './config/db.js'
+import { port, domain } from './config/host.js'
+import router from './routes/router.js'
 
 const app = express()
 const readFileAsync = promisify(fs.readFile)
 
-/* CONFIG */
-
+// CONFIG
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -25,14 +24,17 @@ app.use(compression())
 mongoose.connect(mongoUri)
   .catch(err => console.error('MongoDB connection error:', err))
 
-/* ROUTES */
-
+// ROUTES
 app.get('/', async(req, res) => {
-  const file = await readFileAsync('README.md', 'utf8')
-  res.send(marked(file.toString()))
+  try {
+    const file = await readFileAsync('README.md', 'utf8')
+    res.send(marked(file.toString()))
+  } catch (err) {
+    res.status(500).send('Error reading README.md')
+  }
 })
+
 app.use('/', router)
 
-/* SERVER */
-
+// SERVER
 app.listen(port, () => console.log(`Serving on ${domain}`))

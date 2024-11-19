@@ -1,8 +1,7 @@
-const router = require('express').Router()
-const quotesRouter = require('./quotes')
-// const authRouter = require('./auth')
+import { Router } from 'express'
+import quotesRouter from './quotes.js'
 
+const router = new Router()
 router.use('/quotes', quotesRouter)
-// router.use('/auth', authRouter)
 
-module.exports = router
+export default router

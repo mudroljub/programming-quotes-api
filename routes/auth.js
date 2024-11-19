@@ -1,6 +1,6 @@
-const router = require('express').Router()
-const passport = require('passport')
-const jwt = require('jsonwebtoken')
+import express from 'express'
+import passport from 'passport'
+import jwt from 'jsonwebtoken'
 
 let referrer = ''
 
@@ -27,4 +27,4 @@ for (const provider of providers) {
   })
 }
 
-module.exports = router
+export router

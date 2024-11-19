@@ -1,7 +1,7 @@
-const passport = require('passport')
-const GoogleStrategy = require('passport-google-oauth20')
-const GitHubStrategy = require('passport-github2')
-const User = require('../models/User')
+import passport from 'passport'
+import { Strategy as GoogleStrategy } from 'passport-google-oauth20'
+import { Strategy as GitHubStrategy } from 'passport-github2'
+import User from '../models/User.js'
 
 passport.serializeUser((user, done) => done(null, user.id))
 
@@ -40,4 +40,4 @@ passport.use(new GitHubStrategy({
 }, findOrCreateUser))
 */
 
-module.exports = passport
+export passport

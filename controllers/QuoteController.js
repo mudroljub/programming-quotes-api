@@ -1,7 +1,7 @@
-const Quote = require('../models/Quote')
-const User = require('../models/User')
+import Quote from '../models/Quote.js'
+import User from '../models/User.js'
 
-exports.create = async(req, res) => {
+const create = async(req, res) => {
   const { user } = res.locals
   const params = { ...req.body }
   delete params._id // error if try to convert empty _id
@@ -10,20 +10,20 @@ exports.create = async(req, res) => {
     const quote = await Quote.create({ ...params, addedBy: user._id })
     res.send({ message: 'SUCCESS_SAVED', quote })
   } catch (err) {
-    res.status(500).send(err)
+    res.status(500).send({ message: 'SERVER_ERROR', error: err.message })
   }
 }
 
-exports.getAll = async(req, res) => {
+const getAll = async(req, res) => {
   try {
     const quotes = await Quote.find().select()
     res.send(quotes)
   } catch (e) {
-    res.send('SERVER_ERROR', e.message)
+    res.status(500).send({ message: 'SERVER_ERROR', error: e.message })
   }
 }
 
-exports.getById = async(req, res) => {
+const getById = async(req, res) => {
   const { _id } = req.params
 
   try {
@@ -31,23 +31,24 @@ exports.getById = async(req, res) => {
     res.send(quote)
   } catch (err) {
     console.error(err)
-    res.send('SERVER_ERROR', err.message)
+    res.status(500).send({ message: 'SERVER_ERROR', error: err.message })
   }
 }
 
-exports.readByLang = async(req, res) => {
+const readByLang = async(req, res) => {
   const { lang } = req.params
+
   try {
     const quotes = await Quote
       .find({ [lang]: { $ne: '' } })
       .select({ author: 1, [lang]: 1, rating: 1 })
     res.send(quotes)
   } catch (e) {
-    res.send('SERVER_ERROR', e.message)
+    res.status(500).send({ message: 'SERVER_ERROR', error: e.message })
   }
 }
 
-exports.readByPage = async(req, res) => {
+const readByPage = async(req, res) => {
   const { pageNumber } = req.params
   const pageSize = 20
 
@@ -59,11 +60,11 @@ exports.readByPage = async(req, res) => {
       .select({ author: 1, en: 1, sr: 1, rating: 1 })
     res.send(quotes)
   } catch (err) {
-    res.send('SERVER_ERROR', err.message)
+    res.status(500).send({ message: 'SERVER_ERROR', error: err.message })
   }
 }
 
-exports.random = async(req, res) => {
+const random = async(req, res) => {
   try {
     const count = await Quote.estimatedDocumentCount()
     const rand = Math.floor(Math.random() * count)
@@ -73,11 +74,11 @@ exports.random = async(req, res) => {
       .skip(rand)
     res.send(quote)
   } catch (err) {
-    res.send(err)
+    res.status(500).send({ message: 'SERVER_ERROR', error: err.message })
   }
 }
 
-exports.randomByLang = async(req, res) => {
+const randomByLang = async(req, res) => {
   const { lang } = req.params
   const query = { [lang]: { $ne: '' } }
 
@@ -89,11 +90,11 @@ exports.randomByLang = async(req, res) => {
       .skip(rand)
     res.send(quote)
   } catch (err) {
-    res.send('SERVER_ERROR', err.message)
+    res.status(500).send({ message: 'SERVER_ERROR', error: err.message })
   }
 }
 
-exports.update = async(req, res) => {
+const update = async(req, res) => {
   const { _id } = req.body
 
   try {
@@ -102,11 +103,11 @@ exports.update = async(req, res) => {
     await quote.save()
     res.send({ message: 'SUCCESS_SAVED', quote })
   } catch (err) {
-    res.send('SERVER_ERROR', err.message)
+    res.status(500).send({ message: 'SERVER_ERROR', error: err.message })
   }
 }
 
-exports.vote = async(req, res) => {
+const vote = async(req, res) => {
   const { quoteId, newVote } = req.body
   const { user } = res.locals
   if (newVote > 5 || newVote < 1) return res.status(400).send({ message: 'Invalid vote' })
@@ -122,17 +123,30 @@ exports.vote = async(req, res) => {
 
     res.send({ message: 'SUCCESS_SAVED', quote })
   } catch (e) {
-    res.send('SERVER_ERROR', e.message)
+    res.status(500).send({ message: 'SERVER_ERROR', error: e.message })
   }
 }
 
-exports.delete = async(req, res) => {
+const deleteQuote = async(req, res) => {
   const { _id } = req.body
 
   try {
     await Quote.findOneAndRemove({ _id })
-    res.send('QUOTE_DELETED')
+    res.send({ message: 'QUOTE_DELETED' })
   } catch (err) {
-    res.send('SERVER_ERROR', err.message)
+    res.status(500).send({ message: 'SERVER_ERROR', error: err.message })
   }
+}
+
+export default {
+  create,
+  getAll,
+  getById,
+  readByLang,
+  readByPage,
+  random,
+  randomByLang,
+  update,
+  vote,
+  deleteQuote
 }

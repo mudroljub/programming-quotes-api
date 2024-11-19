@@ -1,6 +1,8 @@
-const router = require('express').Router()
-const { validateUser, validateAdmin } = require('../utils/helpers')
-const QuoteController = require('../controllers/QuoteController')
+import { Router } from 'express'
+import { validateUser, validateAdmin } from '../utils/helpers.js'
+import QuoteController from '../controllers/QuoteController.js'
+
+const router = new Router()
 
 router.get('/', QuoteController.getAll)
 router.get('/lang/:lang', QuoteController.readByLang)
@@ -14,6 +16,6 @@ router.post('/vote', QuoteController.vote)
 router.post('/', QuoteController.create)
 router.use(validateAdmin)
 router.put('/', QuoteController.update)
-router.delete('/', QuoteController.delete)
+router.delete('/', QuoteController.deleteQuote)
 
-module.exports = router
+export default router

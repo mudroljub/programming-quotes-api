@@ -12,6 +12,7 @@
   },
   "author": "Damjan Pavlica <mudroljub@gmail.com>",
   "license": "ISC",
+  "type": "module",
   "dependencies": {
     "body-parser": "^1.20.3",
     "compression": "^1.7.5",

@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose')
+import { Schema, model } from 'mongoose'
 
 const QuotesSchema = new Schema({
   author: {
@@ -47,4 +47,4 @@ const QuotesSchema = new Schema({
 
 QuotesSchema.set('toJSON', { getters: true }) // enable getters
 
-module.exports = model('Quote', QuotesSchema)
+export default model('Quote', QuotesSchema)
