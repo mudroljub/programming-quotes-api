@@ -7,45 +7,48 @@ const getToken = async (req, res) => {
   const { email, password } = req.body
 
   try {
-    let user = await User.findOne({ email })
-    if (user) {
-      const isMatch = await bcrypt.compare(password, user.password)
-      if (!isMatch) 
-        return res.status(400).json({ message: 'Bad password' })
+    const existingUser = await User.findOne({ email })
+    if (existingUser && !await bcrypt.compare(password, existingUser.password))
+      return res.status(400).json({ message: 'Bad password' })
 
-    } else {
-      user = new User({
-        email,
-        password: await bcrypt.hash(password, 10)
-      })
-      await user.save()
-    }
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '24h' })
+    const user = existingUser 
+      ? existingUser 
+      : new User({
+          email,
+          password: await bcrypt.hash(password, 10),
+        })
+    if (!existingUser) await user.save()
+
+    const { _id, privilege } = user
+    const token = jwt.sign({ _id, privilege }, process.env.JWT_SECRET, { expiresIn: '24h' })
     return res.json({ message: 'Welcome to Programming Quotes API', token })
 
-  } catch (er) {
-    res.status(500).send({ message: 'SERVER_ERROR', error: er.message })
+  } catch (err) {
+    res.status(500).send({ message: 'SERVER_ERROR', error: err.message })
   }
 }
 
 const validateUser = async (req, res, next) => {
   const { token } = req.body
-  if (!token) return res.status(403).send({ success: false, message: 'No token.' })
+  if (!token) return res.status(403).send({  message: 'No token.' })
 
   try {
-    const data = jwt.verify(token, process.env.JWT_SECRET)
-    console.log(data)
+    jwt.verify(token, process.env.JWT_SECRET)
     next()
-  } catch {
-    res.status(403).json({ success: false, message: 'Bad token.' })
+  } catch (err) {
+    res.status(403).json({ message: 'Bad token.', error: err.message })
   }
 }
 
 const validateAdmin = (req, res, next) => {
-  // TODO: if (privilege > 2)
-  if (true) 
-      return res.json({ success: false, message: 'Not admin.' })
-  next()
+  try {
+    const data = jwt.verify(req.body.token, process.env.JWT_SECRET)
+    if (data.privilege > 2) 
+      next()
+    return res.json({ message: 'Not admin.' })
+  } catch (err) {
+    res.status(403).json({ message: 'Bad token.', error: err.message })
+  }
 }
 
 export default {
