@@ -4,19 +4,19 @@ import jwt from 'jsonwebtoken'
 import User from '../models/User.js'
 
 const getToken = async (req, res) => {
-  const { name, email, password } = req.body
+  const { email, password } = req.body
+
   try {
     let user = await User.findOne({ email })
     if (user) {
       const isMatch = await bcrypt.compare(password, user.password)
       if (!isMatch) 
-        return res.status(400).json({ message: 'Invalid credentials' })
+        return res.status(400).json({ message: 'Bad password' })
+
     } else {
-      const hashedPassword = await bcrypt.hash(password, 10)
       user = new User({
-        name,
         email,
-        password: hashedPassword
+        password: await bcrypt.hash(password, 10)
       })
       await user.save()
     }
@@ -28,6 +28,24 @@ const getToken = async (req, res) => {
   }
 }
 
+const validateUser = (req, res, next) => {
+  const { token } = req.body
+  if (!token) return res.status(403).send({ success: false, message: 'No token.' })
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, data) => {
+    if (err) return res.status(403).json({ success: false, message: 'Bad token.' })
+    res.locals.user = data.user
+    next()
+  })
+}
+
+const validateAdmin = (req, res, next) => {
+  if (!res.locals.user.admin) return res.json({ success: false, message: 'Not admin.' })
+  next()
+}
+
 export default {
-  getToken
+  getToken,
+  validateUser,
+  validateAdmin,
 }

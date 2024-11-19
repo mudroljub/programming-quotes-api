@@ -100,5 +100,17 @@ npm run dev
 
 ## TODO
 
-- implement user auth
+- auth kontroler
+  - izdavanje tokena
+  - provera autentifikacije (validacija JWT-a i dozvola pristupa)
+- user kontroler
+  - get profil
+  - ažuriranje podataka o korisniku
+  - brisanje korisnika
+  - lista korisnika (za admine)
+  - dodela privilegije (za admine)
 - zameniti admin sa privilege (1, 2, 3...)
+
+- možda
+  UserService za validaciju korisnika, dobijanje ili ažuriranje podataka.
+  AuthService za prijavu, registraciju i generisanje tokena.
