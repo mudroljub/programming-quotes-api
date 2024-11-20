@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs'
 import User from '../models/User.js'
 
-const getUser = async email => await User.findOne({ email })
+const getByEmail = async email => await User.findOne({ email })
 
 const getById = async id => await User.findById(id)
 
@@ -21,7 +21,7 @@ const findOrCreateUser = async(email, password) =>
   (await getMyUser(email, password)) || createUser(email, password)
 
 export default {
-  getUser,
+  getByEmail,
   getMyUser,
   createUser,
   findOrCreateUser,

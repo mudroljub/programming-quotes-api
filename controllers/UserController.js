@@ -3,7 +3,7 @@ import UserService from '../services/UserService.js'
 const getUserByEmail = async(req, res) => {
   const { email } = req.params
   try {
-    const user = await UserService.getUser(email)
+    const user = await UserService.getByEmail(email)
     res.send(user)
   } catch (e) {
     res.status(500).send({ message: 'SERVER_ERROR', error: e.message })

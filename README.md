@@ -102,8 +102,7 @@ npm run dev
 
 - auth kontroler deo u auth servis
 - user kontroler
-  - get profil, šalje token, dobija svoje podatke
-    - da dobija DTO, ne sve
+  - da vraća DTO, ne sve
   - ažuriranje podataka o korisniku
   - brisanje korisnika
   - lista korisnika (za admine)
