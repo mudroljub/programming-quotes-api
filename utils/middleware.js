@@ -1,20 +1,24 @@
+import jwt from 'jsonwebtoken'
+
+const { JWT_SECRET } = process.env
+
 const authenticate = (req, res, next) => {
   const token = req.headers.authorization?.split(' ')[1]
-  if (!token) return res.status(401).json({ error: 'Unauthorized' })
+  if (!token) return res.status(401).send({ message: 'No token.' })
 
   try {
-    const data = jwt.verify(token, process.env.JWT_SECRET) // Dobijamo podatke iz tokena
+    const data = jwt.verify(token, JWT_SECRET)
     console.log(data)
     req.user = data
     next()
-  } catch (e) {
-    res.status(403).json({ error: 'Invalid token' })
+  } catch (err) {
+    res.status(403).json({ message: 'TOKEN_ERROR.', error: err.message })
   }
 }
 
 const validatePrivilege = (level) => async (req, res, next) => {
   const token = req.headers.authorization?.split(' ')[1]
-  if (!token) return res.status(403).send({ message: 'No token.' })
+  if (!token) return res.status(401).send({ message: 'No token.' })
 
   try {
     const { privilege } = jwt.verify(token, JWT_SECRET)
@@ -24,7 +28,7 @@ const validatePrivilege = (level) => async (req, res, next) => {
 
     next()
   } catch (err) {
-    res.status(403).json({ message: 'Bad token.', error: err.message })
+    res.status(403).json({ message: 'TOKEN_ERROR.', error: err.message })
   }
 }
 

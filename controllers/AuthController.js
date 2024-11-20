@@ -7,7 +7,7 @@ const getToken = async (req, res) => {
   const { email, password } = req.body
   try {
     const user = await UserService.findOrCreateUser(email, password)
-    const tokenData = { userId: user.id, privilege: user.privilege }
+    const tokenData = { id: user.id, privilege: user.privilege }
     const token = jwt.sign(tokenData, JWT_SECRET, { expiresIn: '24h' })
     res.json({ message: 'Welcome to Programming Quotes API', token })
   } catch (err) {
