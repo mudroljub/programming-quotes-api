@@ -3,6 +3,8 @@ import User from '../models/User.js'
 
 const getUser = async email => await User.findOne({ email })
 
+const getById = async id => await User.findById(id)
+
 const getMyUser = async(email, password) => {
   const user = await User.findOne({ email })
   if (user && !await bcrypt.compare(password, user.password))
@@ -23,4 +25,5 @@ export default {
   getMyUser,
   createUser,
   findOrCreateUser,
+  getById,
 }
