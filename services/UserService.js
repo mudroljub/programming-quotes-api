@@ -8,22 +8,29 @@ const getByEmail = async email => {
   return new UserResponseDTO(user)
 }
 
-const getById = async id => await User.findById(id)
+const getById = async id => {
+  const user = await User.findById(id)
+  return new UserResponseDTO(user)
+}
 
 const getMyUser = async(email, password) => {
   const user = await User.findOne({ email })
+
   if (user && !await bcrypt.compare(password, user.password))
     throw new Error('BAD_PASSWORD')
-  return new UserResponseDTO(user)
+
+  return user && new UserResponseDTO(user)
 }
 
 const createUser = async(email, password) => {
   const hashedPassword = await bcrypt.hash(password, 10)
-  return new User({ email, password: hashedPassword }).save()
+  const user = new User({ email, password: hashedPassword })
+  await user.save()
+  return new UserResponseDTO(user)
 }
 
 const findOrCreateUser = async(email, password) =>
-  (await getMyUser(email, password)) || createUser(email, password)
+  await getMyUser(email, password) || await createUser(email, password)
 
 export default {
   getByEmail,
