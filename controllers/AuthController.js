@@ -3,28 +3,28 @@ import jwt from 'jsonwebtoken'
 
 import User from '../models/User.js'
 
+const getUser = async (email, password) => {
+  const user = await User.findOne({ email })
+  if (user && !await bcrypt.compare(password, user.password))
+    throw new Error('BAD_PASSWORD')
+  return user
+}
+
+const createUser = async (email, password) => {
+  const hashedPassword = await bcrypt.hash(password, 10)
+  return new User({ email, password: hashedPassword }).save()
+}
+
 const getToken = async (req, res) => {
   const { email, password } = req.body
-
   try {
-    const existingUser = await User.findOne({ email })
-    if (existingUser && !await bcrypt.compare(password, existingUser.password))
-      return res.status(400).json({ message: 'Bad password' })
-
-    const user = existingUser 
-      ? existingUser 
-      : new User({
-          email,
-          password: await bcrypt.hash(password, 10),
-        })
-    if (!existingUser) await user.save()
-
+    const user = await getUser(email, password) || await createUser(email, password)
     const { _id, privilege } = user
     const token = jwt.sign({ _id, privilege }, process.env.JWT_SECRET, { expiresIn: '24h' })
-    return res.json({ message: 'Welcome to Programming Quotes API', token })
-
+    res.json({ message: 'Welcome to Programming Quotes API', token })
   } catch (err) {
-    res.status(500).send({ message: 'SERVER_ERROR', error: err.message })
+    const status = err.message === 'BAD_PASSWORD' ? 400 : 500
+    res.status(status).json({ message: err.message })
   }
 }
 

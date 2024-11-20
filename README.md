@@ -100,9 +100,6 @@ npm run dev
 
 ## TODO
 
-- auth kontroler
-  - izdavanje tokena
-  - provera autentifikacije (validacija JWT-a i dozvola pristupa)
 - user kontroler
   - get profil
   - ažuriranje podataka o korisniku
