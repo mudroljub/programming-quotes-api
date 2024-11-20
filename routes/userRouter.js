@@ -1,7 +1,7 @@
 import express from 'express'
+import User from '../models/User.js'
 import UserController from '../controllers/UserController.js'
 import { authenticate } from '../utils/middleware.js'
-// TODO: fix lint!!!
 
 const router = express.Router()
 
