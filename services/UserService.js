@@ -7,7 +7,11 @@ const createUser = async (email, password) => {
   return new User({ email, password: hashedPassword }).save()
 }
 
-const getUser = async (email, password) => {
+const getUser = async (email) => {
+  return await User.findOne({ email })
+}
+
+const getMyUser = async (email, password) => {
   const user = await User.findOne({ email })
   if (user && !await bcrypt.compare(password, user.password))
     throw new Error('BAD_PASSWORD')
@@ -16,5 +20,6 @@ const getUser = async (email, password) => {
 
 export default {
   getUser,
+  getMyUser,
   createUser,
 }

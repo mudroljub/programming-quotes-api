@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import quotesRouter from './quotes.js'
-import authRouter from './auth.js'
+import quotesRouter from './quotesRouter.js'
+import authRouter from './authRouter.js'
 
 const router = new Router()
 router.use('/quotes', quotesRouter)
