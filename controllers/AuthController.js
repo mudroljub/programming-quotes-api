@@ -10,6 +10,7 @@ const getToken = async (req, res) => {
     const tokenData = { id: user.id, privilege: user.privilege }
     const token = jwt.sign(tokenData, JWT_SECRET, { expiresIn: '24h' })
     res.json({ message: 'Welcome to Programming Quotes API', token })
+
   } catch (err) {
     const status = err.message === 'BAD_PASSWORD' ? 400 : 500
     res.status(status).json({ message: err.message })
