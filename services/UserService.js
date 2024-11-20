@@ -3,7 +3,10 @@ import bcrypt from 'bcryptjs'
 import User from '../models/User.js'
 import UserResponseDTO from '../dto/UserResponseDTO.js'
 
-const getByEmail = async email => await User.findOne({ email })
+const getByEmail = async email => {
+  const user = await User.findOne({ email })
+  return new UserResponseDTO(user)
+}
 
 const getById = async id => await User.findById(id)
 
@@ -11,7 +14,7 @@ const getMyUser = async(email, password) => {
   const user = await User.findOne({ email })
   if (user && !await bcrypt.compare(password, user.password))
     throw new Error('BAD_PASSWORD')
-  return user
+  return new UserResponseDTO(user)
 }
 
 const createUser = async(email, password) => {
