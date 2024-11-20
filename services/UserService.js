@@ -1,5 +1,7 @@
 import bcrypt from 'bcryptjs'
+
 import User from '../models/User.js'
+import UserResponseDTO from '../dto/UserResponseDTO.js'
 
 const getByEmail = async email => await User.findOne({ email })
 

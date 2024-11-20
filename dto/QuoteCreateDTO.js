@@ -1,4 +1,4 @@
-class QuoteCreateDTO {
+export default class QuoteCreateDTO {
   constructor(data) {
     this.author = data.author
     this.en = data.en
@@ -6,5 +6,3 @@ class QuoteCreateDTO {
     this.source = data.source
   }
 }
-
-export default QuoteCreateDTO
