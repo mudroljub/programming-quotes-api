@@ -1,6 +1,6 @@
 import UserService from '../services/UserService.js' 
 
-const getUser = async (req, res) => {
+const getUserByEmail = async (req, res) => {
   const { email } = req.params
   try {
     const user = await UserService.getUser(email)
@@ -11,5 +11,5 @@ const getUser = async (req, res) => {
 }
 
 export default {
-  getUser,
+  getUserByEmail,
 }

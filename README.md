@@ -101,7 +101,7 @@ npm run dev
 ## TODO
 
 - user kontroler
-  - get profil
+  - get profil, šalje token, dobija svoje podatke
   - ažuriranje podataka o korisniku
   - brisanje korisnika
   - lista korisnika (za admine)
