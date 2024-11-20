@@ -16,28 +16,6 @@ const getToken = async (req, res) => {
   }
 }
 
-const validatePrivilege = (level) => async (req, res, next) => {
-  const token = req.headers.authorization?.split(' ')[1]
-  if (!token) return res.status(403).send({ message: 'No token.' })
-
-  try {
-    const { privilege } = jwt.verify(token, JWT_SECRET)
-
-    if (privilege < level)
-      return res.status(403).json({ message: 'Not authorized.' })
-
-    next()
-  } catch (err) {
-    res.status(403).json({ message: 'Bad token.', error: err.message })
-  }
-}
-
-const validateUser = validatePrivilege(1)
-
-const validateAdmin = validatePrivilege(3)
-
 export default {
   getToken,
-  validateUser,
-  validateAdmin,
 }

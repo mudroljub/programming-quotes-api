@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import QuoteController from '../controllers/QuoteController.js'
-import AuthController from '../controllers/AuthController.js'
+import { validateUser, validateAdmin } from '../utils/middleware.js'
 
 const router = new Router()
 
@@ -11,9 +11,9 @@ router.get('/random', QuoteController.random)
 router.get('/random/lang/:lang', QuoteController.randomByLang)
 router.get('/id/:_id', QuoteController.getById)
 
-router.use(AuthController.validateUser) // all routes bellow are protected
+router.use(validateUser) // all routes bellow are protected
 router.post('/vote', QuoteController.vote)
-router.use(AuthController.validateAdmin)
+router.use(validateAdmin)
 router.post('/', QuoteController.create)
 router.put('/', QuoteController.update)
 router.delete('/', QuoteController.deleteQuote)
