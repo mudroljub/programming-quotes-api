@@ -1,13 +1,12 @@
 import jwt from 'jsonwebtoken'
 import UserService from '../services/UserService.js' 
 
-const { getMyUser, createUser } = UserService
 const { JWT_SECRET } = process.env
 
 const getToken = async (req, res) => {
   const { email, password } = req.body
   try {
-    const user = await getMyUser(email, password) || await createUser(email, password)
+    const user = await UserService.findOrCreateUser(email, password)
     const tokenData = { _id: user.id, privilege: user.privilege }
     const token = jwt.sign(tokenData, JWT_SECRET, { expiresIn: '24h' })
     res.json({ message: 'Welcome to Programming Quotes API', token })

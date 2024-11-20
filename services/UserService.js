@@ -2,11 +2,6 @@ import bcrypt from 'bcryptjs'
 
 import User from '../models/User.js'
 
-const createUser = async (email, password) => {
-  const hashedPassword = await bcrypt.hash(password, 10)
-  return new User({ email, password: hashedPassword }).save()
-}
-
 const getUser = async (email) => {
   return await User.findOne({ email })
 }
@@ -18,8 +13,17 @@ const getMyUser = async (email, password) => {
   return user
 }
 
+const createUser = async (email, password) => {
+  const hashedPassword = await bcrypt.hash(password, 10)
+  return new User({ email, password: hashedPassword }).save()
+}
+
+const findOrCreateUser = async (email, password) => 
+  (await getMyUser(email, password)) || createUser(email, password)
+
 export default {
   getUser,
   getMyUser,
   createUser,
+  findOrCreateUser,
 }

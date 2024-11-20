@@ -6,7 +6,7 @@ const userSchema = new Schema({
     lowercase: true,
     required: true,
     match: /\S+@\S+\.\S+/,
-    index: true,
+    unique: true,
     trim: true,
     maxlength: 100,
   },
@@ -20,10 +20,6 @@ const userSchema = new Schema({
     type: String,
     trim: true,
     maxlength: 100,
-  },
-  accessToken: {
-    type: String,
-    unique: true
   },
   voted: [
     {
