@@ -1,6 +1,6 @@
-import UserService from '../services/UserService.js' 
+import UserService from '../services/UserService.js'
 
-const getUserByEmail = async (req, res) => {
+const getUserByEmail = async(req, res) => {
   const { email } = req.params
   try {
     const user = await UserService.getUser(email)

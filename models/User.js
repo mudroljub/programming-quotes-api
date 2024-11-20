@@ -10,8 +10,8 @@ const userSchema = new Schema({
     trim: true,
     maxlength: 100,
   },
-  password: { 
-    type: String, 
+  password: {
+    type: String,
     trim: true,
     required: true,
     maxlength: 100,

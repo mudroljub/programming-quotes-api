@@ -7,7 +7,7 @@ const router = express.Router()
 
 router.get('/email/:email', UserController.getUserByEmail)
 
-router.get('/profile', authenticate, async (req, res) => {
+router.get('/profile', authenticate, async(req, res) => {
   try {
     console.log(req.user)
     const userId = req.user.id // Korisnički podaci su sada dostupni u req.user

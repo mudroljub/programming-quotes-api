@@ -3,12 +3,9 @@ import User from '../models/User.js'
 import QuoteCreateDTO from '../dto/QuoteCreateDTO.js'
 
 const create = async(req, res) => {
-  const { user } = res.locals
-  const params = { ...req.body }
-
   try {
     const quoteDTO = new QuoteCreateDTO(req.body)
-    const quote = await Quote.create({ ...quoteDTO, addedBy: user._id })
+    const quote = await Quote.create({ ...quoteDTO, addedBy: req.user.id })
     res.send({ message: 'SUCCESS_SAVED', quote })
 
   } catch (err) {

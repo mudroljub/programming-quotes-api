@@ -1,9 +1,9 @@
 import jwt from 'jsonwebtoken'
-import UserService from '../services/UserService.js' 
+import UserService from '../services/UserService.js'
 
 const { JWT_SECRET } = process.env
 
-const getToken = async (req, res) => {
+const getToken = async(req, res) => {
   const { email, password } = req.body
   try {
     const user = await UserService.findOrCreateUser(email, password)
