@@ -1,14 +1,15 @@
 import jwt from 'jsonwebtoken'
-
 import UserService from '../services/UserService.js' 
+
 const { getUser, createUser } = UserService
+const { JWT_SECRET } = process.env
 
 const getToken = async (req, res) => {
   const { email, password } = req.body
   try {
     const user = await getUser(email, password) || await createUser(email, password)
-    const { _id, privilege } = user
-    const token = jwt.sign({ _id, privilege }, process.env.JWT_SECRET, { expiresIn: '24h' })
+    const tokenData = { _id: user.id, privilege: user.privilege }
+    const token = jwt.sign(tokenData, JWT_SECRET, { expiresIn: '24h' })
     res.json({ message: 'Welcome to Programming Quotes API', token })
   } catch (err) {
     const status = err.message === 'BAD_PASSWORD' ? 400 : 500
@@ -21,7 +22,7 @@ const validatePrivilege = (level) => async (req, res, next) => {
   if (!token) return res.status(403).send({ message: 'No token.' })
 
   try {
-    const { privilege } = jwt.verify(token, process.env.JWT_SECRET)
+    const { privilege } = jwt.verify(token, JWT_SECRET)
 
     if (privilege < level)
       return res.status(403).json({ message: 'Not authorized.' })
