@@ -1,19 +1,7 @@
-import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
-import User from '../models/User.js'
-
-const getUser = async (email, password) => {
-  const user = await User.findOne({ email })
-  if (user && !await bcrypt.compare(password, user.password))
-    throw new Error('BAD_PASSWORD')
-  return user
-}
-
-const createUser = async (email, password) => {
-  const hashedPassword = await bcrypt.hash(password, 10)
-  return new User({ email, password: hashedPassword }).save()
-}
+import UserService from '../services/UserService.js' 
+const { getUser, createUser } = UserService
 
 const getToken = async (req, res) => {
   const { email, password } = req.body
