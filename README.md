@@ -100,7 +100,6 @@ npm run dev
 
 ## TODO
 
-- auth kontroler deo u auth servis
 - user kontroler
   - ažuriranje podataka o korisniku
   - brisanje korisnika
