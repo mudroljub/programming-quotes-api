@@ -102,13 +102,9 @@ npm run dev
 
 - auth kontroler deo u auth servis
 - user kontroler
-  - da vraća DTO, ne sve
   - ažuriranje podataka o korisniku
   - brisanje korisnika
   - lista korisnika (za admine)
   - dodela privilegije (za admine)
 - en u text, sr u?
-
-- možda
-  UserService za validaciju korisnika, dobijanje ili ažuriranje podataka.
-  AuthService za prijavu, registraciju i generisanje tokena.
+- probati json
