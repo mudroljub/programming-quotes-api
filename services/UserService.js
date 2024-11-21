@@ -3,13 +3,13 @@ import bcrypt from 'bcryptjs'
 import User from '../models/User.js'
 import UserResponseDTO from '../dto/UserResponseDTO.js'
 
-const getByEmail = async email => {
-  const user = await User.findOne({ email })
+const getById = async id => {
+  const user = await User.findById(id)
   return new UserResponseDTO(user)
 }
 
-const getById = async id => {
-  const user = await User.findById(id)
+const getByEmail = async email => {
+  const user = await User.findOne({ email })
   return new UserResponseDTO(user)
 }
 
@@ -29,6 +29,30 @@ const createUser = async(email, password) => {
   return new UserResponseDTO(user)
 }
 
+const updateUser = async(id, updates) => {
+  const user = await User.findByIdAndUpdate(id, updates, { new: true })
+  return new UserResponseDTO(user)
+}
+
+const deleteUser = async id => {
+  const user = await User.findByIdAndDelete(id)
+  return user ? { message: 'User deleted successfully' } : { message: 'User not found' }
+}
+
+const listUsers = async() => {
+  const users = await User.find()
+  return users.map(user => new UserResponseDTO(user))
+}
+
+const addPrivilege = async(id, privilege) => {
+  const user = await User.findById(id)
+  if (!user) return { message: 'User not found' }
+
+  user.privilege = privilege
+  await user.save()
+  return new UserResponseDTO(user)
+}
+
 const findOrCreateUser = async(email, password) =>
   await getMyUser(email, password) || await createUser(email, password)
 
@@ -38,4 +62,8 @@ export default {
   createUser,
   findOrCreateUser,
   getById,
+  updateUser,
+  deleteUser,
+  listUsers,
+  addPrivilege,
 }

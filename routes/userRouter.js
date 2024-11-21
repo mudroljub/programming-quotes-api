@@ -4,8 +4,9 @@ import { authenticate } from '../utils/middleware.js'
 
 const router = express.Router()
 
+router.get('/id/:id', UserController.getUserById)
 router.get('/email/:email', UserController.getUserByEmail)
-
-router.get('/profile', authenticate, UserController.getProfile)
+router.use(authenticate)
+router.get('/profile', UserController.getProfile)
 
 export default router
