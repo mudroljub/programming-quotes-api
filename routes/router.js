@@ -4,8 +4,8 @@ import authRouter from './authRouter.js'
 import userRouter from './userRouter.js'
 
 const router = new Router()
-  .use('/auth', authRouter)
   .use('/quotes', quotesRouter)
-  .use('/user', userRouter)
+  .use('/auth', authRouter)
+  .use('/users', userRouter)
 
 export default router
