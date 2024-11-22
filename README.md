@@ -6,44 +6,68 @@ Github repo: [github.com/mudroljub/programming-quotes-api](https://github.com/mu
 
 ## API Documentation
 
-### Public routes
+### Public Routes  
 
-GET [`/quotes/random`](/quotes/random) (get random quote)
+#### GET `/quotes/random`  
+- **Description**: Fetches a random programming quote.  
 
-GET [`/quotes`](/quotes) (get all quotes)
+#### GET `/quotes`  
+- **Description**: Retrieves all programming quotes.  
 
-GET [`/quotes?page=1&quotesPerPage=20`](/quotes?page=1&quotesPerPage=20) (get quotes with params: `page`, `quotesPerPage`, `author`)
+#### GET `/quotes?page=1&quotesPerPage=20`  
+- **Description**: Retrieves quotes with optional query parameters:  
+  - `page`: The page number (default: 1).  
+  - `quotesPerPage`: Number of quotes per page (default: 20).  
+  - `author`: Filter quotes by a specific author.  
 
-GET [`/quotes/5a6ce86f2af929789500e824`](/quotes/5a6ce86f2af929789500e824) (get quote by id)
+#### GET `/quotes/:id`  
+- **Description**: Retrieves a single quote by its unique ID.  
 
-### Protected routes
+---
 
-The following routes are protected and depend on the user's privilege. You can only vote for a quote with a newly created user.
+### Protected Routes  
 
-POST `/quotes` (post new quote)
-- required params: `author`, `text` (should be sent in json body)
-- optional: `source`
-- author name should be from Wikipedia
+Access to these routes requires a valid token.  
 
-PUT `/quotes/5a6ce86f2af929789500e824` (update values)
-- params: `author`, `text` or `source`
+#### POST `/quotes`  
+- **Description**: Adds a new quote.  
+- **Required Parameters** (in JSON body):  
+  - `author`: The name of the author (should match a Wikipedia entry).  
+  - `text`: The quote text.  
+- **Optional Parameters**:  
+  - `source`: The source or context of the quote.  
 
-POST `/quotes/vote` (vote for quote)
-- required params: `quoteId`, `newVote` (number from 1 to 5)
+#### PUT `/quotes/:id`  
+- **Description**: Updates an existing quote by ID.  
+- **Parameters** (in JSON body):  
+  - `author`, `text`, or `source`.  
 
-DELETE: `/quotes/5a6ce86f2af929789500e824`
+#### POST `/quotes/vote`  
+- **Description**: Votes for a specific quote.  
+- **Required Parameters** (in JSON body):  
+  - `quoteId`: The ID of the quote.  
+  - `newVote`: A numeric value (1–5).  
 
-### Authentication
+#### DELETE `/quotes/:id`  
+- **Description**: Deletes a quote by its unique ID.  
 
-GET `/auth/token` (logs in or registers user)
-- required params: `email`, `password`
-- returns `token`
+---
 
-For all subsequent requests, the token should be sent in the Authorization header:
+### Authentication  
 
+#### GET `/auth/token`  
+- **Description**: Logs in or registers a new user.  
+- **Required Parameters** (in JSON body):  
+  - `email`: The user's email address.  
+  - `password`: The user's password.  
+- **Returns**: A JWT token.  
+
+**Token Usage**: For all subsequent requests, include the token in the `Authorization` header as follows:  
 ```
 Authorization: Bearer <token>
-```
+```  
+
+---
 
 ## Development
 
