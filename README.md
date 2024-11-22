@@ -101,8 +101,3 @@ npm run dev
 ## TODO
 
 - Dokumentacija: Jasno opisujemo svrhu i parametre svake rute (OpenAPI/Swagger)
-- Ako resurs zavisi od drugog:
-    /users/:userId/orders – porudžbine određenog korisnika.
-- Parametrizacija
-    Path parametri: Za identifikaciju resursa: /users/:id.
-    Query parametri: Za filtriranje/paginaciju: /products?category=books&page=2.
