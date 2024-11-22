@@ -1,6 +1,11 @@
 import { Schema, model } from 'mongoose'
 
 const userSchema = new Schema({
+  name: {
+    type: String,
+    trim: true,
+    maxlength: 100,
+  },
   email: {
     type: String,
     lowercase: true,
@@ -16,11 +21,6 @@ const userSchema = new Schema({
     required: true,
     maxlength: 100,
   },
-  name: {
-    type: String,
-    trim: true,
-    maxlength: 100,
-  },
   voted: [
     {
       type: Schema.Types.ObjectId,
@@ -30,8 +30,8 @@ const userSchema = new Schema({
   ],
   privilege: {
     type: Number,
-    default: 1, // 1. unverified user, 2. verified user, 3. editor, 4. admin
-    max: 5,
+    default: 0, // 0. unverified user, 1. verified user, 2. editor, 3. admin
+    max: 3,
   },
   memberSince: {
     type: Date,

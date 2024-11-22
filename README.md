@@ -101,9 +101,8 @@ npm run dev
 ## TODO
 
 - user kontroler
-  - ažuriranje podataka o korisniku
-  - brisanje korisnika
-  - lista korisnika (za admine)
+  - ažuriranje podataka o korisniku (dozvoljava tom korisniku i adminu)
+  - brisanje korisnika (dozvoljava tom korisniku i adminu)
   - dodela privilegije (za admine)
 - en u text, sr u?
 - probati json
@@ -113,7 +112,6 @@ npm run dev
     POST /users – kreira korisnika.
     PUT /users/:id – ažurira korisnika.
     DELETE /users/:id – briše korisnika.
-- Koristimo jasne imenice (ne glagole): /products umesto /getProducts.
 - Ako resurs zavisi od drugog:
     /users/:userId/orders – porudžbine određenog korisnika.
 - Parametrizacija

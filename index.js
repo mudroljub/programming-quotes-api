@@ -11,6 +11,7 @@ import { promisify } from 'util'
 import { mongoUri } from './config/db.js'
 import { port, domain } from './config/host.js'
 import router from './routes/router.js'
+import { normalizeRequestBody } from './middleware/normalize.js'
 
 const app = express()
 const readFileAsync = promisify(fs.readFile)
@@ -19,6 +20,7 @@ const readFileAsync = promisify(fs.readFile)
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+app.use(normalizeRequestBody)
 app.use(compression())
 
 mongoose.connect(mongoUri)

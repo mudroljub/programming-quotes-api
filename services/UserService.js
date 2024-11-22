@@ -46,7 +46,7 @@ const listUsers = async() => {
 
 const addPrivilege = async(id, privilege) => {
   const user = await User.findById(id)
-  if (!user) return { message: 'User not found' }
+  if (!user) return null
 
   user.privilege = privilege
   await user.save()
