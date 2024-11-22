@@ -1,9 +1,6 @@
 import { Schema, model } from 'mongoose'
 
 const QuotesSchema = new Schema({
-  _id: {
-    type: Schema.Types.ObjectId,
-  },
   author: {
     type: String,
     required: true,

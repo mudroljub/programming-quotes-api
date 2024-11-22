@@ -5,12 +5,12 @@ import { authenticate, authorizeAdmin } from '../middleware/auth.js'
 const router = new Router()
 
 router.get('/', QuoteController.getAll)
-router.get('/lang/:lang', QuoteController.readByLang)
-router.get('/page/:pageNumber', QuoteController.readByPage)
+// router.get('/lang/:lang', QuoteController.readByLang)
+// router.get('/page/:pageNumber', QuoteController.readByPage)
 
 router.get('/random', QuoteController.random)
-router.get('/random/lang/:lang', QuoteController.randomByLang)
-router.get('/id/:_id', QuoteController.getById)
+// router.get('/random/lang/:lang', QuoteController.randomByLang)
+router.get('/:id', QuoteController.getById)
 
 router.use(authenticate) // all routes bellow are protected
 router.post('/vote', QuoteController.vote)

@@ -2,13 +2,13 @@ import Quote from '../models/Quote.js'
 import User from '../models/User.js'
 import QuoteCreateDTO from '../dto/QuoteCreateDTO.js'
 import { handleError } from '../utils.js'
+import QuoteService from '../services/QuoteService.js'
 
 const create = async(req, res) => {
   try {
     const quoteDTO = new QuoteCreateDTO(req.body)
-    const quote = await Quote.create({ ...quoteDTO, addedBy: req.user.id })
+    const quote = await QuoteService.create(quoteDTO, req.user.id)
     res.send({ message: 'SUCCESS_SAVED', quote })
-
   } catch (err) {
     handleError(res, err)
   }
@@ -16,18 +16,15 @@ const create = async(req, res) => {
 
 const getAll = async(req, res) => {
   try {
-    const quotes = await Quote.find().select()
-    res.send(quotes)
+    res.send(await QuoteService.getAll())
   } catch (err) {
     handleError(res, err)
   }
 }
 
 const getById = async(req, res) => {
-  const { _id } = req.params
-
   try {
-    const quote = await Quote.findById(_id)
+    const quote = await QuoteService.getById(req.params.id)
     res.send(quote)
   } catch (err) {
     handleError(res, err)
