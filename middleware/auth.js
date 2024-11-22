@@ -10,12 +10,12 @@ const validatePrivilege = level => async(req, res, next) => {
     const data = jwt.verify(token, JWT_SECRET)
 
     if (data.privilege < level)
-      return res.status(403).json({ message: 'FORBIDDEN.' })
+      return res.status(403).json({ message: 'NO_PRIVILEGE' })
 
     req.user = data
     next()
   } catch (err) {
-    res.status(403).json({ message: 'AUTH_ERROR.', error: err.message })
+    res.status(403).json({ message: 'FORBIDDEN.', error: err.message })
   }
 }
 
@@ -28,7 +28,7 @@ const allowSelfOrAdmin = (req, res, next) => {
   if (user.id === id || user.privilege > 2)
     next()
 
-  return res.status(403).json({ message: 'FORBIDDEN' })
+  return res.status(403).json({ message: 'NOT SELF OR ADMIN' })
 }
 
 const authenticate = validatePrivilege(0)

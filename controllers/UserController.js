@@ -40,8 +40,8 @@ const updateUser = async(req, res) => {
     if (!user) return res.status(404).json({ message: 'USER_NOT_FOUND' })
 
     res.send(user)
-  } catch (e) {
-    res.status(500).send({ message: 'SERVER_ERROR', error: e.message })
+  } catch (err) {
+    serverError(res, err)
   }
 }
 
@@ -53,8 +53,8 @@ const deleteUser = async(req, res) => {
     if (!deletedUser) return res.status(404).json({ message: 'USER_NOT_FOUND' })
 
     res.status(200).json({ message: 'USER_DELETED', user: deletedUser })
-  } catch (e) {
-    res.status(500).send({ message: 'SERVER_ERROR', error: e.message })
+  } catch (err) {
+    serverError(res, err)
   }
 }
 
@@ -62,21 +62,20 @@ const listUsers = async(req, res) => {
   try {
     const users = await UserService.listUsers()
     res.send(users)
-  } catch (e) {
-    res.status(500).send({ message: 'SERVER_ERROR', error: e.message })
+  } catch (err) {
+    serverError(res, err)
   }
 }
 
 const addPrivilege = async(req, res) => {
   const { privilege } = req.body
-
   try {
     const user = await UserService.addPrivilege(req.params.id, privilege)
     if (!user) return res.status(404).json({ message: 'USER_NOT_FOUND' })
 
     res.status(200).json(user)
-  } catch (e) {
-    res.status(500).send({ message: 'SERVER_ERROR', error: e.message })
+  } catch (err) {
+    serverError(res, err)
   }
 }
 
