@@ -1,8 +1,7 @@
 export default class QuoteCreateDTO {
   constructor(data) {
     this.author = data.author
-    this.en = data.en
-    this.sr = data.sr
+    this.text = data.text
     this.source = data.source
   }
 }

@@ -59,7 +59,7 @@ const readByPage = async(req, res) => {
       .find()
       .skip((pageNumber - 1) * pageSize)
       .limit(pageSize)
-      .select({ author: 1, en: 1, sr: 1, rating: 1 })
+      .select({ author: 1, text: 1, rating: 1 })
     res.send(quotes)
   } catch (err) {
     res.status(500).send({ message: 'SERVER_ERROR', error: err.message })
@@ -72,7 +72,7 @@ const random = async(req, res) => {
     const rand = Math.floor(Math.random() * count)
     const quote = await Quote
       .findOne()
-      .select({ author: 1, en: 1 })
+      .select({ author: 1, text: 1 })
       .skip(rand)
     res.send(quote)
   } catch (err) {
