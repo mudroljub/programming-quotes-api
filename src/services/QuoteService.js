@@ -22,9 +22,24 @@ const getRandom = async() => {
   return quote
 }
 
+const applyVote = async(quoteId, newVote) => {
+  const quote = await Quote.findByIdAndUpdate(
+    quoteId,
+    {
+      $inc: { numberOfVotes: 1 },
+      $set: { rating: { $round: [{ $add: ['$rating', (newVote - '$rating') / '$numberOfVotes'] }, 1] } },
+    },
+    { new: true }
+  )
+
+  if (!quote) throw new Error('Quote not found')
+  return quote
+}
+
 export default {
   create,
   getAll,
   getById,
   getRandom,
+  applyVote,
 }

@@ -3,6 +3,7 @@ import User from '../models/User.js'
 import QuoteCreateDTO from '../dto/QuoteCreateDTO.js'
 import { handleError } from '../utils.js'
 import QuoteService from '../services/QuoteService.js'
+import UserService from '../services/UserService.js'
 
 const create = async(req, res) => {
   try {
@@ -79,32 +80,50 @@ const random = async(req, res) => {
 
 const update = async(req, res) => {
   const { _id } = req.body
-
   try {
-    const quote = await Quote.findById(_id)
-    quote.set({ ...req.body })
-    await quote.save()
-    res.send({ message: 'SUCCESS_SAVED', quote })
+    const quote = await Quote.findByIdAndUpdate(_id, req.body, { new: true, runValidators: true })
+    if (!quote) return res.status(404).send({ message: 'NOT_FOUND' })
+    res.json({ message: 'SUCCESS_SAVED', quote })
   } catch (err) {
     handleError(res, err)
   }
 }
 
+// const vote = async(req, res) => {
+//   const { quoteId, newVote } = req.body
+//   const { user } = res.locals
+//   if (newVote > 5 || newVote < 1) return res.status(400).send({ message: 'Invalid vote' })
+
+//   try {
+//     const quote = await Quote.findById(quoteId)
+//     const { rating, numberOfVotes } = quote
+//     const newRating = (rating * numberOfVotes + Number(newVote)) / (numberOfVotes + 1)
+//     quote.rating = newRating.toFixed(1)
+//     await quote.save()
+//     if (user)
+//       await User.updateOne({ _id: user._id }, { $addToSet: { voted: quoteId } })
+
+//     res.send({ message: 'SUCCESS_SAVED', quote })
+//   } catch (err) {
+//     handleError(res, err)
+//   }
+// }
+
 const vote = async(req, res) => {
   const { quoteId, newVote } = req.body
-  const { user } = res.locals
-  if (newVote > 5 || newVote < 1) return res.status(400).send({ message: 'Invalid vote' })
+  const vote = Number(newVote)
+
+  if (isNaN(vote) || vote > 5 || vote < 1)
+    return res.status(400).send({ message: 'INVALID_VOTE' })
+
+  if (!req.user)
+    return res.status(400).send({ message: 'NO_USER' })
 
   try {
-    const quote = await Quote.findById(quoteId)
-    const { rating, numberOfVotes } = quote
-    const newRating = (rating * numberOfVotes + Number(newVote)) / (numberOfVotes + 1)
-    quote.rating = newRating.toFixed(1)
-    await quote.save()
-    if (user)
-      await User.updateOne({ _id: user._id }, { $addToSet: { voted: quoteId } })
+    const quote = await QuoteService.applyVote(quoteId, vote, req.user)
+    await UserService.updateVoted(req.user.id, quoteId)
 
-    res.send({ message: 'SUCCESS_SAVED', quote })
+    res.json({ message: 'SUCCESS_SAVED', quote })
   } catch (err) {
     handleError(res, err)
   }

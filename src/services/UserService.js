@@ -53,6 +53,9 @@ const addPrivilege = async(id, privilege) => {
   return new UserResponseDTO(user)
 }
 
+const updateVoted = (userId, quoteId) =>
+  User.updateOne({ _id: userId }, { $addToSet: { voted: quoteId } })
+
 const findOrCreate = async(email, password) =>
   await getMyUser(email, password) || await create(email, password)
 
