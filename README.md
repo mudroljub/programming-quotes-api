@@ -2,23 +2,18 @@
 
 **Programming Quotes API for open source projects.**
 
-Github repo: [github.com/skolakoda/programming-quotes-api](https://github.com/skolakoda/programming-quotes-api)
+Github repo: [github.com/mudroljub/programming-quotes-api](https://github.com/mudroljub/programming-quotes-api)
 
 ## API Documentation
-
-Suported languages: en, sr.
 
 ### Public routes
 
 GET [`/quotes`](/quotes) (get all quotes)
 
-GET [`/quotes/lang/en`](/quotes/lang/en) (get quotes by language)
-
+http://localhost:5000/quotes?page=1&numPerPage=10&author=Edsger%20W.%20Dijkstra
 GET [`/quotes/page/2`](/quotes/page/2) (get quotes by page)
 
 GET [`/quotes/random`](/quotes/random) (get random quote)
-
-GET [`/quotes/random/lang/sr`](/quotes/random/lang/sr) (get random quote by language)
 
 GET [`/quotes/id/5a6ce86f2af929789500e824`](/quotes/id/5a6ce86f2af929789500e824) (get quote by id)
 
@@ -27,17 +22,17 @@ GET [`/quotes/id/5a6ce86f2af929789500e824`](/quotes/id/5a6ce86f2af929789500e824)
 POST `/quotes/vote` (post vote)
 - required params: `quoteId`, `newVote` (number from 1 to 5)
 
-POST `/quotes` (for registered user)
+POST `/quotes` (post new quote)
 - required params: `token`, `author`, `en`
 - optional: `source`, `sr`
 - author name should be from Wikipedia
 
-PUT `/quotes` (update quote for admin)
-- required params: `token`, `_id`, `author`, `en`
+PUT `/quotes` (update quote)
+- required params: `token`, `id`, `author`, `en`
 - optional: `source`, `sr`
 
-DELETE: `/quotes` (for admin)
-- required params: `token`, `_id`
+DELETE: `/quotes`
+- required params: `token`, `id`
 
 ### Authentication
 
@@ -55,11 +50,11 @@ GET `/auth/{provider}:token` (get user data)
 ### Prerequisites
 
 - Install Node.js
-- Set [environment variables](https://github.com/skolakoda/baza-podataka/wiki/Environment-variables)
+- Set environment variables
 
 ### Setup database
 
-Import json file into local MongoDB database, if needed (replace with real values):
+Import json file into local MongoDB database (replace with real values):
 
 ```
 mongoimport --db quotes --collection quotes --file quotes.json --jsonArray --username quotes --password quotes
