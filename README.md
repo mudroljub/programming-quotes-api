@@ -100,10 +100,6 @@ npm run dev
 
 ## TODO
 
-- user kontroler
-  - ažuriranje podataka o korisniku (dozvoljava tom korisniku i adminu)
-  - brisanje korisnika (dozvoljava tom korisniku i adminu)
-  - dodela privilegije (za admine)
 - en u text, sr u?
 - probati json
 - Dokumentacija: Jasno opisujemo svrhu i parametre svake rute (OpenAPI/Swagger)
