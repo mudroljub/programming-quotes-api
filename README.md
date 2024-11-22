@@ -76,14 +76,6 @@ DB_USER=
 DB_PASSWORD=
 DB_DOMAIN=
 
-# obtain from Github (have two separate OAuth apps, for local and for production)
-GITHUB_CLIENT_ID=
-GITHUB_CLIENT_SECRET=
-
-# OAuth 2.0 client IDs (obtain from Google API Console)
-GOOGLE_CLIENT_ID=
-GOOGLE_CLIENT_SECRET=
-
 # whatever random string you like
 JWT_SECRET=
 
