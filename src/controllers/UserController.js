@@ -44,13 +44,12 @@ const updateUser = async(req, res) => {
 }
 
 const deleteUser = async(req, res) => {
-  const { id } = req.params
-
   try {
-    const deletedUser = await UserService.deleteUser(id)
-    if (!deletedUser) return res.status(404).json({ message: 'USER_NOT_FOUND' })
+    const user = await UserService.deleteUser(req.params.id)
+    if (!user)
+      return res.status(404).json({ message: 'USER_NOT_FOUND' })
 
-    res.status(200).json({ message: 'USER_DELETED', user: deletedUser })
+    res.status(200).json({ message: 'USER_DELETED', user })
   } catch (err) {
     handleError(res, err)
   }

@@ -17,6 +17,7 @@ router.post('/vote', QuoteController.vote)
 router.use(authorizeAdmin)
 router.post('/', QuoteController.create)
 router.put('/', QuoteController.update)
-router.delete('/', QuoteController.deleteQuote)
+
+router.delete('/:id', QuoteController.deleteQuote)
 
 export default router
