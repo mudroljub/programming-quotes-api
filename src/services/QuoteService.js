@@ -14,8 +14,17 @@ const getById = async id => {
   return quote
 }
 
+const getRandom = async() => {
+  const count = await Quote.estimatedDocumentCount()
+  const quote = await Quote
+    .findOne()
+    .skip(Math.floor(Math.random() * count))
+  return quote
+}
+
 export default {
   create,
   getAll,
   getById,
+  getRandom,
 }

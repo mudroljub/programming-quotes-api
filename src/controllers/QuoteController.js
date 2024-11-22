@@ -31,64 +31,51 @@ const getById = async(req, res) => {
   }
 }
 
-const readByLang = async(req, res) => {
-  const { lang } = req.params
+// const readByLang = async(req, res) => {
+//   const { lang } = req.params
+//   console.log(lang)
+// }
 
-  try {
-    const quotes = await Quote
-      .find({ [lang]: { $ne: '' } })
-      .select({ author: 1, [lang]: 1, rating: 1 })
-    res.send(quotes)
-  } catch (err) {
-    handleError(res, err)
-  }
-}
+// const readByPage = async(req, res) => {
+//   const { pageNumber } = req.params
+//   const pageSize = 20
 
-const readByPage = async(req, res) => {
-  const { pageNumber } = req.params
-  const pageSize = 20
-
-  try {
-    const quotes = await Quote
-      .find()
-      .skip((pageNumber - 1) * pageSize)
-      .limit(pageSize)
-      .select({ author: 1, text: 1, rating: 1 })
-    res.send(quotes)
-  } catch (err) {
-    handleError(res, err)
-  }
-}
+//   try {
+//     const quotes = await Quote
+//       .find()
+//       .skip((pageNumber - 1) * pageSize)
+//       .limit(pageSize)
+//       .select({ author: 1, text: 1, rating: 1 })
+//     res.send(quotes)
+//   } catch (err) {
+//     handleError(res, err)
+//   }
+// }
 
 const random = async(req, res) => {
   try {
-    const count = await Quote.estimatedDocumentCount()
-    const rand = Math.floor(Math.random() * count)
-    const quote = await Quote
-      .findOne()
-      .select({ author: 1, text: 1 })
-      .skip(rand)
+    const quote = await QuoteService.getRandom()
     res.send(quote)
   } catch (err) {
     handleError(res, err)
   }
 }
 
-const randomByLang = async(req, res) => {
-  const { lang } = req.params
-  const query = { [lang]: { $ne: '' } }
+// const randomByLang = async(req, res) => {
+//   const { lang } = req.params
+//   const query = { [lang]: { $ne: '' } }
 
-  try {
-    const n = await Quote.countDocuments(query)
-    const rand = Math.floor(Math.random() * n)
-    const quote = await Quote
-      .findOne(query)
-      .skip(rand)
-    res.send(quote)
-  } catch (err) {
-    handleError(res, err)
-  }
-}
+//   try {
+//     const n = await Quote.countDocuments(query)
+//     const rand = Math.floor(Math.random() * n)
+//     const quote = await Quote
+//       .findOne(query)
+//       .skip(rand)
+//     res.send(quote)
+//   } catch (err) {
+//     handleError(res, err)
+//   }
+// }
 
 const update = async(req, res) => {
   const { _id } = req.body
@@ -138,10 +125,10 @@ export default {
   create,
   getAll,
   getById,
-  readByLang,
-  readByPage,
+  // readByLang,
+  // readByPage,
   random,
-  randomByLang,
+  // randomByLang,
   update,
   vote,
   delete: deleteQuote,
