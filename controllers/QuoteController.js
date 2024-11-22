@@ -2,6 +2,13 @@ import Quote from '../models/Quote.js'
 import User from '../models/User.js'
 import QuoteCreateDTO from '../dto/QuoteCreateDTO.js'
 
+const handleError = (res, err) => {
+  if (err.name === 'ValidationError')
+    res.status(400).json({ message: 'BAD_DATA', error: err.message })
+  else
+    res.status(500).send({ message: 'SERVER_ERROR', error: err.message })
+}
+
 const create = async(req, res) => {
   try {
     const quoteDTO = new QuoteCreateDTO(req.body)
@@ -9,10 +16,7 @@ const create = async(req, res) => {
     res.send({ message: 'SUCCESS_SAVED', quote })
 
   } catch (err) {
-    if (err.name === 'ValidationError')
-      res.status(400).json({ message: 'Validation failed', errors: err.errors })
-    else
-      res.status(500).send({ message: 'SERVER_ERROR', error: err.message })
+    handleError(res, err)
   }
 }
 
@@ -20,8 +24,8 @@ const getAll = async(req, res) => {
   try {
     const quotes = await Quote.find().select()
     res.send(quotes)
-  } catch (e) {
-    res.status(500).send({ message: 'SERVER_ERROR', error: e.message })
+  } catch (err) {
+    handleError(res, err)
   }
 }
 
@@ -32,8 +36,7 @@ const getById = async(req, res) => {
     const quote = await Quote.findById(_id)
     res.send(quote)
   } catch (err) {
-    console.error(err)
-    res.status(500).send({ message: 'SERVER_ERROR', error: err.message })
+    handleError(res, err)
   }
 }
 
@@ -45,8 +48,8 @@ const readByLang = async(req, res) => {
       .find({ [lang]: { $ne: '' } })
       .select({ author: 1, [lang]: 1, rating: 1 })
     res.send(quotes)
-  } catch (e) {
-    res.status(500).send({ message: 'SERVER_ERROR', error: e.message })
+  } catch (err) {
+    handleError(res, err)
   }
 }
 
@@ -62,7 +65,7 @@ const readByPage = async(req, res) => {
       .select({ author: 1, text: 1, rating: 1 })
     res.send(quotes)
   } catch (err) {
-    res.status(500).send({ message: 'SERVER_ERROR', error: err.message })
+    handleError(res, err)
   }
 }
 
@@ -76,7 +79,7 @@ const random = async(req, res) => {
       .skip(rand)
     res.send(quote)
   } catch (err) {
-    res.status(500).send({ message: 'SERVER_ERROR', error: err.message })
+    handleError(res, err)
   }
 }
 
@@ -92,7 +95,7 @@ const randomByLang = async(req, res) => {
       .skip(rand)
     res.send(quote)
   } catch (err) {
-    res.status(500).send({ message: 'SERVER_ERROR', error: err.message })
+    handleError(res, err)
   }
 }
 
@@ -105,7 +108,7 @@ const update = async(req, res) => {
     await quote.save()
     res.send({ message: 'SUCCESS_SAVED', quote })
   } catch (err) {
-    res.status(500).send({ message: 'SERVER_ERROR', error: err.message })
+    handleError(res, err)
   }
 }
 
@@ -124,8 +127,8 @@ const vote = async(req, res) => {
       await User.updateOne({ _id: user._id }, { $addToSet: { voted: quoteId } })
 
     res.send({ message: 'SUCCESS_SAVED', quote })
-  } catch (e) {
-    res.status(500).send({ message: 'SERVER_ERROR', error: e.message })
+  } catch (err) {
+    handleError(res, err)
   }
 }
 
@@ -136,7 +139,7 @@ const deleteQuote = async(req, res) => {
     await Quote.findOneAndRemove({ _id })
     res.send({ message: 'QUOTE_DELETED' })
   } catch (err) {
-    res.status(500).send({ message: 'SERVER_ERROR', error: err.message })
+    handleError(res, err)
   }
 }
 

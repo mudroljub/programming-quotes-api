@@ -100,7 +100,8 @@ npm run dev
 
 ## TODO
 
-- probati json
+- quote servisi, kontroleri i rute
+
 - Dokumentacija: Jasno opisujemo svrhu i parametre svake rute (OpenAPI/Swagger)
 - osmisliti rute:
     GET /users – vraća sve korisnike.

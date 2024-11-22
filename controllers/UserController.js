@@ -1,6 +1,6 @@
 import UserService from '../services/UserService.js'
 
-const serverError = (res, err) =>
+const handleError = (res, err) =>
   res.status(500).send({ message: 'SERVER_ERROR', error: err.message })
 
 const getUserByEmail = async(req, res) => {
@@ -10,7 +10,7 @@ const getUserByEmail = async(req, res) => {
 
     res.send(user)
   } catch (err) {
-    serverError(res, err)
+    handleError(res, err)
   }
 }
 
@@ -21,7 +21,7 @@ const getUserById = async(req, res) => {
 
     res.send(user)
   } catch (err) {
-    serverError(res, err)
+    handleError(res, err)
   }
 }
 
@@ -30,7 +30,7 @@ const getProfile = async(req, res) => {
     const user = await UserService.getById(req.user.id)
     res.json(user)
   } catch (err) {
-    serverError(res, err)
+    handleError(res, err)
   }
 }
 
@@ -41,7 +41,7 @@ const updateUser = async(req, res) => {
 
     res.send(user)
   } catch (err) {
-    serverError(res, err)
+    handleError(res, err)
   }
 }
 
@@ -54,7 +54,7 @@ const deleteUser = async(req, res) => {
 
     res.status(200).json({ message: 'USER_DELETED', user: deletedUser })
   } catch (err) {
-    serverError(res, err)
+    handleError(res, err)
   }
 }
 
@@ -63,7 +63,7 @@ const listUsers = async(req, res) => {
     const users = await UserService.listUsers()
     res.send(users)
   } catch (err) {
-    serverError(res, err)
+    handleError(res, err)
   }
 }
 
@@ -75,7 +75,7 @@ const addPrivilege = async(req, res) => {
 
     res.status(200).json(user)
   } catch (err) {
-    serverError(res, err)
+    handleError(res, err)
   }
 }
 
