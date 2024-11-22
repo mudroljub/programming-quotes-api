@@ -34,7 +34,7 @@ const getByPage = async(req, res) => {
 }
 
 const getQuotes = (req, res) => {
-  if (req.query) return getByPage(req, res)
+  if (req.query.page) return getByPage(req, res)
   return getAll(req, res)
 }
 
@@ -55,27 +55,6 @@ const random = async(req, res) => {
     handleError(res, err)
   }
 }
-
-// const readByLang = async(req, res) => {
-//   const { lang } = req.params
-//   console.log(lang)
-// }
-
-// const randomByLang = async(req, res) => {
-//   const { lang } = req.params
-//   const query = { [lang]: { $ne: '' } }
-
-//   try {
-//     const n = await Quote.countDocuments(query)
-//     const rand = Math.floor(Math.random() * n)
-//     const quote = await Quote
-//       .findOne(query)
-//       .skip(rand)
-//     res.send(quote)
-//   } catch (err) {
-//     handleError(res, err)
-//   }
-// }
 
 const update = async(req, res) => {
   const { _id } = req.body
@@ -125,6 +104,4 @@ export default {
   update,
   vote,
   delete: deleteQuote,
-  // readByLang,
-  // randomByLang,
 }

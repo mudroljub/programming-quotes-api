@@ -4,15 +4,11 @@ import { authenticate, authorizeUser, authorizeEditor } from '../middleware/auth
 
 const router = new Router()
 
+// special routes
 router.get('/random', QuoteController.random)
 router.post('/vote', authenticate, QuoteController.vote)
 
-/* support: /quotes?page=1&numPerPage=10 */
-router.get('/', QuoteController.getQuotes)
-
-// router.get('/lang/:lang', QuoteController.readByLang)
-
-// router.get('/random/lang/:lang', QuoteController.randomByLang)
+router.get('/', QuoteController.getQuotes) // support /quotes?page=1&numPerPage=10
 router.get('/:id', QuoteController.getById)
 
 router.post('/', authorizeUser, QuoteController.create)

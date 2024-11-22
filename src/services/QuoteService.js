@@ -9,7 +9,6 @@ const create = async(quote, userId) => {
 const getAll = () => Quote.find().select()
 
 const getByPage = async(page, numPerPage) => {
-  console.log(page, numPerPage)
   const start = (page - 1) * numPerPage
 
   const quotes = await Quote.find()
