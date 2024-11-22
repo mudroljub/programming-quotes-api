@@ -130,10 +130,8 @@ const vote = async(req, res) => {
 }
 
 const deleteQuote = async(req, res) => {
-  const { id } = req.params
-
   try {
-    await Quote.findByIdAndDelete(id)
+    await QuoteService.delete(req.params.id)
     res.send({ message: 'QUOTE_DELETED' })
   } catch (err) {
     handleError(res, err)

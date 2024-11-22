@@ -27,7 +27,7 @@ const update = async(id, updates) => {
 
 const deleteUser = async id => {
   const user = await User.findByIdAndDelete(id)
-  return user ? { message: 'User deleted successfully' } : { message: 'User not found' }
+  return user ? { message: 'Deleted successfully' } : { message: 'NOT_FOUND' }
 }
 
 const getByEmail = async email => {

@@ -1,4 +1,5 @@
 import Quote from '../models/Quote.js'
+import { NotFoundError } from '../utils.js'
 
 const create = async(quote, userId) => {
   const newQuote = await Quote.create({ ...quote, addedBy: userId })
@@ -22,6 +23,13 @@ const getRandom = async() => {
   return quote
 }
 
+const deleteQuote = async id => {
+  const quote = await Quote.findByIdAndDelete(id)
+  if (!quote) throw new NotFoundError('Quote not found')
+
+  return quote
+}
+
 const applyVote = async(quoteId, newVote) => {
   const quote = await Quote.findByIdAndUpdate(
     quoteId,
@@ -42,4 +50,5 @@ export default {
   getById,
   getRandom,
   applyVote,
+  delete: deleteQuote,
 }
