@@ -68,5 +68,6 @@ export default {
   getById,
   getRandom,
   applyVote,
+  update,
   delete: deleteQuote,
 }

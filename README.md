@@ -101,14 +101,8 @@ npm run dev
 ## TODO
 
 - Dokumentacija: Jasno opisujemo svrhu i parametre svake rute (OpenAPI/Swagger)
-- osmisliti rute:
-    GET /users – vraća sve korisnike.
-    POST /users – kreira korisnika.
-    PUT /users/:id – ažurira korisnika.
-    DELETE /users/:id – briše korisnika.
 - Ako resurs zavisi od drugog:
     /users/:userId/orders – porudžbine određenog korisnika.
 - Parametrizacija
     Path parametri: Za identifikaciju resursa: /users/:id.
     Query parametri: Za filtriranje/paginaciju: /products?category=books&page=2.
-- dodavanje jezičkog prefiksa u rute '/sr/products'
