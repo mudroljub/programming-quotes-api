@@ -12,7 +12,7 @@ router.get('/', QuoteController.getQuotes) // support /quotes?page=1&numPerPage=
 router.get('/:id', QuoteController.getById)
 
 router.post('/', authorizeUser, QuoteController.create)
-router.put('/', authorizeEditor, QuoteController.update)
+router.put('/:id', authorizeEditor, QuoteController.update)
 
 router.delete('/:id', QuoteController.delete)
 

@@ -33,6 +33,13 @@ const getRandom = async() => {
   return quote
 }
 
+const update = async(id, values) => {
+  const quote = await Quote.findByIdAndUpdate(id, values, { new: true, runValidators: true })
+  if (!quote) throw new NotFoundError('Quote not found')
+
+  return quote
+}
+
 const deleteQuote = async id => {
   const quote = await Quote.findByIdAndDelete(id)
   if (!quote) throw new NotFoundError('Quote not found')

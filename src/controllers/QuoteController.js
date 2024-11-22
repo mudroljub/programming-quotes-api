@@ -1,4 +1,3 @@
-import Quote from '../models/Quote.js'
 import QuoteCreateDTO from '../dto/QuoteCreateDTO.js'
 import { handleError } from '../utils.js'
 import QuoteService from '../services/QuoteService.js'
@@ -8,7 +7,7 @@ const create = async(req, res) => {
   try {
     const quoteDTO = new QuoteCreateDTO(req.body)
     const quote = await QuoteService.create(quoteDTO, req.user.id)
-    res.send({ message: 'SUCCESS_SAVED', quote })
+    res.send({ message: 'SUCCESS', quote })
   } catch (err) {
     handleError(res, err)
   }
@@ -57,11 +56,10 @@ const random = async(req, res) => {
 }
 
 const update = async(req, res) => {
-  const { _id } = req.body
   try {
-    const quote = await Quote.findByIdAndUpdate(_id, req.body, { new: true, runValidators: true })
-    if (!quote) return res.status(404).send({ message: 'NOT_FOUND' })
-    res.json({ message: 'SUCCESS_SAVED', quote })
+    const quoteDTO = new QuoteCreateDTO(req.body)
+    const quote = await QuoteService.update(req.params.id, quoteDTO)
+    res.json({ message: 'SUCCESS', quote })
   } catch (err) {
     handleError(res, err)
   }
@@ -81,7 +79,7 @@ const vote = async(req, res) => {
     const quote = await QuoteService.applyVote(quoteId, vote, req.user)
     await UserService.updateVoted(req.user.id, quoteId)
 
-    res.json({ message: 'SUCCESS_SAVED', quote })
+    res.json({ message: 'SUCCESS', quote })
   } catch (err) {
     handleError(res, err)
   }
