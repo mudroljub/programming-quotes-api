@@ -11,15 +11,9 @@ const QuotesSchema = new Schema({
     minlength: 2,
     maxlength: 100,
   },
-  en: {
+  text: {
     type: String,
     required: true,
-    trim: true,
-    minlength: 5,
-    maxlength: 800,
-  },
-  sr: {
-    type: String,
     trim: true,
     minlength: 5,
     maxlength: 800,

@@ -32,7 +32,7 @@ app.get('/', async(req, res) => {
     const file = await readFileAsync('README.md', 'utf8')
     res.send(marked(file.toString()))
   } catch (err) {
-    res.status(500).send('Error reading README.md')
+    res.status(500).send('Error reading file')
   }
 })
 

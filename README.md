@@ -100,7 +100,7 @@ npm run dev
 
 ## TODO
 
-- en u text, sr u?
+- en u text
 - probati json
 - Dokumentacija: Jasno opisujemo svrhu i parametre svake rute (OpenAPI/Swagger)
 - osmisliti rute:
