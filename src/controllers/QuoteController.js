@@ -1,13 +1,7 @@
 import Quote from '../models/Quote.js'
 import User from '../models/User.js'
 import QuoteCreateDTO from '../dto/QuoteCreateDTO.js'
-
-const handleError = (res, err) => {
-  if (err.name === 'ValidationError')
-    res.status(400).json({ message: 'BAD_DATA', error: err.message })
-  else
-    res.status(500).send({ message: 'SERVER_ERROR', error: err.message })
-}
+import { handleError } from '../utils.js'
 
 const create = async(req, res) => {
   try {

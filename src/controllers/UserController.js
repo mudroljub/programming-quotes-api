@@ -1,7 +1,5 @@
 import UserService from '../services/UserService.js'
-
-const handleError = (res, err) =>
-  res.status(500).send({ message: 'SERVER_ERROR', error: err.message })
+import { handleError } from '../utils.js'
 
 const getUserByEmail = async(req, res) => {
   try {
