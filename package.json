@@ -3,11 +3,11 @@
   "version": "2.0.0",
   "description": "Programming Quotes API for open source projects.",
   "repository": "https://github.com/skolakoda/programming-quotes-api",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "save": "wget https://programming-quotes-api.herokuapp.com/quotes/ -O backup/quotes.json",
-    "start": "node index.js",
-    "dev": "nodemon index.js",
+    "start": "node app.js",
+    "dev": "nodemon app.js",
     "lint": "eslint . --fix"
   },
   "author": "Damjan Pavlica <mudroljub@gmail.com>",
