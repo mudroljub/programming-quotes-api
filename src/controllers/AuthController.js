@@ -4,7 +4,7 @@ import AuthService from '../services/AuthService.js'
 const getToken = async(req, res) => {
   const { email, password } = req.body
   try {
-    const user = await UserService.findOrCreateUser(email, password)
+    const user = await UserService.findOrCreate(email, password)
     const token = AuthService.createToken(user)
     res.json({ message: 'Welcome to Programming Quotes API', token })
 

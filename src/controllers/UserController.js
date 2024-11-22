@@ -1,7 +1,7 @@
 import UserService from '../services/UserService.js'
 import { handleError } from '../utils.js'
 
-const getUserByEmail = async(req, res) => {
+const getByEmail = async(req, res) => {
   try {
     const user = await UserService.getByEmail(req.params.email)
     if (!user) return res.status(404).json({ message: 'NOT_FOUND' })
@@ -12,7 +12,7 @@ const getUserByEmail = async(req, res) => {
   }
 }
 
-const getUserById = async(req, res) => {
+const getById = async(req, res) => {
   try {
     const user = await UserService.getById(req.params.id)
     if (!user) return res.status(404).json({ message: 'NOT_FOUND' })
@@ -32,9 +32,9 @@ const getProfile = async(req, res) => {
   }
 }
 
-const updateUser = async(req, res) => {
+const update = async(req, res) => {
   try {
-    const user = await UserService.updateUser(req.params.id, req.body)
+    const user = await UserService.update(req.params.id, req.body)
     if (!user) return res.status(404).json({ message: 'USER_NOT_FOUND' })
 
     res.send(user)
@@ -45,7 +45,7 @@ const updateUser = async(req, res) => {
 
 const deleteUser = async(req, res) => {
   try {
-    const user = await UserService.deleteUser(req.params.id)
+    const user = await UserService.delete(req.params.id)
     if (!user)
       return res.status(404).json({ message: 'USER_NOT_FOUND' })
 
@@ -55,9 +55,9 @@ const deleteUser = async(req, res) => {
   }
 }
 
-const listUsers = async(req, res) => {
+const getAll = async(req, res) => {
   try {
-    const users = await UserService.listUsers()
+    const users = await UserService.getAll()
     res.send(users)
   } catch (err) {
     handleError(res, err)
@@ -77,11 +77,11 @@ const addPrivilege = async(req, res) => {
 }
 
 export default {
-  getUserByEmail,
-  getUserById,
+  getByEmail,
+  getById,
   getProfile,
-  listUsers,
-  updateUser,
-  deleteUser,
+  getAll,
+  update,
+  delete: deleteUser,
   addPrivilege,
 }

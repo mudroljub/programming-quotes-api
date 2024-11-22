@@ -5,13 +5,13 @@ import { authenticate, authorizeAdmin, allowSelfOrAdmin } from '../middleware/au
 const router = express.Router()
 
 router.get('/profile', authenticate, UserController.getProfile)
-router.get('/email/:email', UserController.getUserByEmail)
+router.get('/email/:email', UserController.getByEmail)
 
-router.get('/', UserController.listUsers)
-router.get('/:id', UserController.getUserById)
+router.get('/', UserController.getAll)
+router.get('/:id', UserController.getById)
 
-router.post('/:id', authenticate, allowSelfOrAdmin, UserController.updateUser)
-router.delete('/:id', authenticate, allowSelfOrAdmin, UserController.deleteUser)
+router.post('/:id', authenticate, allowSelfOrAdmin, UserController.update)
+router.delete('/:id', authenticate, allowSelfOrAdmin, UserController.delete)
 
 router.use(authorizeAdmin)
 router.post('/:id/privilege', UserController.addPrivilege)

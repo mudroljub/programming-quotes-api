@@ -8,6 +8,28 @@ const getById = async id => {
   return new UserResponseDTO(user)
 }
 
+const getAll = async() => {
+  const users = await User.find()
+  return users.map(user => new UserResponseDTO(user))
+}
+
+const create = async(email, password) => {
+  const hashedPassword = await bcrypt.hash(password, 10)
+  const user = new User({ email, password: hashedPassword })
+  await user.save()
+  return new UserResponseDTO(user)
+}
+
+const update = async(id, updates) => {
+  const user = await User.findByIdAndUpdate(id, updates, { new: true })
+  return new UserResponseDTO(user)
+}
+
+const deleteUser = async id => {
+  const user = await User.findByIdAndDelete(id)
+  return user ? { message: 'User deleted successfully' } : { message: 'User not found' }
+}
+
 const getByEmail = async email => {
   const user = await User.findOne({ email })
   return new UserResponseDTO(user)
@@ -22,28 +44,6 @@ const getMyUser = async(email, password) => {
   return user && new UserResponseDTO(user)
 }
 
-const createUser = async(email, password) => {
-  const hashedPassword = await bcrypt.hash(password, 10)
-  const user = new User({ email, password: hashedPassword })
-  await user.save()
-  return new UserResponseDTO(user)
-}
-
-const updateUser = async(id, updates) => {
-  const user = await User.findByIdAndUpdate(id, updates, { new: true })
-  return new UserResponseDTO(user)
-}
-
-const deleteUser = async id => {
-  const user = await User.findByIdAndDelete(id)
-  return user ? { message: 'User deleted successfully' } : { message: 'User not found' }
-}
-
-const listUsers = async() => {
-  const users = await User.find()
-  return users.map(user => new UserResponseDTO(user))
-}
-
 const addPrivilege = async(id, privilege) => {
   const user = await User.findById(id)
   if (!user) return null
@@ -53,17 +53,15 @@ const addPrivilege = async(id, privilege) => {
   return new UserResponseDTO(user)
 }
 
-const findOrCreateUser = async(email, password) =>
-  await getMyUser(email, password) || await createUser(email, password)
+const findOrCreate = async(email, password) =>
+  await getMyUser(email, password) || await create(email, password)
 
 export default {
-  getByEmail,
-  getMyUser,
-  createUser,
-  findOrCreateUser,
   getById,
-  updateUser,
-  deleteUser,
-  listUsers,
+  update,
+  delete: deleteUser,
+  getAll,
+  getByEmail,
+  findOrCreate,
   addPrivilege,
 }

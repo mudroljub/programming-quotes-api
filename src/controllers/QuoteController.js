@@ -144,5 +144,5 @@ export default {
   randomByLang,
   update,
   vote,
-  deleteQuote
+  delete: deleteQuote,
 }

@@ -18,6 +18,6 @@ router.use(authorizeAdmin)
 router.post('/', QuoteController.create)
 router.put('/', QuoteController.update)
 
-router.delete('/:id', QuoteController.deleteQuote)
+router.delete('/:id', QuoteController.delete)
 
 export default router
