@@ -1,5 +1,4 @@
 import Quote from '../models/Quote.js'
-import User from '../models/User.js'
 import QuoteCreateDTO from '../dto/QuoteCreateDTO.js'
 import { handleError } from '../utils.js'
 import QuoteService from '../services/QuoteService.js'
@@ -17,16 +16,41 @@ const create = async(req, res) => {
 
 const getAll = async(req, res) => {
   try {
-    res.send(await QuoteService.getAll())
+    res.json(await QuoteService.getAll())
   } catch (err) {
     handleError(res, err)
   }
 }
 
+const getByPage = async(req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1
+    const numPerPage = parseInt(req.query.numPerPage) || 20
+    const quotes = await QuoteService.getByPage(page, numPerPage)
+    res.json(quotes)
+  } catch (err) {
+    handleError(res, err)
+  }
+}
+
+const getQuotes = (req, res) => {
+  if (req.query) return getByPage(req, res)
+  return getAll(req, res)
+}
+
 const getById = async(req, res) => {
   try {
     const quote = await QuoteService.getById(req.params.id)
-    res.send(quote)
+    res.json(quote)
+  } catch (err) {
+    handleError(res, err)
+  }
+}
+
+const random = async(req, res) => {
+  try {
+    const quote = await QuoteService.getRandom()
+    res.json(quote)
   } catch (err) {
     handleError(res, err)
   }
@@ -36,31 +60,6 @@ const getById = async(req, res) => {
 //   const { lang } = req.params
 //   console.log(lang)
 // }
-
-// const readByPage = async(req, res) => {
-//   const { pageNumber } = req.params
-//   const pageSize = 20
-
-//   try {
-//     const quotes = await Quote
-//       .find()
-//       .skip((pageNumber - 1) * pageSize)
-//       .limit(pageSize)
-//       .select({ author: 1, text: 1, rating: 1 })
-//     res.send(quotes)
-//   } catch (err) {
-//     handleError(res, err)
-//   }
-// }
-
-const random = async(req, res) => {
-  try {
-    const quote = await QuoteService.getRandom()
-    res.send(quote)
-  } catch (err) {
-    handleError(res, err)
-  }
-}
 
 // const randomByLang = async(req, res) => {
 //   const { lang } = req.params
@@ -88,26 +87,6 @@ const update = async(req, res) => {
     handleError(res, err)
   }
 }
-
-// const vote = async(req, res) => {
-//   const { quoteId, newVote } = req.body
-//   const { user } = res.locals
-//   if (newVote > 5 || newVote < 1) return res.status(400).send({ message: 'Invalid vote' })
-
-//   try {
-//     const quote = await Quote.findById(quoteId)
-//     const { rating, numberOfVotes } = quote
-//     const newRating = (rating * numberOfVotes + Number(newVote)) / (numberOfVotes + 1)
-//     quote.rating = newRating.toFixed(1)
-//     await quote.save()
-//     if (user)
-//       await User.updateOne({ _id: user._id }, { $addToSet: { voted: quoteId } })
-
-//     res.send({ message: 'SUCCESS_SAVED', quote })
-//   } catch (err) {
-//     handleError(res, err)
-//   }
-// }
 
 const vote = async(req, res) => {
   const { quoteId, newVote } = req.body
@@ -140,13 +119,12 @@ const deleteQuote = async(req, res) => {
 
 export default {
   create,
-  getAll,
+  getQuotes,
   getById,
-  // readByLang,
-  // readByPage,
   random,
-  // randomByLang,
   update,
   vote,
   delete: deleteQuote,
+  // readByLang,
+  // randomByLang,
 }

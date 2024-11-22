@@ -8,6 +8,17 @@ const create = async(quote, userId) => {
 
 const getAll = () => Quote.find().select()
 
+const getByPage = async(page, numPerPage) => {
+  console.log(page, numPerPage)
+  const start = (page - 1) * numPerPage
+
+  const quotes = await Quote.find()
+    .skip(start)
+    .limit(numPerPage)
+
+  return quotes
+}
+
 const getById = async id => {
   const quote = await Quote.findById(id)
   if (!quote)
@@ -47,6 +58,7 @@ const applyVote = async(quoteId, newVote) => {
 export default {
   create,
   getAll,
+  getByPage,
   getById,
   getRandom,
   applyVote,
