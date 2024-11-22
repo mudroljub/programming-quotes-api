@@ -8,7 +8,7 @@ const router = new Router()
 router.get('/random', QuoteController.random)
 router.post('/vote', authenticate, QuoteController.vote)
 
-router.get('/', QuoteController.getQuotes) // query params: page, numPerPage, author
+router.get('/', QuoteController.getQuotes) // query params: page, quotesPerPage, author
 router.get('/:id', QuoteController.getById)
 
 router.post('/', authorizeUser, QuoteController.create)

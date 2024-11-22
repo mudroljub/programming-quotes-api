@@ -24,11 +24,11 @@ const getAll = async(req, res) => {
 const getByQuery = async(req, res) => {
   try {
     const page = parseInt(req.query.page) || 1
-    const numPerPage = parseInt(req.query.numPerPage) || 20
+    const quotesPerPage = parseInt(req.query.quotesPerPage) || 20
     const { author } = req.query
     const filter = author ? { author } : {}
 
-    const quotes = await QuoteService.getByQuery({ page, numPerPage, filter })
+    const quotes = await QuoteService.getByQuery({ page, quotesPerPage, filter })
 
     res.json(quotes)
   } catch (err) {

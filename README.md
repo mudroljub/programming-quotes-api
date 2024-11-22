@@ -8,42 +8,42 @@ Github repo: [github.com/mudroljub/programming-quotes-api](https://github.com/mu
 
 ### Public routes
 
-GET [`/quotes`](/quotes) (get all quotes)
-
-http://localhost:5000/quotes?page=1&numPerPage=10&author=Edsger%20W.%20Dijkstra
-GET [`/quotes/page/2`](/quotes/page/2) (get quotes by page)
-
 GET [`/quotes/random`](/quotes/random) (get random quote)
 
-GET [`/quotes/id/5a6ce86f2af929789500e824`](/quotes/id/5a6ce86f2af929789500e824) (get quote by id)
+GET [`/quotes`](/quotes) (get all quotes)
+
+GET [`/quotes?page=1&quotesPerPage=20`](/quotes?page=1&quotesPerPage=20) (get quotes with params: `page`, `quotesPerPage`, `author`)
+
+GET [`/quotes/5a6ce86f2af929789500e824`](/quotes/5a6ce86f2af929789500e824) (get quote by id)
 
 ### Protected routes
 
-POST `/quotes/vote` (post vote)
-- required params: `quoteId`, `newVote` (number from 1 to 5)
+The following routes are protected and depend on the user's privilege. You can only vote for a quote with a newly created user.
 
 POST `/quotes` (post new quote)
-- required params: `token`, `author`, `en`
-- optional: `source`, `sr`
+- required params: `author`, `text` (should be sent in json body)
+- optional: `source`
 - author name should be from Wikipedia
 
-PUT `/quotes` (update quote)
-- required params: `token`, `id`, `author`, `en`
-- optional: `source`, `sr`
+PUT `/quotes/5a6ce86f2af929789500e824` (update values)
+- params: `author`, `text` or `source`
 
-DELETE: `/quotes`
-- required params: `token`, `id`
+POST `/quotes/vote` (vote for quote)
+- required params: `quoteId`, `newVote` (number from 1 to 5)
+
+DELETE: `/quotes/5a6ce86f2af929789500e824`
 
 ### Authentication
 
-GET `/auth/{provider}` (user login)
-- suported providers: Github, Google
-- opens login page
+GET `/auth/token` (logs in or registers user)
+- required params: `email`, `password`
+- returns `token`
 
-After successful login, user will be redirected to client app. The client app should handle token on this route: `#/auth/{provider}/${token}`.
+For all subsequent requests, the token should be sent in the Authorization header:
 
-GET `/auth/{provider}:token` (get user data)
-- returns info on current user
+```
+Authorization: Bearer <token>
+```
 
 ## Development
 
@@ -84,7 +84,3 @@ NODE_ENV=development
 npm i
 npm run dev
 ```
-
-## TODO
-
-- Dokumentacija: Jasno opisujemo svrhu i parametre svake rute (OpenAPI/Swagger)

@@ -8,12 +8,12 @@ const create = async(quote, userId) => {
 
 const getAll = () => Quote.find()
 
-const getByQuery = async({ page, numPerPage, filter } = {}) => {
-  const start = (page - 1) * numPerPage
+const getByQuery = async({ page, quotesPerPage, filter } = {}) => {
+  const start = (page - 1) * quotesPerPage
 
   const quotes = await Quote.find(filter)
     .skip(start)
-    .limit(numPerPage)
+    .limit(quotesPerPage)
 
   return quotes
 }
