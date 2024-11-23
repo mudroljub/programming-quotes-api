@@ -8,14 +8,13 @@ Github repo: [github.com/mudroljub/programming-quotes-api](https://github.com/mu
 
 ### Public Routes  
 
-#### GET `/quotes/random`  
+#### GET [`/quotes/random`](/quotes/random)
 - **Description**: Fetches a random programming quote.  
 
-#### GET `/quotes`  
-- **Description**: Retrieves all programming quotes.  
-
-#### GET `/quotes?page=1&quotesPerPage=20`  
-- **Description**: Retrieves quotes with optional query parameters:  
+#### GET [`/quotes?author=Edsger_W._Dijkstra`](/quotes?author=Edsger_W._Dijkstra) 
+#### GET [`/quotes?page=1&quotesPerPage=20`](/quotes?page=1&quotesPerPage=20) 
+#### GET [`/quotes`](/quotes) 
+- **Description**: Retrieves quotes, with optional query parameters:  
   - `page`: The page number (default: 1).  
   - `quotesPerPage`: Number of quotes per page (default: 20).  
   - `author`: Filter quotes by a specific author.  
@@ -89,11 +88,8 @@ mongoimport --db quotes --collection quotes --file quotes.json --jsonArray --use
 Create `.env` file proper values:
 
 ```
-# Database credentials (obtain from MongoDB)
-DB_NAME=
-DB_USER=
-DB_PASSWORD=
-DB_DOMAIN=
+# database credentials (obtain from MongoDB)
+CONNECTION_STRING=
 
 # whatever random string you like
 JWT_SECRET=
