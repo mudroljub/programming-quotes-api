@@ -5,22 +5,20 @@ import cors from 'cors'
 import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import { marked } from 'marked'
-import compression from 'compression'
 import { promisify } from 'util'
 
 import { port, domain } from './config/host.js'
 import router from './routes/router.js'
-import { normalizeRequestBody } from './middleware/normalize.js'
+import { normalizeJsonKeys } from './middleware/normalize.js'
 
 const app = express()
 const readFileAsync = promisify(fs.readFile)
 
-// CONFIG
+// MIDDLEWARES
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.use(normalizeRequestBody)
-app.use(compression())
+app.use(normalizeJsonKeys)
 
 mongoose.connect(process.env.CONNECTION_STRING)
   .catch(err => console.error('MongoDB connection error:', err))

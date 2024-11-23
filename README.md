@@ -8,13 +8,14 @@ Github repo: [github.com/mudroljub/programming-quotes-api](https://github.com/mu
 
 ### Public Routes  
 
-#### GET `/quotes/random`  
+#### GET [`/quotes/random`](/quotes/random)
 - **Description**: Fetches a random programming quote.  
 
-#### GET `/quotes`  
+#### GET [`/quotes`](/quotes)
 - **Description**: Retrieves all programming quotes.  
 
-#### GET `/quotes?page=1&quotesPerPage=20`  
+#### GET [`/quotes?page=1&quotesPerPage=20`](/quotes?page=1&quotesPerPage=20) 
+#### GET [`/quotes?author=Edsger_W._Dijkstra`](/quotes?author=Edsger_W._Dijkstra) 
 - **Description**: Retrieves quotes with optional query parameters:  
   - `page`: The page number (default: 1).  
   - `quotesPerPage`: Number of quotes per page (default: 20).  
