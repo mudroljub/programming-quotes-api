@@ -2,7 +2,7 @@
 
 **Programming Quotes API for open source projects.**
 
-[programming-quotes-api.azurewebsites.net](https://programming-quotes-api.azurewebsites.net)
+Visit: [programming-quotes-api.azurewebsites.net](https://programming-quotes-api.azurewebsites.net)
 
 Github repo: [github.com/mudroljub/programming-quotes-api](https://github.com/mudroljub/programming-quotes-api)
 
