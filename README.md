@@ -11,12 +11,10 @@ Github repo: [github.com/mudroljub/programming-quotes-api](https://github.com/mu
 #### GET [`/quotes/random`](/quotes/random)
 - **Description**: Fetches a random programming quote.  
 
-#### GET [`/quotes`](/quotes)
-- **Description**: Retrieves all programming quotes.  
-
-#### GET [`/quotes?page=1&quotesPerPage=20`](/quotes?page=1&quotesPerPage=20) 
 #### GET [`/quotes?author=Edsger_W._Dijkstra`](/quotes?author=Edsger_W._Dijkstra) 
-- **Description**: Retrieves quotes with optional query parameters:  
+#### GET [`/quotes?page=1&quotesPerPage=20`](/quotes?page=1&quotesPerPage=20) 
+#### GET [`/quotes`](/quotes) 
+- **Description**: Retrieves quotes, with optional query parameters:  
   - `page`: The page number (default: 1).  
   - `quotesPerPage`: Number of quotes per page (default: 20).  
   - `author`: Filter quotes by a specific author.  
