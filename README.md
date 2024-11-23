@@ -89,11 +89,8 @@ mongoimport --db quotes --collection quotes --file quotes.json --jsonArray --use
 Create `.env` file proper values:
 
 ```
-# Database credentials (obtain from MongoDB)
-DB_NAME=
-DB_USER=
-DB_PASSWORD=
-DB_DOMAIN=
+# database credentials (obtain from MongoDB)
+CONNECTION_STRING=
 
 # whatever random string you like
 JWT_SECRET=

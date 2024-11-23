@@ -8,7 +8,6 @@ import { marked } from 'marked'
 import compression from 'compression'
 import { promisify } from 'util'
 
-import { mongoUri } from './config/db.js'
 import { port, domain } from './config/host.js'
 import router from './routes/router.js'
 import { normalizeRequestBody } from './middleware/normalize.js'
@@ -23,7 +22,7 @@ app.use(bodyParser.json())
 app.use(normalizeRequestBody)
 app.use(compression())
 
-mongoose.connect(mongoUri)
+mongoose.connect(process.env.CONNECTION_STRING)
   .catch(err => console.error('MongoDB connection error:', err))
 
 // ROUTES
