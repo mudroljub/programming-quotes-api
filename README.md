@@ -4,6 +4,8 @@
 
 Github repo: [github.com/mudroljub/programming-quotes-api](https://github.com/mudroljub/programming-quotes-api)
 
+Feel free to get involved, suggest or implement new features.
+
 ## API Documentation
 
 ### Public Routes  
