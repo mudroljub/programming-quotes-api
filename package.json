@@ -5,7 +5,7 @@
   "repository": "https://github.com/mudroljub/programming-quotes-api",
   "main": "src/app.js",
   "scripts": {
-    "save": "wget https://programming-quotes-api.herokuapp.com/quotes/ -O backup/quotes.json",
+    "save": "wget https://programming-quotes-api.azurewebsites.net/quotes/ -O backup/quotes.json",
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
     "lint": "eslint . --fix"
