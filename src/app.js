@@ -7,7 +7,7 @@ import mongoose from 'mongoose'
 import { marked } from 'marked'
 
 import { port, domain } from './config/host.js'
-import router from './routes/router.js'
+import apiRouter from './routes/router.js'
 import { normalizeJsonKeys } from './middleware/normalize.js'
 
 const app = express()
@@ -31,7 +31,7 @@ app.get('/', async(req, res) => {
   }
 })
 
-app.use('/', router)
+app.use('/api/', apiRouter)
 
 // SERVER
 app.listen(port, () => console.log(`Serving on ${domain}`))
