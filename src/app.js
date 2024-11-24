@@ -5,24 +5,28 @@ import cors from 'cors'
 import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import { marked } from 'marked'
+import next from 'next'
 
 import { port, domain } from './config/host.js'
 import apiRouter from './routes/router.js'
 import { normalizeJsonKeys } from './middleware/normalize.js'
 
-const app = express()
+const nextApp = next({ dev: process.env.NODE_ENV === 'development' })
+const handle = nextApp.getRequestHandler()
+
+const server = express()
 
 // MIDDLEWARES
-app.use(cors())
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
-app.use(normalizeJsonKeys)
+server.use(cors())
+server.use(bodyParser.urlencoded({ extended: false }))
+server.use(bodyParser.json())
+server.use(normalizeJsonKeys)
 
 mongoose.connect(process.env.CONNECTION_STRING)
   .catch(err => console.error('Could not connect to database:', err))
 
 // ROUTES
-app.get('/', async(req, res) => {
+server.get('/api', async(req, res) => {
   try {
     const data = await fs.readFile('README.md', 'utf8')
     res.send(marked(data))
@@ -31,7 +35,13 @@ app.get('/', async(req, res) => {
   }
 })
 
-app.use('/api/', apiRouter)
+server.use('/api/', apiRouter)
 
 // SERVER
-app.listen(port, () => console.log(`Serving on ${domain}`))
+
+nextApp.prepare().then(() => {
+  // ostale rute preusmeravamo na nextjs
+  server.all('*', (req, res) => handle(req, res))
+
+  server.listen(port, () => console.log(`Serving on ${domain}`))
+})

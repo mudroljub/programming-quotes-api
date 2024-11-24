@@ -23,7 +23,10 @@
     "jsonwebtoken": "^9.0.2",
     "marked": "^15.0.1",
     "mongodb": "^6.10.0",
-    "mongoose": "^8.8.2"
+    "mongoose": "^8.8.2",
+    "next": "^15.0.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "eslint": "^9.15.0",
