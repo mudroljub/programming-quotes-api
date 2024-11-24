@@ -1,31 +1,12 @@
-import { useRouter } from 'next/router'
-import { useState, useEffect } from 'react'
+import mongoose from 'mongoose'
+import Quote from '../../models/Quote.js'
 
-function QuotePage() {
-  const router = useRouter()
-  const { id } = router.query
-  const [quote, setQuote] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
+function QuotePage({ quote, error }) {
+  if (error)
+    return <p>Error: {error}</p>
 
-  useEffect(() => {
-    if (!id) return
-    setLoading(true)
-    fetch(`/api/quotes/${id}`)
-      .then(res => res.json())
-      .then(data => {
-        setQuote(data)
-        setLoading(false)
-      })
-      .catch(err => {
-        setError(err.message)
-        setLoading(false)
-      })
-  }, [id])
-
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error: {error}</p>
-  if (!quote) return <p>Quote not found.</p>
+  if (!quote)
+    return <p>Quote not found.</p>
 
   return (
     <div>
@@ -34,6 +15,36 @@ function QuotePage() {
       {quote.source && <p><em>Source: {quote.source}</em></p>}
     </div>
   )
+}
+
+export async function getServerSideProps({ params }) {
+  const { id } = params
+  let quote = null
+  let error = null
+
+  try {
+    // Povezivanje sa MongoDB i preuzimanje podataka
+    if (!mongoose.connections[0].readyState)
+      await mongoose.connect(process.env.MONGODB_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      })
+
+    quote = await Quote.findById(id).exec()
+
+    if (!quote)
+      error = 'Quote not found'
+
+  } catch (err) {
+    error = 'Error fetching quote: ' + err.message
+  }
+
+  return {
+    props: {
+      quote: quote ? JSON.parse(JSON.stringify(quote)) : null,
+      error,
+    },
+  }
 }
 
 export default QuotePage

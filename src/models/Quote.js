@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose'
+import mongoose, { Schema, model } from 'mongoose'
 
 const QuotesSchema = new Schema({
   author: {
@@ -35,4 +35,6 @@ const QuotesSchema = new Schema({
   },
 })
 
-export default model('Quote', QuotesSchema)
+const Quote = mongoose.models.Quote || model('Quote', QuotesSchema)
+
+export default Quote
