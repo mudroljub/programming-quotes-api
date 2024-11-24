@@ -35,6 +35,6 @@ const QuotesSchema = new Schema({
   },
 })
 
-const Quote = mongoose.models.Quote || model('Quote', QuotesSchema)
+const Quote = mongoose?.models?.Quote || model('Quote', QuotesSchema)
 
 export default Quote

@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 import Quote from '../../models/Quote.js'
+import QuoteService from '../../services/QuoteService.js'
 
 function QuotePage({ quote, error }) {
   if (error)
@@ -30,7 +31,8 @@ export async function getServerSideProps({ params }) {
         useUnifiedTopology: true,
       })
 
-    quote = await Quote.findById(id).exec()
+    // quote = await Quote.findById(id).exec()
+    quote = await QuoteService.getById(id)
 
     if (!quote)
       error = 'Quote not found'
