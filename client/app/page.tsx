@@ -9,7 +9,7 @@ export default async function Home(): Promise<JSX.Element> {
 
   return (
     <>
-      <blockquote>
+      <blockquote className='bg-gray-900 text-white p-8'>
         <p className="text-xl">
           {quote.text}
         </p>
