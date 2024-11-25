@@ -28,7 +28,7 @@ export default function RootLayout({
         </main>
 
         <footer className="bg-gray-800 text-white text-center p-4">
-          <p>© {new Date().getFullYear()} Programming Quotes by mudroljub</p>
+          <p>🄯 Programming Quotes by mudroljub and open source community</p>
         </footer>
       </body>
     </html>

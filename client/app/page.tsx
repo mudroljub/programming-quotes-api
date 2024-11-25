@@ -10,13 +10,13 @@ export default async function Home(): Promise<JSX.Element> {
   return (
     <>
       <blockquote>
-        <p className="quote-text">
+        <p className="text-xl">
           {quote.text}
         </p>
         <span> — <Link href={authorLink} target='_blank' className="hover:underline">{quote.author}</Link></span>
       </blockquote>
 
-      <form method="GET">
+      <form method="GET" className="mt-4">
         <button type="submit" className="h-10 px-6 font-semibold rounded-md bg-black text-white">
           New quote
         </button>
