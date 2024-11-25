@@ -108,3 +108,8 @@ NODE_ENV=development
 npm i
 npm run dev
 ```
+
+## TODO
+
+- get authors
+- get total quotes
