@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Quote } from '../types/quote';
 import Stars from './components/Stars'
+import BlockQuote from './components/BlockQuote'
 
 export default async function Home(): Promise<JSX.Element> {
   const res = await fetch('http://localhost:5000/api/quotes/random');
@@ -10,16 +11,10 @@ export default async function Home(): Promise<JSX.Element> {
 
   return (
     <>
-      <blockquote className='bg-gray-900 text-white p-8'>
-        <p className="text-xl">
-          {quote.text}
-        </p>
-        <Stars rating={quote.rating ?? 0} />
-        <span> — <Link href={authorLink} target='_blank' className="hover:underline">{quote.author}</Link></span>
-      </blockquote>
+      <BlockQuote quote={quote} />
 
       <form method="GET" className="mt-4">
-        <button type="submit" className="h-10 px-6 font-semibold rounded-md bg-black text-white">
+        <button type="submit" className="h-10 px-6 font-semibold bg-black text-white">
           New quote
         </button>
       </form>
