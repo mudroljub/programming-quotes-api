@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import type { Metadata } from "next";
 import Header from './components/Header'
 import "./globals.css";
@@ -7,11 +8,11 @@ export const metadata: Metadata = {
   description: "Programming Quotes app",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+type Props = {
+  children: ReactNode;
+};
+
+export default function Layout({ children }: Props) {
   return (
     <html lang="en">
       <body className="bg-gray-100 flex flex-col min-h-screen">
