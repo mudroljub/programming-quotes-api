@@ -1,5 +1,5 @@
 type RatingProps = {
-  rating: number // Ocena od 1 do 5
+  rating: number
 }
 
 export default function Stars({ rating }: RatingProps): JSX.Element {

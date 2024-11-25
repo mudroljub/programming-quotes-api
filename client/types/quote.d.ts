@@ -3,5 +3,5 @@ export type Quote = {
   author: string;
   text: string;
   source: string;
-  rating: int;
+  rating: number;
 };
