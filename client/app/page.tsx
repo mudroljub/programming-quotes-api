@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Quote } from '../types/quote';
+import Stars from './components/Stars'
 
 export default async function Home(): Promise<JSX.Element> {
   const res = await fetch('http://localhost:5000/api/quotes/random');
@@ -13,6 +14,7 @@ export default async function Home(): Promise<JSX.Element> {
         <p className="text-xl">
           {quote.text}
         </p>
+        <Stars rating={quote.rating} />
         <span> — <Link href={authorLink} target='_blank' className="hover:underline">{quote.author}</Link></span>
       </blockquote>
 
