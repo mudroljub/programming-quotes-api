@@ -1,0 +1,11 @@
+{
+  "name": "root-project",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "npm run start --prefix api && npm run start --prefix client",
+    "dev": "concurrently \"npm run dev --prefix api\" \"npm run dev --prefix client\""
+  },
+  "devDependencies": {
+    "concurrently": "latest"
+  }
+}
