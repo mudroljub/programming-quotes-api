@@ -3,11 +3,11 @@
   "version": "2.0.0",
   "description": "Programming Quotes API for open source projects.",
   "repository": "https://github.com/mudroljub/programming-quotes-api",
-  "main": "api/app.js",
+  "main": "app.js",
   "scripts": {
     "save": "wget https://programming-quotes-api.azurewebsites.net/quotes/ -O backup/quotes.json",
-    "start": "node api/app.js",
-    "dev": "nodemon api/app.js",
+    "start": "node app.js",
+    "dev": "nodemon app.js",
     "lint": "eslint . --fix"
   },
   "author": "Damjan Pavlica <mudroljub@gmail.com>",

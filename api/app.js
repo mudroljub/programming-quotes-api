@@ -24,7 +24,7 @@ mongoose.connect(process.env.CONNECTION_STRING)
 // ROUTES
 app.get('/api/', async(req, res) => {
   try {
-    const data = await fs.readFile('README.md', 'utf8')
+    const data = await fs.readFile('../README.md', 'utf8')
     res.send(marked(data))
   } catch (err) {
     res.status(500).send(`Error reading file: ${err.message}`)
