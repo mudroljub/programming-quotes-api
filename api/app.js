@@ -22,7 +22,7 @@ mongoose.connect(process.env.CONNECTION_STRING)
   .catch(err => console.error('Could not connect to database:', err))
 
 // ROUTES
-app.get('/', async(req, res) => {
+app.get('/api/', async(req, res) => {
   try {
     const data = await fs.readFile('README.md', 'utf8')
     res.send(marked(data))
