@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Header from './components/Header'
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -14,18 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-gray-100 flex flex-col min-h-screen">
-
-        <header className="bg-blue-500 text-white p-4">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-xl">Programming Quotes</h1>
-            <nav>
-              <ul className="flex space-x-4">
-                <li><a href="/" className="hover:underline">Home</a></li>
-                <li><a href="/about" className="hover:underline">About</a></li>
-              </ul>
-            </nav>
-          </div>
-        </header>
+        <Header/>
 
         <main className="max-w-4xl flex-grow container mx-auto pt-4">
           {children}
