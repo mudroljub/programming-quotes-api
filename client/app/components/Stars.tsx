@@ -2,7 +2,7 @@ type RatingProps = {
   rating: number
 }
 
-export default function Stars({ rating }: RatingProps): JSX.Element {
+export default function Stars({ rating = 0 }: RatingProps): JSX.Element {
   const maxStars = 5
   const filledStars = '★'.repeat(rating)
   const emptyStars = '☆'.repeat(maxStars - rating)

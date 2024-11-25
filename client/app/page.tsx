@@ -14,7 +14,7 @@ export default async function Home(): Promise<JSX.Element> {
         <p className="text-xl">
           {quote.text}
         </p>
-        <Stars rating={quote.rating} />
+        <Stars rating={quote.rating ?? 0} />
         <span> — <Link href={authorLink} target='_blank' className="hover:underline">{quote.author}</Link></span>
       </blockquote>
 
