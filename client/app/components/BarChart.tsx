@@ -7,7 +7,7 @@ import { Quote } from '../../types/quote'
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, BarElement, Title, Tooltip, Legend, Filler);
 
-const LOW_LIMIT = 5;
+const LOW_LIMIT = 6;
 
 type ChartData = {
   labels: string[];
