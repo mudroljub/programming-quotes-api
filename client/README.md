@@ -10,5 +10,6 @@ npm run dev
 
 - dodati vizuelizaciju
   - https://d3js.org/
+- napraviti DAO
 - login
 - editovanje citata
