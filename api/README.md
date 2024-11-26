@@ -39,6 +39,5 @@ npm run dev
 
 ## TODO
 
-- srediti random
 - list authors
 - quotes/total
