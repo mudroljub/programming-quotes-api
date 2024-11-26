@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Quote } from '../../types/quote';
+import { Quote } from '../../types';
 import Stars from './Stars'
 
 type Props = {

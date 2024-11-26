@@ -1,17 +1,9 @@
 import React, { useState } from "react";
 import { Pie } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  Title,
-  Tooltip,
-  Legend,
-  ArcElement,
-} from "chart.js";
+import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from "chart.js";
 
-// Registracija potrebnih komponenti za Chart.js
 ChartJS.register(Title, Tooltip, Legend, ArcElement);
 
-// Generisanje lažnih podataka
 const generateFakeData = () => {
   return [
     { year: "2016", userGain: 500 },

@@ -1,4 +1,4 @@
-import { Quote } from '../types/quote';
+import { Quote } from '../types';
 import BlockQuote from './components/BlockQuote'
 
 export default async function Home(): Promise<JSX.Element> {
