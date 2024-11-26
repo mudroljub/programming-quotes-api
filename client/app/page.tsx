@@ -2,7 +2,7 @@ import { Quote } from '../types/quote';
 import BlockQuote from './components/BlockQuote'
 
 export default async function Home(): Promise<JSX.Element> {
-  const res = await fetch('http://localhost:5000/api/quotes/random');
+  const res = await fetch('http://localhost:5000/api/quotes/random', { cache: 'no-store' });
   const quote: Quote = await res.json();
 
   return (
