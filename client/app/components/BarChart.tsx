@@ -3,12 +3,12 @@ import React, { useEffect, useState } from "react";
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, BarElement, Title, Tooltip, Legend, Filler } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import { getColorFromPalette } from '../utils'
+import { Quote } from '../../types/quote'
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, BarElement, Title, Tooltip, Legend, Filler);
 
 const LOW_LIMIT = 5;
 
-type Quote = { author: string };
 type ChartData = {
   labels: string[];
   datasets: { label: string; data: number[]; backgroundColor: string[] }[];
