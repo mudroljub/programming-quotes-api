@@ -17,6 +17,8 @@ const options = {
 };
 
 const BarChart = ({ chartData }: Props) => {
+  console.log(chartData);
+  
   return (
     <Bar data={chartData} options={options} />
   );

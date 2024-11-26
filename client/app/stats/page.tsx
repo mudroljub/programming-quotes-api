@@ -5,7 +5,7 @@ import PieChart from '../components/PieChart'
 import { Quote, ChartData } from '../../types'
 import { getColorFromPalette } from '../utils'
 
-const LOW_LIMIT = 6;
+const LOW_LIMIT = 10;
 
 export default function About(): JSX.Element {
 
@@ -34,7 +34,7 @@ export default function About(): JSX.Element {
         const quoteCount = filteredAuthors.map(author => authorCount[author]);
 
         const max = Math.max(...quoteCount)
-        const randomColors = quoteCount.map(n => getColorFromPalette(n / max));
+        const randomColors = quoteCount.map(n => getColorFromPalette((n-LOW_LIMIT) / (max-LOW_LIMIT)));
 
         setChartData({
           labels: filteredAuthors,
@@ -57,7 +57,7 @@ export default function About(): JSX.Element {
   return (
     <>
         <BarChart chartData={chartData} />
-        <PieChart/>
+        <PieChart chartData={chartData} />
     </>
   );
 }

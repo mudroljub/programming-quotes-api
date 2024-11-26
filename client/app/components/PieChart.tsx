@@ -1,28 +1,34 @@
 import React, { useState } from "react";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from "chart.js";
+import { ChartData } from '../../types'
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement);
 
-const generateFakeData = () => {
-  return [
-    { year: "2016", userGain: 500 },
-    { year: "2017", userGain: 800 },
-    { year: "2018", userGain: 1200 },
-    { year: "2019", userGain: 1500 },
-    { year: "2020", userGain: 2000 },
-  ];
-};
+type Props = {
+  chartData: ChartData
+}
 
-const PieChart: React.FC = () => {
-  const fakeData = generateFakeData();
+const PieChart = ({ chartData }: Props) => {
 
-  const [chartData] = useState({
-    labels: fakeData.map((dataItem) => dataItem.year),
+  const [data] = useState({
+    labels: [
+      "Fred Brooks",
+      "Edsger W. Dijkstra",
+      "Douglas Crockford",
+      "Alan Perlis",
+      "Daniel T. Barry"
+    ],
     datasets: [
       {
-        label: "Users Gained ",
-        data: fakeData.map((dataItem) => dataItem.userGain),
+        label: "Quotes by author",
+        data: [
+          35,
+          23,
+          17,
+          17,
+          17
+        ],
         backgroundColor: [
           "rgba(75,192,192,1)",
           "#ecf0f1",
@@ -37,20 +43,7 @@ const PieChart: React.FC = () => {
   });
 
   return (
-    <div className="chart-container">
-      <h2 style={{ textAlign: "center" }}>Pie Chart</h2>
-      <Pie
-        data={chartData}
-        options={{
-          plugins: {
-            title: {
-              display: true,
-              text: "Users Gained between 2016-2020",
-            },
-          },
-        }}
-      />
-    </div>
+    <Pie data={chartData} />
   );
 };
 
