@@ -12,5 +12,7 @@ export type ChartData = {
     label: string;
     data: number[];
     backgroundColor: string[]
+    borderColor?: string
+    borderWidth?: number
   }[];
 };
