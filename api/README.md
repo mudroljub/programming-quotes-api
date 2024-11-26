@@ -41,3 +41,4 @@ npm run dev
 
 - list authors
 - quotes/total
+- dodati redis u quote servis
