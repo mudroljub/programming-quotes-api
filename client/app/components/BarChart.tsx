@@ -35,7 +35,9 @@ const MyBarChart = () => {
         }, {});
 
         const filteredAuthors = Object.keys(authorCount)
-          .filter(author => authorCount[author] >= LOW_LIMIT);
+          .filter(author => authorCount[author] >= LOW_LIMIT)
+          .sort((a, b) => authorCount[b] - authorCount[a]);
+
         const quoteCount = filteredAuthors.map(author => authorCount[author]);
 
         const max = Math.max(...quoteCount)
