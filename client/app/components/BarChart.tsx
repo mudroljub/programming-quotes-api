@@ -17,6 +17,11 @@ const options = {
     y: { beginAtZero: true },
     x: { display: true },
   },
+  plugins: {
+    legend: {
+      display: false
+    }
+  }
 };
 
 const BarChart = ({ quoteCount }: Props): JSX.Element => {

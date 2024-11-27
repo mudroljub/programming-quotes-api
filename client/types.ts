@@ -22,7 +22,7 @@ export class ChartData {
     this.labels = labels;
     this.datasets = [
       {
-        label: 'Quotes by author',
+        label: 'number of quotes',
         data: data,
         backgroundColor: backgroundColor,
       }
