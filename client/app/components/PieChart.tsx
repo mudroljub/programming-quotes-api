@@ -13,13 +13,14 @@ type Props = {
 }
 
 const PieChart = ({ quoteCount }: Props): JSX.Element => {
-
   const filtered = quoteCount.filter(([key, value]) => value >= LOW_LIMIT)
   const { keys, values } = getKeysAndValues(filtered);
 
-  const data = new ChartData(keys, values, [
-    "#4BC0C0", "#ecf0f1", "#50AF95", "#f3ba2f", "#2a71d0",
-  ])
+  const max = Math.max(...values)
+  const palette = ["#4BC0C0", "#ecf0f1", "#50AF95", "#f3ba2f", "#2a71d0"]
+  const colors = values.map(n => getColorFromPalette(n / max, palette));
+
+  const data = new ChartData(keys, values, colors)
   data.borderColor = "black"
   data.borderWidth = 2
 
