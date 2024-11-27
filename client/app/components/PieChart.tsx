@@ -8,12 +8,12 @@ ChartJS.register(Title, Tooltip, Legend, ArcElement);
 
 const LOW_LIMIT = 5;
 
-function processArrays(keys: string[], values: number[], limit: number): [string[], number[]] {
+function aggregateBelow(keys: string[], values: number[], limit: number): [string[], number[]] {
   const resultKeys: string[] = [];
   const resultValues: number[] = [];
-  
+
   let othersSum = 0;
-  
+
   keys.forEach((key, index) => {
     if (values[index] < limit) {
       othersSum += values[index];
@@ -22,12 +22,12 @@ function processArrays(keys: string[], values: number[], limit: number): [string
       resultValues.push(values[index]);
     }
   });
-  
+
   if (othersSum > 0) {
     resultKeys.push("Others");
     resultValues.push(othersSum);
   }
-  
+
   return [resultKeys, resultValues];
 }
 
@@ -45,8 +45,8 @@ const options = {
 
 
 const PieChart = ({ quoteCount }: Props): JSX.Element => {
-  const { keys, values } = getKeysAndValues(quoteCount);
-  const [newKeys, newValues] = processArrays(keys, values, LOW_LIMIT)
+  const [keys, values] = getKeysAndValues(quoteCount);
+  const [newKeys, newValues] = aggregateBelow(keys, values, LOW_LIMIT)
 
   const max = Math.max(...values)
   const palette = ["#4BC0C0", "#ecf0f1", "#50AF95", "#f3ba2f", "#2a71d0"]

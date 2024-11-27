@@ -26,8 +26,8 @@ const options = {
 
 const BarChart = ({ quoteCount }: Props): JSX.Element => {
   const filtered = quoteCount.filter(([key, value]) => value >= LOW_LIMIT)
-  const { keys, values } = getKeysAndValues(filtered);
-  
+  const [keys, values] = getKeysAndValues(filtered);
+
   const max = Math.max(...values)
   const colors = values.map(n => getColorFromPalette(n / max));
   const data = new ChartData(keys, values, colors)

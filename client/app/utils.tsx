@@ -5,9 +5,9 @@ export const getColorFromPalette = (percent: number, palette = ['#640D5F', '#D91
   return palette[index]
 }
 
-export const getKeysAndValues = (arr: [string, number][]) =>
+export const getKeysAndValues = (arr: [string, number][]): [string[], number[]] =>
   arr.reduce((acc, [key, value]) => {
-    acc.keys.push(key);
-    acc.values.push(value);
+    acc[0].push(key);
+    acc[1].push(value);
     return acc;
-  }, { keys: [] as string[], values: [] as number[] }); 
+  }, [([] as string[]), ([] as number[])] );
