@@ -5,3 +5,10 @@ export const getColorFromPalette = (value: number) => {
   const index = Math.min(Math.floor(value * palette.length), palette.length - 1)
   return palette[index]
 }
+
+export const getKeysAndValues = (arr: [string, number][]) =>
+  arr.reduce((acc, [key, value]) => {
+    acc.keys.push(key);
+    acc.values.push(value);
+    return acc;
+  }, { keys: [] as string[], values: [] as number[] }); 

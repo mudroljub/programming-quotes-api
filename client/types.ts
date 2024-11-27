@@ -6,13 +6,26 @@ export type Quote = {
   rating?: number;
 };
 
-export type ChartData = {
-  labels: string[];
-  datasets: {
-    label: string;
-    data: number[];
-    backgroundColor: string[]
-    borderColor?: string
-    borderWidth?: number
-  }[];
+type Dataset = {
+  label: string;
+  data: number[];
+  backgroundColor: string[];
+  borderColor?: string;
+  borderWidth?: number;
 };
+
+export class ChartData {
+  labels: string[];
+  datasets: Dataset[];
+
+  constructor(labels: string[], data: number[], backgroundColor : string[] = []) {
+    this.labels = labels;
+    this.datasets = [
+      {
+        label: 'Quotes by author',
+        data: data,
+        backgroundColor: backgroundColor,
+      }
+    ];
+  }
+}
