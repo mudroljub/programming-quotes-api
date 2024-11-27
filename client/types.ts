@@ -28,4 +28,12 @@ export class ChartData {
       }
     ];
   }
+
+  set borderColor(color: string) {
+    this.datasets[0].borderColor = color;
+  }
+
+  set borderWidth(width: number) {
+    this.datasets[0].borderWidth = width;
+  }
 }

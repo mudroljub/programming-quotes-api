@@ -2,6 +2,7 @@ import React from "react";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from "chart.js";
 import { ChartData } from '../../types'
+import { getColorFromPalette, getKeysAndValues } from '../utils'
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement);
 
@@ -13,28 +14,14 @@ type Props = {
 
 const PieChart = ({ quoteCount }: Props): JSX.Element => {
 
-  const dict = new Map(
-    quoteCount.filter(([key, value]) => value >= LOW_LIMIT)
-  );
+  const filtered = quoteCount.filter(([key, value]) => value >= LOW_LIMIT)
+  const { keys, values } = getKeysAndValues(filtered);
 
-  const data : ChartData = {
-    labels: Array.from(dict.keys()),
-    datasets: [
-      {
-        label: "Quotes by author",
-        data: Array.from(dict.values()),
-        backgroundColor: [
-          "rgba(75,192,192,1)",
-          "#ecf0f1",
-          "#50AF95",
-          "#f3ba2f",
-          "#2a71d0",
-        ],
-        borderColor: "black",
-        borderWidth: 2,
-      },
-    ],
-  }
+  const data = new ChartData(keys, values, [
+    "#4BC0C0", "#ecf0f1", "#50AF95", "#f3ba2f", "#2a71d0",
+  ])
+  data.borderColor = "black"
+  data.borderWidth = 2
 
   return (
     <Pie data={data} />
