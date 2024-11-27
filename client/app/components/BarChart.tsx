@@ -6,7 +6,7 @@ import { getColorFromPalette, getKeysAndValues } from '../utils'
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, BarElement, Title, Tooltip, Legend, Filler);
 
-const LOW_LIMIT = 10;
+const LOW_LIMIT = 7;
 
 type Props = {
   quoteCount: [string, number][]

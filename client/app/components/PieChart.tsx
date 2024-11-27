@@ -1,12 +1,12 @@
 import React from "react";
-import { Pie } from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from "chart.js";
 import { ChartData } from '../../types'
 import { getColorFromPalette, getKeysAndValues } from '../utils'
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement);
 
-const LOW_LIMIT = 5;
+const LOW_LIMIT = 7;
 
 function aggregateBelow(keys: string[], values: number[], limit: number): [string[], number[]] {
   const resultKeys: string[] = [];
@@ -57,7 +57,7 @@ const PieChart = ({ quoteCount }: Props): JSX.Element => {
   data.borderWidth = 2
 
   return (
-    <Pie data={data} options={options} />
+    <Doughnut data={data} options={options} />
   );
 };
 

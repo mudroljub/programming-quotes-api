@@ -34,6 +34,7 @@ export default function About(): JSX.Element | null {
 
   return (
     <>
+      <h1>Quotes per author</h1>
       <BarChart quoteCount={data} />
       <PieChart quoteCount={data} />
     </>
