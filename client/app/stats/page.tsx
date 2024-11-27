@@ -2,19 +2,10 @@
 import React, { useEffect, useState } from "react";
 import BarChart from '../components/BarChart'
 import PieChart from '../components/PieChart'
-import { Quote, ChartData } from '../../types'
-import { getColorFromPalette } from '../utils'
+import { Quote } from '../../types'
 
-const LOW_LIMIT = 10;
-
-export default function About(): JSX.Element {
-
-  const [chartData, setChartData] = useState<ChartData>({
-    labels: [],
-    datasets: [
-      { label: "Quotes by author", data: [], backgroundColor: [] },
-    ],
-  });
+export default function About(): JSX.Element | null {
+  const [data, setData] = useState<[string, number][]>()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,30 +13,15 @@ export default function About(): JSX.Element {
         const response = await fetch('http://localhost:5000/api/quotes');
         const quotes: Quote[] = await response.json();
 
-        const authorCount = quotes.reduce<Record<string, number>>((acc, quote) => {
-          acc[quote.author] = (acc[quote.author] || 0) + 1;
-          return acc;
-        }, {});
+        const authorCount = quotes.reduce<Map<string, number>>((acc, quote) => {
+          acc.set(quote.author, (acc.get(quote.author) || 0) + 1)
+          return acc
+        }, new Map())        
 
-        const filteredAuthors = Object.keys(authorCount)
-          .filter(author => authorCount[author] >= LOW_LIMIT)
-          .sort((a, b) => authorCount[b] - authorCount[a]);
+        const sorted = Array.from(authorCount.entries())
+          .sort(([keyA, valueA], [keyB, valueB]) => valueB - valueA)
 
-        const quoteCount = filteredAuthors.map(author => authorCount[author]);
-
-        const max = Math.max(...quoteCount)
-        const randomColors = quoteCount.map(n => getColorFromPalette((n-LOW_LIMIT) / (max-LOW_LIMIT)));
-
-        setChartData({
-          labels: filteredAuthors,
-          datasets: [
-            {
-              label: "Quotes by author",
-              data: quoteCount,
-              backgroundColor: randomColors,
-            },
-          ],
-        });
+        setData(sorted);
       } catch (error) {
         console.error("Error fetching quotes:", error);
       }
@@ -54,10 +30,12 @@ export default function About(): JSX.Element {
     fetchData();
   }, []);
 
+  if (!data) return null;
+
   return (
     <>
-        <BarChart chartData={chartData} />
-        <PieChart chartData={chartData} />
+      <BarChart quoteCount={data} />
+      {/* <PieChart quoteCount={data} /> */}
     </>
   );
 }
