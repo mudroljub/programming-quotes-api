@@ -2,7 +2,7 @@ import React from "react";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from "chart.js";
 import { ChartData } from '../../types'
-import { getColorFromPalette, getKeysAndValues, getRandomColor } from '../utils'
+import { getColorFromPalette, getKeysAndValues } from '../utils'
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement);
 
@@ -49,9 +49,8 @@ const PieChart = ({ quoteCount }: Props): JSX.Element => {
   const [newKeys, newValues] = aggregateBelow(keys, values, LOW_LIMIT)
 
   const max = Math.max(...values)
-  const palette = ["#4BC0C0", "#ecf0f1", "#50AF95", "#f3ba2f", "#2a71d0"]
-  const colors = newValues.map(getRandomColor);
-  // const colors = newValues.map(n => getColorFromPalette(n / max, palette));
+  const palette = ["#ecf0f1", "#f3ba2f", "#50AF95", "#4BC0C0", "#2a71d0"]
+  const colors = newValues.map(n => getColorFromPalette(n / max, palette));
 
   const data = new ChartData(newKeys, newValues, colors)
   data.borderColor = "black"
