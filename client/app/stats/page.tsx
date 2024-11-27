@@ -35,7 +35,7 @@ export default function About(): JSX.Element | null {
   return (
     <>
       <BarChart quoteCount={data} />
-      {/* <PieChart quoteCount={data} /> */}
+      <PieChart quoteCount={data} />
     </>
   );
 }

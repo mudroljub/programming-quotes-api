@@ -8,21 +8,21 @@ ChartJS.register(Title, Tooltip, Legend, ArcElement);
 const LOW_LIMIT = 10;
 
 type Props = {
-  quoteCount: Record<string, number>
+  quoteCount: [string, number][]
 }
 
 const PieChart = ({ quoteCount }: Props): JSX.Element => {
 
-  const dict = Object.fromEntries(
-    Object.entries(quoteCount).filter(([key, value]) => value >= LOW_LIMIT)
+  const dict = new Map(
+    quoteCount.filter(([key, value]) => value >= LOW_LIMIT)
   );
 
   const data : ChartData = {
-    labels: Object.keys(dict),
+    labels: Array.from(dict.keys()),
     datasets: [
       {
         label: "Quotes by author",
-        data: Object.values(dict),
+        data: Array.from(dict.values()),
         backgroundColor: [
           "rgba(75,192,192,1)",
           "#ecf0f1",
