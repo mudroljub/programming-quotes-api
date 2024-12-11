@@ -2,7 +2,9 @@
   "name": "root-project",
   "version": "1.0.0",
   "scripts": {
-    "start": "npm run start --prefix api && npm run start --prefix client",
+    "prestart": "npm run build",
+    "build": "npm run build --prefix client",
+    "start": "concurrently \"npm start --prefix api\" \"npm start --prefix client\"",
     "dev": "concurrently \"npm run dev --prefix api\" \"npm run dev --prefix client\""
   },
   "devDependencies": {

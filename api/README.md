@@ -42,3 +42,4 @@ npm run dev
 - list authors
 - quotes/total
 - dodati redis u quote servis
+- dodati novi citat: "High quality software is cheaper to produce" (Martin Fowler)
