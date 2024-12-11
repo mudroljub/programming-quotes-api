@@ -2,8 +2,8 @@ import jwt from 'jsonwebtoken'
 
 const { JWT_SECRET } = process.env
 
-const createToken = user => {
-  const tokenData = { id: user.id, privilege: user.privilege }
+const createToken = ({ id, email, privilege }) => {
+  const tokenData = { id, email, privilege }
   const token = jwt.sign(tokenData, JWT_SECRET, { expiresIn: '24h' })
   return token
 }
