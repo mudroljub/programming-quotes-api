@@ -58,7 +58,7 @@ Access to these routes requires a valid token.
 
 ### Authentication  
 
-#### GET `/api/auth/token`  
+#### POST `/api/auth/token`  
 - **Description**: Logs in or registers a new user.  
 - **Required Parameters** (in JSON body):  
   - `email`: The user's email address.  
