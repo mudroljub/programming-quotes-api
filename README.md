@@ -89,14 +89,14 @@ mongoimport --db quotes --collection quotes --file quotes.json --jsonArray --use
 
 ### Env variables
 
-Create `.env` file proper values:
+Create `.env` file proper values (this is an example):
 
 ```
 # database credentials (obtain from MongoDB)
-CONNECTION_STRING=
+CONNECTION_STRING=mongodb://quotes:quotes@localhost:27017/quotes
 
 # whatever random string you like
-JWT_SECRET=
+JWT_SECRET=BILO ŠTA SAMO DA JE TAJNA
 
 # use development for local testing
 NODE_ENV=development 
