@@ -2,6 +2,10 @@ import Quote from '../models/Quote.js'
 import { NotFoundError } from '../utils.js'
 
 const create = async(quote, userId) => {
+  const existingQuote = await Quote.findOne({ text: quote.text })
+  if (existingQuote)
+    throw new Error('Quote already exists.')
+
   const newQuote = await Quote.create({ ...quote, addedBy: userId })
   return newQuote
 }
