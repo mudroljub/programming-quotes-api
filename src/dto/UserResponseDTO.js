@@ -5,6 +5,6 @@ export default class UserResponseDTO {
     this.email = user.email
     this.privilege = user.privilege
     this.memberSince = user.memberSince
-    // this.voted = user.voted
+    this.favorites = user.favorites
   }
 }

@@ -21,7 +21,7 @@ const userSchema = new Schema({
     required: true,
     maxlength: 100,
   },
-  voted: [
+  favorites: [
     {
       type: Schema.Types.ObjectId,
       ref: 'Quote',

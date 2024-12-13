@@ -32,6 +32,15 @@ Feel free to get involved, suggest or implement new features.
 
 Access to these routes requires a valid token.  
 
+#### POST `/api/quotes/favorite/:id`  
+- **Description**: Add quote to favorites
+
+#### POST `/api/quotes/vote`  
+- **Description**: Votes for a specific quote.  
+- **Required Parameters** (in JSON body):  
+  - `quoteId`: The ID of the quote.  
+  - `newVote`: A numeric value (1–5).  
+
 #### POST `/api/quotes`  
 - **Description**: Adds a new quote.  
 - **Required Parameters** (in JSON body):  
@@ -44,12 +53,6 @@ Access to these routes requires a valid token.
 - **Description**: Updates an existing quote by ID.  
 - **Parameters** (in JSON body):  
   - `author`, `text`, or `source`.  
-
-#### POST `/api/quotes/vote`  
-- **Description**: Votes for a specific quote.  
-- **Required Parameters** (in JSON body):  
-  - `quoteId`: The ID of the quote.  
-  - `newVote`: A numeric value (1–5).  
 
 #### DELETE `/api/quotes/:id`  
 - **Description**: Deletes a quote by its unique ID.  

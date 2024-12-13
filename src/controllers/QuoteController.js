@@ -82,9 +82,19 @@ const vote = async(req, res) => {
 
   try {
     const quote = await QuoteService.applyVote(quoteId, vote, req.user)
-    await UserService.updateVoted(req.user.id, quoteId)
-
     res.json({ message: 'SUCCESS', quote })
+  } catch (err) {
+    handleError(res, err)
+  }
+}
+
+const favorite = async(req, res) => {
+  if (!req.user)
+    return res.status(400).send({ message: 'NO_USER' })
+
+  try {
+    await UserService.addToFavorites(req.user.id, req.params.id)
+    res.json({ message: 'SUCCESS' })
   } catch (err) {
     handleError(res, err)
   }
@@ -107,4 +117,5 @@ export default {
   update,
   vote,
   delete: deleteQuote,
+  favorite,
 }

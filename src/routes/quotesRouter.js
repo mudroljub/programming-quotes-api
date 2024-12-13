@@ -10,6 +10,7 @@ const router = new Router()
 // preceding routes
 router.get('/random', QuoteController.random)
 router.post('/vote', authenticate, QuoteController.vote)
+router.post('/favorite/:id', authenticate, QuoteController.favorite)
 
 // query params: page, quotesPerPage, author
 router.get('/', normalizeQueryParams, compression(), QuoteController.getQuotes)

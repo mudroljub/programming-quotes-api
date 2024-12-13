@@ -53,8 +53,8 @@ const addPrivilege = async(id, privilege) => {
   return new UserResponseDTO(user)
 }
 
-const updateVoted = (userId, quoteId) =>
-  User.updateOne({ _id: userId }, { $addToSet: { voted: quoteId } })
+const addToFavorites = (userId, quoteId) =>
+  User.updateOne({ _id: userId }, { $addToSet: { favorites: quoteId } })
 
 const findOrCreate = async(email, password) =>
   await getMyUser(email, password) || await create(email, password)
@@ -67,4 +67,5 @@ export default {
   getByEmail,
   findOrCreate,
   addPrivilege,
+  addToFavorites,
 }
