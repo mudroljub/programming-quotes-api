@@ -58,13 +58,13 @@ const applyVote = async(quoteId, newVote) => {
   const { numberOfVotes, rating } = quote
   const newRating = (rating * numberOfVotes + newVote) / (numberOfVotes + 1)
 
-  const newQuote = await Quote.findOneAndUpdate(
+  const updatedQuote = await Quote.findOneAndUpdate(
     { _id: quoteId },
     { $set: { numberOfVotes: numberOfVotes + 1, rating: newRating } },
     { new: true }
   )
 
-  return newQuote
+  return updatedQuote
 }
 
 export default {
