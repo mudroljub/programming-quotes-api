@@ -73,7 +73,7 @@ const update = async(req, res) => {
 const vote = async(req, res) => {
   const vote = Number(req.body.newVote)
 
-  if (isNaN(vote) || vote > 5 || vote < 1)
+  if (isNaN(vote) || vote > 5 || vote < .5)
     return res.status(400).send({ message: 'INVALID_VOTE' })
 
   if (!req.user)
