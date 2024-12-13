@@ -32,14 +32,13 @@ Feel free to get involved, suggest or implement new features.
 
 Access to these routes requires a valid token.  
 
-#### POST `/api/quotes/favorite/:id`  
+#### POST `/api/quotes/favorite/:id`
 - **Description**: Add quote to favorites
 
-#### POST `/api/quotes/vote`  
-- **Description**: Votes for a specific quote.  
-- **Required Parameters** (in JSON body):  
-  - `quoteId`: The ID of the quote.  
-  - `newVote`: A numeric value (1–5).  
+#### POST `/api/quotes/vote/:id`
+- **Description**: Votes for a specific quote. 
+- **Required Parameters** (in JSON body): 
+  - `newVote`: A numeric value (1–5). 
 
 #### POST `/api/quotes`  
 - **Description**: Adds a new quote.  

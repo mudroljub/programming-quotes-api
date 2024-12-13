@@ -71,8 +71,7 @@ const update = async(req, res) => {
 }
 
 const vote = async(req, res) => {
-  const { quoteId, newVote } = req.body
-  const vote = Number(newVote)
+  const vote = Number(req.body.newVote)
 
   if (isNaN(vote) || vote > 5 || vote < 1)
     return res.status(400).send({ message: 'INVALID_VOTE' })
@@ -81,7 +80,7 @@ const vote = async(req, res) => {
     return res.status(400).send({ message: 'NO_USER' })
 
   try {
-    const quote = await QuoteService.applyVote(quoteId, vote, req.user)
+    const quote = await QuoteService.applyVote(req.params.id, vote, req.user)
     res.json({ message: 'SUCCESS', quote })
   } catch (err) {
     handleError(res, err)
