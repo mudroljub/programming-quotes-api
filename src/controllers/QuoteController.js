@@ -7,7 +7,7 @@ const create = async(req, res) => {
   try {
     const quoteDTO = new QuoteCreateDTO(req.body)
     const quote = await QuoteService.create(quoteDTO, req.user.id)
-    res.send({ message: 'SUCCESS', quote })
+    res.json(quote)
   } catch (err) {
     handleError(res, err)
   }
@@ -64,7 +64,7 @@ const update = async(req, res) => {
   try {
     const quoteDTO = new QuoteCreateDTO(req.body)
     const quote = await QuoteService.update(req.params.id, quoteDTO)
-    res.json({ message: 'SUCCESS', quote })
+    res.json(quote)
   } catch (err) {
     handleError(res, err)
   }
@@ -81,7 +81,7 @@ const vote = async(req, res) => {
 
   try {
     const quote = await QuoteService.applyVote(req.params.id, vote, req.user)
-    res.json({ message: 'SUCCESS', quote })
+    res.json(quote)
   } catch (err) {
     handleError(res, err)
   }
@@ -102,7 +102,7 @@ const favorite = async(req, res) => {
 const deleteQuote = async(req, res) => {
   try {
     await QuoteService.delete(req.params.id)
-    res.send({ message: 'QUOTE_DELETED' })
+    res.json({ message: 'QUOTE_DELETED' })
   } catch (err) {
     handleError(res, err)
   }
