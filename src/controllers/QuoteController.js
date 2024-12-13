@@ -92,8 +92,8 @@ const favorite = async(req, res) => {
     return res.status(400).send({ message: 'NO_USER' })
 
   try {
-    await UserService.addToFavorites(req.user.id, req.params.id)
-    res.json({ message: 'SUCCESS' })
+    const result = await UserService.toggleFavorite(req.user.id, req.params.id)
+    res.json(result)
   } catch (err) {
     handleError(res, err)
   }

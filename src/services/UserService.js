@@ -53,8 +53,16 @@ const addPrivilege = async(id, privilege) => {
   return new UserResponseDTO(user)
 }
 
-const addToFavorites = (userId, quoteId) =>
-  User.updateOne({ _id: userId }, { $addToSet: { favorites: quoteId } })
+const toggleFavorite = async(userId, quoteId) => {
+  const user = await User.findById(userId)
+
+  const updateAction = user.favorites.includes(quoteId)
+    ? { $pull: { favorites: quoteId } }
+    : { $addToSet: { favorites: quoteId } }
+
+  const updated = await User.findByIdAndUpdate(userId, updateAction, { new: true })
+  return new UserResponseDTO(updated)
+}
 
 const findOrCreate = async(email, password) =>
   await getMyUser(email, password) || await create(email, password)
@@ -67,5 +75,5 @@ export default {
   getByEmail,
   findOrCreate,
   addPrivilege,
-  addToFavorites,
+  toggleFavorite,
 }
