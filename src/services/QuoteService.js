@@ -53,8 +53,9 @@ const deleteQuote = async id => {
 
 const applyVote = async(quoteId, newVote) => {
   const quote = await Quote.findById(quoteId)
-  const { numberOfVotes, rating } = quote
+  if (!quote) throw new Error('Quote not found')
 
+  const { numberOfVotes, rating } = quote
   const newRating = (rating * numberOfVotes + newVote) / (numberOfVotes + 1)
 
   const newQuote = await Quote.findOneAndUpdate(
@@ -63,7 +64,6 @@ const applyVote = async(quoteId, newVote) => {
     { new: true }
   )
 
-  if (!newQuote) throw new Error('Quote not found')
   return newQuote
 }
 
