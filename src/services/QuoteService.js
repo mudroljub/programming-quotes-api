@@ -52,17 +52,19 @@ const deleteQuote = async id => {
 }
 
 const applyVote = async(quoteId, newVote) => {
-  const quote = await Quote.findByIdAndUpdate(
-    quoteId,
-    {
-      $inc: { numberOfVotes: 1 },
-      $set: { rating: { $round: [{ $add: ['$rating', (newVote - '$rating') / '$numberOfVotes'] }, 1] } },
-    },
+  const quote = await Quote.findById(quoteId)
+  const { numberOfVotes, rating } = quote
+
+  const newRating = (rating * numberOfVotes + newVote) / (numberOfVotes + 1)
+
+  const newQuote = await Quote.findOneAndUpdate(
+    { _id: quoteId },
+    { $set: { numberOfVotes: numberOfVotes + 1, rating: newRating } },
     { new: true }
   )
 
-  if (!quote) throw new Error('Quote not found')
-  return quote
+  if (!newQuote) throw new Error('Quote not found')
+  return newQuote
 }
 
 export default {
