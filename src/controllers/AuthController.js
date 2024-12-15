@@ -5,7 +5,7 @@ const getToken = async(req, res) => {
   const { email, password } = req.body
   try {
     const user = await UserService.findOrCreate(email, password)
-    const token = AuthService.createToken(user)
+    const token = AuthService.createToken(user.id, user.privilege)
     res.json({ message: 'Welcome to Programming Quotes API', token, user })
   } catch (err) {
     const status = err.message === 'BAD_PASSWORD' ? 400 : 500
