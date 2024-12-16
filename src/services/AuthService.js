@@ -22,13 +22,17 @@ const sendEmail = user => {
     from: 'mudroljub@gmail.com',
     to: user.email,
     subject: 'Programming Quotes - Verify Email',
-    text: token
+    html: `Click the link below to verify your email address:<br>
+    <a href="http://localhost:5000/api/auth/verify/${token}" target="_blank">Verify Email</a>`
   }
 
   return transporter.sendMail(mailOptions)
 }
 
+const validateToken = token => jwt.verify(token, process.env.JWT_SECRET)
+
 export default {
   createToken,
-  sendEmail
+  sendEmail,
+  validateToken,
 }

@@ -26,7 +26,20 @@ const sendEmail = async(req, res) => {
   }
 }
 
+const verifyEmail = async(req, res) => {
+  const { token } = req.params
+  console.log(token)
+  try {
+    AuthService.validateToken(token)
+    res.send('verified')
+    // TODO: update privilege, redirect to client app
+  } catch (err) {
+    res.status(400).json({ message: err.message })
+  }
+}
+
 export default {
   getToken,
   sendEmail,
+  verifyEmail,
 }

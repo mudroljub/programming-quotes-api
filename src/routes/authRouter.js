@@ -5,7 +5,7 @@ import { authenticate } from '../middleware/auth.js'
 const router = express.Router()
 
 router.post('/token', AuthController.getToken)
-
 router.post('/email', authenticate, AuthController.sendEmail)
+router.get('/verify/:token', AuthController.verifyEmail)
 
 export default router
