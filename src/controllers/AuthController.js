@@ -1,4 +1,3 @@
-import nodemailer from 'nodemailer'
 import UserService from '../services/UserService.js'
 import AuthService from '../services/AuthService.js'
 
@@ -19,7 +18,7 @@ const sendEmail = async(req, res) => {
   const user = await UserService.getById(req.user.id)
 
   try {
-    const info = AuthService.sendEmail(user.email)
+    const info = AuthService.sendEmail(user)
     res.status(200).send(`Email sent: ${info.response}`)
   } catch (error) {
     console.error(error)

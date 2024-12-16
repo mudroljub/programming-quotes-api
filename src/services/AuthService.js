@@ -9,7 +9,7 @@ const createToken = (id, privilege) => {
   return token
 }
 
-const sendEmail = email => {
+const sendEmail = user => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -17,12 +17,12 @@ const sendEmail = email => {
       pass: process.env.EMAIL_PASSWORD
     }
   })
-
+  const token = createToken(user.id, user.privilege)
   const mailOptions = {
     from: 'mudroljub@gmail.com',
-    to: email,
+    to: user.email,
     subject: 'Programming Quotes - Verify Email',
-    text: 'That was easy!' // TODO: token link
+    text: token
   }
 
   return transporter.sendMail(mailOptions)
