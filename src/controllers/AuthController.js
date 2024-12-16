@@ -1,3 +1,4 @@
+import nodemailer from 'nodemailer'
 import UserService from '../services/UserService.js'
 import AuthService from '../services/AuthService.js'
 
@@ -13,6 +14,20 @@ const getToken = async(req, res) => {
   }
 }
 
+const sendEmail = async(req, res) => {
+  if (!req.user) return res.status(400).send({ message: 'NO_USER' })
+  const user = await UserService.getById(req.user.id)
+
+  try {
+    const info = AuthService.sendEmail(user.email)
+    res.status(200).send(`Email sent: ${info.response}`)
+  } catch (error) {
+    console.error(error)
+    res.status(500).send('Failed to send email')
+  }
+}
+
 export default {
   getToken,
+  sendEmail,
 }

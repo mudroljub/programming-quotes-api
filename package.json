@@ -23,7 +23,8 @@
     "jsonwebtoken": "^9.0.2",
     "marked": "^15.0.1",
     "mongodb": "^6.10.0",
-    "mongoose": "^8.8.3"
+    "mongoose": "^8.8.3",
+    "nodemailer": "^6.9.16"
   },
   "devDependencies": {
     "eslint": "^9.15.0",

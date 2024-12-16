@@ -80,7 +80,7 @@ const vote = async(req, res) => {
     return res.status(400).send({ message: 'NO_USER' })
 
   try {
-    const quote = await QuoteService.applyVote(req.params.id, vote, req.user)
+    const quote = await QuoteService.applyVote(req.params.id, vote)
     res.json(quote)
   } catch (err) {
     handleError(res, err)
