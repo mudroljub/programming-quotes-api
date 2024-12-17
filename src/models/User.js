@@ -1,11 +1,6 @@
 import { Schema, model } from 'mongoose'
 
 const userSchema = new Schema({
-  name: {
-    type: String,
-    trim: true,
-    maxlength: 100,
-  },
   email: {
     type: String,
     lowercase: true,
@@ -21,11 +16,17 @@ const userSchema = new Schema({
     required: true,
     maxlength: 100,
   },
+  name: {
+    type: String,
+    trim: true,
+    maxlength: 100,
+  },
   favorites: [
     {
       type: Schema.Types.ObjectId,
       ref: 'Quote',
-      unique: true
+      unique: true,
+      default: []
     }
   ],
   privilege: {
