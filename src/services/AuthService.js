@@ -9,7 +9,7 @@ const createToken = (id, privilege) => {
   return token
 }
 
-const sendEmail = user => {
+const sendToken = user => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -17,7 +17,7 @@ const sendEmail = user => {
       pass: process.env.EMAIL_PASSWORD
     }
   })
-  const token = createToken(user.id, user.privilege)
+  const token = createToken(user.id)
   const mailOptions = {
     from: 'mudroljub@gmail.com',
     to: user.email,
@@ -33,6 +33,6 @@ const validateToken = token => jwt.verify(token, process.env.JWT_SECRET)
 
 export default {
   createToken,
-  sendEmail,
+  sendToken,
   validateToken,
 }

@@ -18,7 +18,7 @@ const sendEmail = async(req, res) => {
   const user = await UserService.getById(req.user.id)
 
   try {
-    const info = AuthService.sendEmail(user)
+    const info = AuthService.sendToken(user)
     res.status(200).send(`Email sent: ${info.response}`)
   } catch (error) {
     console.error(error)
@@ -30,9 +30,9 @@ const verifyEmail = async(req, res) => {
   const { token } = req.params
   console.log(token)
   try {
-    AuthService.validateToken(token)
-    res.send('verified')
-    // TODO: update privilege, redirect to client app
+    const data = AuthService.validateToken(token)
+    await UserService.addPrivilege(data.id, 1)
+    res.redirect('http://localhost:3000/profile')
   } catch (err) {
     res.status(400).json({ message: err.message })
   }
