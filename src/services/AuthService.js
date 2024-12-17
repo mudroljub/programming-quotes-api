@@ -5,8 +5,7 @@ const { JWT_SECRET } = process.env
 
 const createToken = (id, privilege) => {
   const tokenData = { id, privilege }
-  const token = jwt.sign(tokenData, JWT_SECRET, { expiresIn: '24h' })
-  return token
+  return jwt.sign(tokenData, JWT_SECRET, { expiresIn: '24h' })
 }
 
 const sendToken = user => {
@@ -17,7 +16,7 @@ const sendToken = user => {
       pass: process.env.EMAIL_PASSWORD
     }
   })
-  const token = createToken(user.id)
+  const token = createToken(user.id, user.privilege)
   const mailOptions = {
     from: 'mudroljub@gmail.com',
     to: user.email,
