@@ -10,7 +10,9 @@ const createToken = (id, privilege) => {
 
 const sendToken = user => {
   const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 587, // Preporučeni port za TLS
+    secure: false, // Za TLS, postavi na false
     auth: {
       user: 'mudroljub@gmail.com',
       pass: process.env.EMAIL_PASSWORD
