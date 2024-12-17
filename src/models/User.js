@@ -25,7 +25,6 @@ const userSchema = new Schema({
     {
       type: Schema.Types.ObjectId,
       ref: 'Quote',
-      unique: true,
     }
   ],
   privilege: {
