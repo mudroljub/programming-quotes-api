@@ -1,5 +1,6 @@
 import UserService from '../services/UserService.js'
 import AuthService from '../services/AuthService.js'
+import { clientDomain } from '../config/host.js'
 
 const getToken = async(req, res) => {
   const { email, password } = req.body
@@ -13,7 +14,7 @@ const getToken = async(req, res) => {
   }
 }
 
-const sendEmail = async(req, res) => {
+const sendToken = async(req, res) => {
   if (!req.user) return res.status(400).send({ message: 'NO_USER' })
   const user = await UserService.getById(req.user.id)
 
@@ -28,11 +29,10 @@ const sendEmail = async(req, res) => {
 
 const verifyEmail = async(req, res) => {
   const { token } = req.params
-  console.log(token)
   try {
     const data = AuthService.validateToken(token)
     await UserService.addPrivilege(data.id, 1)
-    res.redirect('http://localhost:3000/profile')
+    res.redirect(`${clientDomain}/profile`)
   } catch (err) {
     res.status(400).json({ message: err.message })
   }
@@ -40,6 +40,6 @@ const verifyEmail = async(req, res) => {
 
 export default {
   getToken,
-  sendEmail,
+  sendToken,
   verifyEmail,
 }
