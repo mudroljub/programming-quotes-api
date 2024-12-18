@@ -1,7 +1,7 @@
-import QuoteCreateDTO from '../dto/QuoteCreateDTO.js'
+import QuoteCreateDTO from './dtos/QuoteCreateDTO.js'
 import { handleError } from '../utils.js'
-import QuoteService from '../services/QuoteService.js'
-import UserService from '../services/UserService.js'
+import QuoteService from './QuoteService.js'
+import UserService from '../users/UserService.js'
 
 const create = async(req, res) => {
   try {

@@ -1,5 +1,5 @@
-import UserService from '../services/UserService.js'
-import AuthService from '../services/AuthService.js'
+import UserService from '../users/UserService.js'
+import AuthService from './AuthService.js'
 import { clientDomain } from '../config/host.js'
 
 const getToken = async(req, res) => {

@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import compression from 'compression'
 
-import QuoteController from '../controllers/QuoteController.js'
+import QuoteController from './QuoteController.js'
 import { authenticate, authorizeUser, authorizeEditor } from '../middleware/auth.js'
 import { normalizeQueryParams } from '../middleware/normalize.js'
 

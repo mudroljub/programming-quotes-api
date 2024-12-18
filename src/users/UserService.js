@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs'
 
-import User from '../models/User.js'
-import UserResponseDTO from '../dto/UserResponseDTO.js'
+import User from './entities/User.js'
+import UserResponseDTO from './dtos/UserResponseDTO.js'
 
 const getById = async id => {
   const user = await User.findById(id)

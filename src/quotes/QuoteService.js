@@ -1,4 +1,4 @@
-import Quote from '../models/Quote.js'
+import Quote from './entities/Quote.js'
 import { NotFoundError } from '../utils.js'
 
 const create = async(quote, userId) => {

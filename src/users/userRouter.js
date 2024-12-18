@@ -1,5 +1,5 @@
 import express from 'express'
-import UserController from '../controllers/UserController.js'
+import UserController from './UserController.js'
 import { authenticate, authorizeAdmin, allowSelfOrAdmin } from '../middleware/auth.js'
 
 const router = express.Router()

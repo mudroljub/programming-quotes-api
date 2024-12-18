@@ -1,13 +1,16 @@
 import 'dotenv/config.js'
 import { promises as fs } from 'fs'
-import express from 'express'
+import express, { Router } from 'express'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import { marked } from 'marked'
 
+import quotesRouter from './quotes/quotesRouter.js'
+import authRouter from './auth/authRouter.js'
+import userRouter from './users/userRouter.js'
+
 import { port, domain } from './config/host.js'
-import apiRouter from './routes/router.js'
 import { normalizeJsonKeys } from './middleware/normalize.js'
 
 const app = express()
@@ -22,6 +25,11 @@ mongoose.connect(process.env.CONNECTION_STRING)
   .catch(err => console.error('Could not connect to database:', err))
 
 // ROUTES
+const router = new Router()
+  .use('/quotes', quotesRouter)
+  .use('/auth', authRouter)
+  .use('/users', userRouter)
+
 app.get('/', async(req, res) => {
   try {
     const data = await fs.readFile('README.md', 'utf8')
@@ -31,7 +39,7 @@ app.get('/', async(req, res) => {
   }
 })
 
-app.use('/api/', apiRouter)
+app.use('/api/', router)
 
 // SERVER
 app.listen(port, () => console.log(`Serving on ${domain}`))
