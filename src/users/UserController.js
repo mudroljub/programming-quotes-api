@@ -1,5 +1,5 @@
 import UserService from './UserService.js'
-import { handleError } from '../utils.js'
+import { handleError } from '../commons/utils.js'
 
 const getByEmail = async(req, res) => {
   try {

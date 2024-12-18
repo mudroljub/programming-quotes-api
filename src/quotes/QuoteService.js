@@ -1,5 +1,5 @@
 import Quote from './entities/Quote.js'
-import { NotFoundError } from '../utils.js'
+import { NotFoundError } from '../commons/utils.js'
 
 const create = async(quote, userId) => {
   const existingQuote = await Quote.findOne({ text: quote.text })

@@ -1,5 +1,5 @@
 import QuoteCreateDTO from './dtos/QuoteCreateDTO.js'
-import { handleError } from '../utils.js'
+import { handleError } from '../commons/utils.js'
 import QuoteService from './QuoteService.js'
 import UserService from '../users/UserService.js'
 

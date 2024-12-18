@@ -1,6 +1,6 @@
 import UserService from '../users/UserService.js'
 import AuthService from './AuthService.js'
-import { clientDomain } from '../config/host.js'
+import { clientDomain } from '../commons/config.js'
 
 const getToken = async(req, res) => {
   const { email, password } = req.body

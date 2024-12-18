@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import nodemailer from 'nodemailer'
-import { domain } from '../config/host.js'
+import { domain } from '../commons/config.js'
 
 const { JWT_SECRET } = process.env
 

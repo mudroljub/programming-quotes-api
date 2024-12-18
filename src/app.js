@@ -10,7 +10,7 @@ import quotesRouter from './quotes/quotesRouter.js'
 import authRouter from './auth/authRouter.js'
 import userRouter from './users/userRouter.js'
 
-import { port, domain } from './config/host.js'
+import { port, domain } from './commons/config.js'
 import { normalizeJsonKeys } from './middleware/normalize.js'
 
 const app = express()
