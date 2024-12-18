@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken'
 import nodemailer from 'nodemailer'
+import { domain } from '../config/host'
 
 const { JWT_SECRET } = process.env
 
@@ -22,7 +23,7 @@ const sendToken = user => {
     to: user.email,
     subject: 'Programming Quotes - Verify Email',
     html: `Click the link below to verify your email address:<br>
-    <a href="http://localhost:5000/api/auth/verify/${token}" target="_blank">Verify Email</a>`
+    <a href="${domain}/api/auth/verify/${token}" target="_blank">Verify Email</a>`
   }
 
   return transporter.sendMail(mailOptions)
