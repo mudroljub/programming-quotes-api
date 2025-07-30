@@ -6,7 +6,7 @@ const getByEmail = async(req, res) => {
     const user = await UserService.getByEmail(req.params.email)
     if (!user) return res.status(404).json({ message: 'NOT_FOUND' })
 
-    res.send(user)
+    res.json(user) // Changed from res.send(user) to res.json(user)
   } catch (err) {
     handleError(res, err)
   }
@@ -17,7 +17,7 @@ const getById = async(req, res) => {
     const user = await UserService.getById(req.params.id)
     if (!user) return res.status(404).json({ message: 'NOT_FOUND' })
 
-    res.send(user)
+    res.json(user) // Changed from res.send(user) to res.json(user)
   } catch (err) {
     handleError(res, err)
   }
@@ -37,7 +37,7 @@ const update = async(req, res) => {
     const user = await UserService.update(req.params.id, req.body)
     if (!user) return res.status(404).json({ message: 'USER_NOT_FOUND' })
 
-    res.send(user)
+    res.json(user) // Changed from res.send(user) to res.json(user)
   } catch (err) {
     handleError(res, err)
   }
@@ -58,7 +58,7 @@ const deleteUser = async(req, res) => {
 const getAll = async(req, res) => {
   try {
     const users = await UserService.getAll()
-    res.send(users)
+    res.json(users) // Changed from res.send(users) to res.json(users)
   } catch (err) {
     handleError(res, err)
   }
