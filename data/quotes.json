@@ -4675,5 +4675,15 @@
     "author": "Gottfried Wilhelm Leibniz",
     "numberOfVotes": 1,
     "rating": 4.5
+  },
+  {
+  "_id": {
+      "$oid": "5aa8f3c2d4b9a70012345678"
+    },
+    "text": "In a world full of bugs, be the debugger.",
+    "author": "Abdou-da0wew",
+    "source": "Original Quote",
+    "numberOfVotes": 0,
+    "rating": 4.9
   }
 ]
